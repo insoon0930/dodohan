@@ -42,7 +42,7 @@ dependencies:
   draggable_home: ^1.0.4
   camera: ^0.10.3+2
   photo_manager: ^2.6.0
-
+  awesome_select: ^6.0.0
 
 dev_dependencies:
   flutter_test:

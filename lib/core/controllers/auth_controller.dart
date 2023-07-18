@@ -14,15 +14,15 @@ class AuthController extends GetxController {
     user.value = newUser;
   }
 
-  updateCameraSetting(CameraSetting setting, bool value) {
-    user.update((user) {
-      user!.cameraSetting[setting.name] = value;
-    });
-  }
-
-  updateDarkMode(bool value) {
-    user.update((user) {
-      user!.darkMode = value;
-    });
-  }
+  // updateCameraSetting(CameraSetting setting, bool value) {
+  //   user.update((user) {
+  //     user!.cameraSetting[setting.name] = value;
+  //   });
+  // }
+  //
+  // updateDarkMode(bool value) {
+  //   user.update((user) {
+  //     user!.darkMode = value;
+  //   });
+  // }
 }

@@ -1,3 +1,4 @@
+import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,33 +7,50 @@ import '../../album/album_page.dart';
 import '../../navigation/navigation_controller.dart';
 
 class HomeFolderListItem extends GetView<NavigationController> {
-  const HomeFolderListItem({Key? key}) : super(key: key);
+  final String title;
+  const HomeFolderListItem(this.title, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<S2Choice<String>> fruits = [
+      S2Choice<String>(value: 'app', title: 'Apple'),
+      S2Choice<String>(value: 'ore', title: 'Orange'),
+      S2Choice<String>(value: 'mel', title: 'Melon'),
+    ];
+    String? _fruit = 'mel';
+    String? _framework = 'flu';
     return GestureDetector(
-      onTap: () => controller.tabIndex.value = 1,
+      onTap: () {},
       child: Column(
         children: [
-          Container(
+          SmartSelect<String?>.single(
+            title: 'Fruit',
+            selectedValue: _fruit,
+            choiceItems: fruits,
+            onChange: (selected) => _fruit = selected.value,
+            modalType: S2ModalType.popupDialog,
+            tileBuilder: (context, state) {
+              return S2Tile.fromState(
+                state,
+                leading: const Icon(Icons.shopping_cart),
+              );
+            },
+          ),
+          SizedBox(
               height: 68,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                color: Color(0xff273D60),
-              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 17.0),
+                      padding: const EdgeInsets.only(left: 17.0),
                       child: Text(
-                        '전체 앨범',
+                        title,
                         maxLines: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                             overflow: TextOverflow.ellipsis,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            // color: Colors.white,
                             fontSize: 17),
                       ),
                     ),

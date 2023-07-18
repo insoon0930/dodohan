@@ -13,60 +13,25 @@ class HomeFolderList extends StatelessWidget {
     return Center(
       child: SizedBox(
         width: Get.width - ThemePaddings.mainPadding * 2,
-        child: LiveList.options(
-          options: options(),
-
-          // Like ListView.builder, but also includes animation property
-          itemBuilder: buildAnimatedItem,
-
-          // Other properties correspond to the
-          // `ListView.builder` / `ListView.separated` widget
-          itemCount: 5,
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              HomeFolderListItem('학과'),
+              Divider(height: 1),
+              HomeFolderListItem('성별'),
+              Divider(height: 1),
+              HomeFolderListItem('키'),
+              Divider(height: 1),
+              HomeFolderListItem('나이'),
+              Divider(height: 1),
+              HomeFolderListItem('체형'),
+              Divider(height: 1),
+              HomeFolderListItem('흡연'),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // Build animated item (helper for all examples)
-  Widget buildAnimatedItem(BuildContext context,
-      int index,
-      Animation<double> animation,) {
-    return FadeTransition(
-      opacity: Tween<double>(
-        begin: 0,
-        end: 1,
-      ).animate(animation),
-      // And slide transition
-      child: SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(0, -0.1),
-          end: Offset.zero,
-        ).animate(animation),
-        // Paste you Widget
-        child: const HomeFolderListItem(),
-      ),
-    );
-  }
-
-  LiveOptions options() {
-    return const LiveOptions(
-      // // Start animation after (default zero)
-      // delay: Duration(seconds: 1),
-      //
-      // // Show each item through (default 250)
-      showItemInterval: Duration(milliseconds: 150),
-      //
-      // // Animation duration (default 250)
-      showItemDuration: Duration(seconds: 1),
-      //
-      // // Animations starts at 0.05 visible
-      // // item fraction in sight (default 0.025)
-      visibleFraction: 0.03,
-      //
-      // // Repeat the animation of the appearance
-      // // when scrolling in the opposite direction (default false)
-      // // To get the effect as in a showcase for ListView, set true
-      // reAnimateOnVisibility: false,
-    );
-  }
 }
