@@ -9,6 +9,7 @@ class User {
   @JsonKey(name: 'id', required: true)
   final String id;
   String uid, phoneNum;
+  bool isMan;
   // List<String> folders;
   // Map<String, dynamic> cameraSetting;
   // Map<String, dynamic> stampSetting;
@@ -19,6 +20,7 @@ class User {
   User({this.id = '',
     this.uid = '',
     this.phoneNum = '',
+    this.isMan = false,
     // this.folders = const [],
     // this.cameraSetting = const {
     //   'saveOriginal': true,

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:stamp_now/app/modules/album/widgets/album_picture_grid.dart';
 import '../../widgets/appbars/album_appbar.dart';
 import '../../widgets/appbars/home_appbarr.dart';
-import '../home/widgets/home_folder_list.dart';
 import 'album_controller.dart';
 
 class AlbumPage extends GetView<AlbumController> {

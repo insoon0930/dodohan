@@ -1,25 +1,7 @@
-import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../data/provider/api_service.dart';
 
-import '../../data/model/user.dart';
-import '../../data/provider/api_service.dart';
-
-class SplashRepository extends ApiService {
-
-  // Future<User?> findOneByUid(String uid) async {
-  //   try {
-  //     QuerySnapshot querySnapshot = await firestore
-  //         .collection('users')
-  //         .where('uid', isEqualTo: uid)
-  //         .get();
-  //     return User.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
-  //   } catch (e) {
-  //     print('findOneByUid e: $e');
-  //     return null;
-  //   }
-  // }
-
+class LoginRepository extends ApiService {
 //todo 회원가입을 firebase auth email로 진행하는건 어때? 혹은 전환번호
 // final FirebaseAuth _auth = FirebaseAuth.instance;
 //

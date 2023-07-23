@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/modules/album/album_page.dart';
-import 'package:stamp_now/app/modules/home/home_page.dart';
+import 'package:stamp_now/app/modules/home/me_info_page.dart';
 import 'package:stamp_now/app/modules/setting/setting_page.dart';
 import '../../../routes/app_routes.dart';
 import '../../widgets/appbars/album_appbar.dart';
@@ -30,7 +30,7 @@ class NavigationView extends GetView<NavigationController> {
         body: LazyIndexedStack(
           index: controller.tabIndex.value,
           children: const [
-            HomePage(),
+            MeInfoPage(),
             AlbumPage(),
             SettingPage(),
             // Navigator(

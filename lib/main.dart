@@ -5,6 +5,8 @@ import 'package:stamp_now/routes/app_pages.dart';
 import 'package:stamp_now/routes/app_routes.dart';
 
 import 'app/data/provider/api_service.dart';
+import 'app/modules/home/me_info_controller.dart';
+import 'app/modules/home/me_info_repository.dart';
 import 'core/controllers/auth_controller.dart';
 import 'core/theme/main_theme.dart';
 import 'firebase_options.dart';
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         Get.put(ApiService(), permanent: true);
         Get.put(AuthController(), permanent: true);
+        Get.put(MeInfoController(repo: MeInfoRepository()), permanent: true);
       }),
       theme: MainTheme.light,
       // darkTheme: MainTheme.dark,

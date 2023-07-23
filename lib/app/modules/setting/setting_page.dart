@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/core/controllers/auth_controller.dart';
-import 'package:stamp_now/app/modules/home/widgets/home_folder_list.dart';
 import 'package:stamp_now/app/widgets/appbars/home_appbarr.dart';
 import 'package:stamp_now/core/theme/colors.dart';
 import 'package:stamp_now/core/theme/paddings.dart';

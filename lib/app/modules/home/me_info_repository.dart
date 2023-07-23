@@ -1,16 +1,17 @@
+import '../../data/model/me_info.dart';
 import '../../data/provider/api_service.dart';
 
-class HomeRepository extends ApiService {
-  // Future<User?> create(User user) async {
-  //   try {
-  //     final ref = await firestore.collection('users').add(user.toJson());
-  //     final snapshot = await ref.get();
-  //     return User.fromJson(snapshot.data()!);
-  //   } catch (e) {
-  //     print('e: $e');
-  //     return null;
-  //   }
-  // }
+class MeInfoRepository extends ApiService {
+  Future<MeInfo?> create(MeInfo meInfo) async {
+    try {
+      final ref = await firestore.collection('meInfo').add(meInfo.toJson());
+      final snapshot = await ref.get();
+      return MeInfo.fromJson(snapshot.data()!);
+    } catch (e) {
+      print('e: $e');
+      return null;
+    }
+  }
   //
   // Future<User?> findOneByUid(String uid) async {
   //   try {
