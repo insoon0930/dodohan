@@ -1,9 +1,6 @@
-import '../../../core/controllers/auth_controller.dart';
-import 'album_repository.dart';
+import '../../../core/services/auth_service.dart';
 
-class AlbumController extends AuthController {
-  final AlbumRepository repo;
-  AlbumController({required this.repo});
-
+class AlbumController {
+  AlbumController();
 }
 

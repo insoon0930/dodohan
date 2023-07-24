@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
+import '../../../core/services/auth_service.dart';
 import '../../data/model/me_info.dart';
 import '../../data/model/user.dart';
-import '../../../core/controllers/auth_controller.dart';
 import 'me_info_repository.dart';
 
 class MeInfoController extends GetxController {
   final MeInfoRepository repo;
   final MeInfo meInfo = MeInfo();
-  User get user => AuthController.to.user.value;
+  User get user => AuthService.to.user.value;
   MeInfoController({required this.repo});
 
   @override

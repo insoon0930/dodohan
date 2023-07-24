@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
-import 'login_repository.dart';
 
 class LoginController extends GetxController {
-  final RxBool isManStage = true.obs;
-  final LoginRepository repo;
-  LoginController({required this.repo});
+  // final RxBool isManStage = true.obs;
 
   @override
   Future<void> onInit() async {

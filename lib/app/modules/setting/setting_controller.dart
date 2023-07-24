@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import '../../../core/controllers/auth_controller.dart';
 
 class SettingController extends GetxController {
 

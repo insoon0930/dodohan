@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/core/controllers/auth_controller.dart';
-import 'package:stamp_now/app/widgets/appbars/home_appbarr.dart';
 import 'package:stamp_now/core/theme/colors.dart';
 import 'package:stamp_now/core/theme/paddings.dart';
+import '../../../core/services/auth_service.dart';
 import '../../data/model/user.dart';
 import 'setting_controller.dart';
 import 'widgets/setting_item.dart';
-import 'widgets/setting_switch_item.dart';
 
 class SettingPage extends GetView<SettingController> {
   const SettingPage({super.key});
 
-  User get user => AuthController.to.user.value;
+  User get user => AuthService.to.user.value;
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,10 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stamp_now/core/utils/utility.dart';
-import '../../data/model/user.dart';
+import '../../../core/services/auth_service.dart';
 import '../../../routes/app_routes.dart';
-import '../../../core/controllers/auth_controller.dart';
-import 'splash_repository.dart';
 
 class SplashController extends GetxController {
-  final SplashRepository repo;
-  SplashController({required this.repo});
-
-  final _duration = 1.seconds;
+  // final _duration = 1.seconds;
 
   @override
   Future<void> onInit() async {
@@ -18,7 +12,7 @@ class SplashController extends GetxController {
     String? uid = prefs.getString('uid');
 
     if (uid != null) {
-      await AuthController.to.loginByUid(uid);
+      await AuthService.to.loginByUid(uid);
     } else {
       Get.offAllNamed(Routes.login);
     }

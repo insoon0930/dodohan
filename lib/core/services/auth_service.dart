@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stamp_now/app/data/provider/api_service.dart';
 
 import '../../app/data/model/user.dart';
+import '../../app/data/service/user_service/repository.dart';
+import '../../app/data/service/user_service/service.dart';
 import '../../routes/app_routes.dart';
 
-enum CameraSetting { saveOriginal, saveImmediately, cameraImmediately }
-enum StampSetting { color, stamp, time, format }
+class AuthService extends ApiService {
+  static AuthService get to => Get.find<AuthService>();
 
-class AuthController extends ApiService {
-  static AuthController get to => Get.find<AuthController>();
+  final UserService _userService;
+
+  AuthService(this._userService);
 
   Rx<User> user = User().obs;
 
@@ -30,29 +34,19 @@ class AuthController extends ApiService {
   //   }
   // }
 
-  Future<User?> findOneByUid(String uid) async {
-    try {
-      QuerySnapshot querySnapshot = await firestore
-          .collection('users')
-          .where('uid', isEqualTo: uid)
-          .get();
-      return User.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
-    } catch (e) {
-      print('findOneByUid e: $e');
-      return null;
-    }
-  }
 
   //todo 추후 회원 가입 단계에서 uid 저장하기
   Future<void> loginByUid(String uid, {Function? callback}) async {
-    User? user = await findOneByUid(uid);
-    if (user != null) {
-      updateUser(user);
-      Get.offAllNamed(Routes.meInfo);
-    } else {
-      Get.offAllNamed(Routes.meInfo);
-    }
+    print('a');
+    User? user = await _userService.findOneByUid(uid);
+    print('b: $user');
+    updateUser(user!);
+    print('c: ');
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('uid', uid);
+    print('d: ');
+    Get.offAllNamed(Routes.meInfo);
+    print('e: ');
     return;
   }
-
 }

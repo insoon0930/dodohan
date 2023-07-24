@@ -4,6 +4,8 @@ import '../app/modules/album/album_binding.dart';
 import '../app/modules/album/album_page.dart';
 import '../app/modules/auth/login/login_binding.dart';
 import '../app/modules/auth/login/login_page.dart';
+import '../app/modules/auth/register/register_binding.dart';
+import '../app/modules/auth/register/register_page.dart';
 import '../app/modules/camera/camera_binding.dart';
 import '../app/modules/camera/camera_page.dart';
 import '../app/modules/home/me_info_binding.dart';
@@ -27,6 +29,10 @@ class AppPages {
         name: Routes.login,
         page: () => const LoginPage(),
         binding: LoginBinding()),
+    GetPage(
+        name: Routes.register,
+        page: () => const RegisterPage(),
+        binding: RegisterBinding()),
     GetPage(
         name: Routes.navigation,
         page: () => const NavigationView(),
