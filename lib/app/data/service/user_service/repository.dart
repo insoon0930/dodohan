@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 import '../../../data/provider/api_service.dart';
 import '../../model/user.dart';
 class UserRepository extends ApiService {
+  static UserRepository get to => Get.find<UserRepository>();
 
   Future<User> create(User user) async {
     try {
