@@ -21,19 +21,15 @@ class AuthService extends ApiService {
     user.value = newUser;
   }
 
-  // Future<User> createUser(User user) async {
-  //   try {
-  //     //todo phoneNum, uid, isMan 이렇게 세개 넣자 그리고 이거 다음으로 isMan 설정하면 가입완료 ㄱㄱ
-  //     final ref = await firestore.collection('users').add(user.toJson());
-  //     await ref.update({'id': ref.id});
-  //     final snapshot = await ref.get();
-  //     return User.fromJson(snapshot.data()!);
-  //   } catch (e) {
-  //     print('create e: $e');
-  //     rethrow;
-  //   }
-  // }
-
+  Future<User> createUser(User user) async {
+    try {
+      //todo phoneNum, uid, isMan 이렇게 세개 넣자 그리고 이거 다음으로 isMan 설정하면 가입완료 ㄱㄱ
+      return await _userService.create(user);
+    } catch (e) {
+      print('create e: $e');
+      rethrow;
+    }
+  }
 
   //todo 추후 회원 가입 단계에서 uid 저장하기
   Future<void> loginByUid(String uid, {Function? callback}) async {

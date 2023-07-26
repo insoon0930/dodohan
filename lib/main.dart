@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.splash,
       initialBinding: BindingsBuilder(() {
         Get.put(ApiService(), permanent: true);
-        Get.put(AuthService(UserService(UserRepository())), permanent: true);
+        Get.put(AuthService(UserService()), permanent: true);
+        //todo 여기는 수정해야될껄 ㅇㅇ?
         Get.put(MeInfoController(repo: MeInfoRepository()), permanent: true);
       }),
       theme: MainTheme.light,

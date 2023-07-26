@@ -4,7 +4,12 @@ import 'package:get/get.dart';
 import '../../../data/provider/api_service.dart';
 import '../../model/user.dart';
 class UserRepository extends ApiService {
-  static UserRepository get to => Get.find<UserRepository>();
+
+  UserRepository._privateConstructor();
+  static final UserRepository _instance = UserRepository._privateConstructor();
+  factory UserRepository() {
+    return _instance;
+  }
 
   Future<User> create(User user) async {
     try {
