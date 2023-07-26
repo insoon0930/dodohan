@@ -43,7 +43,7 @@ class PhoneSMSWidget extends StatelessWidget {
                       border: InputBorder.none,
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: '010-1234-5678'.tr,
+                      hintText: '010-1234-5678',
                       hintStyle: ThemeFonts.medium
                           .getTextStyle(color: ThemeColors.greyText),
                     ),
@@ -98,11 +98,11 @@ class PhoneSMSWidget extends StatelessWidget {
             onPressed: () => controller.onTapSMSButton(),
             child: Center(
               child: controller.isCodeSent.value
-                  ? Text('인증 요청'.tr,
+                  ? Text('인증 요청',
                       style:
                           ThemeFonts.medium.getTextStyle(color: Colors.white))
                   : Text(
-                      '로그인 및 가입 진행'.tr,
+                      '로그인 및 가입 진행',
                       style: ThemeFonts.medium.getTextStyle(
                         color: Colors.white,
                       ),

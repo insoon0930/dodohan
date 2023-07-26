@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/home/widgets/me_info_selector.dart';
+import 'package:stamp_now/app/modules/meInfo/widgets/me_info_selector.dart';
 import '../../../core/theme/paddings.dart';
 import '../../data/utils.dart';
 import 'me_info_controller.dart';

@@ -32,9 +32,18 @@ class UserRepository extends ApiService {
       print('!!!: $querySnapshot');
       print('!!!: ${querySnapshot.docs}');
       print('!!!: ${querySnapshot.docs.first}');
-      return User.fromJson(querySnapshot.docs.first as Map<String, dynamic>);
+      return User.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
       return null;
     }
   }
+
+  // Future<User?> findOne(String id) async {
+  //   try {
+  //     DocumentSnapshot userSnapshot = await firestore.collection('users').doc(id).get();
+  //     return User.fromJson(userSnapshot.data() as Map<String, dynamic>); //되나?
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 }

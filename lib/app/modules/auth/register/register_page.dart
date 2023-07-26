@@ -19,7 +19,7 @@ class RegisterPage extends GetView<RegisterController> {
                 const SizedBox(height: 72.0),
                 Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('성별을 선택해주세요.'.tr, style: ThemeFonts.bold.getTextStyle(size: 24)))
+                    child: Text('성별을 선택해주세요.', style: ThemeFonts.bold.getTextStyle(size: 24)))
                     .paddingOnly(left: ThemePaddings.mainPadding),
                 const SizedBox(height: 30.0),
                 // Obx(

@@ -20,12 +20,12 @@ class LoginPage extends GetView<LoginController> {
                 const SizedBox(height: 72.0),
                 Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('휴대폰 본인 인증'.tr, style: ThemeFonts.bold.getTextStyle(size: 24)))
+                    child: Text('휴대폰 본인 인증', style: ThemeFonts.bold.getTextStyle(size: 24)))
                     .paddingOnly(left: ThemePaddings.mainPadding),
                 const SizedBox(height: 14.0),
                 Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('회원여부 확인 및 가입을 진행합니다.'.tr, style: ThemeFonts.medium.getTextStyle(size: 24)))
+                    child: Text('회원여부 확인 및 가입을 진행합니다.', style: ThemeFonts.medium.getTextStyle(size: 24)))
                     .paddingOnly(left: ThemePaddings.mainPadding),
                 const SizedBox(height: 30.0),
                 Expanded(child: PhoneSMSWidget()),

@@ -10,6 +10,11 @@ class UserService {
     return _instance;
   }
 
+  // Future<User?> findOne(String id) async {
+  //   User? user = await _userRepository.findOne(id);
+  //   return user;
+  // }
+
   Future<User?> findOneByUid(String uid) async {
     return await _userRepository.findOneByUid(uid);
   }
