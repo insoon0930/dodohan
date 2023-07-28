@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stamp_now/app/data/provider/api_service.dart';
-
+import '../../app/data/eums.dart';
 import '../../app/data/model/user.dart';
-import '../../app/data/service/user_service/repository.dart';
 import '../../app/data/service/user_service/service.dart';
 import '../../routes/app_routes.dart';
-import '../utils/utility.dart';
 
 class AuthService extends ApiService {
   static AuthService get to => Get.find<AuthService>();
@@ -33,9 +31,8 @@ class AuthService extends ApiService {
 
   //todo 추후 회원 가입 단계에서 uid 저장하기
   Future<void> loginByUid(String uid) async {
-    print('a');
     User? res = await _userService.findOneByUid(uid);
-    print('a!@ : $res');
+    print('res? :$res');
     final prefs = await SharedPreferences.getInstance();
     if(res == null) {
       //특이 케이스인듯? firebase auth 에는 있는데 디비에는 없는 (실수로 삭제?)
@@ -45,9 +42,25 @@ class AuthService extends ApiService {
       updateUser(res);
       prefs.setString('uid', uid);
     }
-    print('d: ');
-    Get.offAllNamed(Routes.home);
-    print('e: ');
+
+    //todo 관리자 페이지
+    print('user.value.uid : ${user.value.uid}');
+    if(user.value.uid == 'tVa1QkdRhJQqAdjUxNqR6SNq6i62') {
+      Get.offAllNamed(Routes.admin);
+      return;
+    }
+
+    if(user.value.idStatus == null || user.value.idStatus == IdStatus.rejected) {
+      Get.offAllNamed(Routes.register);
+      return;
+    } else if (user.value.idStatus == IdStatus.waiting) {
+      Get.offAllNamed(Routes.waiting);
+      return;
+    } else if (user.value.idStatus == IdStatus.confirmed) {
+      Get.offAllNamed(Routes.home);
+      return;
+    }
+
     return;
   }
 }

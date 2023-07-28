@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/core/theme/colors.dart';
+import 'package:stamp_now/core/theme/paddings.dart';
 
 class BtStyle {
   BtStyle._();
@@ -20,9 +21,10 @@ class BtStyle {
       overlayColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
       minimumSize: MaterialStateProperty.all(const Size(0, 46)),
       shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
 
   static ButtonStyle get start => ButtonStyle(
+
     foregroundColor: MaterialStateProperty.all(Colors.white),
     overlayColor: MaterialStateProperty.all(Colors.white10),
     backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -38,8 +40,12 @@ class BtStyle {
 
   static ButtonStyle get standard => start.copyWith(
     shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
-    minimumSize: MaterialStateProperty.all(Size(Get.width * 0.9, 54)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+    minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
+  );
+
+  static ButtonStyle get info => standard.copyWith(
+    minimumSize: MaterialStateProperty.all(Size(Get.width * 0.5 - 24, 120)),
   );
 
   static ButtonStyle get textSub100 => standard.copyWith(
@@ -87,40 +93,59 @@ class BtStyle {
     shape: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.disabled)) {
         return RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6));
+            borderRadius: BorderRadius.circular(10));
       }
       return RoundedRectangleBorder(
           side: BorderSide(width: 1.5, color: ThemeColors.main),
-          borderRadius: BorderRadius.circular(6));
+          borderRadius: BorderRadius.circular(10));
     }),
   );
 
-  static ButtonStyle changeState(_buttonClicked) => ButtonStyle(
-    minimumSize: MaterialStateProperty.all(Size(Get.width*0.9, 54)),
+  static ButtonStyle onOff(bool isOn) => ButtonStyle(
+    minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
     foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (_buttonClicked) return ThemeColors.main;
-      return Colors.white;
+      if (isOn) return ThemeColors.main;
+      return ThemeColors.grayDark;
     }),
     overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (_buttonClicked) return ThemeColors.main.withOpacity(0.1);
+      if (isOn) return ThemeColors.main.withOpacity(0.1);
       return Colors.white.withOpacity(0.1);
     }),
     backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (_buttonClicked) return Colors.white;
-      return ThemeColors.main;
-    }),
-    shape: MaterialStateProperty.resolveWith((states) {
-      if (!_buttonClicked) return RoundedRectangleBorder(borderRadius: BorderRadius.circular(6));
-      return RoundedRectangleBorder(
-          side: BorderSide(width: 1.5, color: ThemeColors.main),
-          borderRadius: BorderRadius.circular(6));
+      if (isOn) return ThemeColors.main;
+      return ThemeColors.grayDark;
     }),
     textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 16)),
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
   );
+
+  // static ButtonStyle changeState(buttonClicked) => ButtonStyle(
+  //   minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
+  //   foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+  //     if (buttonClicked) return ThemeColors.main;
+  //     return Colors.white;
+  //   }),
+  //   overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
+  //     if (buttonClicked) return ThemeColors.main.withOpacity(0.1);
+  //     return Colors.white.withOpacity(0.1);
+  //   }),
+  //   backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+  //     if (buttonClicked) return Colors.white;
+  //     return ThemeColors.main;
+  //   }),
+  //   shape: MaterialStateProperty.resolveWith((states) {
+  //     if (!buttonClicked) return RoundedRectangleBorder(borderRadius: BorderRadius.circular(10));
+  //     return RoundedRectangleBorder(
+  //         side: const BorderSide(width: 1.5, color: ThemeColors.main),
+  //         borderRadius: BorderRadius.circular(10));
+  //   }),
+  //   textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 16)),
+  // );
 
   static ButtonStyle get menu => ButtonStyle(
       foregroundColor: MaterialStateProperty.all(Colors.black87),
       overlayColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-      minimumSize: MaterialStateProperty.all(Size(Get.width * 0.9, 48)),
+      minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 48)),
       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))));
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,6 +38,11 @@ class PhoneSMSController extends GetxController {
   }
 
   Future<void> onTapSMSButton() async {
+    // if(Platform.isAndroid || Platform.isIOS) {
+    //   await AuthService.to.loginByUid('BZTxdVsVmlTbpuLY142N0DitLHq2');
+    //   return;
+    // }
+
     if (!isCodeSent.value && isValidPhone) {
       await sendSMS();
       isCodeSent.value = true;
@@ -45,14 +52,6 @@ class PhoneSMSController extends GetxController {
       Get.focusScope?.unfocus();
       UserCredential userCredential = await verifySMS();
       String resUid = userCredential.user!.uid;
-
-      //todo 씁! 아니다 회원가입을 그냥 전번만 받으면 가입시키고
-      //todo 활동 하기전 인증 받을 때 '성별', '학생증 사진', '프로필 사진' 을 다 받자
-      //todo 그러면 User에 isAuthed 필드로 어디로 보낼지 정하면 될듯??
-      //auth 정보를 유저 모델에도 담고
-      //auth 승인을 위해 컬렉션은 따로 만들지만 승인되면 User 의 해당 필드도 바꿔주는식 ('성별', '학생증 사진', '프로필 사진')
-      // + meInfo 에 카톡 아이디도 받자
-      //아 근데 유아이가 고민이네...
 
       //회원가입
       if (userCredential.additionalUserInfo!.isNewUser == true) {

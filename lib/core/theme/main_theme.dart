@@ -3,7 +3,7 @@ import 'package:stamp_now/core/theme/colors.dart';
 
 class MainTheme {
   static final ThemeData light = ThemeData.light().copyWith(
-    // scaffoldBackgroundColor: ThemeColors.background,
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,

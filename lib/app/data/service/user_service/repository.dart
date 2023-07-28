@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../../../data/provider/api_service.dart';
+import '../../eums.dart';
 import '../../model/user.dart';
 class UserRepository extends ApiService {
 
@@ -22,6 +23,15 @@ class UserRepository extends ApiService {
     }
   }
 
+  // Future<User?> findOne(String id) async {
+  //   try {
+  //     DocumentSnapshot userSnapshot = await firestore.collection('users').doc(id).get();
+  //     return User.fromJson(userSnapshot.data() as Map<String, dynamic>); //되나?
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
+
   Future<User?> findOneByUid(String uid) async {
     try {
       print('???: $uid');
@@ -38,12 +48,14 @@ class UserRepository extends ApiService {
     }
   }
 
-  // Future<User?> findOne(String id) async {
-  //   try {
-  //     DocumentSnapshot userSnapshot = await firestore.collection('users').doc(id).get();
-  //     return User.fromJson(userSnapshot.data() as Map<String, dynamic>); //되나?
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
+  Future<void> updateIdStatus(String userId, IdStatus idStatus) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      ref.update({'idStatus': idStatus.name});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 }

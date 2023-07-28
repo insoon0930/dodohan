@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
+import '../app/modules/admin/admin_binding.dart';
+import '../app/modules/admin/admin_page.dart';
 import '../app/modules/auth/login/login_binding.dart';
 import '../app/modules/auth/login/login_page.dart';
 import '../app/modules/auth/register/register_binding.dart';
 import '../app/modules/auth/register/register_page.dart';
+import '../app/modules/auth/waiting/waiting_page.dart';
 import '../app/modules/camera/camera_binding.dart';
 import '../app/modules/camera/camera_page.dart';
 import '../app/modules/home/home_binding.dart';
@@ -33,9 +36,16 @@ class AppPages {
         page: () => const RegisterPage(),
         binding: RegisterBinding()),
     GetPage(
+        name: Routes.waiting,
+        page: () => const WaitingPage()),
+    GetPage(
         name: Routes.home,
         page: () => const HomePage(),
         binding: HomeBinding()),
+    GetPage(
+        name: Routes.admin,
+        page: () => const AdminPage(),
+        binding: AdminBinding()),
     GetPage(
         name: Routes.navigation,
         page: () => const NavigationView(),

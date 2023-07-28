@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../eums.dart';
+
 part 'user.g.dart';
 
 @JsonSerializable()
@@ -14,6 +16,7 @@ class User {
   // Map<String, dynamic> cameraSetting;
   // Map<String, dynamic> stampSetting;
   // bool darkMode;
+  IdStatus? idStatus;
   DateTime? createdAt;
   DateTime? deletedAt;
 
@@ -34,6 +37,7 @@ class User {
     //   'format': 'format_1'
     // },
     // this.darkMode = false,
+    this.idStatus,
     this.createdAt,
     this.deletedAt,
   }) {
