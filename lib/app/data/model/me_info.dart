@@ -5,20 +5,21 @@ part 'me_info.g.dart';
 @JsonSerializable()
 class MeInfo {
   @JsonKey(name: 'id', required: true)
-  String id;
-  String univ, major, bodyShape;
-  bool isMan, isSmoker;
-  int height, age;
+  String? id;
+  String? user, univ, major, bodyShape;
+  bool? isMan, isSmoker;
+  int? height, age;
 
   MeInfo(
-      {this.id = '',
-      this.univ = '',
-      this.major = '',
-      this.bodyShape = '',
-      this.isMan = true,
-      this.isSmoker = true,
-      this.height = 0,
-      this.age = 0});
+      {this.id,
+      this.user,
+      this.univ,
+      this.major,
+      this.bodyShape,
+      this.isMan,
+      this.isSmoker,
+      this.height,
+      this.age});
 
   factory MeInfo.fromJson(Map<String, dynamic> json) =>
       _$MeInfoFromJson(json);

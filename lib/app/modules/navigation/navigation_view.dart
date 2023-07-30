@@ -5,13 +5,9 @@ import 'package:stamp_now/app/modules/setting/setting_page.dart';
 import '../../widgets/appbars/album_appbar.dart';
 import '../../widgets/appbars/home_appbarr.dart';
 import '../../widgets/appbars/setting_appbar.dart';
-import '../meInfo/me_info_page.dart';
+import '../me_info/me_info_page.dart';
 import 'navigation_controller.dart';
 import 'widgets/lazy_indexed_stack.dart';
-
-enum AppBarType { home, album }
-
-const mainAppBarList = [AppBarType.home, AppBarType.album];
 
 class NavigationView extends GetView<NavigationController> {
   const NavigationView({super.key});

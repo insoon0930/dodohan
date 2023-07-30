@@ -108,7 +108,7 @@ class PhoneSMSWidget extends StatelessWidget {
                       ),
                     ),
             ),
-          ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
+          ).paddingAll(ThemePaddings.mainPadding),
         ),
       ],
     );

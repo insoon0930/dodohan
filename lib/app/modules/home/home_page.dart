@@ -89,7 +89,7 @@ class HomePage extends GetView<HomeController> {
       ),
       const SizedBox(height: 16),
       Text(
-        " * '나'와 '이상형'을 모두 작성후 신청해주세요",
+        " * '나' 와 '이상형'을 모두 작성후 신청해주세요",
         style: ThemeFonts.medium.getTextStyle(size: 11),
       ),
       const Divider(thickness: 10, color: ThemeColors.grayLightest).paddingSymmetric(vertical: 16),

@@ -10,7 +10,7 @@ class HomeController extends GetxController {
   Future<void> onInit() async {
     //tood MeInfo값 디비에서 찾아와보기
     // await 1.delay();
-    Get.toNamed(Routes.register);
+    // Get.toNamed(Routes.register);
     super.onInit();
   }
 }

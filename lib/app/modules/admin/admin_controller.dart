@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../../../core/services/auth_service.dart';
-import '../../data/eums.dart';
+import '../../data/enums.dart';
 import '../../data/model/identity.dart';
 import '../../data/model/user.dart';
 import '../../data/service/identity_service/service.dart';
@@ -20,10 +20,14 @@ class AdminController extends GetxController {
     super.onInit();
   }
 
-  Future<void> updateStatus(Identity identity, IdStatus status) async {
-    await identityService.updateStatus(identity.id, status);
+  Future<void> confirm(Identity identity) async {
+    await identityService.confirmed(identity);
     waitingIds.removeWhere((item) => item.id == identity.id);
-    userService.updateIdStatus(identity.user, status);
+  }
+
+  Future<void> reject(Identity identity) async {
+    await identityService.rejected(identity);
+    waitingIds.removeWhere((item) => item.id == identity.id);
   }
 
 }

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/data/eums.dart';
+import 'package:stamp_now/app/data/enums.dart';
 
 import '../../../data/provider/api_service.dart';
 import '../../model/identity.dart';
@@ -50,7 +50,7 @@ class IdentityRepository extends ApiService {
   Future<void> updateStatus(String id, IdStatus idStatus) async {
     try {
       final DocumentReference ref = firestore.collection('identities').doc(id);
-      ref.update({'status': idStatus.name});
+      await ref.update({'status': idStatus.name});
       return;
     } catch (e) {
       rethrow;

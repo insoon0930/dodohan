@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:json_annotation/json_annotation.dart';
-
-import '../eums.dart';
+import '../enums.dart';
 
 part 'user.g.dart';
 
@@ -10,8 +7,8 @@ part 'user.g.dart';
 class User {
   @JsonKey(name: 'id', required: true)
   final String id;
-  String uid, phoneNum;
-  bool isMan;
+  String uid, phoneNum, profileImage;
+  bool? isMan;
   // List<String> folders;
   // Map<String, dynamic> cameraSetting;
   // Map<String, dynamic> stampSetting;
@@ -23,7 +20,8 @@ class User {
   User({this.id = '',
     this.uid = '',
     this.phoneNum = '',
-    this.isMan = false,
+    this.profileImage = '',
+    this.isMan,
     // this.folders = const [],
     // this.cameraSetting = const {
     //   'saveOriginal': true,

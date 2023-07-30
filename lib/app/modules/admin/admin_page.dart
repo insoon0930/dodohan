@@ -5,7 +5,7 @@ import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../../routes/app_routes.dart';
-import '../../data/eums.dart';
+import '../../data/enums.dart';
 import '../../data/model/identity.dart';
 import '../../widgets/image/image_view_box.dart';
 import 'admin_controller.dart';
@@ -43,9 +43,9 @@ class AdminPage extends GetView<AdminController> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(onPressed: () => controller.updateStatus(item, IdStatus.confirmed), child: const Text('승인')),
-            SizedBox(height: Get.width * 0.1,),
-            ElevatedButton(onPressed: () => controller.updateStatus(item, IdStatus.rejected), child: const Text('거절')),
+            ElevatedButton(onPressed: () => controller.confirm(item), child: const Text('승인')),
+            SizedBox(height: Get.width * 0.1),
+            ElevatedButton(onPressed: () => controller.reject(item), child: const Text('거절')),
           ],
         ),
       ],

@@ -45,6 +45,7 @@ class BtStyle {
   );
 
   static ButtonStyle get info => standard.copyWith(
+    backgroundColor: MaterialStateProperty.all(ThemeColors.mainLight),
     minimumSize: MaterialStateProperty.all(Size(Get.width * 0.5 - 24, 120)),
   );
 

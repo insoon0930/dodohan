@@ -15,7 +15,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
     id: json['id'] as String? ?? '',
     uid: json['uid'] as String? ?? '',
     phoneNum: json['phoneNum'] as String? ?? '',
-    isMan: json['isMan'] as bool? ?? false,
+    profileImage: json['profileImage'] as String? ?? '',
+    isMan: json['isMan'] as bool?,
     idStatus: $enumDecodeNullable(_$IdStatusEnumMap, json['idStatus']),
     createdAt: json['createdAt'] == null
         ? null
@@ -30,6 +31,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'uid': instance.uid,
       'phoneNum': instance.phoneNum,
+      'profileImage': instance.profileImage,
       'isMan': instance.isMan,
       'idStatus': _$IdStatusEnumMap[instance.idStatus],
       'createdAt': instance.createdAt?.toIso8601String(),

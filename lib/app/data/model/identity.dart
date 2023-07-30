@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../eums.dart';
+import '../enums.dart';
 
 part 'identity.g.dart';
 

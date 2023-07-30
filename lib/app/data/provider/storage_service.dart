@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stamp_now/app/data/provider/api_service.dart';
 import 'package:stamp_now/core/services/auth_service.dart';
 import 'package:stamp_now/core/utils/utility.dart';
-import '../eums.dart';
+import '../enums.dart';
 import 'dart:io' as io;
 
 class StorageService extends ApiService {
@@ -47,13 +47,13 @@ class StorageService extends ApiService {
 
     print('ref1: $ref');
     if (kIsWeb) {
-      ref.putData(await file.readAsBytes(), metadata);
+      await ref.putData(await file.readAsBytes(), metadata);
     } else {
       //추후) 문제해결
-      ref.putFile(io.File(file.path), metadata);
+      await ref.putFile(io.File(file.path), metadata);
     }
     print('ref2: $ref');
-    print('ref3: ${ref.getDownloadURL()}');
+    print('ref3: ${await ref.getDownloadURL()}');
     return await ref.getDownloadURL();
   }
 }

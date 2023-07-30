@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../../../data/provider/api_service.dart';
-import '../../eums.dart';
+import '../../enums.dart';
+import '../../model/identity.dart';
 import '../../model/user.dart';
 class UserRepository extends ApiService {
 
@@ -51,7 +52,51 @@ class UserRepository extends ApiService {
   Future<void> updateIdStatus(String userId, IdStatus idStatus) async {
     try {
       final DocumentReference ref = firestore.collection('users').doc(userId);
-      ref.update({'idStatus': idStatus.name});
+      await ref.update({'idStatus': idStatus.name});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateProfileImage(String userId, String url) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      await ref.update({'profileImage': url});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateIsMan(String userId, bool isMan) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      await ref.update({'isMan': isMan});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> confirmed(Identity identity) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(identity.user);
+      await ref.update({
+        'idStatus': IdStatus.confirmed.name,
+        'profileImage': identity.profileImage,
+        'isMan': identity.isMan,
+      });
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> rejected(Identity identity) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(identity.user);
+      ref.update({'idStatus': IdStatus.rejected.name});
       return;
     } catch (e) {
       rethrow;

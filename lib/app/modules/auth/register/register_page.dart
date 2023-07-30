@@ -61,8 +61,9 @@ class RegisterPage extends GetView<RegisterController> {
                         style:
                         ThemeFonts.medium.getTextStyle(color: Colors.white)),
                   ),
-                ),
+                )
               ),
+              const SizedBox(height: 16),
             ],
           ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
         ),

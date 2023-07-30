@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stamp_now/app/data/provider/api_service.dart';
-import '../../app/data/eums.dart';
+import '../../app/data/enums.dart';
 import '../../app/data/model/user.dart';
 import '../../app/data/service/user_service/service.dart';
 import '../../routes/app_routes.dart';
@@ -45,10 +45,10 @@ class AuthService extends ApiService {
 
     //todo 관리자 페이지
     print('user.value.uid : ${user.value.uid}');
-    if(user.value.uid == 'tVa1QkdRhJQqAdjUxNqR6SNq6i62') {
-      Get.offAllNamed(Routes.admin);
-      return;
-    }
+    // if(user.value.uid == 'tVa1QkdRhJQqAdjUxNqR6SNq6i62') {
+    //   Get.offAllNamed(Routes.admin);
+    //   return;
+    // }
 
     if(user.value.idStatus == null || user.value.idStatus == IdStatus.rejected) {
       Get.offAllNamed(Routes.register);

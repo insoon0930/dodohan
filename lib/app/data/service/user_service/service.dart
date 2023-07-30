@@ -1,6 +1,8 @@
+import 'package:stamp_now/app/data/model/me_info.dart';
 import 'package:stamp_now/app/data/service/user_service/repository.dart';
-import '../../eums.dart';
+import '../../enums.dart';
 import '../../model/user.dart';
+import '../me_info_service/repository.dart';
 
 class UserService {
   final UserRepository _userRepository = UserRepository();
@@ -24,8 +26,7 @@ class UserService {
     return await _userRepository.findOneByUid(uid);
   }
 
-  Future<void> updateIdStatus(String userId, IdStatus idStatus) async {
-    return await _userRepository.updateIdStatus(userId, idStatus);
+  Future<void> updateProfileImage(String userId, String url) async {
+    return await _userRepository.updateProfileImage(userId, url);
   }
-
 }
