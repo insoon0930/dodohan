@@ -1,6 +1,6 @@
 import 'package:awesome_select/awesome_select.dart';
 
-class Utils {
+class InfoData {
   static List<S2Choice<String>> major = [
     S2Choice<String>(value: '건축학부', title: '건축학부', group: '공과대학'),
     S2Choice<String>(value: '건축공학부', title: '건축공학부', group: '공과대학'),
@@ -22,8 +22,8 @@ class Utils {
     S2Choice<String>(value: '마른', title: '마른'),
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
-    S2Choice<String>(value: '슬림탄탄', title: '슬림탄탄'),
-    S2Choice<String>(value: '근육질', title: '근육질'),
+    S2Choice<String>(value: '근육있는', title: '근육있는'),
+    S2Choice<String>(value: '상관없음', title: '상관없음'),
   ];
 
   static List<S2Choice<String>> bodyShapeForWoman = [
@@ -31,11 +31,18 @@ class Utils {
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
     S2Choice<String>(value: '볼륨있는', title: '볼륨있는'),
-    S2Choice<String>(value: '글래머한', title: '글래머한'),
+    S2Choice<String>(value: '상관없음', title: '상관없음'),
   ];
 
   static List<S2Choice<String>> smoke = [
-    S2Choice<String>(value: 'true', title: '흡연'),
-    S2Choice<String>(value: 'false', title: '비흡연'),
+    S2Choice<String>(value: '흡연', title: '흡연'),
+    S2Choice<String>(value: '비흡연', title: '비흡연'),
+    S2Choice<String>(value: '상관없음', title: '상관없음'),
   ];
+
+  static List<S2Choice<String>> exceptSameMajor = [
+    S2Choice<String>(value: 'true', title: '배제함'),
+    S2Choice<String>(value: 'false', title: '상관없음'),
+  ];
+
 }

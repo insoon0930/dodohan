@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:stamp_now/app/data/model/you_info.dart';
 import 'me_info.dart';
 
 part 'application.g.dart';
@@ -7,10 +8,12 @@ part 'application.g.dart';
 class Application {
   @JsonKey(name: 'id', required: true)
   String id;
+  String? user;
   MeInfo? meInfo;
+  YouInfo? youInfo;
   DateTime? createdAt;
 
-  Application({this.id = '', this.meInfo, this.createdAt}) {
+  Application({this.id = '', this.user, this.meInfo, this.youInfo, this.createdAt}) {
     createdAt ??= DateTime.now();
   }
 

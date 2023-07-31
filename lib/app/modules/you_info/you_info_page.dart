@@ -6,10 +6,10 @@ import '../../../core/theme/paddings.dart';
 import '../../data/info_data.dart';
 import '../../widgets/appbars/setting_appbar.dart';
 import '../../widgets/info_selector.dart';
-import 'me_info_controller.dart';
+import 'you_info_controller.dart';
 
-class MeInfoPage extends GetView<MeInfoController> {
-  const MeInfoPage({super.key});
+class YouInfoPage extends GetView<YouInfoController> {
+  const YouInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,11 @@ class MeInfoPage extends GetView<MeInfoController> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            _meInfoList(),
+            _youInfoList(),
             const SizedBox(height: 10),
             ElevatedButton(
               style: BtStyle.standard,
-              onPressed: () => controller.updateMeInfo(),
+              onPressed: () => controller.updateYouInfo(),
               child: Center(
                 child: Text('저장',
                     style:
@@ -36,7 +36,7 @@ class MeInfoPage extends GetView<MeInfoController> {
     );
   }
 
-  Widget _meInfoList() => Center(
+  Widget _youInfoList() => Center(
         child: SizedBox(
           width: Get.width - ThemePaddings.mainPadding * 2,
           child: SingleChildScrollView(
@@ -44,41 +44,56 @@ class MeInfoPage extends GetView<MeInfoController> {
               () => Column(
                 children: [
                   InfoSelector(
-                      title: '학과',
-                      placeholder: controller.meInfo.value.major,
-                      list: InfoData.major,
+                      title: '동일 학과 배제',
+                      placeholder: '${controller.youInfo.value.exceptSameMajor}',
+                      list: InfoData.exceptSameMajor,
                       changedCallback: (selected) =>
-                          controller.meInfo.value.major = selected.value),
+                          controller.youInfo.value.exceptSameMajor =
+                              selected.value == 'true' ? true : false),
                   const Divider(height: 1),
                   InfoSelector(
-                      title: '키',
-                      placeholder: '${controller.meInfo.value.height}',
+                      title: '키(이상)',
+                      placeholder: '${controller.youInfo.value.minHeight}',
                       list: InfoData.height,
                       changedCallback: (selected) => controller
-                          .meInfo.value.height = int.parse('${selected.value}')),
+                          .youInfo.value.minHeight = int.parse('${selected.value}')),
                   const Divider(height: 1),
                   InfoSelector(
-                      title: '나이',
-                      placeholder: '${controller.meInfo.value.age}',
+                      title: '키(이하)',
+                      placeholder: '${controller.youInfo.value.maxHeight}',
+                      list: InfoData.height,
+                      changedCallback: (selected) => controller
+                          .youInfo.value.maxHeight = int.parse('${selected.value}')),
+                  const Divider(height: 1),
+                  InfoSelector(
+                      title: '나이(이상)',
+                      placeholder: '${controller.youInfo.value.minAge}',
                       list: InfoData.age,
-                      changedCallback: (selected) => controller.meInfo.value.age =
+                      changedCallback: (selected) => controller.youInfo.value.minAge =
+                          int.parse('${selected.value ?? 0}')),
+                  const Divider(height: 1),
+                  InfoSelector(
+                      title: '나이(이하)',
+                      placeholder: '${controller.youInfo.value.maxAge}',
+                      list: InfoData.age,
+                      changedCallback: (selected) => controller.youInfo.value.maxAge =
                           int.parse('${selected.value ?? 0}')),
                   const Divider(height: 1),
                   InfoSelector(
                       title: '체형',
-                      placeholder: controller.meInfo.value.bodyShape,
+                      placeholder: controller.youInfo.value.bodyShape,
                       list: controller.user.isMan!
                           ? InfoData.bodyShapeForMan
                           : InfoData.bodyShapeForWoman,
                       changedCallback: (selected) =>
-                      controller.meInfo.value.bodyShape = selected.value),
+                      controller.youInfo.value.bodyShape = selected.value),
                   const Divider(height: 1),
                   InfoSelector(
                       title: '흡연',
-                      placeholder: '${controller.meInfo.value.isSmoker}',
+                      placeholder: controller.youInfo.value.isSmoker,
                       list: InfoData.smoke,
-                      changedCallback: (selected) => controller.meInfo.value
-                          .isSmoker = selected.value == 'true' ? true : false),
+                      changedCallback: (selected) =>
+                          controller.youInfo.value.isSmoker = selected.value),
                 ],
               ),
             ),
