@@ -41,12 +41,12 @@ class BtStyle {
   static ButtonStyle get standard => start.copyWith(
     shape: MaterialStateProperty.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-    minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
+    minimumSize: MaterialStateProperty.all(Size(Get.width, 54)),
   );
 
   static ButtonStyle get info => standard.copyWith(
     backgroundColor: MaterialStateProperty.all(ThemeColors.mainLight),
-    minimumSize: MaterialStateProperty.all(Size(Get.width * 0.5 - 24, 120)),
+    minimumSize: MaterialStateProperty.all(Size(Get.width, 100)),
   );
 
   static ButtonStyle get textSub100 => standard.copyWith(

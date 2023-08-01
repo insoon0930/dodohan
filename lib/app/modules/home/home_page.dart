@@ -77,30 +77,29 @@ class HomePage extends GetView<HomeController> {
       Row(
         children: [
           const SizedBox(width: 16),
-          ElevatedButton(
-            style: BtStyle.info,
-            onPressed: () => Get.toNamed(Routes.meInfo),
-            child: Text('나',
-                style:
-                ThemeFonts.medium.getTextStyle(color: Colors.white)),
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.info,
+              onPressed: () => Get.toNamed(Routes.meInfo),
+              child: Text('나',
+                  style:
+                  ThemeFonts.medium.getTextStyle(color: Colors.white)),
+            ),
           ),
           const SizedBox(width: 16),
-          ElevatedButton(
-            style: BtStyle.info,
-            onPressed: () => Get.toNamed(Routes.youInfo),
-            child: Text('이상형',
-                style:
-                ThemeFonts.medium.getTextStyle(color: Colors.white)),
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.info,
+              onPressed: () => Get.toNamed(Routes.youInfo),
+              child: Text('이상형',
+                  style:
+                  ThemeFonts.medium.getTextStyle(color: Colors.white)),
+            ),
           ),
           const SizedBox(width: 16),
         ],
       ),
       const SizedBox(height: 16),
-      Text(
-        "* '나'와 '이상형'을 모두 작성후 신청해주세요",
-        style: ThemeFonts.medium.getTextStyle(size: 11),
-      ),
-      const Divider(thickness: 10, color: ThemeColors.grayLightest).paddingSymmetric(vertical: 16),
       ElevatedButton(
         style: BtStyle.standard,
         onPressed: () async {
@@ -116,6 +115,11 @@ class HomePage extends GetView<HomeController> {
             style:
             ThemeFonts.medium.getTextStyle(color: Colors.white)),
       ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
+      const SizedBox(height: 16),
+      Text(
+        "* '나'와 '이상형'을 모두 작성후 신청해주세요",
+        style: ThemeFonts.medium.getTextStyle(size: 11),
+      ),
     ],
   );
 
