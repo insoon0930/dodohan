@@ -5,7 +5,6 @@ import '../../../core/theme/buttons.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../data/utils.dart';
-import '../../widgets/appbars/home_appbarr.dart';
 import '../../widgets/appbars/setting_appbar.dart';
 import 'me_info_controller.dart';
 
@@ -69,15 +68,15 @@ class MeInfoPage extends GetView<MeInfoController> {
                       title: '체형',
                       placeholder: controller.meInfo.value.bodyShape,
                       list: controller.user.isMan!
-                          ? Utils.bodyShapeForMan
-                          : Utils.bodyShapeForWoman,
+                          ? Utils.meBodyShapeForMan
+                          : Utils.meBodyShapeForWoman,
                       changedCallback: (selected) =>
                       controller.meInfo.value.bodyShape = selected.value),
                   const Divider(height: 1),
                   MeInfoSelector(
                       title: '흡연',
                       placeholder: '${controller.meInfo.value.isSmoker}',
-                      list: Utils.smoke,
+                      list: Utils.meSmoke,
                       changedCallback: (selected) => controller.meInfo.value
                           .isSmoker = selected.value == 'true' ? true : false),
                 ],

@@ -18,24 +18,38 @@ class Utils {
   static List<S2Choice<String>> age = List.generate(
       20, (index) => S2Choice<String>(value: '${20 + index}', title: '${20 + index}'));
 
-  static List<S2Choice<String>> bodyShapeForMan = [
+  static List<S2Choice<String>> meBodyShapeForMan = [
     S2Choice<String>(value: '마른', title: '마른'),
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
-    S2Choice<String>(value: '슬림탄탄', title: '슬림탄탄'),
-    S2Choice<String>(value: '근육질', title: '근육질'),
+    S2Choice<String>(value: '근육있는', title: '근육있는'),
   ];
 
-  static List<S2Choice<String>> bodyShapeForWoman = [
+  static List<S2Choice<String>> youBodyShapeForMan = [
+    ...meBodyShapeForWoman,
+    S2Choice<String>(value: '상관없음', title: '상관없음'),
+  ];
+
+  static List<S2Choice<String>> meBodyShapeForWoman = [
     S2Choice<String>(value: '마른', title: '마른'),
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
     S2Choice<String>(value: '볼륨있는', title: '볼륨있는'),
-    S2Choice<String>(value: '글래머한', title: '글래머한'),
   ];
 
-  static List<S2Choice<String>> smoke = [
+  static List<S2Choice<String>> youBodyShapeForWoman = [
+    ...meBodyShapeForMan,
+    S2Choice<String>(value: '볼륨있는', title: '볼륨있는'),
+  ];
+
+  static List<S2Choice<String>> meSmoke = [
     S2Choice<String>(value: 'true', title: '흡연'),
     S2Choice<String>(value: 'false', title: '비흡연'),
+  ];
+
+  static List<S2Choice<String>> youSmoke = [
+    S2Choice<String>(value: '흡연', title: '흡연'),
+    S2Choice<String>(value: '비흡연', title: '비흡연'),
+    S2Choice<String>(value: '상관없음', title: '상관없음'),
   ];
 }
