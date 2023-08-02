@@ -16,7 +16,7 @@ YouInfo _$YouInfoFromJson(Map<String, dynamic> json) {
     user: json['user'] as String?,
     univ: json['univ'] as String?,
     bodyShape: json['bodyShape'] as String?,
-    isSmoker: json['isSmoker'] as bool?,
+    isSmoker: json['isSmoker'] as String?,
     exceptSameMajor: json['exceptSameMajor'] as bool?,
     minHeight: json['minHeight'] as int?,
     maxHeight: json['maxHeight'] as int?,

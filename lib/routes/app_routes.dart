@@ -8,7 +8,7 @@ abstract class Routes{
   static const admin = '/admin';
   static const navigation = '/navigation';
   static const meInfo = '/me-info';
-  // static const album = '/meInfo/album';
+  static const youInfo = '/you-info';
   static const setting = '/setting';
   static const camera = '/camera';
 }

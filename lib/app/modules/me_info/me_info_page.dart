@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/me_info/widgets/me_info_selector.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
-import '../../data/utils.dart';
+import '../../data/info_data.dart';
 import '../../widgets/appbars/setting_appbar.dart';
+import '../../widgets/info_selector.dart';
 import 'me_info_controller.dart';
 
 class MeInfoPage extends GetView<MeInfoController> {
@@ -43,40 +43,40 @@ class MeInfoPage extends GetView<MeInfoController> {
             child: Obx(
               () => Column(
                 children: [
-                  MeInfoSelector(
+                  InfoSelector(
                       title: '학과',
                       placeholder: controller.meInfo.value.major,
-                      list: Utils.major,
+                      list: InfoData.major,
                       changedCallback: (selected) =>
                           controller.meInfo.value.major = selected.value),
                   const Divider(height: 1),
-                  MeInfoSelector(
+                  InfoSelector(
                       title: '키',
                       placeholder: '${controller.meInfo.value.height}',
-                      list: Utils.height,
+                      list: InfoData.height,
                       changedCallback: (selected) => controller
                           .meInfo.value.height = int.parse('${selected.value}')),
                   const Divider(height: 1),
-                  MeInfoSelector(
+                  InfoSelector(
                       title: '나이',
                       placeholder: '${controller.meInfo.value.age}',
-                      list: Utils.age,
+                      list: InfoData.age,
                       changedCallback: (selected) => controller.meInfo.value.age =
                           int.parse('${selected.value ?? 0}')),
                   const Divider(height: 1),
-                  MeInfoSelector(
+                  InfoSelector(
                       title: '체형',
                       placeholder: controller.meInfo.value.bodyShape,
                       list: controller.user.isMan!
-                          ? Utils.meBodyShapeForMan
-                          : Utils.meBodyShapeForWoman,
+                          ? InfoData.meBodyShapeForMan
+                          : InfoData.meBodyShapeForWoman,
                       changedCallback: (selected) =>
                       controller.meInfo.value.bodyShape = selected.value),
                   const Divider(height: 1),
-                  MeInfoSelector(
+                  InfoSelector(
                       title: '흡연',
                       placeholder: '${controller.meInfo.value.isSmoker}',
-                      list: Utils.meSmoke,
+                      list: InfoData.meSmoke,
                       changedCallback: (selected) => controller.meInfo.value
                           .isSmoker = selected.value == 'true' ? true : false),
                 ],

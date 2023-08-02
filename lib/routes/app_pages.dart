@@ -18,6 +18,8 @@ import '../app/modules/setting/setting_binding.dart';
 import '../app/modules/setting/setting_page.dart';
 import '../app/modules/splash/splash_binding.dart';
 import '../app/modules/splash/splash_page.dart';
+import '../app/modules/you_info/you_info_binding.dart';
+import '../app/modules/you_info/you_info_page.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -54,11 +56,10 @@ class AppPages {
         name: Routes.meInfo,
         page: () => const MeInfoPage(),
         binding: MeInfoBinding()),
-    // GetPage(
-    //     name: Routes.album,
-    //     page: () => const AlbumPage(),
-    //     transition: Transition.rightToLeft,
-    //     binding: AlbumBinding()),
+    GetPage(
+        name: Routes.youInfo,
+        page: () => const YouInfoPage(),
+        binding: YouInfoBinding()),
     GetPage(
         name: Routes.setting,
         page: () => const SettingPage(),

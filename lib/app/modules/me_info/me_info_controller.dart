@@ -9,7 +9,6 @@ class MeInfoController extends GetxController {
   final MeInfoService _meInfoService = MeInfoService();
 
   Rx<MeInfo> meInfo = MeInfo().obs;
-  final TextEditingController kakaoIdTextController = TextEditingController();
 
   User get user => AuthService.to.user.value;
 

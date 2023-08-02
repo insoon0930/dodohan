@@ -6,8 +6,8 @@ part 'you_info.g.dart';
 class YouInfo {
   @JsonKey(name: 'id', required: true)
   String? id;
-  String? user, univ, bodyShape;
-  bool? isSmoker, exceptSameMajor;
+  String? user, univ, bodyShape, isSmoker;
+  bool? exceptSameMajor;
   int? minHeight, maxHeight, minAge, maxAge;
 
   YouInfo(

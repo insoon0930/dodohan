@@ -5,7 +5,10 @@ import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../../routes/app_routes.dart';
+import '../../data/model/me_info.dart';
+import '../../data/model/you_info.dart';
 import '../../widgets/appbars/home_appbarr.dart';
+import '../../widgets/dialogs/application_dialog.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -61,6 +64,11 @@ class HomePage extends GetView<HomeController> {
             style:
             ThemeFonts.medium.getTextStyle(color: Colors.white)),
       ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
+      const SizedBox(height: 16),
+      Text(
+        "* '금요일' 하루동안 확인할 수 있습니다",
+        style: ThemeFonts.medium.getTextStyle(size: 11),
+      ),
     ],
   );
 
@@ -69,37 +77,49 @@ class HomePage extends GetView<HomeController> {
       Row(
         children: [
           const SizedBox(width: 16),
-          ElevatedButton(
-            style: BtStyle.info,
-            onPressed: () => Get.toNamed(Routes.meInfo),
-            child: Text('나',
-                style:
-                ThemeFonts.medium.getTextStyle(color: Colors.white)),
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.info,
+              onPressed: () => Get.toNamed(Routes.meInfo),
+              child: Text('나',
+                  style:
+                  ThemeFonts.medium.getTextStyle(color: Colors.white)),
+            ),
           ),
           const SizedBox(width: 16),
-          ElevatedButton(
-            style: BtStyle.info,
-            onPressed: () => Get.toNamed(Routes.meInfo),
-            child: Text('이상형',
-                style:
-                ThemeFonts.medium.getTextStyle(color: Colors.white)),
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.info,
+              onPressed: () => Get.toNamed(Routes.youInfo),
+              child: Text('이상형',
+                  style:
+                  ThemeFonts.medium.getTextStyle(color: Colors.white)),
+            ),
           ),
           const SizedBox(width: 16),
         ],
       ),
       const SizedBox(height: 16),
-      Text(
-        " * '나' 와 '이상형'을 모두 작성후 신청해주세요",
-        style: ThemeFonts.medium.getTextStyle(size: 11),
-      ),
-      const Divider(thickness: 10, color: ThemeColors.grayLightest).paddingSymmetric(vertical: 16),
       ElevatedButton(
         style: BtStyle.standard,
-        onPressed: () {},
+        onPressed: () async {
+          Map<String, dynamic> res = await controller.getInfos();
+          MeInfo meInfo = res['meInfo'];
+          YouInfo youInfo = res['youInfo'];
+          Get.dialog(ApplicationDialog(
+              meInfo: meInfo,
+              youInfo: youInfo,
+              applyClicked: () => controller.apply(meInfo, youInfo)));
+        },
         child: Text('신청하기',
             style:
             ThemeFonts.medium.getTextStyle(color: Colors.white)),
       ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
+      const SizedBox(height: 16),
+      Text(
+        "* '나'와 '이상형'을 모두 작성후 신청해주세요",
+        style: ThemeFonts.medium.getTextStyle(size: 11),
+      ),
     ],
   );
 
