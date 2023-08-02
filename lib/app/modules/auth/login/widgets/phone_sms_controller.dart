@@ -38,10 +38,10 @@ class PhoneSMSController extends GetxController {
   }
 
   Future<void> onTapSMSButton() async {
-    // if(Platform.isAndroid || Platform.isIOS) {
+    //   Get.offAllNamed(Routes.admin);
+    //   return;
       await AuthService.to.loginByUid('lQCQOt9dtFUlZ9r17FjnwYtUeXs2');
       return;
-    // }
 
     if (!isCodeSent.value && isValidPhone) {
       await sendSMS();

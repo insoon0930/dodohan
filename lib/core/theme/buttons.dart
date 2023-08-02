@@ -3,18 +3,20 @@ import 'package:get/get.dart';
 import 'package:stamp_now/core/theme/colors.dart';
 import 'package:stamp_now/core/theme/paddings.dart';
 
+import 'fonts.dart';
+
 class BtStyle {
   BtStyle._();
 
   static ButtonStyle get textDialog => TextButton.styleFrom(
-    foregroundColor: ThemeColors.main,
-    side: const BorderSide(color: ThemeColors.main, width: 1),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    elevation: 0,
-    minimumSize: Size(Get.width * 0.55, 54),
-  );
+        foregroundColor: ThemeColors.main,
+        side: const BorderSide(color: ThemeColors.main, width: 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        elevation: 0,
+        minimumSize: Size(Get.width * 0.55, 54),
+      );
 
   static ButtonStyle get splash => ButtonStyle(
       backgroundColor: MaterialStateProperty.all(Colors.white),
@@ -24,102 +26,125 @@ class BtStyle {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
 
   static ButtonStyle get start => ButtonStyle(
-
-    foregroundColor: MaterialStateProperty.all(Colors.white),
-    overlayColor: MaterialStateProperty.all(Colors.white10),
-    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        foregroundColor: MaterialStateProperty.all(Colors.white),
+        overlayColor: MaterialStateProperty.all(Colors.white10),
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) return Colors.grey;
           return ThemeColors.main;
         }),
-    shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
-    minimumSize: MaterialStateProperty.all(const Size(80, 48)),
-    textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 16)),
-  );
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+        minimumSize: MaterialStateProperty.all(const Size(80, 54)),
+        textStyle: MaterialStateProperty.all(ThemeFonts.medium.getTextStyle(size: 16))
+      );
 
   static ButtonStyle get standard => start.copyWith(
-    shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-    minimumSize: MaterialStateProperty.all(Size(Get.width, 54)),
-  );
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        minimumSize: MaterialStateProperty.all(Size(Get.width, 54)),
+      );
+
+  //FAButton(
+  //                 height: 44,
+  //                 onTap: () {
+  //                   Get.back();
+  //                   if (callback != null) {
+  //                     callback!();
+  //                   }
+  //                 },
+  //                 borderRadius: BorderRadius.circular(33),
+  //                 color: ThemeColor.black.getColor(),
+  //                 child: Center(
+  //                     child: Text('common.done'.tr,
+  //                         style: ThemeFont.h1Medium.getTextStyle(color: Colors.white), textAlign: TextAlign.center)))
 
   static ButtonStyle get info => standard.copyWith(
-    backgroundColor: MaterialStateProperty.all(ThemeColors.mainLight),
-    minimumSize: MaterialStateProperty.all(Size(Get.width, 100)),
-  );
+        backgroundColor: MaterialStateProperty.all(ThemeColors.mainLight),
+        minimumSize: MaterialStateProperty.all(Size(Get.width, 100)),
+      );
+
+  static ButtonStyle get confirm => standard.copyWith(
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        elevation: MaterialStateProperty.all(0),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(33),
+            side: const BorderSide(width: 1.5, color: ThemeColors.mainLightest))),
+      );
 
   static ButtonStyle get textSub100 => standard.copyWith(
-    backgroundColor: MaterialStateProperty.all(ThemeColors.main),
-  );
+        backgroundColor: MaterialStateProperty.all(ThemeColors.main),
+      );
 
   static ButtonStyle get textSub200 => standard.copyWith(
-    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) return Colors.grey;
           return ThemeColors.main;
         }),
-  );
+      );
 
   static ButtonStyle get delete => standard.copyWith(
-    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) return Colors.grey;
           return Colors.grey;
         }),
-  );
+      );
 
   static ButtonStyle get textMain100 => standard.copyWith(
-    backgroundColor: MaterialStateProperty.all(ThemeColors.main),
-  );
+        backgroundColor: MaterialStateProperty.all(ThemeColors.main),
+      );
 
   static ButtonStyle get textMain200 => standard.copyWith(
-    backgroundColor: MaterialStateProperty.all(ThemeColors.main),
-  );
+        backgroundColor: MaterialStateProperty.all(ThemeColors.main),
+      );
 
   static ButtonStyle get sideLine => standard.copyWith(
-    foregroundColor: MaterialStateProperty.resolveWith<Color>(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             return Colors.white;
           }
           return ThemeColors.main;
         }),
-    overlayColor: MaterialStateProperty.resolveWith((states) => ThemeColors.main.withOpacity(0.1)),
-    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        overlayColor: MaterialStateProperty.resolveWith(
+            (states) => ThemeColors.main.withOpacity(0.1)),
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) return Colors.grey;
           return Colors.white;
         }),
-    shape: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.disabled)) {
-        return RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10));
-      }
-      return RoundedRectangleBorder(
-          side: BorderSide(width: 1.5, color: ThemeColors.main),
-          borderRadius: BorderRadius.circular(10));
-    }),
-  );
+        shape: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.disabled)) {
+            return RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10));
+          }
+          return RoundedRectangleBorder(
+              side: const BorderSide(width: 1.5, color: ThemeColors.main),
+              borderRadius: BorderRadius.circular(10));
+        }),
+      );
 
   static ButtonStyle onOff(bool isOn) => ButtonStyle(
-    minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
-    foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (isOn) return ThemeColors.main;
-      return ThemeColors.grayDark;
-    }),
-    overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (isOn) return ThemeColors.main.withOpacity(0.1);
-      return Colors.white.withOpacity(0.1);
-    }),
-    backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (isOn) return ThemeColors.main;
-      return ThemeColors.grayDark;
-    }),
-    textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 16)),
-    shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-  );
+        minimumSize: MaterialStateProperty.all(
+            Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
+        foregroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+          if (isOn) return ThemeColors.main;
+          return ThemeColors.grayDark;
+        }),
+        overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
+          if (isOn) return ThemeColors.main.withOpacity(0.1);
+          return Colors.white.withOpacity(0.1);
+        }),
+        backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+          if (isOn) return ThemeColors.main;
+          return ThemeColors.grayDark;
+        }),
+        textStyle: MaterialStateProperty.all(ThemeFonts.medium.getTextStyle(size: 16)),
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+      );
 
   // static ButtonStyle changeState(buttonClicked) => ButtonStyle(
   //   minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
@@ -147,6 +172,8 @@ class BtStyle {
   static ButtonStyle get menu => ButtonStyle(
       foregroundColor: MaterialStateProperty.all(Colors.black87),
       overlayColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-      minimumSize: MaterialStateProperty.all(Size(Get.width - ThemePaddings.mainPadding * 2, 48)),
-      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))));
+      minimumSize: MaterialStateProperty.all(
+          Size(Get.width - ThemePaddings.mainPadding * 2, 54)),
+      shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))));
 }

@@ -13,7 +13,7 @@ class MeInfo {
   MeInfo(
       {this.id,
       this.user,
-      this.univ,
+      this.univ = '한양대',
       this.major,
       this.bodyShape,
       this.isMan,
@@ -25,4 +25,5 @@ class MeInfo {
       _$MeInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MeInfoToJson(this);
+
 }

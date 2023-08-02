@@ -13,7 +13,7 @@ class YouInfo {
   YouInfo(
       {this.id,
       this.user,
-      this.univ,
+      this.univ = '한양대',
       this.bodyShape,
       this.isSmoker,
       this.exceptSameMajor,

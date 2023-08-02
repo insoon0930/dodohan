@@ -3,47 +3,38 @@ import 'package:get/get.dart';
 import 'package:stamp_now/app/data/enums.dart';
 
 import '../../../data/provider/api_service.dart';
-import '../../model/application.dart';
-class ApplicationRepository extends ApiService {
+import '../../model/match.dart';
+class MatchRepository extends ApiService {
 
-  ApplicationRepository._privateConstructor();
-  static final ApplicationRepository _instance = ApplicationRepository._privateConstructor();
-  factory ApplicationRepository() {
+  MatchRepository._privateConstructor();
+  static final MatchRepository _instance = MatchRepository._privateConstructor();
+  factory MatchRepository() {
     return _instance;
   }
 
-  Future<Application> create(Application application) async {
+  Future<Match?> findOne(String user) async {
+    final DateTime today = DateTime(DateTime.now().year, DateTime.now().month);
     try {
-      final ref = await firestore.collection('applications').add(application.toJson());
-      await ref.update({'id': ref.id});
-      final snapshot = await ref.get();
-      return Application.fromJson(snapshot.data()!);
+      QuerySnapshot querySnapshot = await firestore
+          .collection('matches')
+          .where('user', isEqualTo: user)
+          .where('createdAt', isGreaterThanOrEqualTo: today.toIso8601String())
+          .get();
+      return Match.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
-      rethrow;
+      return null;
     }
   }
 
-  findOne() {}
 
-
-  // Future<Application?> findOne(String id) async {
-  //   try {
-  //     DocumentSnapshot applicationSnapshot = await firestore.collection('applications').doc(id).get();
-  //     return Application.fromJson(applicationSnapshot.data() as Map<String, dynamic>);
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
-  //
-
-  Future<Application?> findThisWeekOne(String user) async {
+  Future<Match?> findThisWeekOne(String user) async {
     final int thisWeekDay = DateTime.now().weekday;
     final DateTime today = DateTime(DateTime.now().year, DateTime.now().month);
     final DateTime lastFriday = today.subtract(Duration(days: today.weekday + 2));
     final DateTime thisFriday = today.subtract(Duration(days: today.weekday - DateTime.friday));
     try {
       QuerySnapshot querySnapshot = await firestore
-          .collection('applications')
+          .collection('matches')
           .where('user', isEqualTo: user)
           .where('createdAt',
               isGreaterThanOrEqualTo: thisWeekDay < 5
@@ -51,7 +42,7 @@ class ApplicationRepository extends ApiService {
                   : thisFriday.toIso8601String())
           .get();
       print('querySnapshot.docs.first.data(): ${querySnapshot.docs.first.data()}');
-      return Application.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
+      return Match.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
       return null;
     }
@@ -59,7 +50,7 @@ class ApplicationRepository extends ApiService {
   //
   // Future<void> updateStatus(String id, IdStatus idStatus) async {
   //   try {
-  //     final DocumentReference ref = firestore.collection('applications').doc(id);
+  //     final DocumentReference ref = firestore.collection('matches').doc(id);
   //     await ref.update({'status': idStatus.name});
   //     return;
   //   } catch (e) {

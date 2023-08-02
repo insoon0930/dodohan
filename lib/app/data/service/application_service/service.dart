@@ -32,10 +32,17 @@ class ApplicationService {
   //   return await _applicationRepository.findOne(id);
   // }
   //
-  // //@Get
-  // Future<List<Application>> findWaiting() async {
-  //   return await _applicationRepository.findWaiting();
-  // }
+
+  //@Get
+  Future<bool> isAlreadyApplied(String user) async {
+    Application? application = await _applicationRepository.findThisWeekOne(user);
+    if(application == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   //
   // //@Patch
   // Future<void> updateStatus(String id, IdStatus idStatus) async {

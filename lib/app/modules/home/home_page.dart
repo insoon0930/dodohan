@@ -5,10 +5,7 @@ import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../../routes/app_routes.dart';
-import '../../data/model/me_info.dart';
-import '../../data/model/you_info.dart';
 import '../../widgets/appbars/home_appbarr.dart';
-import '../../widgets/dialogs/application_dialog.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -59,7 +56,7 @@ class HomePage extends GetView<HomeController> {
       const SizedBox(height: 52),
       ElevatedButton(
         style: BtStyle.standard,
-        onPressed: () {},
+        onPressed: () => controller.getMatchResult(),
         child: Text('결과 확인',
             style:
             ThemeFonts.medium.getTextStyle(color: Colors.white)),
@@ -102,15 +99,7 @@ class HomePage extends GetView<HomeController> {
       const SizedBox(height: 16),
       ElevatedButton(
         style: BtStyle.standard,
-        onPressed: () async {
-          Map<String, dynamic> res = await controller.getInfos();
-          MeInfo meInfo = res['meInfo'];
-          YouInfo youInfo = res['youInfo'];
-          Get.dialog(ApplicationDialog(
-              meInfo: meInfo,
-              youInfo: youInfo,
-              applyClicked: () => controller.apply(meInfo, youInfo)));
-        },
+        onPressed: () => controller.getInfos(),
         child: Text('신청하기',
             style:
             ThemeFonts.medium.getTextStyle(color: Colors.white)),

@@ -18,6 +18,13 @@ abstract class Utility {
     return randomString;
   }
 
+  static String formatPhoneNum(String phoneNum) {
+    return phoneNum.replaceAllMapped(
+        RegExp(r'^\+82(\d{2})(\d{4})(\d{4})$'),
+            (match) => '0${match[1]}-${match[2]}-${match[3]}'
+    );
+  }
+
   static Future<XFile?> getImage({ImageSource source = ImageSource.gallery}) async {
     if (!kIsWeb) {
       final Permission requiredPermission;

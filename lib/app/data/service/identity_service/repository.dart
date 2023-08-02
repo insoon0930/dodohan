@@ -26,7 +26,7 @@ class IdentityRepository extends ApiService {
   Future<Identity?> findOne(String id) async {
     try {
       DocumentSnapshot identitySnapshot = await firestore.collection('identities').doc(id).get();
-      return Identity.fromJson(identitySnapshot.data() as Map<String, dynamic>); //되나?
+      return Identity.fromJson(identitySnapshot.data() as Map<String, dynamic>);
     } catch (e) {
       return null;
     }

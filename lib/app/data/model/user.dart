@@ -7,7 +7,7 @@ part 'user.g.dart';
 class User {
   @JsonKey(name: 'id', required: true)
   final String id;
-  String uid, phoneNum, profileImage;
+  String uid, phoneNum, profileImage, univ;
   bool? isMan;
   // List<String> folders;
   // Map<String, dynamic> cameraSetting;
@@ -21,6 +21,7 @@ class User {
     this.uid = '',
     this.phoneNum = '',
     this.profileImage = '',
+    this.univ = '한양대',
     this.isMan,
     // this.folders = const [],
     // this.cameraSetting = const {
