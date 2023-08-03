@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../core/services/auth_service.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
+import '../../../routes/app_routes.dart';
+import '../../modules/home/home_controller.dart';
 import '../dialogs/select/select_dialog.dart';
 import '../dialogs/select/select_dialog_item.dart';
 
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+  final HomeController? controller;
+  const HomeAppBar({this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +41,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   _getDialog() => Get.dialog(SelectDialog(itemHeight: 60, items: [
     SelectDialogItem(
         text: '로그아웃',
-        onTap: () async {
-          Get.back();
-        },
+        onTap: () => AuthService.to.logOut(),
         first: true,
         style: ThemeFonts.semiBold.getTextStyle(size: 15)),
     if(true) //todo 관리자이면
     SelectDialogItem(
         text: '관리자 페이지',
-        onTap: () async {
-          Get.back();
-        },
+        onTap: () => Get.toNamed(Routes.admin),
         style: ThemeFonts.semiBold.getTextStyle(size: 15)),
     SelectDialogItem(
         text: '회원탈퇴',
-        onTap: () {
-          Get.back();
-        },
+        onTap: () => AuthService.to.withdraw(),
         last: true,
         style: ThemeFonts.medium.getTextStyle(size: 15, color: ThemeColors.redLight)),
   ]));

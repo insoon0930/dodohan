@@ -63,4 +63,18 @@ class AuthService extends ApiService {
 
     return;
   }
+
+  Future<void> logOut() async {
+    user.value = User();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('uid');
+    Get.offAllNamed(Routes.login);
+    return;
+  }
+
+  Future<void> withdraw() async {
+    await _userService.updateDeletedAt(user.value.id);
+    await logOut();
+    return;
+  }
 }

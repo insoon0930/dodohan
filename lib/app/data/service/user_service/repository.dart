@@ -35,14 +35,11 @@ class UserRepository extends ApiService {
 
   Future<User?> findOneByUid(String uid) async {
     try {
-      print('???: $uid');
       QuerySnapshot querySnapshot = await firestore
           .collection('users')
           .where('uid', isEqualTo: uid)
+          .where('deletedAt', isNull: true)
           .get();
-      print('!!!: $querySnapshot');
-      print('!!!: ${querySnapshot.docs}');
-      print('!!!: ${querySnapshot.docs.first}');
       return User.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
       return null;
@@ -97,6 +94,16 @@ class UserRepository extends ApiService {
     try {
       final DocumentReference ref = firestore.collection('users').doc(identity.user);
       ref.update({'idStatus': IdStatus.rejected.name});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateDeletedAt(String userId) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      ref.update({'deletedAt': DateTime.now()});
       return;
     } catch (e) {
       rethrow;
