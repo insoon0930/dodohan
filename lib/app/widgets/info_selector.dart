@@ -18,17 +18,20 @@ class InfoSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartSelect<String?>.single(
+
       title: title,
       placeholder: (placeholder == null || placeholder == 'null') ? '선택' : placeholder!,
       choiceDirection: Axis.vertical,
       choiceGrouped: title == '학과' ? true : false,
+      groupCounter: false,
+      groupSelector: false,
       selectedValue: placeholder,
       choiceItems: list,
       onChange: (selected) => changedCallback(selected),
       modalType: S2ModalType.popupDialog,
       tileBuilder: (context, state) => S2Tile.fromState(
         state,
-        leading: const Icon(Icons.shopping_cart),
+        // leading: const Icon(Icons.shopping_cart),
       ),
     );
   }

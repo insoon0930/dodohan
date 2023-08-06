@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../converter/date_time_converter.dart';
 import '../enums.dart';
 
 part 'user.g.dart';
@@ -14,7 +16,9 @@ class User {
   // Map<String, dynamic> stampSetting;
   // bool darkMode;
   IdStatus? idStatus;
+  @DateTimeConverter()
   DateTime? createdAt;
+  @DateTimeConverter()
   DateTime? deletedAt;
 
   User({this.id = '',

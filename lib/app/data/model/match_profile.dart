@@ -5,13 +5,10 @@ part 'match_profile.g.dart';
 
 @JsonSerializable()
 class MatchProfile {
-  @JsonKey(name: 'id', required: true)
-  String? id;
   String userId, phoneNum, profileImage;
 
   MatchProfile(
-      {this.id,
-        this.userId = '',
+      {this.userId = '',
         this.phoneNum = '',
         this.profileImage = ''});
 

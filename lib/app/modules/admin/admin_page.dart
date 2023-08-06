@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stamp_now/app/widgets/appbars/default_appbar.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
@@ -16,9 +17,38 @@ class AdminPage extends GetView<AdminController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const DefaultAppBar('관리자'),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Row(
+              children: [
+                const SizedBox(width: 16),
+                Flexible(
+                  child: ElevatedButton(
+                    style: BtStyle.info,
+                    onPressed: () => controller.createManApplicationDummy(),
+                    child: Text('남자 신청',
+                        style:
+                        ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Flexible(
+                  child: ElevatedButton(
+                    style: BtStyle.info,
+                    onPressed: () => controller.createWomanApplicationDummy(),
+                    child: Text('여자 신청',
+                        style:
+                        ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  ),
+                ),
+                const SizedBox(width: 16),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text('심사', style: ThemeFonts.medium.getTextStyle(size: 17)),
+            const SizedBox(height: 16),
             Obx(
               () => ListView.builder(
                 shrinkWrap: true,

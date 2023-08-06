@@ -22,12 +22,10 @@ class YouInfoRepository extends ApiService {
 
   Future<YouInfo> findOne(String user) async {
     try {
-      print('user?? :$user');
       QuerySnapshot querySnapshot = await firestore
           .collection('youInfos')
           .where('user', isEqualTo: user)
           .get();
-      print('user??2 :${querySnapshot.docs.first.data()}');
       return YouInfo.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
       rethrow;

@@ -40,8 +40,8 @@ class PhoneSMSController extends GetxController {
   Future<void> onTapSMSButton() async {
     //   Get.offAllNamed(Routes.admin);
     //   return;
-      await AuthService.to.loginByUid('lQCQOt9dtFUlZ9r17FjnwYtUeXs2');
-      return;
+    //   await AuthService.to.loginByUid('lQCQOt9dtFUlZ9r17FjnwYtUeXs2');
+    //   return;
 
     if (!isCodeSent.value && isValidPhone) {
       await sendSMS();
@@ -50,6 +50,7 @@ class PhoneSMSController extends GetxController {
       codeFocusNode.requestFocus();
     } else if (isCodeSent.value && code.value?.length == 6) {
       Get.focusScope?.unfocus();
+      Get.dialog(const Center(child: CircularProgressIndicator()));
       UserCredential userCredential = await verifySMS();
       String resUid = userCredential.user!.uid;
 

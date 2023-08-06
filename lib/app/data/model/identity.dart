@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../converter/date_time_converter.dart';
 import '../enums.dart';
 
 part 'identity.g.dart';
@@ -11,6 +13,8 @@ class Identity {
   String user, profileImage, studentIdImage;
   bool isMan;
   IdStatus status;
+  @DateTimeConverter()
+  DateTime? createdAt;
 
   Identity(
       {this.id = '',
@@ -18,7 +22,10 @@ class Identity {
       this.profileImage = '',
       this.studentIdImage = '',
       this.isMan = true,
-      this.status = IdStatus.waiting});
+      this.status = IdStatus.waiting,
+      this.createdAt}) {
+    createdAt ??= DateTime.now();
+  }
 
   factory Identity.fromJson(Map<String, dynamic> json) =>
       _$IdentityFromJson(json);

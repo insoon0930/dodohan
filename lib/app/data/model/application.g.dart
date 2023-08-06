@@ -14,15 +14,12 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
   return Application(
     id: json['id'] as String? ?? '',
     user: json['user'] as String?,
-    meInfo: json['meInfo'] == null
-        ? null
-        : MeInfo.fromJson(json['meInfo'] as Map<String, dynamic>),
-    youInfo: json['youInfo'] == null
-        ? null
-        : YouInfo.fromJson(json['youInfo'] as Map<String, dynamic>),
-    createdAt: json['createdAt'] == null
-        ? null
-        : DateTime.parse(json['createdAt'] as String),
+    meInfo: _$JsonConverterFromJson<Map<String, dynamic>, MeInfo>(
+        json['meInfo'], const MeInfoConverter().fromJson),
+    youInfo: _$JsonConverterFromJson<Map<String, dynamic>, YouInfo>(
+        json['youInfo'], const YouInfoConverter().fromJson),
+    createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
+        json['createdAt'], const DateTimeConverter().fromJson),
   );
 }
 
@@ -30,7 +27,22 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user': instance.user,
-      'meInfo': instance.meInfo!.toJson(),
-      'youInfo': instance.youInfo!.toJson(),
-      'createdAt': instance.createdAt?.toIso8601String(),
+      'meInfo': _$JsonConverterToJson<Map<String, dynamic>, MeInfo>(
+          instance.meInfo, const MeInfoConverter().toJson),
+      'youInfo': _$JsonConverterToJson<Map<String, dynamic>, YouInfo>(
+          instance.youInfo, const YouInfoConverter().toJson),
+      'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.createdAt, const DateTimeConverter().toJson),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

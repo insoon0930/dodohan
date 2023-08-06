@@ -14,7 +14,7 @@ YouInfo _$YouInfoFromJson(Map<String, dynamic> json) {
   return YouInfo(
     id: json['id'] as String?,
     user: json['user'] as String?,
-    univ: json['univ'] as String?,
+    univ: json['univ'] as String? ?? '한양대',
     bodyShape: json['bodyShape'] as String?,
     isSmoker: json['isSmoker'] as String?,
     exceptSameMajor: json['exceptSameMajor'] as bool?,

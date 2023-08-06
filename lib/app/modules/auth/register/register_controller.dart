@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/data/model/identity.dart';
 import 'package:stamp_now/core/services/auth_service.dart';
@@ -22,6 +23,7 @@ class RegisterController extends GetxController {
   User get user => AuthService.to.user.value;
 
   Future<void> register() async {
+    Get.dialog(const Center(child: CircularProgressIndicator()));
     //이미지 두개 저장 //이미지 서비스 하나 두고 진행 ㅇㅇ.?
     String profileUrl = await storageService.uploadFile(
         file: profileImage.value!,
@@ -44,6 +46,7 @@ class RegisterController extends GetxController {
     user.idStatus = IdStatus.waiting;
 
     // 페이지 라우팅 //본인 인증이 진행중입니다(24시간 이내 처리)
+    Get.back();
     Get.toNamed(Routes.waiting);
   }
 }

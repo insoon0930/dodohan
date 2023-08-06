@@ -13,23 +13,28 @@ class UserService {
     return _instance;
   }
 
+  //@Post
   Future<User> create(User user) async {
     return await _userRepository.create(user);
   }
 
+  //@Get
   Future<User?> findOne(String id) async {
     User? user = await _userRepository.findOne(id);
     return user;
   }
 
+  //@Get
   Future<User?> findOneByUid(String uid) async {
     return await _userRepository.findOneByUid(uid);
   }
 
+  //@Patch
   Future<void> updateProfileImage(String userId, String url) async {
     return await _userRepository.updateProfileImage(userId, url);
   }
 
+  //@Patch
   Future<void> updateDeletedAt(String userId) async {
     return await _userRepository.updateDeletedAt(userId);
   }

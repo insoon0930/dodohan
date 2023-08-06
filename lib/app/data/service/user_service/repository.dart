@@ -42,6 +42,7 @@ class UserRepository extends ApiService {
           .get();
       return User.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
+      print('error: $e');
       return null;
     }
   }

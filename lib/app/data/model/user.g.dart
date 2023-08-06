@@ -16,14 +16,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
     uid: json['uid'] as String? ?? '',
     phoneNum: json['phoneNum'] as String? ?? '',
     profileImage: json['profileImage'] as String? ?? '',
+    univ: json['univ'] as String? ?? '한양대',
     isMan: json['isMan'] as bool?,
     idStatus: $enumDecodeNullable(_$IdStatusEnumMap, json['idStatus']),
-    createdAt: json['createdAt'] == null
-        ? null
-        : DateTime.parse(json['createdAt'] as String),
-    deletedAt: json['deletedAt'] == null
-        ? null
-        : DateTime.parse(json['deletedAt'] as String),
+    createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
+        json['createdAt'], const DateTimeConverter().fromJson),
+    deletedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
+        json['deletedAt'], const DateTimeConverter().fromJson),
   );
 }
 
@@ -32,10 +31,13 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'uid': instance.uid,
       'phoneNum': instance.phoneNum,
       'profileImage': instance.profileImage,
+      'univ': instance.univ,
       'isMan': instance.isMan,
       'idStatus': _$IdStatusEnumMap[instance.idStatus],
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'deletedAt': instance.deletedAt?.toIso8601String(),
+      'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.createdAt, const DateTimeConverter().toJson),
+      'deletedAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.deletedAt, const DateTimeConverter().toJson),
     };
 
 const _$IdStatusEnumMap = {
@@ -43,3 +45,15 @@ const _$IdStatusEnumMap = {
   IdStatus.confirmed: 'confirmed',
   IdStatus.rejected: 'rejected',
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

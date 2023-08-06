@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../converter/date_time_converter.dart';
 import 'match_profile.dart';
 
 part 'match.g.dart';
@@ -7,14 +9,14 @@ part 'match.g.dart';
 class Match {
   @JsonKey(name: 'id', required: true)
   String? id;
-  MatchProfile? man;
-  MatchProfile? woman;
+  String man, woman;
+  @DateTimeConverter()
   DateTime? createdAt;
 
   Match(
       {this.id,
-      this.man,
-      this.woman,
+      this.man = '',
+      this.woman = '',
       this.createdAt}) {
     createdAt ??= DateTime.now();
   }

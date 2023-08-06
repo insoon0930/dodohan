@@ -31,8 +31,9 @@ class AuthService extends ApiService {
 
   //todo 추후 회원 가입 단계에서 uid 저장하기
   Future<void> loginByUid(String uid) async {
+    print('uid: $uid');
     User? res = await _userService.findOneByUid(uid);
-    print('res? :$res');
+    print('res: $res');
     final prefs = await SharedPreferences.getInstance();
     if(res == null) {
       //특이 케이스인듯? firebase auth 에는 있는데 디비에는 없는 (실수로 삭제?)
@@ -43,13 +44,7 @@ class AuthService extends ApiService {
       prefs.setString('uid', uid);
     }
 
-    //todo 관리자 페이지
-    print('user.value.uid : ${user.value.uid}');
-    // if(user.value.uid == 'tVa1QkdRhJQqAdjUxNqR6SNq6i62') {
-    //   Get.offAllNamed(Routes.admin);
-    //   return;
-    // }
-
+    Get.back();
     if(user.value.idStatus == null || user.value.idStatus == IdStatus.rejected) {
       Get.offAllNamed(Routes.register);
       return;
@@ -60,7 +55,6 @@ class AuthService extends ApiService {
       Get.offAllNamed(Routes.home);
       return;
     }
-
     return;
   }
 

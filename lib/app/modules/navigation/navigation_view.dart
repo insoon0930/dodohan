@@ -4,7 +4,7 @@ import 'package:stamp_now/app/modules/album/album_page.dart';
 import 'package:stamp_now/app/modules/setting/setting_page.dart';
 import '../../widgets/appbars/album_appbar.dart';
 import '../../widgets/appbars/home_appbarr.dart';
-import '../../widgets/appbars/setting_appbar.dart';
+import '../../widgets/appbars/default_appbar.dart';
 import '../me_info/me_info_page.dart';
 import 'navigation_controller.dart';
 import 'widgets/lazy_indexed_stack.dart';
@@ -19,7 +19,7 @@ class NavigationView extends GetView<NavigationController> {
         appBar: [
           const HomeAppBar() as PreferredSizeWidget,
           AlbumAppBar(title: '유럽 여행 기록') as PreferredSizeWidget,
-          SettingAppBar() as PreferredSizeWidget,
+          DefaultAppBar('') as PreferredSizeWidget,
         ][controller.tabIndex.value],
         body: LazyIndexedStack(
           index: controller.tabIndex.value,

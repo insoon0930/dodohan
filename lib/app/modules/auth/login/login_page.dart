@@ -17,7 +17,7 @@ class LoginPage extends GetView<LoginController> {
           child: Scaffold(
             body: Column(
               children: [
-                const SizedBox(height: 74.0),
+                const SizedBox(height: 54.0),
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text('휴대폰 본인 인증', style: ThemeFonts.bold.getTextStyle(size: 24)))

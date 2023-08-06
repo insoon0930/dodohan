@@ -4,7 +4,7 @@ import '../../../core/theme/buttons.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../data/info_data.dart';
-import '../../widgets/appbars/setting_appbar.dart';
+import '../../widgets/appbars/default_appbar.dart';
 import '../../widgets/info_selector.dart';
 import 'you_info_controller.dart';
 
@@ -14,7 +14,7 @@ class YouInfoPage extends GetView<YouInfoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SettingAppBar(),
+      appBar: const DefaultAppBar('이상형'),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -10,8 +10,7 @@ class MeInfo {
   bool? isMan, isSmoker;
   int? height, age;
 
-  MeInfo(
-      {this.id,
+  MeInfo({this.id,
       this.user,
       this.univ = '한양대',
       this.major,

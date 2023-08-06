@@ -44,12 +44,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         onTap: () => AuthService.to.logOut(),
         first: true,
         style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-    if(true) //todo 관리자이면
-    SelectDialogItem(
-        text: '관리자 페이지',
-        onTap: () => Get.toNamed(Routes.admin),
-        style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-    SelectDialogItem(
+    if (controller!.user.id == '6BqgdRdFUoZOPclxIzbD')
+          SelectDialogItem(
+              text: '관리자 페이지',
+              onTap: () {
+                Get.back();
+                Get.toNamed(Routes.admin);
+              },
+              style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+        SelectDialogItem(
         text: '회원탈퇴',
         onTap: () => AuthService.to.withdraw(),
         last: true,

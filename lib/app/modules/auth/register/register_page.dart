@@ -19,7 +19,7 @@ class RegisterPage extends GetView<RegisterController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 74.0),
+              const SizedBox(height: 54.0),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('정보를 입력해주세요', style: ThemeFonts.bold.getTextStyle(size: 24))),

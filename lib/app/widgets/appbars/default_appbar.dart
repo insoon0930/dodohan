@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 import '../../../core/theme/fonts.dart';
 import '../../modules/navigation/navigation_controller.dart';
 
-class SettingAppBar extends StatelessWidget implements PreferredSizeWidget {
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
-  const SettingAppBar({super.key});
+  final String title;
+  const DefaultAppBar(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class SettingAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: GestureDetector(
           onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios)),
-      title: Text('나', style: ThemeFonts.bold.getTextStyle(size: 17)),
+      title: Text(title, style: ThemeFonts.bold.getTextStyle(size: 17)),
       // actions: [Text('완료', style: ThemeFonts.medium.getTextStyle(size: 17)).paddingOnly(right: 16)],
       elevation: 0,
     );

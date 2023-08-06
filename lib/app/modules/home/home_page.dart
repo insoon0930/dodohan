@@ -14,7 +14,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeAppBar(),
+      appBar: HomeAppBar(controller: controller),
       body: Column(
         children: [
           _upperBox(),
@@ -25,49 +25,54 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  Widget _upperBox() => Column(
-    children: [
-      const SizedBox(height: 52),
-      Center(
-        child: Column(
-          children: [
-            Text(
-              "13",
-              style: ThemeFonts.bold.getTextStyle(size: 56, color: ThemeColors.main),
-            ),
-            Text(
-              "신청자 수",
-              style: ThemeFonts.medium.getTextStyle(size: 11),
-            ),
-            //todo 타이머
-            const SizedBox(height: 16),
-            Text(
-              "3일 3시간 15분",
-              style: ThemeFonts.bold.getTextStyle(size: 30, color: ThemeColors.mainLight),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              "마감까지 남은 시간",
-              style: ThemeFonts.medium.getTextStyle(size: 11),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(height: 52),
-      ElevatedButton(
-        style: BtStyle.standard,
-        onPressed: () => controller.getMatchResult(),
-        child: Text('결과 확인',
-            style:
-            ThemeFonts.medium.getTextStyle(color: Colors.white)),
-      ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
-      const SizedBox(height: 16),
-      Text(
-        "* '금요일' 하루동안 확인할 수 있습니다",
-        style: ThemeFonts.medium.getTextStyle(size: 11),
-      ),
-    ],
-  );
+  Widget _upperBox() => Stack(
+        children: [
+          Column(
+            children: [
+              const SizedBox(height: 52),
+              Center(
+                child: Column(
+                  children: [
+                    _applicantNum(),
+                    Text(
+                      "신청자 수",
+                      style: ThemeFonts.medium.getTextStyle(size: 11),
+                    ),
+                    const SizedBox(height: 16),
+                    Obx(
+                      () => Text(
+                        controller.leftDay.value,
+                        style: ThemeFonts.bold.getTextStyle(
+                            size: 30, color: ThemeColors.mainLight),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "이번 회차 마감까지",
+                      style: ThemeFonts.medium.getTextStyle(size: 11),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 52),
+              ElevatedButton(
+                style: BtStyle.standard,
+                onPressed: () => controller.getMatchResult(),
+                child: Text('결과 확인',
+                    style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+              ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
+              const SizedBox(height: 16),
+              Text(
+                "* '금요일' 하루동안 확인할 수 있습니다",
+                style: ThemeFonts.medium.getTextStyle(size: 11),
+              ),
+            ],
+          ),
+          CircleAvatar(
+              backgroundImage: NetworkImage(controller.user.profileImage))
+              .paddingOnly(left: 16),
+        ],
+      );
 
   Widget _lowerBox() => Column(
     children: [
@@ -110,6 +115,22 @@ class HomePage extends GetView<HomeController> {
         style: ThemeFonts.medium.getTextStyle(size: 11),
       ),
     ],
+  );
+
+  Widget _applicantNum() => StreamBuilder<int>(
+    stream: controller.getApplicantsNumStream(),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return Text(
+          "${snapshot.data}",
+          style: ThemeFonts.bold.getTextStyle(size: 56, color: ThemeColors.main),
+        );
+      } else if (snapshot.hasError) {
+        return Text('Error: ${snapshot.error}');
+      } else {
+        return const CircularProgressIndicator();
+      }
+    },
   );
 
 }

@@ -14,7 +14,7 @@ MeInfo _$MeInfoFromJson(Map<String, dynamic> json) {
   return MeInfo(
     id: json['id'] as String?,
     user: json['user'] as String?,
-    univ: json['univ'] as String?,
+    univ: json['univ'] as String? ?? '한양대',
     major: json['major'] as String?,
     bodyShape: json['bodyShape'] as String?,
     isMan: json['isMan'] as bool?,

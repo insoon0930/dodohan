@@ -13,15 +13,10 @@ Match _$MatchFromJson(Map<String, dynamic> json) {
   );
   return Match(
     id: json['id'] as String?,
-    man: json['man'] == null
-        ? null
-        : MatchProfile.fromJson(json['man'] as Map<String, dynamic>),
-    woman: json['woman'] == null
-        ? null
-        : MatchProfile.fromJson(json['woman'] as Map<String, dynamic>),
-    createdAt: json['createdAt'] == null
-        ? null
-        : DateTime.parse(json['createdAt'] as String),
+    man: json['man'] as String? ?? '',
+    woman: json['woman'] as String? ?? '',
+    createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
+        json['createdAt'], const DateTimeConverter().fromJson),
   );
 }
 
@@ -29,5 +24,18 @@ Map<String, dynamic> _$MatchToJson(Match instance) => <String, dynamic>{
       'id': instance.id,
       'man': instance.man,
       'woman': instance.woman,
-      'createdAt': instance.createdAt?.toIso8601String(),
+      'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.createdAt, const DateTimeConverter().toJson),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/data/enums.dart';
 
+import '../../../../core/utils/time_utility.dart';
 import '../../../data/provider/api_service.dart';
 import '../../model/application.dart';
 class ApplicationRepository extends ApiService {
@@ -14,6 +15,7 @@ class ApplicationRepository extends ApiService {
 
   Future<Application> create(Application application) async {
     try {
+      print('application: ${application.toJson()}');
       final ref = await firestore.collection('applications').add(application.toJson());
       await ref.update({'id': ref.id});
       final snapshot = await ref.get();
@@ -35,10 +37,29 @@ class ApplicationRepository extends ApiService {
   //   }
   // }
   //
+  Stream<int> getApplicantsNumStream() {
+    final int thisWeekDay = DateTime.now().weekday;
+    final DateTime today = TimeUtility.todaySimple();
+    final DateTime lastFriday = today.subtract(Duration(days: today.weekday + 2));
+    final DateTime thisFriday = today.subtract(Duration(days: today.weekday - DateTime.friday));
+    // Replace 'applications' with your actual collection name
+    CollectionReference<Map<String, dynamic>> collectionReference =
+        firestore.collection('applications');
+
+    // Create a query snapshot of the collection
+    Stream<QuerySnapshot<Map<String, dynamic>>> stream = collectionReference
+        .where('createdAt',
+            isGreaterThanOrEqualTo:
+                thisWeekDay < 5 ? lastFriday : thisFriday) // 필드 조건 설정
+        .snapshots();
+
+    // Transform the query snapshot stream to a stream of the document count
+    return stream.map((snapshot) => snapshot.size);
+  }
 
   Future<Application?> findThisWeekOne(String user) async {
     final int thisWeekDay = DateTime.now().weekday;
-    final DateTime today = DateTime(DateTime.now().year, DateTime.now().month);
+    final DateTime today = TimeUtility.todaySimple();
     final DateTime lastFriday = today.subtract(Duration(days: today.weekday + 2));
     final DateTime thisFriday = today.subtract(Duration(days: today.weekday - DateTime.friday));
     try {
@@ -47,15 +68,18 @@ class ApplicationRepository extends ApiService {
           .where('user', isEqualTo: user)
           .where('createdAt',
               isGreaterThanOrEqualTo: thisWeekDay < 5
-                  ? lastFriday.toIso8601String()
-                  : thisFriday.toIso8601String())
+                  ? lastFriday
+                  : thisFriday)
           .get();
-      print('querySnapshot.docs.first.data(): ${querySnapshot.docs.first.data()}');
+      print('today22: ${querySnapshot.docs.first.data()}');
+      // print('querySnapshot.docs.first.data(): ${querySnapshot.docs.first.data()}');
       return Application.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
+      print('error: $e');
       return null;
     }
   }
+
   //
   // Future<void> updateStatus(String id, IdStatus idStatus) async {
   //   try {

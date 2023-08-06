@@ -21,17 +21,15 @@ class ApplicationService {
 
   //@Post
   Future<Application> create(MeInfo meInfo, YouInfo youInfo) async {
-    print('meInfo: $meInfo');
-    print('youInfo: $youInfo');
     return await _applicationRepository.create(
         Application(user: meInfo.user, meInfo: meInfo, youInfo: youInfo));
   }
 
-  // //@Get
-  // Future<Application?> findOne(String id) async {
-  //   return await _applicationRepository.findOne(id);
-  // }
-  //
+  //@Get
+  Stream<int> getApplicantsNumStream() {
+    return _applicationRepository.getApplicantsNumStream();
+  }
+
 
   //@Get
   Future<bool> isAlreadyApplied(String user) async {
