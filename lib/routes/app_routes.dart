@@ -1,6 +1,7 @@
 abstract class Routes{
 
   static const splash = '/';
+  static const loginBy = '/login-by';
   static const login = '/login';
   static const register = '/register';
   static const waiting = '/waiting';

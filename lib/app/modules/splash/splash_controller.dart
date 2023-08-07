@@ -15,7 +15,7 @@ class SplashController extends GetxController {
     if (uid != null) {
       await AuthService.to.loginByUid(uid);
     } else {
-      Get.offAllNamed(Routes.login);
+      Get.offAllNamed(Routes.loginBy);
     }
 
     // if (uid == null) {

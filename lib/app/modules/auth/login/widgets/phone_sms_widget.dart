@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/auth/login/widgets/phone_sms_controller.dart';
-
 import '../../../../../core/theme/buttons.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/theme/paddings.dart';
+import '../login_controller.dart';
 
 
 class PhoneSMSWidget extends StatelessWidget {
-  final PhoneSMSController controller = Get.put(PhoneSMSController());
-  PhoneSMSWidget({Key? key}) : super(key: key);
+  final LoginController controller;
+  const PhoneSMSWidget(this.controller, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

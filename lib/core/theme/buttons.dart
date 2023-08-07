@@ -45,20 +45,6 @@ class BtStyle {
         minimumSize: MaterialStateProperty.all(Size(Get.width, 54)),
       );
 
-  //FAButton(
-  //                 height: 44,
-  //                 onTap: () {
-  //                   Get.back();
-  //                   if (callback != null) {
-  //                     callback!();
-  //                   }
-  //                 },
-  //                 borderRadius: BorderRadius.circular(33),
-  //                 color: ThemeColor.black.getColor(),
-  //                 child: Center(
-  //                     child: Text('common.done'.tr,
-  //                         style: ThemeFont.h1Medium.getTextStyle(color: Colors.white), textAlign: TextAlign.center)))
-
   static ButtonStyle get info => standard.copyWith(
         backgroundColor: MaterialStateProperty.all(ThemeColors.mainLight),
         minimumSize: MaterialStateProperty.all(Size(Get.width, 100)),
@@ -72,18 +58,6 @@ class BtStyle {
             side: const BorderSide(width: 1.5, color: ThemeColors.mainLightest))),
       );
 
-  static ButtonStyle get textSub100 => standard.copyWith(
-        backgroundColor: MaterialStateProperty.all(ThemeColors.main),
-      );
-
-  static ButtonStyle get textSub200 => standard.copyWith(
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) return Colors.grey;
-          return ThemeColors.main;
-        }),
-      );
-
   static ButtonStyle get delete => standard.copyWith(
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
@@ -92,13 +66,14 @@ class BtStyle {
         }),
       );
 
-  static ButtonStyle get textMain100 => standard.copyWith(
-        backgroundColor: MaterialStateProperty.all(ThemeColors.main),
-      );
-
-  static ButtonStyle get textMain200 => standard.copyWith(
-        backgroundColor: MaterialStateProperty.all(ThemeColors.main),
-      );
+  static ButtonStyle get loginBy => standard.copyWith(
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))),
+    elevation: MaterialStateProperty.all(4),
+    backgroundColor: MaterialStateProperty.all(Colors.white),
+    surfaceTintColor: MaterialStateProperty.all(Colors.transparent),
+    overlayColor: MaterialStateProperty.all(Colors.grey.withOpacity(0.1)),
+  );
 
   static ButtonStyle get sideLine => standard.copyWith(
         foregroundColor: MaterialStateProperty.resolveWith<Color>(

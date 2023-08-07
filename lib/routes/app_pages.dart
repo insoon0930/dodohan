@@ -3,6 +3,7 @@ import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
 import '../app/modules/auth/login/login_binding.dart';
 import '../app/modules/auth/login/login_page.dart';
+import '../app/modules/auth/login_by/login_by_page.dart';
 import '../app/modules/auth/register/register_binding.dart';
 import '../app/modules/auth/register/register_page.dart';
 import '../app/modules/auth/waiting/waiting_page.dart';
@@ -29,6 +30,9 @@ class AppPages {
         name: Routes.splash,
         page: () => const SplashPage(),
         binding: SplashBinding()),
+    GetPage(
+        name: Routes.loginBy,
+        page: () => const LoginByPage()),
     GetPage(
         name: Routes.login,
         page: () => const LoginPage(),

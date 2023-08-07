@@ -62,7 +62,7 @@ class AuthService extends ApiService {
     user.value = User();
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('uid');
-    Get.offAllNamed(Routes.login);
+    Get.offAllNamed(Routes.loginBy);
     return;
   }
 
