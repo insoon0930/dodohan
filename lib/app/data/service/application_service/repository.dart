@@ -15,7 +15,6 @@ class ApplicationRepository extends ApiService {
 
   Future<Application> create(Application application) async {
     try {
-      print('application: ${application.toJson()}');
       final ref = await firestore.collection('applications').add(application.toJson());
       await ref.update({'id': ref.id});
       final snapshot = await ref.get();
@@ -71,7 +70,6 @@ class ApplicationRepository extends ApiService {
                   ? lastFriday
                   : thisFriday)
           .get();
-      print('today22: ${querySnapshot.docs.first.data()}');
       // print('querySnapshot.docs.first.data(): ${querySnapshot.docs.first.data()}');
       return Application.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {

@@ -34,13 +34,10 @@ class IdentityRepository extends ApiService {
 
   Future<List<Identity>> findWaiting() async {
     try {
-      print('findWaiting');
       QuerySnapshot querySnapshot = await firestore
           .collection('identities')
           .where('status', isEqualTo: IdStatus.waiting.name)
           .get();
-      print('querySnapshot.docs : ${querySnapshot.docs}');
-      print('??????????? : ${querySnapshot.docs.map((e) => Identity.fromJson(e.data() as Map<String, dynamic>)).toList()}');
       return querySnapshot.docs.map((e) => Identity.fromJson(e.data() as Map<String, dynamic>)).toList();
     } catch (e) {
       return [];

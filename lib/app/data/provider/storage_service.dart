@@ -33,9 +33,6 @@ class StorageService extends ApiService {
     required String userId,
   }) async {
     // Create a Reference to the file
-    print('file?? : $file');
-    print('bucket?? : $bucket');
-    print('userId?? : $userId');
     Reference ref = FirebaseStorage.instance
         .ref()
         .child(bucket.name)
@@ -45,15 +42,12 @@ class StorageService extends ApiService {
       customMetadata: {'picked-file-path': file.path},
     );
 
-    print('ref1: $ref');
     if (kIsWeb) {
       await ref.putData(await file.readAsBytes(), metadata);
     } else {
       //추후) 문제해결
       await ref.putFile(io.File(file.path), metadata);
     }
-    print('ref2: $ref');
-    print('ref3: ${await ref.getDownloadURL()}');
     return await ref.getDownloadURL();
   }
 }

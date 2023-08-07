@@ -34,7 +34,6 @@ class RegisterController extends GetxController {
         bucket: StorageBucket.studentId,
         userId: user.id);
 
-    print('profileUrl: $profileUrl, studentIdUrl: $studentIdUrl');
     //들고온 이미지로 다큐먼트 생성
     await identityService.create(Identity(
         user: user.id,
