@@ -38,7 +38,7 @@ class LoginController extends GetxController {
     //   return;
 
     if (!isCodeSent.value && isValidPhone) {
-      Get.dialog(const Center(child: CircularProgressIndicator()));
+      Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
       await sendSMS();
       Get.back();
       isCodeSent.value = true;
@@ -46,7 +46,7 @@ class LoginController extends GetxController {
       codeFocusNode.requestFocus();
     } else if (isCodeSent.value && code.value?.length == 6) {
       Get.focusScope?.unfocus();
-      Get.dialog(const Center(child: CircularProgressIndicator()));
+      Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
       UserCredential userCredential = await verifySMS();
       String resUid = userCredential.user!.uid;
 

@@ -27,14 +27,14 @@ class AdminController extends GetxController {
   }
 
   Future<void> confirm(Identity identity) async {
-    Get.dialog(const Center(child: CircularProgressIndicator()));
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await identityService.confirmed(identity);
     waitingIds.removeWhere((item) => item.id == identity.id);
     Get.back();
   }
 
   Future<void> reject(Identity identity) async {
-    Get.dialog(const Center(child: CircularProgressIndicator()));
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await identityService.rejected(identity);
     waitingIds.removeWhere((item) => item.id == identity.id);
     Get.back();

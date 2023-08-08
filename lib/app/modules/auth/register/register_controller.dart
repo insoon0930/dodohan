@@ -23,7 +23,7 @@ class RegisterController extends GetxController {
   User get user => AuthService.to.user.value;
 
   Future<void> register() async {
-    Get.dialog(const Center(child: CircularProgressIndicator()));
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     //이미지 두개 저장 //이미지 서비스 하나 두고 진행 ㅇㅇ.?
     String profileUrl = await storageService.uploadFile(
         file: profileImage.value!,

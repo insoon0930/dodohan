@@ -68,7 +68,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getInfos() async {
-    Get.dialog(const Center(child: CircularProgressIndicator()));
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     //validation 1. 신청 가능 시간
     final int currentWeekday = DateTime.now().weekday;
     if(currentWeekday == 5) { //금요일
@@ -101,7 +101,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> _apply(MeInfo meInfo, YouInfo youInfo) async {
-    Get.dialog(const Center(child: CircularProgressIndicator()));
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await _applicationService.create(meInfo, youInfo);
     Get.back();
     Get.back();
