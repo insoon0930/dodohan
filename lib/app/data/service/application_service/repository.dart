@@ -17,7 +17,7 @@ class ApplicationRepository extends ApiService {
     try {
       final doc = firestore.collection('applications').doc();
       application.id = doc.id;
-      doc.set(application.toJson());
+      await doc.set(application.toJson());
       return application;
     } catch (e) {
       rethrow;

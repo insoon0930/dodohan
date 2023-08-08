@@ -42,7 +42,7 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const Spacer(),
-              Text('두근두근캠퍼스', style: ThemeFonts.bold.getTextStyle(size: 24, color: ThemeColors.main)),
+              Text('두근두근한양', style: ThemeFonts.bold.getTextStyle(size: 24, color: ThemeColors.main)),
               const Spacer(),
               ElevatedButton(
                 style: BtStyle.loginBy,

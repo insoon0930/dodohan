@@ -19,7 +19,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Text('두근두근캠퍼스', style: ThemeFonts.bold.getTextStyle(size: 22)),
+      title: Text('두근두근한양', style: ThemeFonts.bold.getTextStyle(size: 22)),
       elevation: 0,
       actions: [
         GestureDetector(

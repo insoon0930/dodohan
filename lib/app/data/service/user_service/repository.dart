@@ -17,11 +17,7 @@ class UserRepository extends ApiService {
       // todo 이거로 츄라이 해보던가 , 일단 user final
       final doc = firestore.collection('users').doc();
       user.id = doc.id;
-      doc.set(user.toJson());
-
-      // final ref = await firestore.collection('users').add(user.toJson());
-      // await ref.update({'id': ref.id});
-      // final snapshot = await ref.get();
+      await doc.set(user.toJson());
       return user;
     } catch (e) {
       rethrow;
@@ -51,10 +47,14 @@ class UserRepository extends ApiService {
     }
   }
 
-  Future<void> updateIdStatus(String userId, IdStatus idStatus) async {
+  Future<void> updateIdStatus(String userId, IdStatus idStatus, WriteBatch? batch) async {
     try {
       final DocumentReference ref = firestore.collection('users').doc(userId);
-      await ref.update({'idStatus': idStatus.name});
+      if (batch == null) {
+        await ref.update({'idStatus': idStatus.name});
+      } else {
+        batch.update(ref, {'idStatus': idStatus.name});
+      }
       return;
     } catch (e) {
       rethrow;

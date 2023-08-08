@@ -15,7 +15,7 @@ class MeInfoRepository extends ApiService {
     try {
       final doc = firestore.collection('meInfos').doc();
       meInfo.id = doc.id;
-      doc.set(meInfo.toJson());
+      await doc.set(meInfo.toJson());
       return meInfo;
     } catch (e) {
       rethrow;

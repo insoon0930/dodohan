@@ -12,11 +12,15 @@ class IdentityRepository extends ApiService {
     return _instance;
   }
 
-  Future<Identity> create(Identity identity) async {
+  Future<Identity> create(Identity identity, WriteBatch? batch) async {
     try {
       final doc = firestore.collection('identities').doc();
       identity.id = doc.id;
-      doc.set(identity.toJson());
+      if (batch == null) {
+        await doc.set(identity.toJson());
+      } else {
+        batch.set(doc, identity.toJson());
+      }
       return identity;
     } catch (e) {
       rethrow;

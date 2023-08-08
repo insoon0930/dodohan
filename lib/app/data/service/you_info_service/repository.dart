@@ -13,7 +13,7 @@ class YouInfoRepository extends ApiService {
     try {
       final doc = firestore.collection('youInfos').doc();
       youInfo.id = doc.id;
-      doc.set(youInfo.toJson());
+      await doc.set(youInfo.toJson());
       return youInfo;
     } catch (e) {
       rethrow;

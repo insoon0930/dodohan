@@ -1,13 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:stamp_now/app/data/service/identity_service/repository.dart';
 import '../../enums.dart';
 import '../../model/identity.dart';
 import '../../model/me_info.dart';
 import '../../model/you_info.dart';
+import '../../provider/api_service.dart';
 import '../me_info_service/repository.dart';
 import '../user_service/repository.dart';
 import '../you_info_service/repository.dart';
 
-class IdentityService {
+class IdentityService extends ApiService  {
   final IdentityRepository _identityRepository = IdentityRepository();
   final UserRepository _userRepository = UserRepository();
   final MeInfoRepository _meInfoRepository = MeInfoRepository();
@@ -21,8 +24,10 @@ class IdentityService {
 
   //@Post
   Future<Identity> create(Identity identity) async {
-    Identity res = await _identityRepository.create(identity);
-    await _userRepository.updateIdStatus(identity.user, IdStatus.waiting);
+    final WriteBatch batch = firestore.batch();
+    Identity res = await _identityRepository.create(identity, batch);
+    await _userRepository.updateIdStatus(identity.user, IdStatus.waiting, batch);
+    await batch.commit();
     return res;
   }
 
