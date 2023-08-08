@@ -44,7 +44,7 @@ abstract class Utility {
 
     final ImagePicker picker = ImagePicker();
     try {
-      XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 10);
+      XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 30);
       if(pickedFile == null) {
         return Future.value(null);
       }
