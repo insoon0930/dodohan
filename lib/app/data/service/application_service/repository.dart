@@ -15,10 +15,10 @@ class ApplicationRepository extends ApiService {
 
   Future<Application> create(Application application) async {
     try {
-      final ref = await firestore.collection('applications').add(application.toJson());
-      await ref.update({'id': ref.id});
-      final snapshot = await ref.get();
-      return Application.fromJson(snapshot.data()!);
+      final doc = firestore.collection('applications').doc();
+      application.id = doc.id;
+      doc.set(application.toJson());
+      return application;
     } catch (e) {
       rethrow;
     }

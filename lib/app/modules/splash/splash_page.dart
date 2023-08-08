@@ -10,13 +10,8 @@ class SplashPage extends GetView<SplashController> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              color: Colors.blueAccent,
-              child: const Text('splash 띄워주자'),
-            ),
-          )
+        children: const [
+          Center(child: CircularProgressIndicator())
         ],
       ),
     );

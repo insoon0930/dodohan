@@ -38,7 +38,9 @@ class LoginController extends GetxController {
     //   return;
 
     if (!isCodeSent.value && isValidPhone) {
+      Get.dialog(const Center(child: CircularProgressIndicator()));
       await sendSMS();
+      Get.back();
       isCodeSent.value = true;
       Get.focusScope?.unfocus();
       codeFocusNode.requestFocus();

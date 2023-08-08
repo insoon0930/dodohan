@@ -14,10 +14,10 @@ class IdentityRepository extends ApiService {
 
   Future<Identity> create(Identity identity) async {
     try {
-      final ref = await firestore.collection('identities').add(identity.toJson());
-      await ref.update({'id': ref.id});
-      final snapshot = await ref.get();
-      return Identity.fromJson(snapshot.data()!);
+      final doc = firestore.collection('identities').doc();
+      identity.id = doc.id;
+      doc.set(identity.toJson());
+      return identity;
     } catch (e) {
       rethrow;
     }

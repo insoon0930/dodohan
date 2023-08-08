@@ -8,7 +8,7 @@ part 'user.g.dart';
 @JsonSerializable()
 class User {
   @JsonKey(name: 'id', required: true)
-  final String id;
+  String id;
   String uid, phoneNum, profileImage, univ;
   bool? isMan;
   // List<String> folders;

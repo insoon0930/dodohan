@@ -11,10 +11,10 @@ class YouInfoRepository extends ApiService {
 
   Future<YouInfo> create(YouInfo youInfo) async {
     try {
-      final ref = await firestore.collection('youInfos').add(youInfo.toJson());
-      await ref.update({'id': ref.id});
-      final snapshot = await ref.get();
-      return YouInfo.fromJson(snapshot.data()!);
+      final doc = firestore.collection('youInfos').doc();
+      youInfo.id = doc.id;
+      doc.set(youInfo.toJson());
+      return youInfo;
     } catch (e) {
       rethrow;
     }

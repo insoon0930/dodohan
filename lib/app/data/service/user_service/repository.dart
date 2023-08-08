@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 
 import '../../../data/provider/api_service.dart';
 import '../../enums.dart';
@@ -15,10 +14,15 @@ class UserRepository extends ApiService {
 
   Future<User> create(User user) async {
     try {
-      final ref = await firestore.collection('users').add(user.toJson());
-      await ref.update({'id': ref.id});
-      final snapshot = await ref.get();
-      return User.fromJson(snapshot.data()!);
+      // todo 이거로 츄라이 해보던가 , 일단 user final
+      final doc = firestore.collection('users').doc();
+      user.id = doc.id;
+      doc.set(user.toJson());
+
+      // final ref = await firestore.collection('users').add(user.toJson());
+      // await ref.update({'id': ref.id});
+      // final snapshot = await ref.get();
+      return user;
     } catch (e) {
       rethrow;
     }
