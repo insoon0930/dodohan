@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/widgets/appbars/default_appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
@@ -64,22 +65,29 @@ class AdminPage extends GetView<AdminController> {
   }
 
   Widget _listIem(Identity item) => SizedBox(
-    width: Get.width,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        ImageViewBox(url: item.studentIdImage),
-        ImageViewBox(url: item.profileImage),
-        Column(
+        width: Get.width,
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(onPressed: () => controller.confirm(item), child: const Text('승인')),
-            SizedBox(height: Get.width * 0.1),
-            ElevatedButton(onPressed: () => controller.reject(item), child: const Text('거절')),
+            GestureDetector(
+                onTap: () => controller.launchDefaultUrl(item.studentIdImage),
+                child: ImageViewBox(url: item.studentIdImage)),
+            GestureDetector(
+                onTap: () => controller.launchDefaultUrl(item.profileImage),
+                child: ImageViewBox(url: item.profileImage)),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                    onPressed: () => controller.confirm(item),
+                    child: const Text('승인')),
+                SizedBox(height: Get.width * 0.1),
+                ElevatedButton(
+                    onPressed: () => controller.reject(item),
+                    child: const Text('거절')),
+              ],
+            ),
           ],
         ),
-      ],
-    ),
-  );
-
+      );
 }

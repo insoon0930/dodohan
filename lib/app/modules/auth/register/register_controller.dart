@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import 'package:stamp_now/app/data/model/identity.dart';
 import 'package:stamp_now/core/services/auth_service.dart';
 
+import '../../../../core/theme/colors.dart';
+import '../../../../core/theme/fonts.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../data/enums.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/storage_service.dart';
 import '../../../data/service/identity_service/service.dart';
-import '../../../data/service/user_service/service.dart';
 
 class RegisterController extends GetxController {
   final StorageService storageService = Get.find();
@@ -19,20 +20,24 @@ class RegisterController extends GetxController {
   final Rxn<XFile> profileImage = Rxn<XFile>();
   final Rxn<XFile> studentIdImage = Rxn<XFile>();
 
+  final RxString uploadStatus = '이미지 업로드중 (0/2)'.obs;
+
   bool get ready => isMan.value != null && profileImage.value != null && studentIdImage.value != null;
   User get user => AuthService.to.user.value;
 
   Future<void> register() async {
-    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+    Get.dialog(_processWidget(), barrierDismissible: false);
     //이미지 두개 저장 //이미지 서비스 하나 두고 진행 ㅇㅇ.?
     String profileUrl = await storageService.uploadFile(
         file: profileImage.value!,
         bucket: StorageBucket.profile,
         userId: user.id);
+    uploadStatus.value = '이미지 업로드중(1/2)';
     String studentIdUrl = await storageService.uploadFile(
         file: studentIdImage.value!,
         bucket: StorageBucket.studentId,
         userId: user.id);
+    uploadStatus.value = '잠시만 기다려주세요';
 
     //들고온 이미지로 다큐먼트 생성
     await identityService.create(Identity(
@@ -48,4 +53,18 @@ class RegisterController extends GetxController {
     Get.back();
     Get.toNamed(Routes.waiting);
   }
+
+  Widget _processWidget() => Center(child: Obx(
+        () => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(height: 16),
+            DefaultTextStyle(
+                style: ThemeFonts.semiBold
+                    .getTextStyle(color: ThemeColors.main, size: 18),
+                child: Text(uploadStatus.value)),
+          ],
+        ),
+      ));
 }

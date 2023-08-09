@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/services/auth_service.dart';
 import '../../data/dummy.dart';
 import '../../data/enums.dart';
@@ -53,6 +54,20 @@ class AdminController extends GetxController {
     await applicationService.create(meInfo, youInfo);
     Get.snackbar('남자 신청', '추가 완료');
   }
+
+  //todo 404 해결 아마 공개 권한? 문제일듯
+  void launchDefaultUrl(String url) {
+    launchUrl(
+      Uri(
+        scheme: 'https',
+        host: 'firebasestorage.googleapis.com',
+        path: url.split('https://firebasestorage.googleapis.com/')[1],
+      ),
+      mode: LaunchMode.externalApplication,
+    );
+  }
+
+
   ////@Post
 //   Future<void> createManApplicationDummy() async {
 //     await _identityRepository.updateStatus(identity.id, IdStatus.rejected);
