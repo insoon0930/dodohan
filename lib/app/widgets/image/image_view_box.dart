@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 class ImageViewBox extends StatelessWidget {
   final String url;
-  double? width, height;
+  final double? width, height;
 
-  ImageViewBox({Key? key, this.width, this.height, required this.url})
+  const ImageViewBox({Key? key, this.width, this.height, required this.url})
       : super(key: key);
 
   @override
