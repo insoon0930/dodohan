@@ -10,12 +10,14 @@ class YouInfoController extends GetxController {
   Rx<YouInfo> youInfo = YouInfo().obs;
 
   User get user => AuthService.to.user.value;
+  int? get minHeight => youInfo.value.minHeight;
+  int? get maxHeight => youInfo.value.maxHeight;
+  int? get minAge => youInfo.value.minAge;
+  int? get maxAge => youInfo.value.maxAge;
 
   @override
   Future<void> onInit() async {
-    print('onInit user.id: ${user.id}');
     youInfo.value = await _youInfoService.findOne(user.id);
-    print('onInit youInfo.value: ${youInfo.value}');
     super.onInit();
   }
 

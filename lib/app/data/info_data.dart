@@ -83,7 +83,6 @@ class InfoData {
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
     S2Choice<String>(value: '근육있는', title: '근육있는'),
-    S2Choice<String>(value: '상관없음', title: '상관없음'),
   ];
 
   static List<S2Choice<String>> youBodyShapeForMan = [

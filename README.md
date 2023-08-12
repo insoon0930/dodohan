@@ -15,3 +15,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # stamp_now
+
+# terminal script
+firebase hosting:channel:deploy TEST
+firebase hosting:channel:delete TEST	

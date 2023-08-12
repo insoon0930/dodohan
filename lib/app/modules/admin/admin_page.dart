@@ -49,13 +49,13 @@ class AdminPage extends GetView<AdminController> {
             ),
             const SizedBox(height: 16),
             Text('심사', style: ThemeFonts.medium.getTextStyle(size: 17)),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Obx(
               () => ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.waitingIds.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    _listIem(controller.waitingIds[index]),
+                    _listIem(controller.waitingIds[index]).paddingSymmetric(horizontal: 16, vertical: 8),
               ),
             ),
           ],
@@ -76,12 +76,11 @@ class AdminPage extends GetView<AdminController> {
                 onTap: () => controller.launchDefaultUrl(item.profileImage),
                 child: ImageViewBox(url: item.profileImage)),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                     onPressed: () => controller.confirm(item),
                     child: const Text('승인')),
-                SizedBox(height: Get.width * 0.1),
+                Text(item.isMan ? '남' : '여', style: ThemeFonts.bold.getTextStyle()).paddingSymmetric(vertical: 32),
                 ElevatedButton(
                     onPressed: () => controller.reject(item),
                     child: const Text('거절')),

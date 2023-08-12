@@ -1,3 +1,4 @@
+import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/theme/buttons.dart';
@@ -54,30 +55,55 @@ class YouInfoPage extends GetView<YouInfoController> {
                   InfoSelector(
                       title: '키(이상)',
                       placeholder: '${controller.youInfo.value.minHeight}',
-                      list: InfoData.height,
-                      changedCallback: (selected) => controller
-                          .youInfo.value.minHeight = int.parse('${selected.value}')),
+                      list: controller.maxHeight == null
+                          ? InfoData.height
+                          : List.generate(
+                          controller.maxHeight! - 139,
+                              (index) => S2Choice<String>(
+                              value: '${140 + index}',
+                              title: '${140 + index}')),
+                      changedCallback: (selected) => controller.youInfo.update(
+                          (val) => val!.minHeight = int.parse('${selected.value}'))),
                   const Divider(height: 1),
                   InfoSelector(
                       title: '키(이하)',
                       placeholder: '${controller.youInfo.value.maxHeight}',
-                      list: InfoData.height,
-                      changedCallback: (selected) => controller
-                          .youInfo.value.maxHeight = int.parse('${selected.value}')),
+                      list: controller.minHeight == null
+                          ? InfoData.height
+                          : List.generate(
+                          190 - controller.minHeight!,
+                              (index) => S2Choice<String>(
+                              value: '${controller.minHeight! + index}',
+                              title: '${controller.minHeight! + index}')),
+                      changedCallback: (selected) => controller.youInfo.update(
+                          (val) => val!.maxHeight = int.parse('${selected.value}'))),
                   const Divider(height: 1),
                   InfoSelector(
                       title: '나이(이상)',
                       placeholder: '${controller.youInfo.value.minAge}',
-                      list: InfoData.age,
-                      changedCallback: (selected) => controller.youInfo.value.minAge =
-                          int.parse('${selected.value ?? 0}')),
+                      list: controller.maxAge == null
+                          ? InfoData.age
+                          : List.generate(
+                          controller.maxAge! - 19,
+                              (index) => S2Choice<String>(
+                              value: '${20 + index}',
+                              title: '${20 + index}')),
+                      changedCallback: (selected) => controller.youInfo.update(
+                          (val) =>
+                              val!.minAge = int.parse('${selected.value}'))),
                   const Divider(height: 1),
                   InfoSelector(
                       title: '나이(이하)',
                       placeholder: '${controller.youInfo.value.maxAge}',
-                      list: InfoData.age,
-                      changedCallback: (selected) => controller.youInfo.value.maxAge =
-                          int.parse('${selected.value ?? 0}')),
+                      list: controller.minAge == null
+                          ? InfoData.age
+                          : List.generate(
+                          30 - controller.minAge!,
+                              (index) => S2Choice<String>(
+                              value: '${controller.minAge! + index}',
+                              title: '${controller.minAge! + index}')),
+                      changedCallback: (selected) => controller.youInfo.update(
+                          (val) => val!.maxAge = int.parse('${selected.value}'))),
                   const Divider(height: 1),
                   InfoSelector(
                       title: '체형',

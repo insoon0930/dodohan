@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/services/auth_service.dart';
+import '../../../routes/app_routes.dart';
 import '../../data/dummy.dart';
 import '../../data/enums.dart';
 import '../../data/model/identity.dart';
@@ -23,6 +24,10 @@ class AdminController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    if(user.phoneNum != '+821066192550') {
+      Get.offAllNamed(Routes.loginBy);
+      return;
+    }
     waitingIds.value = await identityService.findWaiting();
     super.onInit();
   }
