@@ -81,8 +81,6 @@ abstract class Utility {
       }
 
       return Future<XFile>.value(XFile(croppedFile.path));
-
-      return Future<XFile>.value(pickedFile);
     } catch (e) {
       return Future.value(null);
     }

@@ -38,7 +38,7 @@ class RegisterPage extends GetView<RegisterController> {
                     deletedCallback: () => controller.profileImage.value = null),
               ),
               const SizedBox(height: 8),
-              Text('* 매칭된 상대에게만 공개됩니다\n  (본인 확인 가능한 사진 필수)'.tr,
+              Text('* 매칭된 상대에게만 공개됩니다\n  (본인 확인 가능한 정면 사진 필수)'.tr,
                   style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.grayDark)),
               const SizedBox(height: 32),
               Text('학생증'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17)),

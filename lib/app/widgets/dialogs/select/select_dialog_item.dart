@@ -33,22 +33,20 @@ class SelectDialogItem extends StatelessWidget {
               ? const BorderRadius.only(bottomLeft: Radius.circular(17), bottomRight: Radius.circular(17))
               : null,
         ),
-        child: SizedBox(
-          height: last ? 59 : 60,
-          child: Column(
-            children: [
-              Expanded(
-                child: Align(
-                    alignment: isCenter ? Alignment.center : Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: isCenter ? 0 : 30),
-                      child:
-                      Text(text, style: style ?? ThemeFonts.medium.getTextStyle(size: 15, color: Colors.black)),
-                    )),
-              ),
-              if (!last) const Divider(color: ThemeColors.grayLightest)
-            ],
-          ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: (last || first) ? 59 : 60,
+              child: Align(
+                  alignment: isCenter ? Alignment.center : Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: isCenter ? 0 : 30),
+                    child:
+                    Text(text, style: style ?? ThemeFonts.medium.getTextStyle(size: 15, color: Colors.black)),
+                  )),
+            ),
+            if (!last) const Divider(height: 1, thickness: 1, color: ThemeColors.grayLightest)
+          ],
         ),
       ),
     );

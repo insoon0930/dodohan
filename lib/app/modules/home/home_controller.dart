@@ -1,29 +1,41 @@
 import 'dart:async';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:stamp_now/app/data/model/image_update_request.dart';
 import 'package:stamp_now/app/modules/splash/splash_controller.dart';
 import 'package:stamp_now/app/widgets/dialogs/application_dialog.dart';
 import 'package:stamp_now/app/widgets/dialogs/match_success_dialog.dart';
 import 'package:stamp_now/core/utils/time_utility.dart';
 import '../../../core/services/auth_service.dart';
+import '../../../core/theme/fonts.dart';
+import '../../../core/utils/utility.dart';
+import '../../data/enums.dart';
 import '../../data/model/me_info.dart';
 import '../../data/model/match.dart';
 import '../../data/model/user.dart';
 import '../../data/model/you_info.dart';
+import '../../data/provider/storage_service.dart';
 import '../../data/service/application_service/service.dart';
+import '../../data/service/image_update_request_service/service.dart';
 import '../../data/service/match_service/service.dart';
 import '../../data/service/me_info_service/service.dart';
 import '../../data/service/user_service/service.dart';
 import '../../data/service/you_info_service/service.dart';
 import '../../widgets/dialogs/error_dialog.dart';
+import '../../widgets/dialogs/select/select_dialog.dart';
+import '../../widgets/dialogs/select/select_dialog_item.dart';
 
 class HomeController extends GetxController {
+  final StorageService storageService = Get.find();
   final ApplicationService _applicationService = ApplicationService();
   final MeInfoService _meInfoService = MeInfoService();
   final YouInfoService _youInfoService = YouInfoService();
   final MatchService _matchService = MatchService();
   final UserService _userService = UserService();
+  final ImageUpdateRequestService _imageUpdateRequestService = ImageUpdateRequestService();
 
   RxString leftDay = '0일 0시 0분 0초'.obs;
   Timer? timer;
@@ -139,6 +151,56 @@ class HomeController extends GetxController {
 
   Stream<int> getApplicantsNumStream() {
     return _applicationService.getApplicantsNumStream();
+  }
+
+  Future<void> updateProfileImage() async {
+    //신청중인 상태인지 확인
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+    ImageUpdateRequest? waitingRequest = await _imageUpdateRequestService.findOneWaiting(user.id);
+    Get.back();
+    if (waitingRequest != null) {
+      return Get.dialog(const ErrorDialog(text: '이미 심사중인 프로필이 있습니다'));
+    }
+    return Get.dialog(SelectDialog(itemHeight: 60, items: [
+        SelectDialogItem(
+            text: '카메라',
+            onTap: () async {
+              Get.back();
+              XFile? result = await Utility.getImage(source: ImageSource.camera);
+              if (result != null) {
+                Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+                String profileUrl = await storageService.uploadFile(
+                    file: result,
+                    bucket: StorageBucket.profile,
+                    userId: user.id);
+                await _imageUpdateRequestService.create(
+                    ImageUpdateRequest(user: user.id, profileImage: profileUrl));
+                Get.back();
+                Get.snackbar('신청 완료', '심사가 통과되면 즉시 반영됩니다');
+              }
+            },
+            first: true,
+            style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+        SelectDialogItem(
+            text: '사진',
+            onTap: () async {
+              Get.back();
+              XFile? result = await Utility.getImage(source: ImageSource.gallery);
+              if (result != null) {
+                Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+                String profileUrl = await storageService.uploadFile(
+                    file: result,
+                    bucket: StorageBucket.profile,
+                    userId: user.id);
+                await _imageUpdateRequestService.create(
+                    ImageUpdateRequest(user: user.id, profileImage: profileUrl));
+                Get.back();
+                Get.snackbar('신청 완료', '심사가 통과되면 즉시 반영됩니다');
+              }
+            },
+            last: true,
+            style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+      ]));
   }
 }
 

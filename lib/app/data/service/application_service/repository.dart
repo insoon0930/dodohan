@@ -24,18 +24,6 @@ class ApplicationRepository extends ApiService {
     }
   }
 
-  findOne() {}
-
-
-  // Future<Application?> findOne(String id) async {
-  //   try {
-  //     DocumentSnapshot applicationSnapshot = await firestore.collection('applications').doc(id).get();
-  //     return Application.fromJson(applicationSnapshot.data() as Map<String, dynamic>);
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
-  //
   Stream<int> getApplicantsNumStream() {
     final int thisWeekDay = DateTime.now().weekday;
     final DateTime today = TimeUtility.todaySimple();
@@ -85,13 +73,18 @@ class ApplicationRepository extends ApiService {
 
       // 기존 문자열 필드를 리스트로 변환하여 업데이트
       for (QueryDocumentSnapshot<Map<String, dynamic>> docSnapshot in snapshot.docs) {
-        final String oldStringField = docSnapshot.data()['youInfo.bodyShape']; // 기존 문자열 필드 이름
+        var oldStringField = docSnapshot.data()['youInfo']['bodyShape']; // 기존 문자열 필드 이름
+        print('${docSnapshot.data()['youInfo']['bodyShape']}');
 
         final List<String> newStringListField;
 
+        if (oldStringField == null || oldStringField.runtimeType != String) {
+          continue;
+        }
+
         // 리스트로 변환
-        if(oldStringField == '상관 없음') {
-          final bool isMan = docSnapshot.data()['meInfo.isMan'];
+        if(oldStringField == '상관없음') {
+          final bool isMan = docSnapshot.data()['meInfo']['isMan'];
           if(isMan) {
             newStringListField = ['마른', '보통', '통통', '볼륨있는'];
           } else {
@@ -100,7 +93,7 @@ class ApplicationRepository extends ApiService {
         } else {
           newStringListField = [oldStringField];
         }
-
+        print('newStringListField!!: $newStringListField');
         // 해당 문서 업데이트
         await firestore.collection('applications').doc(docSnapshot.id).update({
           'youInfo.bodyShape': newStringListField,

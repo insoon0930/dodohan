@@ -78,28 +78,18 @@ class InfoData {
   static List<S2Choice<String>> age = List.generate(
       10, (index) => S2Choice<String>(value: '${20 + index}', title: '${20 + index}'));
 
-  static List<S2Choice<String>> meBodyShapeForMan = [
+  static List<S2Choice<String>> manBodyShape = [
     S2Choice<String>(value: '마른', title: '마른'),
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
     S2Choice<String>(value: '근육있는', title: '근육있는'),
   ];
 
-  static List<S2Choice<String>> youBodyShapeForMan = [
-    ...meBodyShapeForWoman,
-    S2Choice<String>(value: '상관없음', title: '상관없음'),
-  ];
-
-  static List<S2Choice<String>> meBodyShapeForWoman = [
+  static List<S2Choice<String>> womanBodyShape = [
     S2Choice<String>(value: '마른', title: '마른'),
     S2Choice<String>(value: '보통', title: '보통'),
     S2Choice<String>(value: '통통', title: '통통'),
     S2Choice<String>(value: '볼륨있는', title: '볼륨있는'),
-  ];
-
-  static List<S2Choice<String>> youBodyShapeForWoman = [
-    ...meBodyShapeForMan,
-    S2Choice<String>(value: '상관없음', title: '상관없음'),
   ];
 
   static List<S2Choice<String>> meSmoke = [

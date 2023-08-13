@@ -68,9 +68,12 @@ class HomePage extends GetView<HomeController> {
               ),
             ],
           ),
-          CircleAvatar(
-              backgroundImage: NetworkImage(controller.user.profileImage))
-              .paddingOnly(left: 16),
+          GestureDetector(
+            onTap: () => controller.updateProfileImage(),
+            child: CircleAvatar(
+                backgroundImage: NetworkImage(controller.user.profileImage))
+                .paddingOnly(left: 16),
+          ),
         ],
       );
 

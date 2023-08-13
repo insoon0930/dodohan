@@ -20,3 +20,4 @@ samples, guidance on mobile development, and a full API reference.
 firebase hosting:channel:deploy TEST
 firebase hosting:channel:delete TEST
 flutter pub run build_runner build --delete-conflicting-outputs
+flutter run -d chrome --web-renderer html

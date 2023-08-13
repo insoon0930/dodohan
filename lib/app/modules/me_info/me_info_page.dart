@@ -69,8 +69,8 @@ class MeInfoPage extends GetView<MeInfoController> {
                       title: '체형',
                       placeholder: controller.meInfo.value.bodyShape,
                       list: controller.user.isMan!
-                          ? InfoData.meBodyShapeForMan
-                          : InfoData.meBodyShapeForWoman,
+                          ? InfoData.manBodyShape
+                          : InfoData.womanBodyShape,
                       changedCallback: (selected) =>
                       controller.meInfo.value.bodyShape = selected.value),
                   const Divider(height: 1),

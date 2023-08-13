@@ -107,11 +107,11 @@ class YouInfoPage extends GetView<YouInfoController> {
                           (val) => val!.maxAge = int.parse('${selected.value}'))),
                   const Divider(height: 1),
                   MultiSelector(
-                      title: '체형(중복 가능)',
+                      title: '체형',
                       selected: controller.youInfo.value.bodyShape,
                       list: controller.user.isMan!
-                          ? InfoData.youBodyShapeForMan
-                          : InfoData.youBodyShapeForWoman,
+                          ? InfoData.womanBodyShape
+                          : InfoData.manBodyShape,
                       changedCallback: (S2MultiSelected<String?> selected) => controller
                           .youInfo.value.bodyShape = selected.title),
                   const Divider(height: 1),

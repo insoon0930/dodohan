@@ -52,12 +52,17 @@ class YouInfoRepository extends ApiService {
 
       // 기존 문자열 필드를 리스트로 변환하여 업데이트
       for (QueryDocumentSnapshot<Map<String, dynamic>> docSnapshot in snapshot.docs) {
-        final String oldStringField = docSnapshot.data()['bodyShape']; // 기존 문자열 필드 이름
+        var oldStringField = docSnapshot.data()['bodyShape']; // 기존 문자열 필드 이름
+        print('oldStringField: $oldStringField');
 
         final List<String> newStringListField;
 
         // 리스트로 변환
-        if(oldStringField == '상관 없음') {
+        if (oldStringField == null || oldStringField.runtimeType != String) {
+          continue;
+        }
+
+        if(oldStringField == '상관없음') {
           MeInfo meInfo = await _meInfoRepository.findOne(docSnapshot.data()['user']);
           if(meInfo.isMan!) {
             newStringListField = ['마른', '보통', '통통', '볼륨있는'];
@@ -67,7 +72,7 @@ class YouInfoRepository extends ApiService {
         } else {
           newStringListField = [oldStringField];
         }
-
+        print('newStringListField!!: $newStringListField');
         // 해당 문서 업데이트
         await firestore.collection('youInfos').doc(docSnapshot.id).update({
           'bodyShape': newStringListField,

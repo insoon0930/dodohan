@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         Get.put(ApiService(), permanent: true);
         Get.put(AuthService(UserService()), permanent: true);
-        Get.put(StorageService());
+        Get.put(StorageService(), permanent: true);
         //todo 여기는 수정해야될껄 ㅇㅇ?
         // Get.put(MeInfoController(repo: MeInfoRepository()), permanent: true);
       }),

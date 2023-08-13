@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:stamp_now/app/data/service/identity_service/repository.dart';
 import '../../enums.dart';
 import '../../model/identity.dart';
@@ -29,11 +28,6 @@ class IdentityService extends ApiService  {
     await _userRepository.updateIdStatus(identity.user, IdStatus.waiting, batch);
     await batch.commit();
     return res;
-  }
-
-  //@Get
-  Future<Identity?> findOne(String id) async {
-    return await _identityRepository.findOne(id);
   }
 
   //@Get

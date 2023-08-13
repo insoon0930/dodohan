@@ -11,11 +11,11 @@ import '../../../data/enums.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/storage_service.dart';
 import '../../../data/service/identity_service/service.dart';
+import '../../../widgets/dialogs/error_dialog.dart';
 
 class RegisterController extends GetxController {
   final StorageService storageService = Get.find();
   final IdentityService identityService = IdentityService();
-
   final Rxn<bool> isMan = Rxn<bool>();
   final Rxn<XFile> profileImage = Rxn<XFile>();
   final Rxn<XFile> studentIdImage = Rxn<XFile>();
@@ -24,6 +24,15 @@ class RegisterController extends GetxController {
 
   bool get ready => isMan.value != null && profileImage.value != null && studentIdImage.value != null;
   User get user => AuthService.to.user.value;
+
+  @override
+  void onReady() {
+    if(user.idStatus == IdStatus.rejected) {
+      Get.dialog(const ErrorDialog(
+          text: '심사 반려\n\n학생증 혹은 프로필 이미지를 확인해주세요. (마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...)'));
+    }
+    super.onReady();
+  }
 
   Future<void> register() async {
     Get.dialog(_processWidget(), barrierDismissible: false);
