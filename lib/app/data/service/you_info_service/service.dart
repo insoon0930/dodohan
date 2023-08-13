@@ -26,4 +26,9 @@ class YouInfoService {
     return;
   }
 
+  //@Patch
+  Future<void> updateBodyShapeType() async {
+    await _youInfoRepository.updateBodyShapeType();
+    return;
+  }
 }

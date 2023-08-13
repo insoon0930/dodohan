@@ -1,13 +1,13 @@
 import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 
-class InfoSelector extends StatelessWidget {
+class SingleSelector extends StatelessWidget {
   final String title;
   final String? placeholder;
   final List<S2Choice<String>> list;
   final Function changedCallback;
 
-  const InfoSelector(
+  const SingleSelector(
       {required this.title,
       required this.placeholder,
       required this.list,
@@ -18,7 +18,6 @@ class InfoSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartSelect<String?>.single(
-
       title: title,
       placeholder: (placeholder == null || placeholder == 'null') ? '선택' : placeholder!,
       choiceDirection: Axis.vertical,

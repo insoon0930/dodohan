@@ -6,7 +6,8 @@ import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../data/info_data.dart';
 import '../../widgets/appbars/default_appbar.dart';
-import '../../widgets/info_selector.dart';
+import '../../widgets/multi_selector.dart';
+import '../../widgets/single_selector.dart';
 import 'you_info_controller.dart';
 
 class YouInfoPage extends GetView<YouInfoController> {
@@ -44,7 +45,7 @@ class YouInfoPage extends GetView<YouInfoController> {
             child: Obx(
               () => Column(
                 children: [
-                  InfoSelector(
+                  SingleSelector(
                       title: '동일 학과 배제',
                       placeholder: '${controller.youInfo.value.exceptSameMajor}',
                       list: InfoData.exceptSameMajor,
@@ -52,7 +53,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                           controller.youInfo.value.exceptSameMajor =
                               selected.value == 'true' ? true : false),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '키(이상)',
                       placeholder: '${controller.youInfo.value.minHeight}',
                       list: controller.maxHeight == null
@@ -65,7 +66,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) => val!.minHeight = int.parse('${selected.value}'))),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '키(이하)',
                       placeholder: '${controller.youInfo.value.maxHeight}',
                       list: controller.minHeight == null
@@ -78,7 +79,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) => val!.maxHeight = int.parse('${selected.value}'))),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '나이(이상)',
                       placeholder: '${controller.youInfo.value.minAge}',
                       list: controller.maxAge == null
@@ -92,7 +93,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                           (val) =>
                               val!.minAge = int.parse('${selected.value}'))),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '나이(이하)',
                       placeholder: '${controller.youInfo.value.maxAge}',
                       list: controller.minAge == null
@@ -105,16 +106,16 @@ class YouInfoPage extends GetView<YouInfoController> {
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) => val!.maxAge = int.parse('${selected.value}'))),
                   const Divider(height: 1),
-                  InfoSelector(
-                      title: '체형',
-                      placeholder: controller.youInfo.value.bodyShape,
+                  MultiSelector(
+                      title: '체형(중복 가능)',
+                      selected: controller.youInfo.value.bodyShape,
                       list: controller.user.isMan!
                           ? InfoData.youBodyShapeForMan
                           : InfoData.youBodyShapeForWoman,
-                      changedCallback: (selected) =>
-                      controller.youInfo.value.bodyShape = selected.value),
+                      changedCallback: (S2MultiSelected<String?> selected) => controller
+                          .youInfo.value.bodyShape = selected.title),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '흡연',
                       placeholder: controller.youInfo.value.isSmoker,
                       list: InfoData.youSmoke,

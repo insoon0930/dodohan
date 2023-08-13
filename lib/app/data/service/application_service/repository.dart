@@ -78,6 +78,40 @@ class ApplicationRepository extends ApiService {
     }
   }
 
+  Future<void> updateBodyShapeType() async {
+    try {
+      // 기존 데이터 가져오기
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestore.collection('applications').get();
+
+      // 기존 문자열 필드를 리스트로 변환하여 업데이트
+      for (QueryDocumentSnapshot<Map<String, dynamic>> docSnapshot in snapshot.docs) {
+        final String oldStringField = docSnapshot.data()['youInfo.bodyShape']; // 기존 문자열 필드 이름
+
+        final List<String> newStringListField;
+
+        // 리스트로 변환
+        if(oldStringField == '상관 없음') {
+          final bool isMan = docSnapshot.data()['meInfo.isMan'];
+          if(isMan) {
+            newStringListField = ['마른', '보통', '통통', '볼륨있는'];
+          } else {
+            newStringListField = ['마른', '보통', '통통', '근육있는'];
+          }
+        } else {
+          newStringListField = [oldStringField];
+        }
+
+        // 해당 문서 업데이트
+        await firestore.collection('applications').doc(docSnapshot.id).update({
+          'youInfo.bodyShape': newStringListField,
+        });
+      }
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   //
   // Future<void> updateStatus(String id, IdStatus idStatus) async {
   //   try {

@@ -30,7 +30,6 @@ class ApplicationService {
     return _applicationRepository.getApplicantsNumStream();
   }
 
-
   //@Get
   Future<bool> isAlreadyApplied(String user) async {
     Application? application = await _applicationRepository.findThisWeekOne(user);
@@ -39,6 +38,12 @@ class ApplicationService {
     } else {
       return true;
     }
+  }
+
+  //@Path
+  Future<void> updateBodyShapeType() async {
+    await _applicationRepository.updateBodyShapeType();
+    return;
   }
 
   //

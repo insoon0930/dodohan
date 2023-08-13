@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../routes/app_routes.dart';
 import '../../data/dummy.dart';
-import '../../data/enums.dart';
 import '../../data/model/identity.dart';
 import '../../data/model/me_info.dart';
 import '../../data/model/user.dart';
@@ -12,11 +11,13 @@ import '../../data/model/you_info.dart';
 import '../../data/service/application_service/service.dart';
 import '../../data/service/identity_service/service.dart';
 import '../../data/service/user_service/service.dart';
+import '../../data/service/you_info_service/service.dart';
 
 class AdminController extends GetxController {
   final IdentityService identityService = IdentityService();
   final UserService userService = UserService();
   final ApplicationService applicationService = ApplicationService();
+  final YouInfoService youInfoService = YouInfoService();
 
   final RxList<Identity> waitingIds = <Identity>[].obs;
   User get user => AuthService.to.user.value;
@@ -58,6 +59,16 @@ class AdminController extends GetxController {
     YouInfo youInfo = Dummy.womanYouInfo;
     await applicationService.create(meInfo, youInfo);
     Get.snackbar('남자 신청', '추가 완료');
+  }
+
+  Future<void> updateYouInfoBodyShapeType() async {
+    await youInfoService.updateBodyShapeType();
+    Get.snackbar('필드 업데이트', '완료');
+  }
+
+  Future<void> updateApplicationBodyShapeType() async {
+    await applicationService.updateBodyShapeType();
+    Get.snackbar('필드 업데이트', '완료');
   }
 
   //todo 404 해결 아마 공개 권한? 문제일듯

@@ -51,6 +51,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Get.back();
                 Get.toNamed(Routes.admin);
               },
+              last: true,
               style: ThemeFonts.semiBold.getTextStyle(size: 15)),
     if (controller!.user.id != '6BqgdRdFUoZOPclxIzbD')
         SelectDialogItem(

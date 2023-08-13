@@ -5,7 +5,8 @@ import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../data/info_data.dart';
 import '../../widgets/appbars/default_appbar.dart';
-import '../../widgets/info_selector.dart';
+import '../../widgets/multi_selector.dart';
+import '../../widgets/single_selector.dart';
 import 'me_info_controller.dart';
 
 class MeInfoPage extends GetView<MeInfoController> {
@@ -43,28 +44,28 @@ class MeInfoPage extends GetView<MeInfoController> {
             child: Obx(
               () => Column(
                 children: [
-                  InfoSelector(
+                  SingleSelector(
                       title: '학과',
                       placeholder: controller.meInfo.value.major,
                       list: InfoData.major,
                       changedCallback: (selected) =>
                           controller.meInfo.value.major = selected.value),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '키',
                       placeholder: '${controller.meInfo.value.height}',
                       list: InfoData.height,
                       changedCallback: (selected) => controller
                           .meInfo.value.height = int.parse('${selected.value}')),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '나이',
                       placeholder: '${controller.meInfo.value.age}',
                       list: InfoData.age,
                       changedCallback: (selected) => controller.meInfo.value.age =
                           int.parse('${selected.value ?? 0}')),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '체형',
                       placeholder: controller.meInfo.value.bodyShape,
                       list: controller.user.isMan!
@@ -73,7 +74,7 @@ class MeInfoPage extends GetView<MeInfoController> {
                       changedCallback: (selected) =>
                       controller.meInfo.value.bodyShape = selected.value),
                   const Divider(height: 1),
-                  InfoSelector(
+                  SingleSelector(
                       title: '흡연',
                       placeholder: '${controller.meInfo.value.isSmoker}',
                       list: InfoData.meSmoke,

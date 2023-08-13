@@ -18,4 +18,5 @@ samples, guidance on mobile development, and a full API reference.
 
 # terminal script
 firebase hosting:channel:deploy TEST
-firebase hosting:channel:delete TEST	
+firebase hosting:channel:delete TEST
+flutter pub run build_runner build --delete-conflicting-outputs

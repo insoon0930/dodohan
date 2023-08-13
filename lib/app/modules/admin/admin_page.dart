@@ -28,6 +28,30 @@ class AdminPage extends GetView<AdminController> {
                 Flexible(
                   child: ElevatedButton(
                     style: BtStyle.info,
+                    onPressed: () => controller.updateYouInfoBodyShapeType(),
+                    child: Text('youInfo',
+                        style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Flexible(
+                  child: ElevatedButton(
+                    style: BtStyle.info,
+                    onPressed: () => controller.updateApplicationBodyShapeType(),
+                    child: Text('application',
+                        style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  ),
+                ),
+                const SizedBox(width: 16),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                const SizedBox(width: 16),
+                Flexible(
+                  child: ElevatedButton(
+                    style: BtStyle.info,
                     onPressed: () => controller.createManApplicationDummy(),
                     child: Text('남자 신청',
                         style:

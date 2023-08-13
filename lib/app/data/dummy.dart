@@ -17,7 +17,7 @@ class Dummy {
 
   static YouInfo manYouInfo = YouInfo(
       id: 'aD1rVw5AQ8E0jYGR9Hwv',
-      bodyShape: '상관없음',
+      bodyShape: ['상관없음'],
       exceptSameMajor: false,
       isSmoker: '상관없음',
       maxAge: 38,
@@ -40,7 +40,7 @@ class Dummy {
 
   static YouInfo womanYouInfo = YouInfo(
       id: 'nOLlvm3pTxJ97AaScDrj',
-      bodyShape: '마른',
+      bodyShape: ['마른'],
       exceptSameMajor: true,
       isSmoker: '비흡연',
       maxAge: 19,

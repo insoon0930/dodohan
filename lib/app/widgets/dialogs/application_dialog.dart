@@ -104,7 +104,7 @@ class ApplicationDialog extends StatelessWidget {
       ),
       Row(
         children: [
-          Expanded(child: _item('체형', youInfo.bodyShape!)),
+          Expanded(child: _item('체형', youInfo.bodyShape!.join(', '))),
           Expanded(child: _item('흡연', youInfo.isSmoker!)),
         ],
       ),
