@@ -29,11 +29,8 @@ class AuthService extends ApiService {
     return await updateUser(res);
   }
 
-  //todo 추후 회원 가입 단계에서 uid 저장하기
   Future<void> loginByUid(String uid) async {
-    print('uid: $uid');
     User? res = await _userService.findOneByUid(uid);
-    print('res: $res');
     final prefs = await SharedPreferences.getInstance();
     if(res == null) {
       //특이 케이스인듯? firebase auth 에는 있는데 디비에는 없는 (실수로 삭제?)

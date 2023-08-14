@@ -105,14 +105,18 @@ class ApplicationRepository extends ApiService {
     }
   }
 
-  //
-  // Future<void> updateStatus(String id, IdStatus idStatus) async {
-  //   try {
-  //     final DocumentReference ref = firestore.collection('applications').doc(id);
-  //     await ref.update({'status': idStatus.name});
-  //     return;
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  //todo 이번주 신청한거면 지우자
+
+  Future<void> deleteMany(String user) async {
+    try {
+      CollectionReference collection = firestore.collection('applications');
+      QuerySnapshot<Object?> querySnapshot = await collection.where('user', isEqualTo: user).get();
+      for (QueryDocumentSnapshot<Object?> docSnapshot in querySnapshot.docs) {
+        await firestore.collection('applications').doc(docSnapshot.id).delete();
+      }
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

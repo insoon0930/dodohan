@@ -2,10 +2,12 @@ import 'package:stamp_now/app/data/model/me_info.dart';
 import 'package:stamp_now/app/data/service/user_service/repository.dart';
 import '../../enums.dart';
 import '../../model/user.dart';
+import '../application_service/repository.dart';
 import '../me_info_service/repository.dart';
 
 class UserService {
   final UserRepository _userRepository = UserRepository();
+  final ApplicationRepository _applicationRepository = ApplicationRepository();
 
   UserService._privateConstructor();
   static final UserService _instance = UserService._privateConstructor();
@@ -31,6 +33,7 @@ class UserService {
 
   //@Patch
   Future<void> updateDeletedAt(String userId) async {
+    await _applicationRepository.deleteMany(userId);
     return await _userRepository.updateDeletedAt(userId);
   }
 }
