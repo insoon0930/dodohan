@@ -17,7 +17,7 @@ class MatchRepository extends ApiService {
         TimeUtility.todaySimple().subtract(const Duration(minutes: 5));
     try {
       QuerySnapshot querySnapshot = await firestore
-          .collection('matches')
+          .collection('match_result')
           .where(isMan ? 'man' : 'woman', isEqualTo: user)
           .where('createdAt', isGreaterThanOrEqualTo: matchTime)
           .get();

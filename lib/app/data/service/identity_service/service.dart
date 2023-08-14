@@ -43,7 +43,7 @@ class IdentityService extends ApiService  {
   //@Patch
   Future<void> confirmed(Identity identity) async {
     await _identityRepository.updateStatus(identity.id, IdStatus.confirmed);
-    await _userRepository.confirmed(identity);
+    await _userRepository.idConfirmed(identity);
     await _meInfoRepository.create(MeInfo(user: identity.user, isMan: identity.isMan));
     await _youInfoRepository.create(YouInfo(user: identity.user));
     return;
@@ -52,7 +52,7 @@ class IdentityService extends ApiService  {
   //@Patch
   Future<void> rejected(Identity identity) async {
     await _identityRepository.updateStatus(identity.id, IdStatus.rejected);
-    await _userRepository.rejected(identity);
+    await _userRepository.idRejected(identity);
     return;
   }
 }

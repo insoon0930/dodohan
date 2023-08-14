@@ -24,51 +24,21 @@ class AdminPage extends GetView<AdminController> {
           children: [
             Row(
               children: [
-                const SizedBox(width: 16),
+                const SizedBox(width: 8),
                 Flexible(
                   child: ElevatedButton(
-                    style: BtStyle.info,
-                    onPressed: () => controller.updateYouInfoBodyShapeType(),
-                    child: Text('youInfo',
-                        style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
-                  ),
+                      style: BtStyle.standard(color: ThemeColors.mainLight),
+                      onPressed: () => Get.toNamed(Routes.test),
+                      child: Text('테스트', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 8),
                 Flexible(
                   child: ElevatedButton(
-                    style: BtStyle.info,
-                    onPressed: () => controller.updateApplicationBodyShapeType(),
-                    child: Text('application',
-                        style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
-                  ),
+                      style: BtStyle.standard(color: ThemeColors.main),
+                      onPressed: () => Get.toNamed(Routes.profileImageRequest),
+                      child: Text('프로필 심사', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
                 ),
-                const SizedBox(width: 16),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                const SizedBox(width: 16),
-                Flexible(
-                  child: ElevatedButton(
-                    style: BtStyle.info,
-                    onPressed: () => controller.createManApplicationDummy(),
-                    child: Text('남자 신청',
-                        style:
-                        ThemeFonts.medium.getTextStyle(color: Colors.white)),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Flexible(
-                  child: ElevatedButton(
-                    style: BtStyle.info,
-                    onPressed: () => controller.createWomanApplicationDummy(),
-                    child: Text('여자 신청',
-                        style:
-                        ThemeFonts.medium.getTextStyle(color: Colors.white)),
-                  ),
-                ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 8),
               ],
             ),
             const SizedBox(height: 16),
@@ -79,7 +49,7 @@ class AdminPage extends GetView<AdminController> {
                 shrinkWrap: true,
                 itemCount: controller.waitingIds.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    _listIem(controller.waitingIds[index]).paddingSymmetric(horizontal: 16, vertical: 8),
+                    _listIem(controller.waitingIds[index]),
               ),
             ),
           ],
@@ -99,16 +69,20 @@ class AdminPage extends GetView<AdminController> {
             GestureDetector(
                 onTap: () => controller.launchDefaultUrl(item.profileImage),
                 child: ImageViewBox(url: item.profileImage)),
-            Column(
-              children: [
-                ElevatedButton(
-                    onPressed: () => controller.confirm(item),
-                    child: const Text('승인')),
-                Text(item.isMan ? '남' : '여', style: ThemeFonts.bold.getTextStyle()).paddingSymmetric(vertical: 32),
-                ElevatedButton(
-                    onPressed: () => controller.reject(item),
-                    child: const Text('거절')),
-              ],
+            Flexible(
+              child: Column(
+                children: [
+                  ElevatedButton(
+                      onPressed: () => controller.confirm(item),
+                      child: const Text('승인')),
+                  const SizedBox(height: 10),
+                  Text(item.isMan ? '남' : '여', style: ThemeFonts.bold.getTextStyle()),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                      onPressed: () => controller.reject(item),
+                      child: const Text('거절')),
+                ],
+              ),
             ),
           ],
         ),

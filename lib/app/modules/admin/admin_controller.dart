@@ -15,7 +15,6 @@ import '../../data/service/you_info_service/service.dart';
 
 class AdminController extends GetxController {
   final IdentityService identityService = IdentityService();
-  final UserService userService = UserService();
   final ApplicationService applicationService = ApplicationService();
   final YouInfoService youInfoService = YouInfoService();
 

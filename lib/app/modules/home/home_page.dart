@@ -56,7 +56,7 @@ class HomePage extends GetView<HomeController> {
               ),
               const SizedBox(height: 52),
               ElevatedButton(
-                style: BtStyle.standard,
+                style: BtStyle.standard(),
                 onPressed: () => controller.getMatchResult(),
                 child: Text('결과 확인',
                     style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
@@ -84,7 +84,7 @@ class HomePage extends GetView<HomeController> {
           const SizedBox(width: 16),
           Flexible(
             child: ElevatedButton(
-              style: BtStyle.info,
+              style: BtStyle.standard(color: ThemeColors.mainLight, height: 100),
               onPressed: () => Get.toNamed(Routes.meInfo),
               child: Text('나',
                   style:
@@ -94,7 +94,7 @@ class HomePage extends GetView<HomeController> {
           const SizedBox(width: 16),
           Flexible(
             child: ElevatedButton(
-              style: BtStyle.info,
+              style: BtStyle.standard(color: ThemeColors.mainLight, height: 100),
               onPressed: () => Get.toNamed(Routes.youInfo),
               child: Text('이상형',
                   style:
@@ -106,7 +106,7 @@ class HomePage extends GetView<HomeController> {
       ),
       const SizedBox(height: 16),
       ElevatedButton(
-        style: BtStyle.standard,
+        style: BtStyle.standard(),
         onPressed: () => controller.getInfos(),
         child: Text('신청하기',
             style:

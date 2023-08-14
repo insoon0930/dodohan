@@ -14,7 +14,8 @@ ImageUpdateRequest _$ImageUpdateRequestFromJson(Map<String, dynamic> json) {
   return ImageUpdateRequest(
     id: json['id'] as String? ?? '',
     user: json['user'] as String? ?? '',
-    profileImage: json['profileImage'] as String? ?? '',
+    newProfileImage: json['newProfileImage'] as String? ?? '',
+    preProfileImage: json['preProfileImage'] as String? ?? '',
     status: $enumDecodeNullable(_$IdStatusEnumMap, json['status']) ??
         IdStatus.waiting,
     createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
@@ -26,7 +27,8 @@ Map<String, dynamic> _$ImageUpdateRequestToJson(ImageUpdateRequest instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user': instance.user,
-      'profileImage': instance.profileImage,
+      'newProfileImage': instance.newProfileImage,
+      'preProfileImage': instance.preProfileImage,
       'status': _$IdStatusEnumMap[instance.status]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),

@@ -24,6 +24,7 @@ import '../../data/service/match_service/service.dart';
 import '../../data/service/me_info_service/service.dart';
 import '../../data/service/user_service/service.dart';
 import '../../data/service/you_info_service/service.dart';
+import '../../widgets/dialogs/action_dialog.dart';
 import '../../widgets/dialogs/error_dialog.dart';
 import '../../widgets/dialogs/select/select_dialog.dart';
 import '../../widgets/dialogs/select/select_dialog_item.dart';
@@ -159,48 +160,48 @@ class HomeController extends GetxController {
     ImageUpdateRequest? waitingRequest = await _imageUpdateRequestService.findOneWaiting(user.id);
     Get.back();
     if (waitingRequest != null) {
-      return Get.dialog(const ErrorDialog(text: '이미 심사중인 프로필이 있습니다'));
+      return Get.dialog(const ErrorDialog(text: '심사중인 프로필이 있습니다'));
     }
-    return Get.dialog(SelectDialog(itemHeight: 60, items: [
+
+    Get.dialog(ActionDialog(
+      title: '프로필 변경 신청',
+      text: '본인 확인이 어려운 사진은 반려될 수 있습니다 (마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...)',
+      confirmCallback: () {
+        Get.back();
+        return Get.dialog(SelectDialog(itemHeight: 60, items: [
         SelectDialogItem(
             text: '카메라',
-            onTap: () async {
-              Get.back();
-              XFile? result = await Utility.getImage(source: ImageSource.camera);
-              if (result != null) {
-                Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                String profileUrl = await storageService.uploadFile(
-                    file: result,
-                    bucket: StorageBucket.profile,
-                    userId: user.id);
-                await _imageUpdateRequestService.create(
-                    ImageUpdateRequest(user: user.id, profileImage: profileUrl));
-                Get.back();
-                Get.snackbar('신청 완료', '심사가 통과되면 즉시 반영됩니다');
-              }
-            },
+            onTap: () => _createRequest(ImageSource.camera),
             first: true,
             style: ThemeFonts.semiBold.getTextStyle(size: 15)),
         SelectDialogItem(
             text: '사진',
-            onTap: () async {
-              Get.back();
-              XFile? result = await Utility.getImage(source: ImageSource.gallery);
-              if (result != null) {
-                Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                String profileUrl = await storageService.uploadFile(
-                    file: result,
-                    bucket: StorageBucket.profile,
-                    userId: user.id);
-                await _imageUpdateRequestService.create(
-                    ImageUpdateRequest(user: user.id, profileImage: profileUrl));
-                Get.back();
-                Get.snackbar('신청 완료', '심사가 통과되면 즉시 반영됩니다');
-              }
-            },
+            onTap: () => _createRequest(ImageSource.gallery),
             last: true,
             style: ThemeFonts.semiBold.getTextStyle(size: 15)),
       ]));
+      },
+    ));
+
+    return ;
+  }
+
+  Future<void> _createRequest(ImageSource imageSource) async {
+    Get.back();
+    XFile? result = await Utility.getImage(source: ImageSource.camera);
+    if (result != null) {
+      Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+      String profileUrl = await storageService.uploadFile(
+          file: result,
+          bucket: StorageBucket.profile,
+          userId: user.id);
+      await _imageUpdateRequestService.create(ImageUpdateRequest(
+          user: user.id,
+          newProfileImage: profileUrl,
+          preProfileImage: user.profileImage));
+      Get.back();
+      Get.snackbar('신청 완료', '심사 통과시 반영됩니다');
+    }
   }
 }
 

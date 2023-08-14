@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:stamp_now/app/data/model/identity.dart';
 import 'package:stamp_now/app/data/service/image_update_request_service/repository.dart';
 import '../../enums.dart';
 import '../../model/image_update_request.dart';
 import '../../provider/api_service.dart';
+import '../identity_service/repository.dart';
 import '../me_info_service/repository.dart';
 import '../user_service/repository.dart';
 import '../you_info_service/repository.dart';
@@ -39,18 +41,15 @@ class ImageUpdateRequestService extends ApiService  {
   }
 
   //@Patch
-  // Future<void> confirmed(ImageUpdateRequest imageUpdateRequest) async {
-  //   await _imageUpdateRequestRepository.updateStatus(imageUpdateRequest.id, IdStatus.confirmed);
-  //   await _userRepository.confirmed(imageUpdateRequest);
-  //   await _meInfoRepository.create(MeInfo(user: imageUpdateRequest.user, isMan: imageUpdateRequest.isMan));
-  //   await _youInfoRepository.create(YouInfo(user: imageUpdateRequest.user));
-  //   return;
-  // }
+  Future<void> confirmed(ImageUpdateRequest imageUpdateRequest) async {
+    await _imageUpdateRequestRepository.updateStatus(imageUpdateRequest.id, IdStatus.confirmed);
+    await _userRepository.updateProfileImage(imageUpdateRequest.user, imageUpdateRequest.newProfileImage);
+    return;
+  }
 
   //@Patch
-  // Future<void> rejected(ImageUpdateRequest imageUpdateRequest) async {
-  //   await _imageUpdateRequestRepository.updateStatus(imageUpdateRequest.id, IdStatus.rejected);
-  //   await _userRepository.rejected(imageUpdateRequest);
-  //   return;
-  // }
+  Future<void> rejected(ImageUpdateRequest imageUpdateRequest) async {
+    await _imageUpdateRequestRepository.updateStatus(imageUpdateRequest.id, IdStatus.rejected);
+    return;
+  }
 }

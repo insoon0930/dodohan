@@ -10,7 +10,7 @@ part 'image_update_request.g.dart';
 class ImageUpdateRequest {
   @JsonKey(name: 'id', required: true)
   String id;
-  String user, profileImage;
+  String user, newProfileImage, preProfileImage;
   IdStatus status;
   @DateTimeConverter()
   DateTime? createdAt;
@@ -18,7 +18,8 @@ class ImageUpdateRequest {
   ImageUpdateRequest(
       {this.id = '',
         this.user = '',
-        this.profileImage = '',
+        this.newProfileImage = '',
+        this.preProfileImage = '',
         this.status = IdStatus.waiting,
         this.createdAt}) {
     createdAt ??= DateTime.now();

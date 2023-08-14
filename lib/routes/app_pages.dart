@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
+import '../app/modules/admin/profile_image_request/profile_image_request_binding.dart';
+import '../app/modules/admin/profile_image_request/profile_image_request_page.dart';
+import '../app/modules/admin/test/test_binding.dart';
+import '../app/modules/admin/test/test_page.dart';
 import '../app/modules/auth/login/login_binding.dart';
 import '../app/modules/auth/login/login_page.dart';
 import '../app/modules/auth/login_by/login_by_page.dart';
@@ -52,6 +56,14 @@ class AppPages {
         name: Routes.admin,
         page: () => const AdminPage(),
         binding: AdminBinding()),
+    GetPage(
+        name: Routes.test,
+        page: () => const TestPage(),
+        binding: TestBinding()),
+    GetPage(
+        name: Routes.profileImageRequest,
+        page: () => const ProfileImageRequestPage(),
+        binding: ProfileImageRequestBinding()),
     GetPage(
         name: Routes.navigation,
         page: () => const NavigationView(),

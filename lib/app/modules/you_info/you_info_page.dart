@@ -24,7 +24,7 @@ class YouInfoPage extends GetView<YouInfoController> {
             _youInfoList(),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: BtStyle.standard,
+              style: BtStyle.standard(),
               onPressed: () => controller.updateYouInfo(),
               child: Center(
                 child: Text('저장',

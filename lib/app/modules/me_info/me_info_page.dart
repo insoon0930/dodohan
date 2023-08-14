@@ -23,7 +23,7 @@ class MeInfoPage extends GetView<MeInfoController> {
             _meInfoList(),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: BtStyle.standard,
+              style: BtStyle.standard(),
               onPressed: () => controller.updateMeInfo(),
               child: Center(
                 child: Text('저장',

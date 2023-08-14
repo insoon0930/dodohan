@@ -27,6 +27,19 @@ class IdentityRepository extends ApiService {
     }
   }
 
+  Future<Identity> findOneConfirmed(String user) async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('identities')
+          .where('user', isEqualTo: user)
+          .get();
+      List<Identity> identities = querySnapshot.docs.map((e) => Identity.fromJson(e.data() as Map<String, dynamic>)).toList();
+      return identities.firstWhere((e) => e.status == IdStatus.confirmed);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<Identity>> findWaiting() async {
     try {
       QuerySnapshot querySnapshot = await firestore

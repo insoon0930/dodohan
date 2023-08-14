@@ -30,11 +30,6 @@ class UserService {
   }
 
   //@Patch
-  Future<void> updateProfileImage(String userId, String url) async {
-    return await _userRepository.updateProfileImage(userId, url);
-  }
-
-  //@Patch
   Future<void> updateDeletedAt(String userId) async {
     return await _userRepository.updateDeletedAt(userId);
   }

@@ -81,7 +81,7 @@ class UserRepository extends ApiService {
     }
   }
 
-  Future<void> confirmed(Identity identity) async {
+  Future<void> idConfirmed(Identity identity) async {
     try {
       final DocumentReference ref = firestore.collection('users').doc(identity.user);
       await ref.update({
@@ -95,7 +95,7 @@ class UserRepository extends ApiService {
     }
   }
 
-  Future<void> rejected(Identity identity) async {
+  Future<void> idRejected(Identity identity) async {
     try {
       final DocumentReference ref = firestore.collection('users').doc(identity.user);
       ref.update({'idStatus': IdStatus.rejected.name});

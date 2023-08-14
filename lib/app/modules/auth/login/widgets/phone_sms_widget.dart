@@ -93,7 +93,7 @@ class PhoneSMSWidget extends StatelessWidget {
         const Spacer(),
         Obx(
           () => ElevatedButton(
-            style: BtStyle.standard,
+            style: BtStyle.standard(),
             onPressed: () => controller.onTapSMSButton(),
             child: Center(
               child: controller.isCodeSent.value

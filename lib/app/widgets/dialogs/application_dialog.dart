@@ -37,7 +37,7 @@ class ApplicationDialog extends StatelessWidget {
             style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 11),
           ),
           ElevatedButton(
-            style: BtStyle.standard,
+            style: BtStyle.standard(),
             onPressed: () => applyClicked(),
             child: Center(
               child: Text('신청',
