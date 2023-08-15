@@ -6,7 +6,7 @@ import 'model/you_info.dart';
 class Dummy {
   static MeInfo manMeInfo = MeInfo(
       id: 'xpnekRl9TgNyFGKlayky',
-      age: 27,
+      age: 15,
       bodyShape: '근육있는',
       height: 178,
       isMan: true,
