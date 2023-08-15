@@ -17,7 +17,7 @@ class Dummy {
 
   static YouInfo manYouInfo = YouInfo(
       id: 'aD1rVw5AQ8E0jYGR9Hwv',
-      bodyShape: ['상관없음'],
+      bodyShape: ['보통', '통통', '마른', '볼륨있는'],
       exceptSameMajor: false,
       isSmoker: '상관없음',
       maxAge: 38,

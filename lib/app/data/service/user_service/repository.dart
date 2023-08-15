@@ -47,6 +47,58 @@ class UserRepository extends ApiService {
     }
   }
 
+  Future<List<User>> findWomen() async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: false)
+          .get();
+      return querySnapshot.docs.map((e) => User.fromJson(e.data() as Map<String, dynamic>)).toList();
+    } catch (e) {
+      print('findWomen error: $e');
+      return [];
+    }
+  }
+
+  Future<Map<String, int>> findUserNum(bool isDeleted) async {
+    try {
+      print('isDeleted: $isDeleted');
+      QuerySnapshot querySnapshot;
+      if (isDeleted) {
+        print('aaa: $isDeleted');
+        querySnapshot = await firestore
+            .collection('users')
+            .where('deletedAt', isNull: false)
+            .get();
+        print('!!!: ${querySnapshot.docs.first.data()}');
+      } else {
+        print('bbb: $isDeleted');
+        querySnapshot = await firestore
+            .collection('users')
+            .where('deletedAt', isNull: true)
+            .get();
+      }
+
+      int manNum = 0;
+      int womanNum = 0;
+      for (var e in querySnapshot.docs) {
+        bool? isMan = (e.data() as Map<String, dynamic>)['isMan'];
+        if(isMan == null) {
+          continue;
+        }
+        if (isMan) {
+          manNum++;
+        } else {
+          womanNum++;
+        }
+      }
+      return {'manNum': manNum, 'womanNum': womanNum};
+    } catch (e) {
+      print('findUserNum error: $e');
+      return {'manNum': 0, 'womanNum': 0};
+    }
+  }
+
   Future<void> updateIdStatus(String userId, IdStatus idStatus, WriteBatch? batch) async {
     try {
       final DocumentReference ref = firestore.collection('users').doc(userId);
@@ -114,5 +166,4 @@ class UserRepository extends ApiService {
       rethrow;
     }
   }
-
 }

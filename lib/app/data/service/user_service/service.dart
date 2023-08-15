@@ -31,6 +31,16 @@ class UserService {
     return await _userRepository.findOneByUid(uid);
   }
 
+  //@Get
+  Future<List<User>> findWomen() async {
+    return await _userRepository.findWomen();
+  }
+
+  //@Get
+  Future<Map<String, int>> findUserNum({bool isDeleted = false}) async {
+    return await _userRepository.findUserNum(isDeleted);
+  }
+
   //@Patch
   Future<void> updateDeletedAt(String userId) async {
     await _applicationRepository.deleteMany(userId);

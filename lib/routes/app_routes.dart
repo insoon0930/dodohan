@@ -9,6 +9,8 @@ abstract class Routes{
   static const admin = '/admin';
   static const test = '/test'; //hm
   static const profileImageRequest = '/profile-image-request'; //hm
+  static const womanUser = '/woman-user'; //hm
+  static const match = '/match'; //hm
   static const navigation = '/navigation';
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';

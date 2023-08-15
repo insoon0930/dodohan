@@ -188,7 +188,7 @@ class HomeController extends GetxController {
 
   Future<void> _createRequest(ImageSource imageSource) async {
     Get.back();
-    XFile? result = await Utility.getImage(source: ImageSource.camera);
+    XFile? result = await Utility.getImage(source: imageSource);
     if (result != null) {
       Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
       String profileUrl = await storageService.uploadFile(

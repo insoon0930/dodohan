@@ -41,6 +41,46 @@ class AdminPage extends GetView<AdminController> {
                 const SizedBox(width: 8),
               ],
             ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const SizedBox(width: 8),
+                Flexible(
+                  child: ElevatedButton(
+                      style: BtStyle.standard(color: ThemeColors.main),
+                      onPressed: () => Get.toNamed(Routes.womanUser),
+                      child: Text('유저', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: ElevatedButton(
+                      style: BtStyle.standard(color: ThemeColors.main),
+                      onPressed: () => Get.toNamed(Routes.profileImageRequest),
+                      child: Text('매치', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const SizedBox(width: 8),
+                Flexible(
+                  child: ElevatedButton(
+                      style: BtStyle.standard(color: ThemeColors.mainLight),
+                      onPressed: () => Get.toNamed(Routes.test),
+                      child: Text('이번주 매칭 안된', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: ElevatedButton(
+                      style: BtStyle.standard(color: ThemeColors.mainLight),
+                      onPressed: () => Get.toNamed(Routes.profileImageRequest),
+                      child: Text('이번주 신청', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
             const SizedBox(height: 16),
             Text('심사', style: ThemeFonts.medium.getTextStyle(size: 17)),
             const SizedBox(height: 8),
@@ -86,5 +126,5 @@ class AdminPage extends GetView<AdminController> {
             ),
           ],
         ),
-      );
+      ).paddingSymmetric(vertical: 8);
 }

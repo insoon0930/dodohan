@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
+import '../app/modules/admin/match/profile_image_request_binding.dart';
+import '../app/modules/admin/match/profile_image_request_page.dart';
 import '../app/modules/admin/profile_image_request/profile_image_request_binding.dart';
 import '../app/modules/admin/profile_image_request/profile_image_request_page.dart';
 import '../app/modules/admin/test/test_binding.dart';
 import '../app/modules/admin/test/test_page.dart';
+import '../app/modules/admin/woman_user/woman_user_binding.dart';
+import '../app/modules/admin/woman_user/woman_user_page.dart';
 import '../app/modules/auth/login/login_binding.dart';
 import '../app/modules/auth/login/login_page.dart';
 import '../app/modules/auth/login_by/login_by_page.dart';
@@ -64,6 +68,14 @@ class AppPages {
         name: Routes.profileImageRequest,
         page: () => const ProfileImageRequestPage(),
         binding: ProfileImageRequestBinding()),
+    GetPage(
+        name: Routes.womanUser,
+        page: () => const WomanUserPage(),
+        binding: WomanUserBinding()),
+    GetPage(
+        name: Routes.match,
+        page: () => const MatchPage(),
+        binding: MatchBinding()),
     GetPage(
         name: Routes.navigation,
         page: () => const NavigationView(),
