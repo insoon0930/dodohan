@@ -66,7 +66,7 @@ abstract class Utility {
             enforceBoundary: true,
             showZoomer: false,
             translations: const WebTranslations(
-                title: '사진 편집',
+                title: '',
                 rotateLeftTooltip: '',
                 rotateRightTooltip: '',
                 cancelButton: '',
