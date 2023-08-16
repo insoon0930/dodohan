@@ -55,7 +55,7 @@ class AdminPage extends GetView<AdminController> {
                 Flexible(
                   child: ElevatedButton(
                       style: BtStyle.standard(color: ThemeColors.main),
-                      onPressed: () => Get.toNamed(Routes.profileImageRequest),
+                      onPressed: () => Get.toNamed(Routes.match),
                       child: Text('매치', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
                 ),
                 const SizedBox(width: 8),

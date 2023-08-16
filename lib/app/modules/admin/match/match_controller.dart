@@ -12,7 +12,7 @@ import '../../../data/model/match.dart';
 class MatchController extends GetxController {
   final MatchService matchService = MatchService();
 
-  final RxList<Match> matches = <Match>[].obs;
+  final RxList<Map<String, String>> matchProfiles = <Map<String, String>>[].obs;
   User get user => AuthService.to.user.value;
 
   @override
@@ -22,7 +22,7 @@ class MatchController extends GetxController {
       return;
     }
 
-    matches.value = await matchService.findTwoWeeks();
+    matchProfiles.value = await matchService.findTwoWeeks();
     super.onInit();
   }
 }
