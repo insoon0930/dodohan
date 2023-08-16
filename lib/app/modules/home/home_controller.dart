@@ -7,7 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stamp_now/app/data/model/image_update_request.dart';
 import 'package:stamp_now/app/modules/splash/splash_controller.dart';
 import 'package:stamp_now/app/widgets/dialogs/application_dialog.dart';
-import 'package:stamp_now/app/widgets/dialogs/match_success_dialog.dart';
+import 'package:stamp_now/app/widgets/dialogs/match/final_decision_dialog.dart';
+import 'package:stamp_now/app/widgets/dialogs/match/match_success_dialog.dart';
 import 'package:stamp_now/core/utils/time_utility.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/theme/fonts.dart';
@@ -26,6 +27,7 @@ import '../../data/service/user_service/service.dart';
 import '../../data/service/you_info_service/service.dart';
 import '../../widgets/dialogs/action_dialog.dart';
 import '../../widgets/dialogs/error_dialog.dart';
+import '../../widgets/dialogs/match/decision_waiting_dialog.dart';
 import '../../widgets/dialogs/select/select_dialog.dart';
 import '../../widgets/dialogs/select/select_dialog_item.dart';
 
@@ -134,7 +136,6 @@ class HomeController extends GetxController {
       Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
       return;
     }
-
     String phoneNum;
     String profileImage;
     if(user.isMan!) {
@@ -147,7 +148,53 @@ class HomeController extends GetxController {
       profileImage = man.profileImage;
     }
 
-    Get.dialog(MatchSuccessDialog(phoneNum: phoneNum, profileImage: profileImage));
+    //아랫것들 다 겟터로 적어두면좋겠다
+    //내 상태 보고(1) (2차 선택 안했으면 해당 다이얼로그로)
+    //처음 보는거면 상태 업데이트 umChecked > checked
+    if((user.isMan! && match.manStatus == MatchStatus.unChecked) || (!user.isMan! && match.womanStatus == MatchStatus.unChecked)) {
+      await _matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.checked);
+    }
+
+    //2차 선택 다이얼로그로
+    if ((user.isMan! && match.manStatus == MatchStatus.unChecked) ||
+        (user.isMan! && match.manStatus == MatchStatus.checked) ||
+        (!user.isMan! && match.womanStatus == MatchStatus.unChecked) ||
+        (!user.isMan! && match.womanStatus == MatchStatus.checked)) {
+      Get.dialog(FinalDecisionDialog(_matchService,
+          match: match,
+          profileImage: profileImage,
+          phoneNum: phoneNum,
+          function: () => getMatchResult()));
+      return;
+    }
+
+    //내 상태 보고(2) (내가 2차 거절했으면 거절했습니다 다이얼로그)
+    if((user.isMan! && match.manStatus == MatchStatus.rejected) || (!user.isMan! && match.womanStatus == MatchStatus.rejected)) {
+      Get.dialog(const ErrorDialog(text: '거절한 매칭입니다'));
+      return;
+    }
+
+    //여기서부터는 상대 상태 기준
+    //상대가 확인 안했음
+    if((user.isMan! && match.womanStatus == MatchStatus.unChecked) || (!user.isMan! && match.manStatus == MatchStatus.unChecked)) {
+      Get.dialog(DecisionWaitingDialog(profileImage: profileImage, status: MatchStatus.unChecked));
+      return;
+    }
+
+    //상대가 확인했는데 선택 안했음
+    if((user.isMan! && match.womanStatus == MatchStatus.checked) || (!user.isMan! && match.manStatus == MatchStatus.checked)) {
+      Get.dialog(DecisionWaitingDialog(profileImage: profileImage, status: MatchStatus.checked));
+      return;
+    }
+
+    //상대가 거절했음
+    if((user.isMan! && match.womanStatus == MatchStatus.rejected) || (!user.isMan! && match.manStatus == MatchStatus.rejected)) {
+      Get.dialog(const ErrorDialog(text: '최종 매칭 실패'));
+      return;
+    }
+
+    //최종 매칭
+    Get.dialog(MatchSuccessDialog(match: match, phoneNum: phoneNum, profileImage: profileImage));
   }
 
   Stream<int> getApplicantsNumStream() {

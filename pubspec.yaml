@@ -58,6 +58,8 @@ dependencies:
   http: ^1.1.0 #image_cropper 5.0.0 버전에 필요
   image_cropper: ^5.0.0
 
+  blur: ^3.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

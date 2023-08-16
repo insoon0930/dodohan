@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'profile_image_request_controller.dart';
+import 'match_controller.dart';
 
 class MatchBinding extends Bindings {
   @override

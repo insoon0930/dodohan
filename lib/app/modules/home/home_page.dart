@@ -63,7 +63,7 @@ class HomePage extends GetView<HomeController> {
               ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
               const SizedBox(height: 16),
               Text(
-                "* '금요일' 하루동안 확인할 수 있습니다",
+                "* '금요일' 하루간 확인할 수 있습니다",
                 style: ThemeFonts.medium.getTextStyle(size: 11),
               ),
             ],

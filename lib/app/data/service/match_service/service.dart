@@ -1,4 +1,5 @@
 import 'package:stamp_now/app/data/service/match_service/repository.dart';
+import '../../enums.dart';
 import '../../model/match.dart';
 
 class MatchService {
@@ -13,5 +14,15 @@ class MatchService {
   //@Get
   Future<Match?> findOne(String user, bool isMan) async {
     return await _matchRepository.findOne(user, isMan);
+  }
+
+  //@Get
+  Future<List<Match>> findTwoWeeks() async {
+    return await _matchRepository.findTwoWeeks();
+  }
+
+  //@Patch
+  Future<void> updateMatchStatus(String docId, bool isMan, MatchStatus newStatus) async {
+    return await _matchRepository.updateMatchStatus(docId, isMan, newStatus);
   }
 }

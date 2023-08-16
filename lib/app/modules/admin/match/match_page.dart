@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/widgets/appbars/default_appbar.dart';
 import '../../../../core/theme/fonts.dart';
-import '../../../data/model/image_update_request.dart';
-import '../../../widgets/image/image_view_box.dart';
-import 'profile_image_request_controller.dart';
+import 'match_controller.dart';
+import '../../../data/model/match.dart';
 
 class MatchPage extends GetView<MatchController> {
   const MatchPage({super.key});
+  //todo user, application 이렇게 두개 필요함 ㅇㅇ
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,8 @@ class MatchPage extends GetView<MatchController> {
             Obx(
                   () => ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.waitingRequests.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    _listIem(controller.waitingRequests[index]),
+                itemCount: controller.matches.length,
+                itemBuilder: (BuildContext context, int index) => _listIem(controller.matches[index]),
               ),
             ),
           ],
@@ -30,35 +29,22 @@ class MatchPage extends GetView<MatchController> {
     );
   }
 
-  Widget _listIem(ImageUpdateRequest item) => SizedBox(
+  Widget _listIem(Match item) => SizedBox(
     width: Get.width,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Column(
           children: [
-            ImageViewBox(url: item.preProfileImage),
+            // ImageViewBox(url: item.preProfileImage),
             Text('기존', style: ThemeFonts.medium.getTextStyle())
               ],
         ),
         Column(
           children: [
-            ImageViewBox(url: item.newProfileImage),
+            // ImageViewBox(url: item.newProfileImage),
             Text('신청', style: ThemeFonts.medium.getTextStyle())
           ],
-        ),
-        Flexible(
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () => controller.confirm(item),
-                  child: const Text('승인')),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                  onPressed: () => controller.reject(item),
-                  child: const Text('거절')),
-            ],
-          ),
         ),
       ],
     ),

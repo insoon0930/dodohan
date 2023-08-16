@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
-import '../app/modules/admin/match/profile_image_request_binding.dart';
-import '../app/modules/admin/match/profile_image_request_page.dart';
+import '../app/modules/admin/match/match_binding.dart';
+import '../app/modules/admin/match/match_page.dart';
 import '../app/modules/admin/profile_image_request/profile_image_request_binding.dart';
 import '../app/modules/admin/profile_image_request/profile_image_request_page.dart';
 import '../app/modules/admin/test/test_binding.dart';

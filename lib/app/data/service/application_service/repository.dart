@@ -105,8 +105,6 @@ class ApplicationRepository extends ApiService {
     }
   }
 
-  //todo 이번주 신청한거면 지우자
-
   Future<void> deleteMany(String user) async {
     try {
       CollectionReference collection = firestore.collection('applications');
