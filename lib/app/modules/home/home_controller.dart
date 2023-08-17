@@ -124,18 +124,24 @@ class HomeController extends GetxController {
   }
 
   Future<void> getMatchResult() async {
+    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     //validation 1. 확인 가능 시간
     final int currentWeekday = DateTime.now().weekday;
     if(currentWeekday != 5) { //금요일
+      Get.back();
       Get.dialog(const ErrorDialog(text: '금요일 외에는 확인이 불가능합니다'));
       return;
     }
 
+    //man: 6BqgdRdFUoZOPclxIzbD
+    //woman: WdIHlWaTUAitbexvmW5E
     Match? match = await _matchService.findOne(user.id, user.isMan!);
     if (match == null) {
+      Get.back();
       Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
       return;
     }
+    print('match: ${match.toJson()}');
     String phoneNum;
     String profileImage;
     if(user.isMan!) {
@@ -160,6 +166,7 @@ class HomeController extends GetxController {
         (user.isMan! && match.manStatus == MatchStatus.checked) ||
         (!user.isMan! && match.womanStatus == MatchStatus.unChecked) ||
         (!user.isMan! && match.womanStatus == MatchStatus.checked)) {
+      Get.back();
       Get.dialog(FinalDecisionDialog(_matchService,
           match: match,
           profileImage: profileImage,
@@ -170,6 +177,7 @@ class HomeController extends GetxController {
 
     //내 상태 보고(2) (내가 2차 거절했으면 거절했습니다 다이얼로그)
     if((user.isMan! && match.manStatus == MatchStatus.rejected) || (!user.isMan! && match.womanStatus == MatchStatus.rejected)) {
+      Get.back();
       Get.dialog(const ErrorDialog(text: '거절한 매칭입니다'));
       return;
     }
@@ -177,23 +185,27 @@ class HomeController extends GetxController {
     //여기서부터는 상대 상태 기준
     //상대가 확인 안했음
     if((user.isMan! && match.womanStatus == MatchStatus.unChecked) || (!user.isMan! && match.manStatus == MatchStatus.unChecked)) {
+      Get.back();
       Get.dialog(DecisionWaitingDialog(profileImage: profileImage, status: MatchStatus.unChecked));
       return;
     }
 
     //상대가 확인했는데 선택 안했음
     if((user.isMan! && match.womanStatus == MatchStatus.checked) || (!user.isMan! && match.manStatus == MatchStatus.checked)) {
+      Get.back();
       Get.dialog(DecisionWaitingDialog(profileImage: profileImage, status: MatchStatus.checked));
       return;
     }
 
     //상대가 거절했음
     if((user.isMan! && match.womanStatus == MatchStatus.rejected) || (!user.isMan! && match.manStatus == MatchStatus.rejected)) {
+      Get.back();
       Get.dialog(const ErrorDialog(text: '최종 매칭 실패'));
       return;
     }
 
     //최종 매칭
+    Get.back();
     Get.dialog(MatchSuccessDialog(match: match, phoneNum: phoneNum, profileImage: profileImage));
   }
 

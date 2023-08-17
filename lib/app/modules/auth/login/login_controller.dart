@@ -34,8 +34,9 @@ class LoginController extends GetxController {
   Future<void> onTapSMSButton() async {
     //   Get.offAllNamed(Routes.admin);
     //   return;
-    //   await AuthService.to.loginByUid('lQCQOt9dtFUlZ9r17FjnwYtUeXs2');
-    //   return;
+    // print('??');
+    // await AuthService.to.loginByUid('xIK278QzSvOry7IAjExUE6FteTm2');
+    // return;
 
     if (!isCodeSent.value && isValidPhone) {
       Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
