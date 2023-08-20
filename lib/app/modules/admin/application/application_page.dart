@@ -12,19 +12,19 @@ class ApplicationPage extends GetView<ApplicationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('이번주 신청'),
-      body: SingleChildScrollView(
-        child: Obx(
-          () => Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('신청한 여성 수: ${controller.applications.length}'),
-              ListView.builder(
+      body: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('신청한 여성 수: ${controller.applications.length}'),
+            Expanded(
+              child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.applications.length,
                 itemBuilder: (BuildContext context, int index) => _listIem(controller.applications[index]),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -64,6 +64,7 @@ class WomanUserPage extends GetView<WomanUserController> {
             ]),
         Column(
           children: [
+            SelectableText(item.id),
             const Text('createdAt:'),
             Text('${item.createdAt}'),
             //todo 해당 유저의 meInfo youInfo 들고오기
