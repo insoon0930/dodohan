@@ -11,6 +11,7 @@ abstract class Routes{
   static const profileImageRequest = '/profile-image-request'; //hm
   static const womanUser = '/woman-user'; //hm
   static const match = '/match'; //hm
+  static const application = '/application'; //hm
   static const navigation = '/navigation';
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';

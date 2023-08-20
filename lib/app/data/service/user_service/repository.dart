@@ -53,7 +53,14 @@ class UserRepository extends ApiService {
           .collection('users')
           .where('isMan', isEqualTo: false)
           .get();
-      return querySnapshot.docs.map((e) => User.fromJson(e.data() as Map<String, dynamic>)).toList();
+
+      List<User> users = querySnapshot.docs
+          .map((e) => User.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+
+      // createdAt 필드 기준으로 오름차순 정렬
+      users.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+      return users;
     } catch (e) {
       print('findWomen error: $e');
       return [];

@@ -13,27 +13,27 @@ class WomanUserPage extends GetView<WomanUserController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('유저'),
-      body: SingleChildScrollView(
-        child: Obx(
-          () => Column(
-            children: [
-              Text('총 유저 : ${controller.allUserNum}'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('남성 : ${controller.manNum}'),
-                  Text('여성 : ${controller.womanNum}'),
-                  Text('성비 : ${controller.genderRatio}'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('탈퇴 남성 : ${controller.deletedManNum}'),
-                  Text('탈퇴 여성 : ${controller.deletedWomanNum}'),
-                ],
-              ),
-              Obx(
+      body: Obx(
+        () => Column(
+          children: [
+            Text('총 유저 : ${controller.allUserNum}'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('남성 : ${controller.manNum}'),
+                Text('여성 : ${controller.womanNum}'),
+                Text('성비 : ${controller.genderRatio}'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('탈퇴 남성 : ${controller.deletedManNum}'),
+                Text('탈퇴 여성 : ${controller.deletedWomanNum}'),
+              ],
+            ),
+            Expanded(
+              child: Obx(
                     () => ListView.builder(
                   shrinkWrap: true,
                   itemCount: controller.womanUsers.length,
@@ -41,8 +41,8 @@ class WomanUserPage extends GetView<WomanUserController> {
                       _listIem(controller.womanUsers[index]),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -56,13 +56,17 @@ class WomanUserPage extends GetView<WomanUserController> {
         Stack(children: [
           ImageViewBox(url: item.profileImage, width: Get.width * 0.5, height: Get.width * 0.5),
           if(item.deletedAt != null)
-            Container(color: ThemeColors.redLight.withOpacity(0.3), width: Get.width * 0.5, height: Get.width * 0.5)
-        ]),
+            Container(
+                    color: ThemeColors.redLight.withOpacity(0.3),
+                    width: Get.width * 0.5,
+                    height: Get.width * 0.5,
+              child: Text('${item.deletedAt}', style: const TextStyle(color: Colors.white)),)
+            ]),
         Column(
           children: [
+            const Text('createdAt:'),
             Text('${item.createdAt}'),
             //todo 해당 유저의 meInfo youInfo 들고오기
-            // Text('${item.}'),
           ],
         ),
       ],

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stamp_now/app/data/dto/admin_application.dart';
 import 'package:stamp_now/app/widgets/appbars/default_appbar.dart';
-import '../../../../core/theme/fonts.dart';
 import '../../../widgets/image/image_view_box.dart';
 import 'application_controller.dart';
-import '../../../data/model/match.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
   const ApplicationPage({super.key});
@@ -12,31 +11,59 @@ class ApplicationPage extends GetView<ApplicationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar('매치'),
+      appBar: const DefaultAppBar('이번주 신청'),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Obx(
-                  () => ListView.builder(
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('신청한 여성 수: ${controller.applications.length}'),
+              ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.matchProfiles.length,
-                itemBuilder: (BuildContext context, int index) => _listIem(controller.matchProfiles[index]),
+                itemCount: controller.applications.length,
+                itemBuilder: (BuildContext context, int index) => _listIem(controller.applications[index]),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _listIem(Map<String, String> item) => SizedBox(
+  Widget _listIem(AdminApplication item) => SizedBox(
     width: Get.width,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        ImageViewBox(url: item['man']!),
-        ImageViewBox(url: item['woman']!),
+        ImageViewBox(url: item.profileImage),
+        Expanded(
+          child: Column(
+            children: [
+              const Text('ME'),
+              Text('${item.application.meInfo!.user}'),
+              Text('${item.application.meInfo!.age}'),
+              Text('${item.application.meInfo!.height}'),
+              Text('${item.application.meInfo!.major}'),
+              Text('${item.application.meInfo!.isSmoker}'),
+              Text('${item.application.meInfo!.bodyShape}'),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              const Text('YOU'),
+              Text('${item.application.youInfo!.minAge}'),
+              Text('${item.application.youInfo!.maxAge}'),
+              Text('${item.application.youInfo!.minHeight}'),
+              Text('${item.application.youInfo!.maxHeight}'),
+              Text('${item.application.youInfo!.exceptSameMajor}'),
+              Text('${item.application.youInfo!.isSmoker}'),
+              Text('${item.application.youInfo!.bodyShape}'),
+            ],
+          ),
+        ),
       ],
-    ),
+    ).paddingSymmetric(vertical: 4),
   );
 }

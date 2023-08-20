@@ -11,10 +11,6 @@ class User {
   String id;
   String uid, phoneNum, profileImage, univ;
   bool? isMan;
-  // List<String> folders;
-  // Map<String, dynamic> cameraSetting;
-  // Map<String, dynamic> stampSetting;
-  // bool darkMode;
   IdStatus? idStatus;
   @DateTimeConverter()
   DateTime? createdAt;
@@ -27,19 +23,6 @@ class User {
     this.profileImage = '',
     this.univ = '한양대',
     this.isMan,
-    // this.folders = const [],
-    // this.cameraSetting = const {
-    //   'saveOriginal': true,
-    //   'saveImmediately': true,
-    //   'cameraImmediately': true
-    // },
-    // this.stampSetting = const {
-    //   'color': 'red',
-    //   'stamp': 'stamp_1',
-    //   'time': null,
-    //   'format': 'format_1'
-    // },
-    // this.darkMode = false,
     this.idStatus,
     this.createdAt,
     this.deletedAt,

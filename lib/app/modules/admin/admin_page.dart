@@ -68,14 +68,7 @@ class AdminPage extends GetView<AdminController> {
                 Flexible(
                   child: ElevatedButton(
                       style: BtStyle.standard(color: ThemeColors.mainLight),
-                      onPressed: () => Get.toNamed(Routes.test),
-                      child: Text('이번주 매칭 안된', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
-                ),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.mainLight),
-                      onPressed: () => Get.toNamed(Routes.profileImageRequest),
+                      onPressed: () => Get.toNamed(Routes.application),
                       child: Text('이번주 신청', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
                 ),
                 const SizedBox(width: 8),

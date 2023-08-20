@@ -19,7 +19,7 @@ class WomanUserController extends GetxController {
   final RxInt deletedWomanNum = 0.obs;
   User get user => AuthService.to.user.value;
   int get allUserNum => manNum.value + womanNum.value;
-  String get genderRatio => '${(manNum.value / womanNum.value).round()} : 1';
+  String get genderRatio => '${(manNum.value / womanNum.value).toStringAsFixed(2)} : 1';
 
 
   @override

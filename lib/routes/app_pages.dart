@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
+import '../app/modules/admin/application/application_binding.dart';
+import '../app/modules/admin/application/application_page.dart';
 import '../app/modules/admin/match/match_binding.dart';
 import '../app/modules/admin/match/match_page.dart';
 import '../app/modules/admin/profile_image_request/profile_image_request_binding.dart';
@@ -76,6 +78,10 @@ class AppPages {
         name: Routes.match,
         page: () => const MatchPage(),
         binding: MatchBinding()),
+    GetPage(
+        name: Routes.application,
+        page: () => const ApplicationPage(),
+        binding: ApplicationBinding()),
     GetPage(
         name: Routes.navigation,
         page: () => const NavigationView(),

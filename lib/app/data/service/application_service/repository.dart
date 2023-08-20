@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
-import 'package:stamp_now/app/data/enums.dart';
 
 import '../../../../core/utils/time_utility.dart';
 import '../../../data/provider/api_service.dart';
@@ -63,6 +61,33 @@ class ApplicationRepository extends ApiService {
     } catch (e) {
       print('error: $e');
       return null;
+    }
+  }
+
+  Future<List<Application>> findThisWeekMany() async {
+    final int thisWeekDay = DateTime.now().weekday;
+    final DateTime today = TimeUtility.todaySimple();
+    final DateTime lastFriday = today.subtract(Duration(days: today.weekday + 2));
+    final DateTime thisFriday = today.subtract(Duration(days: today.weekday - DateTime.friday));
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('applications')
+          .where('meInfo.isMan', isEqualTo: false)
+          .where('createdAt',
+          isGreaterThanOrEqualTo: thisWeekDay < 5
+              ? lastFriday
+              : thisFriday)
+          .get();
+
+      List<Application> applications = querySnapshot.docs
+          .map((e) => Application.fromJson(e.data() as Map<String, dynamic>))
+          .toList();
+
+      applications.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+      return applications;
+    } catch (e) {
+      print('findThisWeekMany error: $e');
+      return [];
     }
   }
 

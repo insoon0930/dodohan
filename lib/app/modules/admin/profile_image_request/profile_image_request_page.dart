@@ -13,10 +13,10 @@ class ProfileImageRequestPage extends GetView<ProfileImageRequestController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('프로필 이미지 심사'),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Obx(
+      body: Column(
+        children: [
+          Expanded(
+            child: Obx(
                   () => ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.waitingRequests.length,
@@ -24,8 +24,8 @@ class ProfileImageRequestPage extends GetView<ProfileImageRequestController> {
                     _listIem(controller.waitingRequests[index]),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

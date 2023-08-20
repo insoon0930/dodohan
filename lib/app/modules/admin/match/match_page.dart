@@ -14,18 +14,18 @@ class MatchPage extends GetView<MatchController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('매치'),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Obx(
+      body: Column(
+        children: [
+          Expanded(
+            child: Obx(
                   () => ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.matchProfiles.length,
                 itemBuilder: (BuildContext context, int index) => _listIem(controller.matchProfiles[index]),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
