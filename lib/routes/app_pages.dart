@@ -19,8 +19,8 @@ import '../app/modules/auth/register/register_page.dart';
 import '../app/modules/auth/waiting/waiting_page.dart';
 import '../app/modules/camera/camera_binding.dart';
 import '../app/modules/camera/camera_page.dart';
-import '../app/modules/home/home_binding.dart';
-import '../app/modules/home/home_page.dart';
+import '../app/modules/lobby/lobby_binding.dart';
+import '../app/modules/lobby/lobby_page.dart';
 import '../app/modules/me_info/me_info_binding.dart';
 import '../app/modules/me_info/me_info_page.dart';
 import '../app/modules/navigation/navigation_binding.dart';
@@ -55,9 +55,9 @@ class AppPages {
         name: Routes.waiting,
         page: () => const WaitingPage()),
     GetPage(
-        name: Routes.home,
-        page: () => const HomePage(),
-        binding: HomeBinding()),
+        name: Routes.lobby,
+        page: () => const LobbyPage(),
+        binding: LobbyBinding()),
     GetPage(
         name: Routes.admin,
         page: () => const AdminPage(),

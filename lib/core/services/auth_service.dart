@@ -49,7 +49,7 @@ class AuthService extends ApiService {
       Get.offAllNamed(Routes.waiting);
       return;
     } else if (user.value.idStatus == IdStatus.confirmed) {
-      Get.offAllNamed(Routes.home);
+      Get.offAllNamed(Routes.lobby);
       return;
     }
     return;

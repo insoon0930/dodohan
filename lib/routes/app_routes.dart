@@ -5,7 +5,7 @@ abstract class Routes{
   static const login = '/login';
   static const register = '/register';
   static const waiting = '/waiting';
-  static const home = '/home';
+  static const lobby = '/lobby';
   static const admin = '/admin';
   static const test = '/test'; //hm
   static const profileImageRequest = '/profile-image-request'; //hm

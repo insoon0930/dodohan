@@ -6,14 +6,14 @@ import '../../../core/services/auth_service.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../routes/app_routes.dart';
-import '../../modules/home/home_controller.dart';
+import '../../modules/lobby/lobby_controller.dart';
 import '../dialogs/select/select_dialog.dart';
 import '../dialogs/select/select_dialog_item.dart';
 
 
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final HomeController? controller;
-  const HomeAppBar({this.controller, super.key});
+class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final LobbyController controller = Get.find();
+  LobbyAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

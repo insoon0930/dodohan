@@ -60,6 +60,9 @@ dependencies:
 
   blur: ^3.1.0
 
+  lazy_load_indexed_stack: ^1.0.1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

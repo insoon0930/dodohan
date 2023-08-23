@@ -17,7 +17,7 @@ class NavigationView extends GetView<NavigationController> {
     return Obx(
       () => Scaffold(
         appBar: [
-          const HomeAppBar() as PreferredSizeWidget,
+          LobbyAppBar() as PreferredSizeWidget,
           AlbumAppBar(title: '유럽 여행 기록') as PreferredSizeWidget,
           DefaultAppBar('') as PreferredSizeWidget,
         ][controller.tabIndex.value],

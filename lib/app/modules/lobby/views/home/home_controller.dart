@@ -10,26 +10,26 @@ import 'package:stamp_now/app/widgets/dialogs/application_dialog.dart';
 import 'package:stamp_now/app/widgets/dialogs/match/final_decision_dialog.dart';
 import 'package:stamp_now/app/widgets/dialogs/match/match_success_dialog.dart';
 import 'package:stamp_now/core/utils/time_utility.dart';
-import '../../../core/services/auth_service.dart';
-import '../../../core/theme/fonts.dart';
-import '../../../core/utils/utility.dart';
-import '../../data/enums.dart';
-import '../../data/model/me_info.dart';
-import '../../data/model/match.dart';
-import '../../data/model/user.dart';
-import '../../data/model/you_info.dart';
-import '../../data/provider/storage_service.dart';
-import '../../data/service/application_service/service.dart';
-import '../../data/service/image_update_request_service/service.dart';
-import '../../data/service/match_service/service.dart';
-import '../../data/service/me_info_service/service.dart';
-import '../../data/service/user_service/service.dart';
-import '../../data/service/you_info_service/service.dart';
-import '../../widgets/dialogs/action_dialog.dart';
-import '../../widgets/dialogs/error_dialog.dart';
-import '../../widgets/dialogs/match/decision_waiting_dialog.dart';
-import '../../widgets/dialogs/select/select_dialog.dart';
-import '../../widgets/dialogs/select/select_dialog_item.dart';
+import '../../../../../core/services/auth_service.dart';
+import '../../../../../core/theme/fonts.dart';
+import '../../../../../core/utils/utility.dart';
+import '../../../../data/enums.dart';
+import '../../../../data/model/me_info.dart';
+import '../../../../data/model/match.dart';
+import '../../../../data/model/user.dart';
+import '../../../../data/model/you_info.dart';
+import '../../../../data/provider/storage_service.dart';
+import '../../../../data/service/application_service/service.dart';
+import '../../../../data/service/image_update_request_service/service.dart';
+import '../../../../data/service/match_service/service.dart';
+import '../../../../data/service/me_info_service/service.dart';
+import '../../../../data/service/user_service/service.dart';
+import '../../../../data/service/you_info_service/service.dart';
+import '../../../../widgets/dialogs/action_dialog.dart';
+import '../../../../widgets/dialogs/error_dialog.dart';
+import '../../../../widgets/dialogs/match/decision_waiting_dialog.dart';
+import '../../../../widgets/dialogs/select/select_dialog.dart';
+import '../../../../widgets/dialogs/select/select_dialog_item.dart';
 
 class HomeController extends GetxController {
   final StorageService storageService = Get.find();
@@ -47,6 +47,7 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onInit() async {
+
     if (user.id == '') {
       Get.put(SplashController());
       await 1.delay();
@@ -228,17 +229,17 @@ class HomeController extends GetxController {
       confirmCallback: () {
         Get.back();
         return Get.dialog(SelectDialog(itemHeight: 60, items: [
-        SelectDialogItem(
-            text: '카메라',
-            onTap: () => _createRequest(ImageSource.camera),
-            first: true,
-            style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-        SelectDialogItem(
-            text: '사진',
-            onTap: () => _createRequest(ImageSource.gallery),
-            last: true,
-            style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-      ]));
+          SelectDialogItem(
+              text: '카메라',
+              onTap: () => _createRequest(ImageSource.camera),
+              first: true,
+              style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+          SelectDialogItem(
+              text: '사진',
+              onTap: () => _createRequest(ImageSource.gallery),
+              last: true,
+              style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+        ]));
       },
     ));
 

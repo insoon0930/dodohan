@@ -1,12 +1,16 @@
 import 'package:stamp_now/app/data/service/match_service/repository.dart';
+import '../../dto/admin_match.dart';
 import '../../enums.dart';
+import '../../model/application.dart';
 import '../../model/match.dart';
 import '../../model/user.dart';
+import '../application_service/repository.dart';
 import '../user_service/repository.dart';
 
 class MatchService {
   final MatchRepository _matchRepository = MatchRepository();
   final UserRepository _userRepository = UserRepository();
+  final ApplicationRepository _applicationRepository = ApplicationRepository();
 
   MatchService._privateConstructor();
   static final MatchService _instance = MatchService._privateConstructor();
@@ -20,14 +24,19 @@ class MatchService {
   }
 
   //@Get
-  Future<List<Map<String, String>>> findTwoWeeks() async {
+  Future<List<AdminMatch>> findTwoWeeks() async {
     List<Match> matches = await _matchRepository.findTwoWeeks();
-    List<Map<String, String>> matchProfiles = await Future.wait(matches.map((match) async {
+    List<AdminMatch> matchProfiles = await Future.wait(matches.map((match) async {
       User? man = await _userRepository.findOne(match.man);
-      print('man: $man');
       User? woman = await _userRepository.findOne(match.woman);
-      print('woman: $woman');
-      return {'man': man!.profileImage, 'woman': woman!.profileImage};
+      Application? manApplication = await _applicationRepository.findThisWeekOne(match.man);
+      Application? womanApplication = await _applicationRepository.findThisWeekOne(match.woman);
+      return AdminMatch(
+          match: match,
+          nextWeekManApplication: manApplication,
+          nextWeekWomanApplication: womanApplication,
+          manProfileImage: man!.profileImage,
+          womanProfileImage: woman!.profileImage);
     }));
     return matchProfiles;
   }

@@ -19,65 +19,65 @@ class AdminPage extends GetView<AdminController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('관리자'),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const SizedBox(width: 8),
-                Flexible(
-                  child: ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.mainLight),
-                      onPressed: () => Get.toNamed(Routes.test),
-                      child: Text('테스트', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
-                ),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.main),
-                      onPressed: () => Get.toNamed(Routes.profileImageRequest),
-                      child: Text('프로필 심사', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
-                ),
-                const SizedBox(width: 8),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                const SizedBox(width: 8),
-                Flexible(
-                  child: ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.main),
-                      onPressed: () => Get.toNamed(Routes.womanUser),
-                      child: Text('유저', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
-                ),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.main),
-                      onPressed: () => Get.toNamed(Routes.match),
-                      child: Text('매치', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
-                ),
-                const SizedBox(width: 8),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                const SizedBox(width: 8),
-                Flexible(
-                  child: ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.mainLight),
-                      onPressed: () => Get.toNamed(Routes.application),
-                      child: Text('이번주 신청', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
-                ),
-                const SizedBox(width: 8),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Text('심사', style: ThemeFonts.medium.getTextStyle(size: 17)),
-            const SizedBox(height: 8),
-            Obx(
+      body: Column(
+        children: [
+          Row(
+            children: [
+              const SizedBox(width: 8),
+              Flexible(
+                child: ElevatedButton(
+                    style: BtStyle.standard(color: ThemeColors.mainLight),
+                    onPressed: () => Get.toNamed(Routes.test),
+                    child: Text('테스트', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: ElevatedButton(
+                    style: BtStyle.standard(color: ThemeColors.main),
+                    onPressed: () => Get.toNamed(Routes.profileImageRequest),
+                    child: Text('프로필 심사', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+              ),
+              const SizedBox(width: 8),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const SizedBox(width: 8),
+              Flexible(
+                child: ElevatedButton(
+                    style: BtStyle.standard(color: ThemeColors.main),
+                    onPressed: () => Get.toNamed(Routes.womanUser),
+                    child: Text('유저', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: ElevatedButton(
+                    style: BtStyle.standard(color: ThemeColors.main),
+                    onPressed: () => Get.toNamed(Routes.match),
+                    child: Text('매치', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+              ),
+              const SizedBox(width: 8),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const SizedBox(width: 8),
+              Flexible(
+                child: ElevatedButton(
+                    style: BtStyle.standard(color: ThemeColors.mainLight),
+                    onPressed: () => Get.toNamed(Routes.application),
+                    child: Text('이번주 신청', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+              ),
+              const SizedBox(width: 8),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text('심사', style: ThemeFonts.medium.getTextStyle(size: 17)),
+          const SizedBox(height: 8),
+          Expanded(
+            child: Obx(
               () => ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.waitingIds.length,
@@ -85,8 +85,8 @@ class AdminPage extends GetView<AdminController> {
                     _listIem(controller.waitingIds[index]),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

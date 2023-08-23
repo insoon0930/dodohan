@@ -29,7 +29,7 @@ class RegisterController extends GetxController {
   void onReady() {
     if(user.idStatus == IdStatus.rejected) {
       Get.dialog(const ErrorDialog(
-          text: '심사 반려\n\n학생증 혹은 프로필 이미지를 확인해주세요. (마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...)'));
+          text: '심사 반려\n\n학생증 혹은 프로필 이미지를 확인해주세요. (본인 사진이 안나온 학생증, 마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...)'));
     }
     super.onReady();
   }
