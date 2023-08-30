@@ -80,7 +80,7 @@ class HomeView extends GetView<HomeController> {
           const SizedBox(width: 16),
           Flexible(
             child: ElevatedButton(
-              style: BtStyle.standard(color: ThemeColors.mainLight, height: 100),
+              style: BtStyle.standard(color: ThemeColors.mainLight),
               onPressed: () => Get.toNamed(Routes.meInfo),
               child: Text('나',
                   style:
@@ -90,7 +90,7 @@ class HomeView extends GetView<HomeController> {
           const SizedBox(width: 16),
           Flexible(
             child: ElevatedButton(
-              style: BtStyle.standard(color: ThemeColors.mainLight, height: 100),
+              style: BtStyle.standard(color: ThemeColors.mainLight),
               onPressed: () => Get.toNamed(Routes.youInfo),
               child: Text('이상형',
                   style:

@@ -31,7 +31,7 @@ class DailyView extends GetView<DailyController> {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _card(),
                     _card(),
@@ -71,31 +71,31 @@ class DailyView extends GetView<DailyController> {
   Widget _card() => Card(
     clipBehavior: Clip.hardEdge,
     child: Container(
-      width: 200,
-      height: 300,
+      width: (Get.width - 64) / 2,
+      height: (Get.width - 64) / 2 * 1.4,
       padding: const EdgeInsets.all(4.0),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //키 나이 체형 흡현 mbti
-          ImageViewBox(url: 'https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/KakaoTalk_Photo_2023-08-10-18-31-31.jpg', width: 192, height: 192, isBlurred: true),
-          Spacer(),
-          Row(
+          ImageViewBox(url: 'https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/KakaoTalk_Photo_2023-08-10-18-31-31.jpg', width: (Get.width - 64) / 2 - 8, height: (Get.width - 64) / 2 - 8, isBlurred: true),
+          const Spacer(),
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('179cm'),
+              Text('180cm'),
               Text('26살'),
             ],
           ),
-          SizedBox(height: 12),
-          Row(
+          const SizedBox(height: 12),
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text('근육있는'),
               Text('비흡연'),
             ],
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     ),

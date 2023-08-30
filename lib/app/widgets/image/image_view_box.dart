@@ -17,7 +17,7 @@ class ImageViewBox extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: ImageFiltered(
-        imageFilter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+        imageFilter: ImageFilter.blur(sigmaX: isBlurred ? 25.0 : 0, sigmaY: isBlurred ? 25.0 : 0),
         child: Image.network(
           url,
           width: width ?? Get.width * 0.4,
