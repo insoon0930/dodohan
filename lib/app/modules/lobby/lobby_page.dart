@@ -5,15 +5,10 @@ import 'package:stamp_now/app/modules/lobby/views/home/home_view.dart';
 import '../../widgets/appbars/home_appbarr.dart';
 import '../../widgets/my_bottom_navigation_bar.dart';
 import 'lobby_controller.dart';
-import 'views/daily/daily_page.dart';
+import 'views/daily/daily_view.dart';
 
 class LobbyPage extends GetView<LobbyController> {
   const LobbyPage({super.key});
-
-  // static List<Widget> tabPages = <Widget>[
-  //   const HomeView(),
-  //   const DailyPage(),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +17,7 @@ class LobbyPage extends GetView<LobbyController> {
       body: Obx(
         () => LazyLoadIndexedStack(index: controller.selectedTabIndex.value, children: const [
           HomeView(),
-          DailyPage(),
+          DailyView(),
         ]),
       ),
       // body: Obx(() => tabPages[controller.selectedTabIndex.value]),

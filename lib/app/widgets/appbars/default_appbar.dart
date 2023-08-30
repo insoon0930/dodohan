@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/theme/fonts.dart';
-import '../../modules/navigation/navigation_controller.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 

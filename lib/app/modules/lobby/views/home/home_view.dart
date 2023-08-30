@@ -12,7 +12,6 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    print('!!!!!!!!!!!');
     return Column(
       children: [
         _upperBox(),

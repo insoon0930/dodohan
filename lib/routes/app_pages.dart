@@ -17,16 +17,10 @@ import '../app/modules/auth/login_by/login_by_page.dart';
 import '../app/modules/auth/register/register_binding.dart';
 import '../app/modules/auth/register/register_page.dart';
 import '../app/modules/auth/waiting/waiting_page.dart';
-import '../app/modules/camera/camera_binding.dart';
-import '../app/modules/camera/camera_page.dart';
 import '../app/modules/lobby/lobby_binding.dart';
 import '../app/modules/lobby/lobby_page.dart';
 import '../app/modules/me_info/me_info_binding.dart';
 import '../app/modules/me_info/me_info_page.dart';
-import '../app/modules/navigation/navigation_binding.dart';
-import '../app/modules/navigation/navigation_view.dart';
-import '../app/modules/setting/setting_binding.dart';
-import '../app/modules/setting/setting_page.dart';
 import '../app/modules/splash/splash_binding.dart';
 import '../app/modules/splash/splash_page.dart';
 import '../app/modules/you_info/you_info_binding.dart';
@@ -83,10 +77,6 @@ class AppPages {
         page: () => const ApplicationPage(),
         binding: ApplicationBinding()),
     GetPage(
-        name: Routes.navigation,
-        page: () => const NavigationView(),
-        binding: NavigationBinding()),
-    GetPage(
         name: Routes.meInfo,
         page: () => const MeInfoPage(),
         binding: MeInfoBinding()),
@@ -95,12 +85,8 @@ class AppPages {
         page: () => const YouInfoPage(),
         binding: YouInfoBinding()),
     GetPage(
-        name: Routes.setting,
-        page: () => const SettingPage(),
-        binding: SettingBinding()),
-    GetPage(
-        name: Routes.camera,
-        page: () => const CameraPage(),
-        binding: CameraBinding()),
+        name: Routes.dailyCard,
+        page: () => const YouInfoPage(),
+        binding: YouInfoBinding()),
   ];
 }

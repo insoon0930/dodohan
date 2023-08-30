@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:stamp_now/app/modules/lobby/views/daily/daily_controller.dart';
 import 'package:stamp_now/app/modules/splash/splash_controller.dart';
 import '../../../core/services/auth_service.dart';
 import '../../data/model/user.dart';
@@ -21,6 +22,7 @@ class LobbyController extends GetxController {
   }
 
   void changeIndex(int index) {
+    Get.put(DailyController());
     selectedTabIndex(index);
   }
 }

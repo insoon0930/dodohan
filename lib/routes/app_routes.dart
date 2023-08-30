@@ -12,9 +12,7 @@ abstract class Routes{
   static const womanUser = '/woman-user'; //hm
   static const match = '/match'; //hm
   static const application = '/application'; //hm
-  static const navigation = '/navigation';
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';
-  static const setting = '/setting';
-  static const camera = '/camera';
+  static const dailyCard = '/daily-card';
 }
