@@ -33,7 +33,7 @@ class ApplicationDialog extends StatelessWidget {
           _youInfo(),
           const SizedBox(height: 16),
           Text(
-            "* 매칭시, '전화번호'와 '프로필 사진'이 전달됩니다",
+            "* 매칭 시, '전화번호'와 '프로필 사진'이 전달됩니다",
             style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 11),
           ),
           ElevatedButton(

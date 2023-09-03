@@ -10,20 +10,22 @@ part 'daily_card.g.dart';
 
 @JsonSerializable()
 class DailyCard {
-  String id;
   @MeInfoConverter()
   MeInfo? youInfo, meInfo;
   String youProfileImage, meProfileImage;
   MatchStatus youStatus, meStatus;
+  @DateTimeConverter()
+  DateTime? createdAt;
 
-  DailyCard(
-      {this.id = '',
-        this.youInfo,
-        this.meInfo,
-        this.youProfileImage = '',
-        this.meProfileImage = '',
-        this.youStatus = MatchStatus.unChecked,
-        this.meStatus = MatchStatus.unChecked});
+  DailyCard({this.youInfo,
+      this.meInfo,
+      this.youProfileImage = '',
+      this.meProfileImage = '',
+      this.youStatus = MatchStatus.unChecked,
+      this.meStatus = MatchStatus.unChecked,
+      this.createdAt}) {
+    createdAt ??= DateTime.now();
+  }
 
   factory DailyCard.fromJson(Map<String, dynamic> json) => _$DailyCardFromJson(json);
 

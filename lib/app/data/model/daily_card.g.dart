@@ -7,7 +7,6 @@ part of 'daily_card.dart';
 // **************************************************************************
 
 DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
-      id: json['id'] as String? ?? '',
       youInfo: _$JsonConverterFromJson<Map<String, dynamic>, MeInfo>(
           json['youInfo'], const MeInfoConverter().fromJson),
       meInfo: _$JsonConverterFromJson<Map<String, dynamic>, MeInfo>(
@@ -18,10 +17,11 @@ DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
           MatchStatus.unChecked,
       meStatus: $enumDecodeNullable(_$MatchStatusEnumMap, json['meStatus']) ??
           MatchStatus.unChecked,
+      createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
+          json['createdAt'], const DateTimeConverter().fromJson),
     );
 
 Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
-      'id': instance.id,
       'youInfo': _$JsonConverterToJson<Map<String, dynamic>, MeInfo>(
           instance.youInfo, const MeInfoConverter().toJson),
       'meInfo': _$JsonConverterToJson<Map<String, dynamic>, MeInfo>(
@@ -30,6 +30,8 @@ Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
       'meProfileImage': instance.meProfileImage,
       'youStatus': _$MatchStatusEnumMap[instance.youStatus]!,
       'meStatus': _$MatchStatusEnumMap[instance.meStatus]!,
+      'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.createdAt, const DateTimeConverter().toJson),
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

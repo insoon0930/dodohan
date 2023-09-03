@@ -4,6 +4,8 @@ import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/theme/fonts.dart';
+
 class ImageViewBox extends StatelessWidget {
   final String url;
   final double? width, height;
