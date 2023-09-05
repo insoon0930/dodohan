@@ -18,14 +18,14 @@ class CardItem extends GetView<DailyController> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => controller.tapCard(index),
+      onTap: () => controller.tapCard(index, dailyCard),
       child: Card(
         margin: const EdgeInsets.all(4.0),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(9.0))),
         elevation: 5,
         child: Obx(
-              () => Stack(
+          () => Stack(
             children: [
               Container(
                 width: (Get.width - 64) / 2,
@@ -34,7 +34,11 @@ class CardItem extends GetView<DailyController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ImageViewBox(url: dailyCard.youProfileImage, width: (Get.width - 64) / 2 - 8, height: (Get.width - 64) / 2 - 8, isBlurred: true),
+                    ImageViewBox(
+                        url: dailyCard.youProfileImage,
+                        width: (Get.width - 64) / 2 - 8,
+                        height: (Get.width - 64) / 2 - 8,
+                        isBlurred: true),
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,7 +59,8 @@ class CardItem extends GetView<DailyController> {
                   ],
                 ),
               ),
-              if(controller.todayCards[index].meStatus == MatchStatus.unChecked)
+              if (controller.todayCards[index].meStatus ==
+                  MatchStatus.unChecked)
                 _cardCover(),
             ],
           ),
@@ -71,5 +76,7 @@ class CardItem extends GetView<DailyController> {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
           elevation: 0,
-          child: SvgPicture.asset('assets/love.svg', color: ThemeColors.mainLightest).paddingAll((Get.width - 64) / 7)));
+          child: SvgPicture.asset('assets/love.svg',
+                  color: ThemeColors.mainLightest)
+              .paddingAll((Get.width - 64) / 7)));
 }

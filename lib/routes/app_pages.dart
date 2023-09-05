@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:stamp_now/app/modules/daily_card/daily_card_binding.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
 import '../app/modules/admin/application/application_binding.dart';
@@ -17,6 +18,7 @@ import '../app/modules/auth/login_by/login_by_page.dart';
 import '../app/modules/auth/register/register_binding.dart';
 import '../app/modules/auth/register/register_page.dart';
 import '../app/modules/auth/waiting/waiting_page.dart';
+import '../app/modules/daily_card/daily_card_page.dart';
 import '../app/modules/lobby/lobby_binding.dart';
 import '../app/modules/lobby/lobby_page.dart';
 import '../app/modules/me_info/me_info_binding.dart';
@@ -86,7 +88,7 @@ class AppPages {
         binding: YouInfoBinding()),
     GetPage(
         name: Routes.dailyCard,
-        page: () => const YouInfoPage(),
-        binding: YouInfoBinding()),
+        page: () => const DailyCardPage(),
+        binding: DailyCardBinding()),
   ];
 }

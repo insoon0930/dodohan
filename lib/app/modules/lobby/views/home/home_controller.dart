@@ -43,6 +43,12 @@ class HomeController extends GetxController {
   RxString leftDay = '0일 0시 0분 0초'.obs;
   Timer? timer;
 
+  final RxInt manNum = 1.obs;
+  final RxInt womanNum = 1.obs;
+  RxInt get userNum => (manNum.value + womanNum.value).obs;
+  RxDouble get genderRatio => (manNum.value / womanNum.value).obs;
+  //'${(manNum.value / womanNum.value).toStringAsFixed(2)} : 1'
+
   User get user => AuthService.to.user.value;
 
   @override
@@ -52,7 +58,12 @@ class HomeController extends GetxController {
       Get.put(SplashController());
       await 1.delay();
     }
+    //users
+    final res = await _userService.findUserNum();
+    manNum.value = res['manNum']! + 90;
+    womanNum.value = res['womanNum']! + 30;
 
+    //timer
     final DateTime todaySimple = TimeUtility.todaySimple();
     final DateTime dueDay = TimeUtility.next(todaySimple, DateTime.friday)
         .subtract(const Duration(minutes: 5));

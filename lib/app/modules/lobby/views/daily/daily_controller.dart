@@ -55,12 +55,12 @@ class DailyController extends GetxController {
     super.onInit();
   }
 
-  void tapCard(int index) async {
+  void tapCard(int index, DailyCard dailyCard) async {
     if(todayCards[index].meStatus == MatchStatus.unChecked) {
       todayCards[index].meStatus = MatchStatus.checked;
       todayCards.refresh();
     } else {
-      Get.toNamed(Routes.dailyCard);
+      Get.toNamed(Routes.dailyCard, arguments: dailyCard);
     }
   }
 }

@@ -29,11 +29,18 @@ class HomeView extends GetView<HomeController> {
           Center(
             child: Column(
               children: [
-                _applicantNum(),
-                Text(
-                  "신청자 수",
-                  style: ThemeFonts.medium.getTextStyle(size: 11),
-                ),
+                if(controller.user.phoneNum == '+821066192550')
+                  Column(
+                    children: [
+                      _applicantNum(),
+                      Text(
+                        "신청자 수",
+                        style: ThemeFonts.medium.getTextStyle(size: 11),
+                      ),
+                    ],
+                  ),
+                if(controller.user.phoneNum != '+821066192550')
+                  _userNumData(),
                 const SizedBox(height: 16),
                 Obx(
                       () => Text(
@@ -50,7 +57,7 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
           ),
-          const SizedBox(height: 52),
+          const SizedBox(height: 40),
           ElevatedButton(
             style: BtStyle.standard(),
             onPressed: () => controller.getMatchResult(),
@@ -130,5 +137,37 @@ class HomeView extends GetView<HomeController> {
         return const CircularProgressIndicator();
       }
     },
+  );
+
+  Widget _userNumData() => Obx(
+        () => Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            Text(
+              "${controller.userNum.value}",
+              style: ThemeFonts.bold.getTextStyle(size: 40, color: ThemeColors.main),
+            ),
+            Text(
+              "가입자 수",
+              style: ThemeFonts.medium.getTextStyle(size: 11),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              (controller.genderRatio.value).toStringAsFixed(2),
+              style: ThemeFonts.bold.getTextStyle(size: 40, color: ThemeColors.main),
+            ),
+            Text(
+              "성비",
+              style: ThemeFonts.medium.getTextStyle(size: 11),
+            ),
+          ],
+        ),
+      ],
+    ),
   );
 }

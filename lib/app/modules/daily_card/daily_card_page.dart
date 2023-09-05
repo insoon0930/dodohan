@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stamp_now/app/widgets/image/image_view_box.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
-import '../../data/info_data.dart';
 import '../../widgets/appbars/default_appbar.dart';
-import '../../widgets/multi_selector.dart';
-import '../../widgets/single_selector.dart';
 import 'daily_card_controller.dart';
 
 class DailyCardPage extends GetView<DailyCardController> {
@@ -15,11 +13,11 @@ class DailyCardPage extends GetView<DailyCardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar('나'),
+      appBar: const DefaultAppBar('오늘의 카드'),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 10),
+            ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: true, width: Get.width - 32, height: Get.width - 32),
             ElevatedButton(
               style: BtStyle.standard(),
               onPressed: () {},
@@ -28,10 +26,42 @@ class DailyCardPage extends GetView<DailyCardController> {
                     style:
                     ThemeFonts.medium.getTextStyle(color: Colors.white)),
               ),
-            ).paddingSymmetric(horizontal: 16)
+            ).paddingSymmetric(vertical: 16),
+            _infoForm('학교', controller.youInfo.univ!),
+            const Divider(),
+            _infoForm('키', '${controller.youInfo.height}cm'),
+            const Divider(),
+            _infoForm('나이', '${controller.youInfo.age}살'),
+            const Divider(),
+            _infoForm('체형', controller.youInfo.bodyShape!),
+            const Divider(),
+            _infoForm('흡연', controller.youInfo.isSmoker!?'흡연':'비흡연'),
+            const Divider(),
+            _infoForm('MBTI', ''),
+            const Divider(),
+            _infoForm('소개', ''),
+            const Divider(),
           ],
-        ),
+        ).paddingAll(16),
       ),
+    );
+  }
+
+  Widget _infoForm(String category, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          width: Get.width * 0.2,
+          alignment: Alignment.centerLeft,
+          child: Text(category, style: ThemeFonts.medium.getTextStyle(color: Colors.black45)).paddingOnly(left: 8),
+        ),
+        Container(
+          width: Get.width * 0.7,
+          alignment: Alignment.centerLeft,
+          child: Text(value, style: ThemeFonts.medium.getTextStyle()).paddingOnly(left: 8),
+        ),
+      ],
     );
   }
 }
