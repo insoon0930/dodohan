@@ -22,7 +22,7 @@ class MyBottomNavigationBar extends GetView<LobbyController> {
       backgroundColor: ThemeColors.main,
       // Bar에 보여질 요소. icon과 label로 구성.
       items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 0), label: '두두한'),
+        BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 0), label: '교내 소개팅'),
         BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 0), label: '오늘의 카드'),
       ],
     ));

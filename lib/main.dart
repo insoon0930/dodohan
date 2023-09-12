@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  analytics.logAppOpen();
+  // // Not supported on web
+  // await FirebaseAnalytics.instance.setDefaultEventParameters({});
+
   runApp(const MyApp());
 }
 
@@ -24,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'DoDoHan',
+      title: '두근두근캠퍼스',
       debugShowCheckedModeBanner: false,
       getPages: AppPages.pages,
       initialRoute: Routes.splash,
@@ -32,8 +38,6 @@ class MyApp extends StatelessWidget {
         Get.put(ApiService(), permanent: true);
         Get.put(AuthService(UserService()), permanent: true);
         Get.put(StorageService(), permanent: true);
-        //todo 여기는 수정해야될껄 ㅇㅇ?
-        // Get.put(MeInfoController(repo: MeInfoRepository()), permanent: true);
       }),
       theme: MainTheme.light,
       // darkTheme: MainTheme.dark,

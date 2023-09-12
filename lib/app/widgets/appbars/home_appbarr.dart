@@ -6,6 +6,7 @@ import '../../../core/services/auth_service.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../routes/app_routes.dart';
+import '../../data/info_data.dart';
 import '../../modules/lobby/lobby_controller.dart';
 import '../dialogs/select/select_dialog.dart';
 import '../dialogs/select/select_dialog_item.dart';
@@ -19,8 +20,8 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      //todo 체계화
-      title: Text(controller.user.univ == '한양대' ? '두근두근한양' : '두근두근중앙',
+
+      title: Text('두근두근${InfoData.univInfo[controller.user.univ]!.appTitleTail}',
           style: ThemeFonts.bold.getTextStyle(size: 22)),
       elevation: 0,
       actions: [

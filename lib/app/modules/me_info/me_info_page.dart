@@ -5,7 +5,6 @@ import '../../../core/theme/fonts.dart';
 import '../../../core/theme/paddings.dart';
 import '../../data/info_data.dart';
 import '../../widgets/appbars/default_appbar.dart';
-import '../../widgets/multi_selector.dart';
 import '../../widgets/single_selector.dart';
 import 'me_info_controller.dart';
 
@@ -47,8 +46,7 @@ class MeInfoPage extends GetView<MeInfoController> {
                   SingleSelector(
                       title: '학과',
                       placeholder: controller.meInfo.value.major,
-                      //todo 체계화
-                      list: controller.meInfo.value.univ == '한양대' ? InfoData.majorHanYang : InfoData.majorChungAng,
+                      list: InfoData.univInfo[controller.user.univ]!.major,
                       changedCallback: (selected) =>
                           controller.meInfo.value.major = selected.value),
                   const Divider(height: 1),

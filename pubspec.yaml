@@ -64,6 +64,8 @@ dependencies:
   intl: ^0.18.1
   animated_digit: ^3.2.3
 
+  firebase_analytics: ^10.4.5
+
 
 dev_dependencies:
   flutter_test:
