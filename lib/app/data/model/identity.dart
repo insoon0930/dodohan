@@ -10,7 +10,7 @@ part 'identity.g.dart';
 class Identity {
   @JsonKey(name: 'id', required: true)
   String id;
-  String user, profileImage, studentIdImage;
+  String user, profileImage, studentIdImage, univ;
   bool isMan;
   IdStatus status;
   @DateTimeConverter()
@@ -21,6 +21,7 @@ class Identity {
       this.user = '',
       this.profileImage = '',
       this.studentIdImage = '',
+      this.univ = '한양대',
       this.isMan = true,
       this.status = IdStatus.waiting,
       this.createdAt}) {

@@ -47,7 +47,8 @@ class MeInfoPage extends GetView<MeInfoController> {
                   SingleSelector(
                       title: '학과',
                       placeholder: controller.meInfo.value.major,
-                      list: InfoData.major,
+                      //todo 체계화
+                      list: controller.meInfo.value.univ == '한양대' ? InfoData.majorHanYang : InfoData.majorChungAng,
                       changedCallback: (selected) =>
                           controller.meInfo.value.major = selected.value),
                   const Divider(height: 1),

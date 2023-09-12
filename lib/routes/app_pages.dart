@@ -12,11 +12,15 @@ import '../app/modules/admin/test/test_binding.dart';
 import '../app/modules/admin/test/test_page.dart';
 import '../app/modules/admin/woman_user/woman_user_binding.dart';
 import '../app/modules/admin/woman_user/woman_user_page.dart';
+import '../app/modules/auth/agree_pages/privacy.dart';
+import '../app/modules/auth/agree_pages/terms_of_use.dart';
 import '../app/modules/auth/login/login_binding.dart';
 import '../app/modules/auth/login/login_page.dart';
+import '../app/modules/auth/login_by/login_by_binding.dart';
 import '../app/modules/auth/login_by/login_by_page.dart';
 import '../app/modules/auth/register/register_binding.dart';
 import '../app/modules/auth/register/register_page.dart';
+import '../app/modules/auth/waiting/waiting_binding.dart';
 import '../app/modules/auth/waiting/waiting_page.dart';
 import '../app/modules/daily_card/daily_card_page.dart';
 import '../app/modules/lobby/lobby_binding.dart';
@@ -38,7 +42,8 @@ class AppPages {
         binding: SplashBinding()),
     GetPage(
         name: Routes.loginBy,
-        page: () => const LoginByPage()),
+        page: () => const LoginByPage(),
+        binding: LoginByBinding()),
     GetPage(
         name: Routes.login,
         page: () => const LoginPage(),
@@ -49,7 +54,8 @@ class AppPages {
         binding: RegisterBinding()),
     GetPage(
         name: Routes.waiting,
-        page: () => const WaitingPage()),
+        page: () => const WaitingPage(),
+        binding: WaitingBinding()),
     GetPage(
         name: Routes.lobby,
         page: () => const LobbyPage(),
@@ -90,5 +96,11 @@ class AppPages {
         name: Routes.dailyCard,
         page: () => const DailyCardPage(),
         binding: DailyCardBinding()),
+    GetPage(
+        name: Routes.termsOfUse,
+        page: () => const TermsOfUsePage()),
+    GetPage(
+        name: Routes.privacy,
+        page: () => const PrivacyPage()),
   ];
 }

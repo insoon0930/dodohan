@@ -14,7 +14,7 @@ YouInfo _$YouInfoFromJson(Map<String, dynamic> json) {
   return YouInfo(
     id: json['id'] as String?,
     user: json['user'] as String?,
-    univ: json['univ'] as String? ?? '한양대',
+    univ: json['univ'] as String?,
     bodyShape:
         (json['bodyShape'] as List<dynamic>?)?.map((e) => e as String).toList(),
     isSmoker: json['isSmoker'] as String?,

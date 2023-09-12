@@ -14,7 +14,7 @@ class YouInfo {
   YouInfo(
       {this.id,
       this.user,
-      this.univ = '한양대',
+      this.univ,
       this.bodyShape,
       this.isSmoker,
       this.exceptSameMajor,

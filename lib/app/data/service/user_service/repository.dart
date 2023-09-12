@@ -70,35 +70,26 @@ class UserRepository extends ApiService {
   Future<Map<String, int>> findUserNum(bool isDeleted) async {
     try {
       print('isDeleted: $isDeleted');
-      QuerySnapshot querySnapshot;
-      if (isDeleted) {
-        print('aaa: $isDeleted');
-        querySnapshot = await firestore
-            .collection('users')
-            .where('deletedAt', isNull: false)
-            .get();
-        print('!!!: ${querySnapshot.docs.first.data()}');
-      } else {
-        print('bbb: $isDeleted');
-        querySnapshot = await firestore
-            .collection('users')
-            .where('deletedAt', isNull: true)
-            .get();
-      }
 
-      int manNum = 0;
-      int womanNum = 0;
-      for (var e in querySnapshot.docs) {
-        bool? isMan = (e.data() as Map<String, dynamic>)['isMan'];
-        if(isMan == null) {
-          continue;
-        }
-        if (isMan) {
-          manNum++;
-        } else {
-          womanNum++;
-        }
-      }
+      // 남자 수 가져오기
+      QuerySnapshot querySnapshotMan = await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: true)
+          .where('deletedAt', isNull: !isDeleted)
+          .get();
+
+      final manNum = querySnapshotMan.size;
+
+      // 여자 수 가져오기
+      QuerySnapshot querySnapshotWoman = await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: false)
+          .where('deletedAt', isNull: !isDeleted)
+          .get();
+
+      final womanNum = querySnapshotWoman.size;
+
+      print('ddd');
       return {'manNum': manNum, 'womanNum': womanNum};
     } catch (e) {
       print('findUserNum error: $e');
@@ -147,6 +138,7 @@ class UserRepository extends ApiService {
         'idStatus': IdStatus.confirmed.name,
         'profileImage': identity.profileImage,
         'isMan': identity.isMan,
+        'univ': identity.univ,
       });
       return;
     } catch (e) {

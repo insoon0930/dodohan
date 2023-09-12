@@ -44,8 +44,8 @@ class IdentityService extends ApiService  {
   Future<void> confirmed(Identity identity) async {
     await _identityRepository.updateStatus(identity.id, IdStatus.confirmed);
     await _userRepository.idConfirmed(identity);
-    await _meInfoRepository.create(MeInfo(user: identity.user, isMan: identity.isMan));
-    await _youInfoRepository.create(YouInfo(user: identity.user));
+    await _meInfoRepository.create(MeInfo(user: identity.user, isMan: identity.isMan, univ: identity.univ));
+    await _youInfoRepository.create(YouInfo(user: identity.user, univ: identity.univ));
     return;
   }
 

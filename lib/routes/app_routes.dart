@@ -15,4 +15,6 @@ abstract class Routes{
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';
   static const dailyCard = '/daily-card';
+  static const termsOfUse = '/terms-of-use';
+  static const privacy = '/privacy';
 }

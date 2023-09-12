@@ -16,6 +16,7 @@ Identity _$IdentityFromJson(Map<String, dynamic> json) {
     user: json['user'] as String? ?? '',
     profileImage: json['profileImage'] as String? ?? '',
     studentIdImage: json['studentIdImage'] as String? ?? '',
+    univ: json['univ'] as String? ?? '한양대',
     isMan: json['isMan'] as bool? ?? true,
     status: $enumDecodeNullable(_$IdStatusEnumMap, json['status']) ??
         IdStatus.waiting,
@@ -29,6 +30,7 @@ Map<String, dynamic> _$IdentityToJson(Identity instance) => <String, dynamic>{
       'user': instance.user,
       'profileImage': instance.profileImage,
       'studentIdImage': instance.studentIdImage,
+      'univ': instance.univ,
       'isMan': instance.isMan,
       'status': _$IdStatusEnumMap[instance.status]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(

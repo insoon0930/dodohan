@@ -61,7 +61,7 @@ class HomeController extends GetxController {
     //users
     final res = await _userService.findUserNum();
     manNum.value = res['manNum']! + 90;
-    womanNum.value = res['womanNum']! + 30;
+    womanNum.value = res['womanNum']! + 35;
 
     //timer
     final DateTime todaySimple = TimeUtility.todaySimple();

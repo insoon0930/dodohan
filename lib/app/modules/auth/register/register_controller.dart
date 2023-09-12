@@ -8,6 +8,7 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../data/enums.dart';
+import '../../../data/info_data.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/storage_service.dart';
 import '../../../data/service/identity_service/service.dart';
@@ -19,11 +20,14 @@ class RegisterController extends GetxController {
   final Rxn<bool> isMan = Rxn<bool>();
   final Rxn<XFile> profileImage = Rxn<XFile>();
   final Rxn<XFile> studentIdImage = Rxn<XFile>();
+  final Rx<String> univ = '선택'.obs;
+  final Rx<bool> termsAgree = false.obs;
 
   final RxString uploadStatus = '이미지 업로드중 (0/2)'.obs;
 
-  bool get ready => isMan.value != null && profileImage.value != null && studentIdImage.value != null;
+  bool get ready => termsAgree.value && univ.value != '선택' && isMan.value != null && profileImage.value != null && studentIdImage.value != null;
   User get user => AuthService.to.user.value;
+  int get selectedUnivIndex => InfoData.univ.indexOf(univ.value);
 
   @override
   void onReady() {
@@ -53,7 +57,7 @@ class RegisterController extends GetxController {
         user: user.id,
         profileImage: profileUrl,
         studentIdImage: studentIdUrl,
-        isMan: isMan.value!));
+        isMan: isMan.value!, univ: univ.value));
 
     //유저 모델 상태 업데이트
     user.idStatus = IdStatus.waiting;

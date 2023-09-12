@@ -9,6 +9,7 @@ import 'package:stamp_now/core/theme/buttons.dart';
 
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
+import '../../../../../routes/app_routes.dart';
 import 'widgets/dummy_card_item.dart';
 
 class DailyView extends GetView<DailyController> {
@@ -69,6 +70,29 @@ class DailyView extends GetView<DailyController> {
               repeatForever: true,
             ),
           ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                GestureDetector(
+                    onTap: () => Get.toNamed(Routes.termsOfUse),
+                    child: Text('이용 약관',
+                        style: ThemeFonts.medium.getTextStyle(size: 11))),
+                Text(
+                  " 및 ",
+                  style: ThemeFonts.medium.getTextStyle(size: 11, color: Colors.black54),
+                ),
+                GestureDetector(
+                    onTap: () => Get.toNamed(Routes.privacy),
+                    child: Text('개인정보 처리방침',
+                        style: ThemeFonts.medium.getTextStyle(size: 11)))
+              ],
+            ).paddingOnly(bottom: 8),
+          ],
         )
       ],
     );

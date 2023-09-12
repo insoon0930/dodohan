@@ -62,6 +62,7 @@ dependencies:
 
   lazy_load_indexed_stack: ^1.0.1
   intl: ^0.18.1
+  animated_digit: ^3.2.3
 
 
 dev_dependencies:

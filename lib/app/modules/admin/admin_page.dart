@@ -91,33 +91,38 @@ class AdminPage extends GetView<AdminController> {
     );
   }
 
-  Widget _listIem(Identity item) => SizedBox(
+  Widget _listIem(Identity item) => Container(
         width: Get.width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        decoration: BoxDecoration(
+            color: item.isMan
+                ? ThemeColors.blueLight.withOpacity(0.1)
+                : ThemeColors.redLight.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: item.isMan
+                ? ThemeColors.blueLight
+                : ThemeColors.redLight)),
+        child: Column(
           children: [
-            GestureDetector(
-                onTap: () => controller.launchDefaultUrl(item.studentIdImage),
-                child: ImageViewBox(url: item.studentIdImage)),
-            GestureDetector(
-                onTap: () => controller.launchDefaultUrl(item.profileImage),
-                child: ImageViewBox(url: item.profileImage)),
-            Flexible(
-              child: Column(
-                children: [
-                  ElevatedButton(
-                      onPressed: () => controller.confirm(item),
-                      child: const Text('승인')),
-                  const SizedBox(height: 10),
-                  Text(item.isMan ? '남' : '여', style: ThemeFonts.bold.getTextStyle()),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                      onPressed: () => controller.reject(item),
-                      child: const Text('거절')),
-                ],
-              ),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ImageViewBox(url: item.studentIdImage),
+                ImageViewBox(url: item.profileImage),
+              ],
+            ).paddingOnly(bottom: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                    onPressed: () => controller.confirm(item),
+                    child: const Text('승인')),
+                Text(item.univ, style: ThemeFonts.bold.getTextStyle()),
+                ElevatedButton(
+                    onPressed: () => controller.reject(item),
+                    child: const Text('거절')),
+              ],
+            )
           ],
-        ),
+        ).paddingSymmetric(vertical: 8),
       ).paddingSymmetric(vertical: 8);
 }

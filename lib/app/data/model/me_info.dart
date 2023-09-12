@@ -12,7 +12,7 @@ class MeInfo {
 
   MeInfo({this.id,
       this.user,
-      this.univ = '한양대',
+      this.univ,
       this.major,
       this.bodyShape,
       this.isMan,

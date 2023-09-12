@@ -21,7 +21,7 @@ class User {
     this.uid = '',
     this.phoneNum = '',
     this.profileImage = '',
-    this.univ = '한양대',
+    this.univ = '',
     this.isMan,
     this.idStatus,
     this.createdAt,

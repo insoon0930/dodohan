@@ -35,7 +35,7 @@ class ImagePickBox extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             border: Border.all(color: ThemeColors.grayLightest, width: 1),
-            color: file == null ? ThemeColors.grayLightest : Colors.transparent),
+            color: file == null ? ThemeColors.cream : Colors.transparent),
         child: file == null
             ? Center(child: SvgPicture.asset('assets/add.svg'))
             : _image(),

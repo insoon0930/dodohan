@@ -16,7 +16,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
     uid: json['uid'] as String? ?? '',
     phoneNum: json['phoneNum'] as String? ?? '',
     profileImage: json['profileImage'] as String? ?? '',
-    univ: json['univ'] as String? ?? '한양대',
+    univ: json['univ'] as String? ?? '',
     isMan: json['isMan'] as bool?,
     idStatus: $enumDecodeNullable(_$IdStatusEnumMap, json['idStatus']),
     createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(

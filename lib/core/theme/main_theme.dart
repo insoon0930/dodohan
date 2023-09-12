@@ -15,7 +15,7 @@ class MainTheme {
     //   textTheme: ButtonTextTheme.accent,
     // ),
     // primaryColor: ThemeColors.specialColor,
-    // useMaterial3: true,
+    useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff6750a4)),
   );
 

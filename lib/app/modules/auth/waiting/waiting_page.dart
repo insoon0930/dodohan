@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/services/auth_service.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../../core/theme/paddings.dart';
@@ -11,6 +12,7 @@ class WaitingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('WaitingPage build!');
     return Scaffold(
       body: Center(
         child: Column(

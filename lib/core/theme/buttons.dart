@@ -47,6 +47,7 @@ class BtStyle {
     backgroundColor: Colors.white,
     textStyle: ThemeFonts.medium.getTextStyle(),
     surfaceTintColor: Colors.transparent,
+    elevation: 3,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     minimumSize: Size(Get.width, 54),
   );
