@@ -5,20 +5,25 @@ import '../../../../core/theme/paddings.dart';
 
 class SettingItem extends StatelessWidget {
   final String text;
-  const SettingItem(this.text, {Key? key, onTap}) : super(key: key);
+  final VoidCallback onTap;
+  const SettingItem(this.text, {Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      height: 52,
-      color: Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(width: ThemePaddings.mainPadding),
-          Text(text, style: const TextStyle(fontSize: 16)),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: Get.width,
+        height: 52,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(text, style: const TextStyle(fontSize: 16)),
+            const Icon(Icons.arrow_forward_ios_rounded, size: 12)
+          ],
+        ).paddingSymmetric(horizontal: 16),
       ),
     );
   }

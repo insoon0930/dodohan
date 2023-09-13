@@ -17,4 +17,8 @@ abstract class Routes{
   static const dailyCard = '/daily-card';
   static const termsOfUse = '/terms-of-use';
   static const privacy = '/privacy';
+  static const setting = '/setting';
+  static const inquire = '/inquire';
+  static const updates = '/updates';
+  static const questions = '/questions';
 }

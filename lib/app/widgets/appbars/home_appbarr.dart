@@ -10,27 +10,31 @@ import '../../data/info_data.dart';
 import '../../modules/lobby/lobby_controller.dart';
 import '../dialogs/select/select_dialog.dart';
 import '../dialogs/select/select_dialog_item.dart';
-
+import '../setting_icon_button.dart';
 
 class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final LobbyController controller = Get.find();
+
   LobbyAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-
-      title: Text('두근두근${InfoData.univInfo[controller.user.univ]!.appTitleTail}',
+      title: Text(
+          '두근두근${InfoData.univInfo[controller.user.univ]?.appTitleTail ?? '캠퍼스'}',
           style: ThemeFonts.bold.getTextStyle(size: 22)),
       elevation: 0,
       actions: [
-        GestureDetector(
-          onTap: () => _getDialog(),
-          child: Container(
-              color: Colors.transparent,
-              child: SvgPicture.asset('assets/dots.svg').paddingAll(15)),
-        ),
+        AuthService.to.isForFree
+            ? const SettingIconButton()
+            : Row(
+                children: [
+                  SvgPicture.asset('assets/love.svg'),
+                  const SizedBox(width: 6),
+                  Text('3', style: ThemeFonts.semiBold.getTextStyle(size: 20))
+                ],
+              ).paddingOnly(right: 16),
         const SizedBox(width: 1),
       ],
     );
@@ -40,27 +44,4 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
   // TODO: implement preferredSize
   // Size get preferredSize => throw UnimplementedError();
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
-  _getDialog() => Get.dialog(SelectDialog(itemHeight: 60, items: [
-    SelectDialogItem(
-        text: '로그아웃',
-        onTap: () => AuthService.to.logOut(),
-        first: true,
-        style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-    if (controller!.user.id == '6BqgdRdFUoZOPclxIzbD')
-          SelectDialogItem(
-              text: '관리자 페이지',
-              onTap: () {
-                Get.back();
-                Get.toNamed(Routes.admin);
-              },
-              last: true,
-              style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-    if (controller!.user.id != '6BqgdRdFUoZOPclxIzbD')
-        SelectDialogItem(
-        text: '회원탈퇴',
-        onTap: () => AuthService.to.withdraw(),
-        last: true,
-        style: ThemeFonts.medium.getTextStyle(size: 15, color: ThemeColors.redLight)),
-  ]));
 }

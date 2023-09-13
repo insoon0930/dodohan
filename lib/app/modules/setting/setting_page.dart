@@ -3,61 +3,48 @@ import 'package:get/get.dart';
 import 'package:stamp_now/core/theme/colors.dart';
 import 'package:stamp_now/core/theme/paddings.dart';
 import '../../../core/services/auth_service.dart';
+import '../../../routes/app_routes.dart';
 import '../../data/model/user.dart';
-import 'setting_controller.dart';
+import '../../widgets/appbars/default_appbar.dart';
+import '../../widgets/dialogs/action_dialog.dart';
+import '../../widgets/my_divider.dart';
 import 'widgets/setting_item.dart';
 
-class SettingPage extends GetView<SettingController> {
+class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
-
-  User get user => AuthService.to.user.value;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-
-            settingTextWithPadding('카메라 설정'),
-            // SettingSwitchItem(
-            //   text: '원본 사진 저장',
-            //   rxValue: user.saveOriginal,
-            //   onTap: () => controller.switchSaveOriginal(!user.saveOriginal),
-            // ),
-            // const Divider(height: 1, indent: ThemePaddings.mainPadding),
-            // SettingSwitchItem(
-            //   text: '즉시 저장',
-            //   rxValue: user.saveImmediately,
-            //   onTap: () => controller.switchSaveImmediately(!user.saveImmediately),
-            // ),
-            // const Divider(height: 1, indent: ThemePaddings.mainPadding),
-            // //todo 폴더 정하기?
-            // SettingSwitchItem(
-            //   text: '앱 시작 시 카메라 실행',
-            //   rxValue: user.cameraImmediately,
-            //   onTap: () => controller.switchCameraImmediately(!user.cameraImmediately),
-            // ),
-            // settingTextWithPadding('인앱 결제'),
-            // SettingSwitchItem(
-            //   text: '다크 모드',
-            //   rxValue: user.darkMode,
-            //   onTap: () => controller.switchDarkMode(!user.darkMode),
-            // ),
-            const Divider(height: 1, indent: ThemePaddings.mainPadding),
-            const SettingItem('스탬프샵'),
-            const Divider(height: 1, indent: ThemePaddings.mainPadding),
-            const SettingItem('광고 제거'),
-            const Divider(height: 1, indent: ThemePaddings.mainPadding),
-            const SettingItem('구매 복원'),
-            settingTextWithPadding('기타'),
-            const SettingItem('문의 하기'),
-            const Divider(height: 1, indent: ThemePaddings.mainPadding),
-            const SettingItem('리뷰 남기기'),
-            settingTextWithPadding(''),
-          ],
-        ),
+      appBar: const DefaultAppBar('설정'),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          settingTextWithPadding('고객센터'),
+          SettingItem('문의하기', onTap: () => Get.toNamed(Routes.inquire)),
+          const MyDivider(),
+          SettingItem('공지사항', onTap: () => Get.toNamed(Routes.updates)),
+          const MyDivider(),
+          SettingItem('자주하는 질문', onTap: () => Get.toNamed(Routes.questions)),
+          const MyDivider(),
+          SettingItem('이용약관', onTap: () => Get.toNamed(Routes.termsOfUse)),
+          const MyDivider(),
+          SettingItem('개인정보처리방침', onTap: () => Get.toNamed(Routes.privacy)),
+          const Divider(thickness: 10, color: ThemeColors.grayLightest,),
+          settingTextWithPadding('계정'),
+          if (!AuthService.to.isAdmin)
+            SettingItem('회원탈퇴',
+                onTap: () => Get.dialog(ActionDialog(
+                    title: '회원 탈퇴',
+                    text: '이후 재가입에 제한이\n있을 수 있습니다',
+                    buttonText: '탈퇴하기',
+                    confirmCallback: () => AuthService.to.withdraw()))),
+          if (AuthService.to.isAdmin)
+            SettingItem('관리자 페이지', onTap: () => Get.toNamed(Routes.admin)),
+          const MyDivider(),
+          SettingItem('로그아웃', onTap: () => AuthService.to.logOut()),
+          Expanded(child: Container(width: Get.width, color: ThemeColors.grayLightest))
+        ],
       ),
     );
   }

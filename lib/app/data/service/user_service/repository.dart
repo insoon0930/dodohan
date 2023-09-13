@@ -69,8 +69,6 @@ class UserRepository extends ApiService {
 
   Future<Map<String, int>> findUserNum(bool isDeleted) async {
     try {
-      print('isDeleted: $isDeleted');
-
       // 남자 수 가져오기
       QuerySnapshot querySnapshotMan = await firestore
           .collection('users')
@@ -88,8 +86,6 @@ class UserRepository extends ApiService {
           .get();
 
       final womanNum = querySnapshotWoman.size;
-
-      print('ddd');
       return {'manNum': manNum, 'womanNum': womanNum};
     } catch (e) {
       print('findUserNum error: $e');

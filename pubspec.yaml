@@ -30,8 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.4.1
-  firebase_auth: ^4.7.1
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
   cloud_firestore: ^4.8.4
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1

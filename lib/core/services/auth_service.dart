@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stamp_now/app/data/info_data.dart';
 import 'package:stamp_now/app/data/provider/api_service.dart';
 import '../../app/data/enums.dart';
 import '../../app/data/model/user.dart';
@@ -15,6 +16,9 @@ class AuthService extends ApiService {
   AuthService(this._userService);
 
   Rx<User> user = User().obs;
+
+  bool get isForFree => InfoData.univInfo[user.value.univ]?.isForFree ?? true;
+  bool get isAdmin => user.value.id =='6BqgdRdFUoZOPclxIzbD';
 
   Future<User> updateUser(User newUser) async {
     user.value = newUser;
@@ -32,7 +36,7 @@ class AuthService extends ApiService {
   Future<void> loginByUid(String uid) async {
     User? res = await _userService.findOneByUid(uid);
     final prefs = await SharedPreferences.getInstance();
-    if(res == null) {
+    if (res == null) {
       //특이 케이스인듯? firebase auth 에는 있는데 디비에는 없는 (실수로 삭제?)
       User res = await registerUser(user.value, uid);
       prefs.setString('uid', res.uid);
@@ -42,7 +46,8 @@ class AuthService extends ApiService {
     }
 
     Get.back();
-    if(user.value.idStatus == null || user.value.idStatus == IdStatus.rejected) {
+    if (user.value.idStatus == null ||
+        user.value.idStatus == IdStatus.rejected) {
       Get.offAllNamed(Routes.register);
       return;
     } else if (user.value.idStatus == IdStatus.waiting) {

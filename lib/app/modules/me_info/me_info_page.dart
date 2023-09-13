@@ -46,7 +46,7 @@ class MeInfoPage extends GetView<MeInfoController> {
                   SingleSelector(
                       title: '학과',
                       placeholder: controller.meInfo.value.major,
-                      list: InfoData.univInfo[controller.user.univ]!.major,
+                      list: InfoData.univInfo[controller.user.univ]?.major??[],
                       changedCallback: (selected) =>
                           controller.meInfo.value.major = selected.value),
                   const Divider(height: 1),

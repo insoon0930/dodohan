@@ -15,13 +15,14 @@ class LobbyPage extends GetView<LobbyController> {
     return Scaffold(
         appBar: LobbyAppBar(),
         body: Obx(
-              () => LazyLoadIndexedStack(index: controller.selectedTabIndex.value, children: const [
-            HomeView(),
-            DailyView(),
-          ]),
+          () => LazyLoadIndexedStack(
+              index: controller.selectedTabIndex.value,
+              children: const [
+                HomeView(),
+                DailyView(),
+              ]),
         ),
         // body: Obx(() => tabPages[controller.selectedTabIndex.value]),
-        bottomNavigationBar: const MyBottomNavigationBar()
-    );
+        bottomNavigationBar: const MyBottomNavigationBar());
   }
 }

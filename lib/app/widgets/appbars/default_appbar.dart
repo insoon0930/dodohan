@@ -13,8 +13,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       leading: GestureDetector(
-          onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios)),
-      title: Text(title, style: ThemeFonts.bold.getTextStyle(size: 17)),
+          onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios_new_rounded)),
+      title: Text(title, style: ThemeFonts.bold.getTextStyle(size: 22)),
       // actions: [Text('완료', style: ThemeFonts.medium.getTextStyle(size: 17)).paddingOnly(right: 16)],
       elevation: 0,
     );

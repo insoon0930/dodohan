@@ -27,6 +27,10 @@ import '../app/modules/lobby/lobby_binding.dart';
 import '../app/modules/lobby/lobby_page.dart';
 import '../app/modules/me_info/me_info_binding.dart';
 import '../app/modules/me_info/me_info_page.dart';
+import '../app/modules/setting/inquire/page.dart';
+import '../app/modules/setting/questions/page.dart';
+import '../app/modules/setting/setting_page.dart';
+import '../app/modules/setting/updates/page.dart';
 import '../app/modules/splash/splash_binding.dart';
 import '../app/modules/splash/splash_page.dart';
 import '../app/modules/you_info/you_info_binding.dart';
@@ -102,5 +106,17 @@ class AppPages {
     GetPage(
         name: Routes.privacy,
         page: () => const PrivacyPage()),
+    GetPage(
+        name: Routes.setting,
+        page: () => const SettingPage()),
+    GetPage(
+        name: Routes.inquire,
+        page: () => const InquirePage()),
+    GetPage(
+        name: Routes.updates,
+        page: () => const UpdatesPage()),
+    GetPage(
+        name: Routes.questions,
+        page: () => const QuestionsPage()),
   ];
 }
