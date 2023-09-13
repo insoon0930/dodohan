@@ -85,7 +85,9 @@ class HomeView extends GetView<HomeController> {
                   child: CircleAvatar(
                       backgroundImage:
                           NetworkImage(controller.user.profileImage))),
-              AuthService.to.isForFree ? const SizedBox() : const SettingIconButton(),
+              AuthService.to.isForFree
+                  ? const SizedBox()
+                  : const SettingIconButton(),
             ],
           ).paddingSymmetric(horizontal: 16),
         ],
@@ -183,28 +185,4 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       );
-
-  _getDialog() => Get.dialog(SelectDialog(itemHeight: 60, items: [
-        SelectDialogItem(
-            text: '로그아웃',
-            onTap: () => AuthService.to.logOut(),
-            first: true,
-            style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-        if (controller.user.id == '6BqgdRdFUoZOPclxIzbD')
-          SelectDialogItem(
-              text: '관리자 페이지',
-              onTap: () {
-                Get.back();
-                Get.toNamed(Routes.admin);
-              },
-              last: true,
-              style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-        if (controller.user.id != '6BqgdRdFUoZOPclxIzbD')
-          SelectDialogItem(
-              text: '회원탈퇴',
-              onTap: () => AuthService.to.withdraw(),
-              last: true,
-              style: ThemeFonts.medium
-                  .getTextStyle(size: 15, color: ThemeColors.redLight)),
-      ]));
 }
