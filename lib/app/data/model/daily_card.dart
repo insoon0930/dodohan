@@ -10,6 +10,7 @@ part 'daily_card.g.dart';
 
 @JsonSerializable()
 class DailyCard {
+  String id;
   @MeInfoConverter()
   MeInfo? youInfo, meInfo;
   String youProfileImage, meProfileImage;
@@ -17,7 +18,8 @@ class DailyCard {
   @DateTimeConverter()
   DateTime? createdAt;
 
-  DailyCard({this.youInfo,
+  DailyCard({this.id = '',
+      this.youInfo,
       this.meInfo,
       this.youProfileImage = '',
       this.meProfileImage = '',

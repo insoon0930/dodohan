@@ -7,6 +7,7 @@ part of 'daily_card.dart';
 // **************************************************************************
 
 DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
+      id: json['id'] as String? ?? '',
       youInfo: _$JsonConverterFromJson<Map<String, dynamic>, MeInfo>(
           json['youInfo'], const MeInfoConverter().fromJson),
       meInfo: _$JsonConverterFromJson<Map<String, dynamic>, MeInfo>(
@@ -22,6 +23,7 @@ DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
     );
 
 Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
+      'id': instance.id,
       'youInfo': _$JsonConverterToJson<Map<String, dynamic>, MeInfo>(
           instance.youInfo, const MeInfoConverter().toJson),
       'meInfo': _$JsonConverterToJson<Map<String, dynamic>, MeInfo>(

@@ -31,10 +31,11 @@ class DailyController extends GetxController {
 
   void tapCard(int index, DailyCard dailyCard) async {
     if(todayCards[index].meStatus == MatchStatus.unChecked) {
+      _dailyCardService.updateMeStatus(dailyCard.id, MatchStatus.checked);
       todayCards[index].meStatus = MatchStatus.checked;
       todayCards.refresh();
     } else {
-      Get.toNamed(Routes.dailyCard, arguments: dailyCard);
+      Get.toNamed(Routes.dailyCard, arguments: {'index': index, 'dailyCard': dailyCard});
     }
   }
 }

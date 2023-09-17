@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stamp_now/app/data/enums.dart';
+import 'package:stamp_now/core/services/auth_service.dart';
 import 'package:stamp_now/core/utils/time_utility.dart';
 
+import '../../../../core/services/auth_service.dart';
 import '../../../data/provider/api_service.dart';
 import '../../../modules/lobby/views/daily/widgets/card_item.dart';
 import '../../model/daily_card.dart';
@@ -15,9 +17,9 @@ class DailyCardRepository extends ApiService {
 
   Future<List<DailyCard>> findToday(String user) async {
     try {
-      DocumentReference todayCardsRef =
+      final DocumentReference todayCardsRef =
           firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash());
-      QuerySnapshot myCardsSnapShot = await todayCardsRef
+      final QuerySnapshot myCardsSnapShot = await todayCardsRef
           .collection('cards')
           .where('meInfo.user', isEqualTo: user)
           .get();
@@ -52,13 +54,32 @@ class DailyCardRepository extends ApiService {
   //   }
   // }
   //
-  // Future<void> updateStatus(String id, IdStatus idStatus) async {
-  //   try {
-  //     final DocumentReference ref = firestore.collection('identities').doc(id);
-  //     await ref.update({'status': idStatus.name});
-  //     return;
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+
+  Future<void> updateMeStatus(String dailyCardId, MatchStatus status) async {
+    try {
+      final DocumentReference todayCardsRef =
+          firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash());
+      final DocumentReference dailyCardDocRef = todayCardsRef
+          .collection('cards')
+          .doc(dailyCardId);
+      await dailyCardDocRef.update({'meStatus' : status.name});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateYouStatus(String dailyCardId, MatchStatus status) async {
+    try {
+      final DocumentReference todayCardsRef =
+        firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash());
+      final DocumentReference dailyCardDocRef = todayCardsRef
+          .collection('cards')
+          .doc(dailyCardId);
+      await dailyCardDocRef.update({'youStatus' : status.name});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

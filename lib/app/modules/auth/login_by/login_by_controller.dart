@@ -12,7 +12,6 @@ class LoginByController extends GetxController {
   Future<void> onInit() async {
     print('LoginByController onInit');
     Map<String, int> userNum = await userService.findUserNum();
-    print('userNum: $userNum');
     manNum.value = userNum['manNum']! + 90;
     womanNum.value = userNum['womanNum']! + 35;
     genderRatio.value = manNum.value / womanNum.value;

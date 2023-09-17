@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:stamp_now/app/widgets/image/image_view_box.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/fonts.dart';
-import '../../../core/theme/paddings.dart';
+import '../../data/enums.dart';
 import '../../widgets/appbars/default_appbar.dart';
 import 'daily_card_controller.dart';
 
@@ -18,15 +18,15 @@ class DailyCardPage extends GetView<DailyCardController> {
         child: Column(
           children: [
             ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: true, width: Get.width - 32, height: Get.width - 32),
-            ElevatedButton(
-              style: BtStyle.standard(),
-              onPressed: () {},
-              child: Center(
-                child: Text('저장',
-                    style:
-                    ThemeFonts.medium.getTextStyle(color: Colors.white)),
-              ),
-            ).paddingSymmetric(vertical: 16),
+            if(controller.dailyCard.value.meStatus == MatchStatus.checked)
+              ElevatedButton(
+                style: BtStyle.standard(),
+                onPressed: () => controller.showConfirmDialog(),
+                child: Text('선택하기',
+                    style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+              ).paddingSymmetric(vertical: 16),
+            if(controller.dailyCard.value.meStatus != MatchStatus.checked)
+              const SizedBox(height: 16),
             _infoForm('학교', controller.youInfo.univ!),
             const Divider(),
             _infoForm('키', '${controller.youInfo.height}cm'),

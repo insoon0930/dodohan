@@ -52,6 +52,7 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
               Obx(() => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  _animatedNum(controller.manNum.value + controller.womanNum.value, text: '이용자 수', color: Colors.black).paddingOnly(right: 32),
                   _animatedNum(controller.manNum.value, text: '남성', color: ThemeColors.blueLight),
                   _animatedNum(controller.womanNum.value, text: '여성', color: ThemeColors.redLight).paddingSymmetric(horizontal: 32),
                   _animatedNum(controller.genderRatio.value, text: '성비', color: ThemeColors.main, fractionDigits: 2),

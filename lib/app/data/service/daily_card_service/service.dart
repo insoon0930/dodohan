@@ -33,10 +33,16 @@ class DailyCardService extends ApiService  {
   //   return await _dailyCardRepository.findWaiting();
   // }
   //
-  // //@Patch
-  // Future<void> updateStatus(String id, IdStatus idStatus) async {
-  //   return await _dailyCardRepository.updateStatus(id, idStatus);
-  // }
+
+  //@Patch
+  Future<void> updateMeStatus(String dailyCardId, MatchStatus status) async {
+    return await _dailyCardRepository.updateMeStatus(dailyCardId, status);
+  }
+
+  //@Patch
+  Future<void> updateYouStatus(String dailyCardId, MatchStatus status) async {
+    return await _dailyCardRepository.updateYouStatus(dailyCardId, status);
+  }
 
   // //@Patch
   // Future<void> confirmed(DailyCard dailyCard) async {

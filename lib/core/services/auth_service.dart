@@ -18,7 +18,7 @@ class AuthService extends ApiService {
   Rx<User> user = User().obs;
 
   bool get isForFree => InfoData.univInfo[user.value.univ]?.isForFree ?? true;
-  bool get isAdmin => user.value.id =='6BqgdRdFUoZOPclxIzbD';
+  bool get isAdmin => user.value.phoneNum =='+821012341234' || user.value.phoneNum =='+821066192550';
 
   Future<User> updateUser(User newUser) async {
     user.value = newUser;

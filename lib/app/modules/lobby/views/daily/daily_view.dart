@@ -1,6 +1,5 @@
 
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/modules/lobby/views/daily/daily_controller.dart';
@@ -9,8 +8,6 @@ import 'package:stamp_now/core/theme/buttons.dart';
 
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
-import '../../../../../routes/app_routes.dart';
-import 'widgets/dummy_card_item.dart';
 
 class DailyView extends GetView<DailyController> {
   const DailyView({Key? key}) : super(key: key);
@@ -19,31 +16,21 @@ class DailyView extends GetView<DailyController> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Blur(
-          blur: 0.6,
-          colorOpacity: 0.8,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            child: Column(
+        Container(
+          padding: const EdgeInsets.all(16),
+          child: Obx(
+            () => Column(
               children: [
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DummyCardItem(),
-                    DummyCardItem(),
-                  ],
-                ),
-
-                // if(controller.todayCards.isEmpty)
-                //   _progressIndicator(),
-                // if(controller.todayCards.isNotEmpty)
-                //   Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       CardItem(index: 0),
-                //       CardItem(index: 1),
-                //     ],
-                //   ),
+                if(controller.todayCards.isEmpty)
+                  _progressIndicator(),
+                if(controller.todayCards.isNotEmpty)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CardItem(index: 0),
+                      CardItem(index: 1),
+                    ],
+                  ),
                 const SizedBox(height: 32),
                 ElevatedButton(
                     style: BtStyle.standard(color: ThemeColors.mainLight),
@@ -61,39 +48,16 @@ class DailyView extends GetView<DailyController> {
             ),
           ),
         ),
-        Center(
-          child: DefaultTextStyle(
-            style: ThemeFonts.medium.getTextStyle(size: 18),
-            child: AnimatedTextKit(
-              animatedTexts: [WavyAnimatedText('준비중입니다')],
-              isRepeatingAnimation: true,
-              repeatForever: true,
-            ),
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                GestureDetector(
-                    onTap: () => Get.toNamed(Routes.termsOfUse),
-                    child: Text('이용 약관',
-                        style: ThemeFonts.medium.getTextStyle(size: 11))),
-                Text(
-                  " 및 ",
-                  style: ThemeFonts.medium.getTextStyle(size: 11, color: Colors.black54),
-                ),
-                GestureDetector(
-                    onTap: () => Get.toNamed(Routes.privacy),
-                    child: Text('개인정보 처리방침',
-                        style: ThemeFonts.medium.getTextStyle(size: 11)))
-              ],
-            ).paddingOnly(bottom: 8),
-          ],
-        )
+        // Center(
+        //   child: DefaultTextStyle(
+        //     style: ThemeFonts.medium.getTextStyle(size: 18),
+        //     child: AnimatedTextKit(
+        //       animatedTexts: [WavyAnimatedText('준비중입니다')],
+        //       isRepeatingAnimation: true,
+        //       repeatForever: true,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
