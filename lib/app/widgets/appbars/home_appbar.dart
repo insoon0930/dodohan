@@ -3,13 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/auth_service.dart';
-import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../routes/app_routes.dart';
 import '../../data/info_data.dart';
 import '../../modules/lobby/lobby_controller.dart';
-import '../dialogs/select/select_dialog.dart';
-import '../dialogs/select/select_dialog_item.dart';
 import '../setting_icon_button.dart';
 
 class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -38,7 +35,7 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
             ).paddingOnly(right: 16),
           )
         else
-          const SettingIconButton(),
+          const SettingIconButton().paddingOnly(right: 8),
         const SizedBox(width: 1),
       ],
     );

@@ -13,7 +13,7 @@ class LoginByController extends GetxController {
     print('LoginByController onInit');
     Map<String, int> userNum = await userService.findUserNum();
     manNum.value = userNum['manNum']! + 90;
-    womanNum.value = userNum['womanNum']! + 35;
+    womanNum.value = userNum['womanNum']! + 44;
     genderRatio.value = manNum.value / womanNum.value;
     super.onInit();
   }
