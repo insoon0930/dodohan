@@ -33,6 +33,8 @@ import '../app/modules/setting/setting_page.dart';
 import '../app/modules/setting/updates/page.dart';
 import '../app/modules/splash/splash_binding.dart';
 import '../app/modules/splash/splash_page.dart';
+import '../app/modules/store/store_binding.dart';
+import '../app/modules/store/store_page.dart';
 import '../app/modules/you_info/you_info_binding.dart';
 import '../app/modules/you_info/you_info_page.dart';
 import 'app_routes.dart';
@@ -118,5 +120,9 @@ class AppPages {
     GetPage(
         name: Routes.questions,
         page: () => const QuestionsPage()),
+    GetPage(
+        name: Routes.store,
+        page: () => const StorePage(),
+        binding: StoreBinding()),
   ];
 }

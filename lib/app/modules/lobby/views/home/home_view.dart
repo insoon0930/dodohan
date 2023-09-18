@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/theme/buttons.dart';
@@ -7,8 +6,6 @@ import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/theme/paddings.dart';
 import '../../../../../routes/app_routes.dart';
-import '../../../../widgets/dialogs/select/select_dialog.dart';
-import '../../../../widgets/dialogs/select/select_dialog_item.dart';
 import '../../../../widgets/setting_icon_button.dart';
 import 'home_controller.dart';
 
@@ -82,12 +79,11 @@ class HomeView extends GetView<HomeController> {
             children: [
               GestureDetector(
                   onTap: () => controller.updateProfileImage(),
-                  child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(controller.user.profileImage))),
-              AuthService.to.isForFree
-                  ? const SizedBox()
-                  : const SettingIconButton(),
+                  child: CircleAvatar(backgroundImage: NetworkImage(controller.user.profileImage))),
+              if(!AuthService.to.isForFree || AuthService.to.isAdmin)
+                const SettingIconButton()
+              else
+                const SizedBox()
             ],
           ).paddingSymmetric(horizontal: 16),
         ],

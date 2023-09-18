@@ -33,6 +33,12 @@ class DailyCardController extends BaseController {
 
   Future<void> confirm() async {
     //todo 하트 3개 소모(유저 서비스) + 하트 부족시 스토어 라우팅
+    //하기 위해서 5시 30분 요시땡
+    // 1. 스토어 페이지 만들기 (30분) - 완료
+    // 그런데, 카드사 도입해야 하니까 해당 api 적용 먼저 하자
+    // 2. 유저 모델 수정하기
+    // 3. 기존 유저 다큐먼트에 함수 만들어 하트 추가 (30분)
+    // 4. 소모 시키기 완료 (30분)
     showLoading();
     _dailyCardService.updateMeStatus(dailyCard.value.id, MatchStatus.confirmed);
     hideLoading();

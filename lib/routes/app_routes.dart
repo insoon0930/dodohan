@@ -21,4 +21,5 @@ abstract class Routes{
   static const inquire = '/inquire';
   static const updates = '/updates';
   static const questions = '/questions';
+  static const store = '/store';
 }

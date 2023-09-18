@@ -11,6 +11,8 @@ class SettingIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       isSelected: true,
+      constraints: const BoxConstraints(), // 패딩 설정
+      padding: EdgeInsets.zero, // 패딩 설정
       icon: const Icon(Icons.settings_outlined),
       color: ThemeColors.grayDark,
       selectedIcon: const Icon(Icons.settings),

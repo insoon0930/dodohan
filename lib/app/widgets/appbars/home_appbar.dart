@@ -26,15 +26,19 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: ThemeFonts.bold.getTextStyle(size: 22)),
       elevation: 0,
       actions: [
-        AuthService.to.isForFree
-            ? const SettingIconButton()
-            : Row(
-                children: [
-                  SvgPicture.asset('assets/love.svg'),
-                  const SizedBox(width: 6),
-                  Text('3', style: ThemeFonts.semiBold.getTextStyle(size: 20))
-                ],
-              ).paddingOnly(right: 16),
+        if(!AuthService.to.isForFree || AuthService.to.isAdmin)
+          GestureDetector(
+            onTap: () => Get.toNamed(Routes.store),
+            child: Row(
+              children: [
+                SvgPicture.asset('assets/love.svg'),
+                const SizedBox(width: 6),
+                Text('3', style: ThemeFonts.semiBold.getTextStyle(size: 20))
+              ],
+            ).paddingOnly(right: 16),
+          )
+        else
+          const SettingIconButton(),
         const SizedBox(width: 1),
       ],
     );
