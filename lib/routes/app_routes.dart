@@ -1,5 +1,4 @@
-abstract class Routes{
-
+abstract class Routes {
   static const splash = '/';
   static const loginBy = '/login-by';
   static const login = '/login';
@@ -22,4 +21,7 @@ abstract class Routes{
   static const updates = '/updates';
   static const questions = '/questions';
   static const store = '/store';
+  static const storeSuccess = '/store/success';
+  // static const storeFail = '/store/fail';
+
 }

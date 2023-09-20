@@ -86,7 +86,6 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
         value: number,
         fractionDigits: fractionDigits,
         duration: const Duration(milliseconds: 500),
-        enableSeparator: true,
       ),
       Text(text, style: ThemeFonts.medium.getTextStyle(size: 13))
         ],

@@ -9,6 +9,8 @@ class SplashController extends GetxController {
   @override
   Future<void> onInit() async {
     print('SplashController onInit!');
+    if(Get.parameters.isNotEmpty) return;
+
     final prefs = await SharedPreferences.getInstance();
     String? uid = prefs.getString('uid');
 

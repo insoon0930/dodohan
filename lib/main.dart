@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/data/provider/storage_service.dart';
+import 'package:stamp_now/app/modules/store/redirect/success/store_page.dart';
 import 'package:stamp_now/routes/app_pages.dart';
 import 'package:stamp_now/routes/app_routes.dart';
 import 'app/data/provider/api_service.dart';
@@ -33,7 +34,20 @@ class MyApp extends StatelessWidget {
       title: '두근두근캠퍼스',
       debugShowCheckedModeBanner: false,
       getPages: AppPages.pages,
-      initialRoute: Routes.splash,
+      onGenerateRoute: (RouteSettings settings) {
+
+        // print current route for clarity.
+        print('>>> ${settings.name} <<<');
+
+        switch (settings.name) {
+          case Routes.storeSuccess:
+            return MaterialPageRoute(
+              builder: (context) => const StoreSuccessPage(),
+              settings: settings,
+            );
+        }
+      },
+      // initialRoute: Routes.splash,
       initialBinding: BindingsBuilder(() {
         Get.put(ApiService(), permanent: true);
         Get.put(AuthService(UserService()), permanent: true);

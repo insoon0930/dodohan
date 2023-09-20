@@ -26,23 +26,19 @@ async function jsOpenTabFunction(url) {
 async function jsPromiseFunction(url) {
   console.log("start jsOpenTabFunction");
   //todo 오케 여기 부분부터 이제 토스로 바꿔주면 되겠다
-  // 1. 결제 준비하기
   var clientKey = 'test_ck_AQ92ymxN349YG91NZoAVajRKXvdk'
-  console.log('bbbb');
   var tossPayments = TossPayments(clientKey)
 
-  // 2. 본인인증창 호출하기
-  // IMP.certification(param, callback) 호출
     // ------ 결제창 띄우기 ------
     tossPayments.requestPayment('카드', { // 결제수단 파라미터 (카드, 계좌이체, 가상계좌, 휴대폰 등)
       // 결제 정보 파라미터
       // 더 많은 결제 정보 파라미터는 결제창 Javascript SDK에서 확인하세요.
       // https://docs.tosspayments.com/reference/js-sdk
-      amount: 100, // 결제 금액
+      amount: 150, // 결제 금액
       orderId: 'T05MlFPKGrlB2LySnGDKV', // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.)
       orderName: '테스트 결제', // 주문명
       customerName: '김토스', // 구매자 이름
-      successUrl: 'https://docs.tosspayments.com/guides/payment/test-success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
+      successUrl:'https://dodohan-6c8fd.web.app/store/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
       failUrl: 'https://docs.tosspayments.com/guides/payment/test-fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
     })
     // ------결제창을 띄울 수 없는 에러 처리 ------

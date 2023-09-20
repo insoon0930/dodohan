@@ -42,10 +42,10 @@ class HomeController extends GetxController {
   RxString leftDay = '0일 0시 0분 0초'.obs;
   Timer? timer;
 
-  final RxInt manNum = 1.obs;
-  final RxInt womanNum = 1.obs;
+  final RxInt manNum = 0.obs;
+  final RxInt womanNum = 0.obs;
   RxInt get userNum => (manNum.value + womanNum.value).obs;
-  RxDouble get genderRatio => (manNum.value / womanNum.value).obs;
+  RxDouble get genderRatio => (manNum.value / (womanNum.value == 0 ? 1 : womanNum.value)).obs;
   //'${(manNum.value / womanNum.value).toStringAsFixed(2)} : 1'
 
   User get user => AuthService.to.user.value;
