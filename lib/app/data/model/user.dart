@@ -11,6 +11,7 @@ class User {
   String id;
   String uid, phoneNum, profileImage, univ;
   bool? isMan;
+  int coin;
   IdStatus? idStatus;
   @DateTimeConverter()
   DateTime? createdAt;
@@ -23,6 +24,7 @@ class User {
     this.profileImage = '',
     this.univ = '',
     this.isMan,
+    this.coin = 0,
     this.idStatus,
     this.createdAt,
     this.deletedAt,

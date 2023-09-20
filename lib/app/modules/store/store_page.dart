@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:stamp_now/core/utils/utility.dart';
 
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
@@ -69,10 +70,11 @@ class StorePage extends StatelessWidget {
         NumberFormat.currency(locale: 'ko_KR', symbol: '₩').format(price);
     return GestureDetector(
       onTap: () async {
-        print('!!!!!@@@@@@@@');
         final JSHelper jsHelper = JSHelper();
-        dynamic iamportRes = await jsHelper.callJSPromise();
-        print('iamportRes: $iamportRes');
+        await jsHelper.callJSPromise(
+            amount: price,
+            orderId: '${DateTime.now().millisecond}_${Utility.randomString(8)}',
+            orderName: '하트 $coinNum개');
       },
       child: Card(
         color: Colors.white,

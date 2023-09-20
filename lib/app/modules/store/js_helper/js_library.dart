@@ -5,7 +5,7 @@ import 'package:js/js.dart';
 
 // This function will do Promise to return something
 @JS()
-external dynamic jsPromiseFunction(String message);
+external dynamic jsPromiseFunction(int amount, String orderId, String orderName);
 
 // This function will open new popup window for given URL.
 @JS()

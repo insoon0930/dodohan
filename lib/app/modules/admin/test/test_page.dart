@@ -63,6 +63,21 @@ class TestPage extends GetView<TestController> {
               const SizedBox(width: 16),
             ],
           ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              const SizedBox(width: 16),
+              Flexible(
+                child: ElevatedButton(
+                  style: BtStyle.standard(height: 100),
+                  onPressed: () => controller.updateDefaultCoin(),
+                  child: Text('coin',
+                      style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                ),
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
         ],
       ),
     );

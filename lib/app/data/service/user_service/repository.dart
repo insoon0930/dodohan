@@ -127,6 +127,18 @@ class UserRepository extends ApiService {
     }
   }
 
+  Future<void> updateDefaultCoin() async {
+    try {
+      QuerySnapshot snapshot = await firestore.collection('users').get();
+      for (final doc in snapshot.docs) {
+        await doc.reference.update({'coin': 5});
+      }
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> idConfirmed(Identity identity) async {
     try {
       final DocumentReference ref = firestore.collection('users').doc(identity.user);

@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/data/provider/storage_service.dart';
-import 'package:stamp_now/app/modules/store/redirect/success/store_page.dart';
 import 'package:stamp_now/routes/app_pages.dart';
 import 'package:stamp_now/routes/app_routes.dart';
 import 'app/data/provider/api_service.dart';
@@ -11,6 +10,8 @@ import 'app/data/service/user_service/service.dart';
 import 'core/services/auth_service.dart';
 import 'core/theme/main_theme.dart';
 import 'firebase_options.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ void main() async {
   // // Not supported on web
   // await FirebaseAnalytics.instance.setDefaultEventParameters({});
 
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -34,20 +36,7 @@ class MyApp extends StatelessWidget {
       title: '두근두근캠퍼스',
       debugShowCheckedModeBanner: false,
       getPages: AppPages.pages,
-      onGenerateRoute: (RouteSettings settings) {
-
-        // print current route for clarity.
-        print('>>> ${settings.name} <<<');
-
-        switch (settings.name) {
-          case Routes.storeSuccess:
-            return MaterialPageRoute(
-              builder: (context) => const StoreSuccessPage(),
-              settings: settings,
-            );
-        }
-      },
-      // initialRoute: Routes.splash,
+      initialRoute: Routes.splash,
       initialBinding: BindingsBuilder(() {
         Get.put(ApiService(), permanent: true);
         Get.put(AuthService(UserService()), permanent: true);

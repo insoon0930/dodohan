@@ -54,4 +54,9 @@ class TestController extends GetxController {
     await applicationService.updateBodyShapeType();
     Get.snackbar('필드 업데이트', '완료');
   }
+
+  Future<void> updateDefaultCoin() async {
+    await userService.updateDefaultCoin();
+    Get.snackbar('필드 업데이트', '완료');
+  }
 }

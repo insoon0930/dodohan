@@ -23,21 +23,18 @@ async function jsOpenTabFunction(url) {
 }
 
 
-async function jsPromiseFunction(url) {
-  console.log("start jsOpenTabFunction");
-  //todo 오케 여기 부분부터 이제 토스로 바꿔주면 되겠다
-  var clientKey = 'test_ck_AQ92ymxN349YG91NZoAVajRKXvdk'
-  var tossPayments = TossPayments(clientKey)
+async function jsPromiseFunction(amount, orderId, orderName) {
+    console.log("start jsOpenTabFunction");
+    //todo 오케 여기 부분부터 이제 토스로 바꿔주면 되겠다
+    var clientKey = 'test_ck_AQ92ymxN349YG91NZoAVajRKXvdk'
+    var tossPayments = TossPayments(clientKey)
 
     // ------ 결제창 띄우기 ------
     tossPayments.requestPayment('카드', { // 결제수단 파라미터 (카드, 계좌이체, 가상계좌, 휴대폰 등)
-      // 결제 정보 파라미터
-      // 더 많은 결제 정보 파라미터는 결제창 Javascript SDK에서 확인하세요.
       // https://docs.tosspayments.com/reference/js-sdk
-      amount: 150, // 결제 금액
-      orderId: 'T05MlFPKGrlB2LySnGDKV', // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.)
-      orderName: '테스트 결제', // 주문명
-      customerName: '김토스', // 구매자 이름
+      amount: amount, // 결제 금액 - 150
+      orderId: orderId, // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.) - 'T05MlFPKGrlB2LySnGDKV'
+      orderName: orderName, // 주문명 - '테스트 결제'
       successUrl:'https://dodohan-6c8fd.web.app/store/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
       failUrl: 'https://docs.tosspayments.com/guides/payment/test-fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
     })

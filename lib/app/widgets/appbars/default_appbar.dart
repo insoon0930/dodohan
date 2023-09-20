@@ -6,14 +6,15 @@ import '../../../core/theme/fonts.dart';
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
-  const DefaultAppBar(this.title, {super.key});
+  final bool hasLeading;
+  const DefaultAppBar(this.title, {super.key, this.hasLeading = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      leading: GestureDetector(
-          onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios_new_rounded, size: 19,)),
+      leading: hasLeading ? GestureDetector(
+          onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios_new_rounded, size: 19,)) : null,
       title: Text(title, style: ThemeFonts.semiBold.getTextStyle(size: 18)),
       // actions: [Text('완료', style: ThemeFonts.medium.getTextStyle(size: 17)).paddingOnly(right: 16)],
       elevation: 0,

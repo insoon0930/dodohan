@@ -11,8 +11,11 @@ class JSHelper {
     return js.context.callMethod('getPlatform');
   }
 
-  Future<dynamic> callJSPromise() async {
-    return await promiseToFuture(jsPromiseFunction("I am back from JS"));
+  Future<dynamic> callJSPromise(
+      {required int amount,
+      required String orderId,
+      required String orderName}) async {
+    return await promiseToFuture(jsPromiseFunction(amount, orderId, orderName));
   }
 
   Future<String> callOpenTab() async {

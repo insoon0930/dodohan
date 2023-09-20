@@ -46,4 +46,9 @@ class UserService {
     await _applicationRepository.deleteMany(userId);
     return await _userRepository.updateDeletedAt(userId);
   }
+
+  //@Patch
+  Future<void> updateDefaultCoin() async {
+    return await _userRepository.updateDefaultCoin();
+  }
 }

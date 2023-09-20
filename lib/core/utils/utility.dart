@@ -41,7 +41,7 @@ abstract class Utility {
 
     final ImagePicker picker = ImagePicker();
     try {
-      XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 60);
+      XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 80);
       if(pickedFile == null) {
         return Future.value(null);
       }
@@ -49,6 +49,7 @@ abstract class Utility {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
         aspectRatioPresets: [CropAspectRatioPreset.square],
+        compressQuality: 100,
         uiSettings: [
           AndroidUiSettings(
               toolbarTitle: '사진 편집',
