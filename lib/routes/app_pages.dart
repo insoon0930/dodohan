@@ -33,7 +33,10 @@ import '../app/modules/setting/setting_page.dart';
 import '../app/modules/setting/updates/page.dart';
 import '../app/modules/splash/splash_binding.dart';
 import '../app/modules/splash/splash_page.dart';
-import '../app/modules/store/redirect/success/store_page.dart';
+import '../app/modules/store/redirect/fail/store_fail_binding.dart';
+import '../app/modules/store/redirect/fail/store_fail_page.dart';
+import '../app/modules/store/redirect/success/store_success_binding.dart';
+import '../app/modules/store/redirect/success/store_success_page.dart';
 import '../app/modules/store/store_binding.dart';
 import '../app/modules/store/store_page.dart';
 import '../app/modules/you_info/you_info_binding.dart';
@@ -127,6 +130,11 @@ class AppPages {
         binding: StoreBinding()),
     GetPage(
         name: Routes.storeSuccess,
-        page: () => const StoreSuccessPage()),
+        page: () => const StoreSuccessPage(),
+        binding: StoreSuccessBinding()),
+    GetPage(
+        name: Routes.storeFail,
+        page: () => const StoreFailPage(),
+        binding: StoreFailBinding()),
   ];
 }

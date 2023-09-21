@@ -35,8 +35,8 @@ async function jsPromiseFunction(amount, orderId, orderName) {
       amount: amount, // 결제 금액 - 150
       orderId: orderId, // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.) - 'T05MlFPKGrlB2LySnGDKV'
       orderName: orderName, // 주문명 - '테스트 결제'
-      successUrl:'https://dodohan-6c8fd.web.app/store/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
-      failUrl: 'https://docs.tosspayments.com/guides/payment/test-fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
+      successUrl: 'https://dodohan-6c8fd.web.app/store/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
+      failUrl: 'https://dodohan-6c8fd.web.app/store/fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
     })
     // ------결제창을 띄울 수 없는 에러 처리 ------
     // 메서드 실행에 실패해서 reject 된 에러를 처리하는 블록입니다.

@@ -22,6 +22,6 @@ abstract class Routes {
   static const questions = '/questions';
   static const store = '/store';
   static const storeSuccess = '/store/success';
-  // static const storeFail = '/store/fail';
+  static const storeFail = '/store/fail';
 
 }

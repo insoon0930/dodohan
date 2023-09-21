@@ -51,4 +51,9 @@ class UserService {
   Future<void> updateDefaultCoin() async {
     return await _userRepository.updateDefaultCoin();
   }
+
+  //@Patch
+  Future<void> increaseCoin(String userId, int coin) async {
+    return await _userRepository.increaseCoin(userId, coin);
+  }
 }

@@ -14,7 +14,6 @@ class UserRepository extends ApiService {
 
   Future<User> create(User user) async {
     try {
-      // todo 이거로 츄라이 해보던가 , 일단 user final
       final doc = firestore.collection('users').doc();
       user.id = doc.id;
       await doc.set(user.toJson());
@@ -133,6 +132,18 @@ class UserRepository extends ApiService {
       for (final doc in snapshot.docs) {
         await doc.reference.update({'coin': 5});
       }
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> increaseCoin(String userId, int coin) async {
+    try {
+      final DocumentReference userDocRef = firestore.collection('users').doc(userId);
+      final DocumentSnapshot userDocSnapshot = await userDocRef.get();
+      final currentCoin = (userDocSnapshot.data() as Map<String, dynamic>)['coin'];
+      await userDocRef.update({'coin': currentCoin + coin});
       return;
     } catch (e) {
       rethrow;
