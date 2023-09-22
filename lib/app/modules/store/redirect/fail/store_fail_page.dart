@@ -29,7 +29,7 @@ class StoreFailPage extends GetView<StoreFailController> {
           // Text('${Get.arguments}'),
           // Text('${Get.arguments['paymentKey']}'),
         ],
-      ),
+      ).paddingSymmetric(horizontal: 16),
     );
   }
 }

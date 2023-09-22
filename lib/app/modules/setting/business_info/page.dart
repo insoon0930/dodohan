@@ -16,7 +16,7 @@ class BusinessInfoPage extends StatelessWidget {
       body: Column(
         children: [
           _listItem('상호', '(별이) Byul E'),
-          _listItem('주소', '부산광역시 동래구 충렬대로 487'),
+          _listItem('주소', '부산광역시 동래구 충렬대로 487, 112동 101호'),
           _listItem('사업자 등록번호', '524-28-01299'),
           _listItem('대표자명', '최인창'),
           _listItem('유선전화번호', '010-6619-2550'),
@@ -42,10 +42,10 @@ class BusinessInfoPage extends StatelessWidget {
                   const Spacer(),
                   Text(
                     text,
-                    style: ThemeFonts.medium.getTextStyle(color: ThemeColors.grayLightest),
+                    style: ThemeFonts.medium.getTextStyle(color: ThemeColors.grayDark),
                   ),
                   const Spacer(),
-                  const Divider(height: 0,),
+                  const Divider(height: 0, color: ThemeColors.grayLightest),
                 ],
               )),
           const SizedBox(width: 16),

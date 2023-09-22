@@ -26,13 +26,16 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
         if(!AuthService.to.isForFree || AuthService.to.isAdmin)
           GestureDetector(
             onTap: () => Get.toNamed(Routes.store),
-            child: Row(
-              children: [
-                SvgPicture.asset('assets/love.svg'),
-                const SizedBox(width: 6),
-                Text('${controller.user.coin}', style: ThemeFonts.semiBold.getTextStyle(size: 20))
-              ],
-            ).paddingOnly(right: 16),
+            child: Container(
+              color: Colors.transparent,
+              child: Row(
+                children: [
+                  SvgPicture.asset('assets/love.svg'),
+                  const SizedBox(width: 6),
+                  Text('${controller.user.coin}', style: ThemeFonts.semiBold.getTextStyle(size: 20))
+                ],
+              ).paddingOnly(right: 16),
+            ),
           )
         else
           const SettingIconButton().paddingOnly(right: 8),
