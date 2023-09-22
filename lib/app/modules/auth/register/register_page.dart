@@ -210,7 +210,7 @@ class RegisterPage extends GetView<RegisterController> {
           ).paddingOnly(right: 8),
           GestureDetector(
               onTap: () => Get.toNamed(Routes.termsOfUse),
-              child: Text('이용 약관',
+              child: Text('이용약관',
                   style: ThemeFonts.medium.getTextStyle(size: 13))),
           Text(
             " 및 ",

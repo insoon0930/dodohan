@@ -6,6 +6,7 @@ import 'package:stamp_now/core/utils/utility.dart';
 
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
+import '../../../routes/app_routes.dart';
 import '../../widgets/appbars/default_appbar.dart';
 import 'js_helper/js_helper_web.dart';
 
@@ -21,9 +22,10 @@ class StorePage extends StatelessWidget {
           Container(color: ThemeColors.mainLightest),
           Column(
             children: [
-              _purchaseItem(5, 5900),
+              _purchaseItem(coin: 3, price: 3900, promotion: 0),
+              _purchaseItem(coin: 5, price: 5900, promotion: 1),
               Stack(children: [
-                _purchaseItem(10, 10900),
+                _purchaseItem(coin: 10, price: 10900, promotion: 2),
                 Positioned(
                     right: 18,
                     top: 18,
@@ -33,7 +35,7 @@ class StorePage extends StatelessWidget {
                     ]))
               ]),
               Stack(children: [
-                _purchaseItem(20, 18900),
+                _purchaseItem(coin: 20, price: 18900, promotion: 4),
                 Positioned(
                     right: 18,
                     top: 18,
@@ -42,22 +44,15 @@ class StorePage extends StatelessWidget {
                       const Color(0xfff9a909)
                     ]))
               ]),
-              // TossPayments(
-              //   clientKey: 'test_ck_AQ92ymxN349YG91NZoAVajRKXvdk',
-              //   data: PaymentData(
-              //       paymentMethod: '카드',
-              //       orderId: 'tosspayments-202303210239',
-              //       orderName: 'toss t-shirt',
-              //       amount: 50000,
-              //       customerName: '김토스',
-              //       customerEmail: 'toss@toss-payments.co.kr'),
-              //   success: (Success success) {
-              //     Get.back(result: success);
-              //   },
-              //   fail: (Fail fail) {
-              //     Get.back(result: fail);
-              //   },
-              // ),
+              const SizedBox(height: 16),
+              GestureDetector(
+                  onTap: () => Get.toNamed(Routes.termsOfUse),
+                  child: const Text('이용약관',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ))),
             ],
           ),
         ],
@@ -65,7 +60,7 @@ class StorePage extends StatelessWidget {
     );
   }
 
-  Widget _purchaseItem(int coinNum, int price) {
+  Widget _purchaseItem({required int coin, required int price, required int promotion}) {
     String formattedPrice =
         NumberFormat.currency(locale: 'ko_KR', symbol: '₩').format(price);
     return GestureDetector(
@@ -74,22 +69,32 @@ class StorePage extends StatelessWidget {
         await jsHelper.callJSPromise(
             amount: price,
             orderId: '${DateTime.now().millisecond}_${Utility.randomString(8)}',
-            orderName: '하트 $coinNum개');
+            orderName: '하트 ${coin + promotion}개');
       },
       child: Card(
         color: Colors.white,
         margin: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4.0))),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
         elevation: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                SvgPicture.asset('assets/love.svg', color: Colors.redAccent)
-                    .paddingSymmetric(horizontal: 16),
-                Text('$coinNum', style: ThemeFonts.semiBold.getTextStyle()),
+                SvgPicture.asset('assets/love.svg', color: Colors.redAccent).paddingSymmetric(horizontal: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('${coin + promotion}개', style: ThemeFonts.semiBold.getTextStyle()),
+                    if(promotion != 0)
+                      Row(
+                        children: [
+                          Text('$coin', style: ThemeFonts.medium.getTextStyle(size: 11)),
+                          Text(' +$promotion 추가', style: ThemeFonts.medium.getTextStyle(size: 11, color: ThemeColors.blueLight)),
+                        ],
+                      ).paddingOnly(top: 4),
+                  ],
+                ),
               ],
             ),
             Text(formattedPrice, style: ThemeFonts.semiBold.getTextStyle())

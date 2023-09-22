@@ -17,11 +17,23 @@ abstract class Routes {
   static const termsOfUse = '/terms-of-use';
   static const privacy = '/privacy';
   static const setting = '/setting';
+  static const businessInfo = Paths.setting + Paths.businessInfo;
+  static const inquire = Paths.setting + Paths.inquire;
+  static const updates = Paths.setting + Paths.updates;
+  static const questions = Paths.setting + Paths.questions;
+  static const store = Paths.store;
+  static const storeSuccess = Paths.store + Paths.success;
+  static const storeFail = Paths.store + Paths.fail;
+}
+
+abstract class Paths {
+  static const setting = '/setting';
+  static const businessInfo = '/business-info';
   static const inquire = '/inquire';
   static const updates = '/updates';
   static const questions = '/questions';
-  static const store = '/store';
-  static const storeSuccess = '/store/success';
-  static const storeFail = '/store/fail';
 
+  static const store = '/store';
+  static const success = '/success';
+  static const fail = '/fail';
 }

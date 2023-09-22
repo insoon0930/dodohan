@@ -8,7 +8,7 @@ part of 'pg_bill.dart';
 
 PgBill _$PgBillFromJson(Map<String, dynamic> json) => PgBill(
       id: json['id'] as String? ?? '',
-      customer: json['customer'] as String? ?? '',
+      customer: json['customer'] as String,
       data: json['data'] as Map<String, dynamic>,
     )..createdAt = _$JsonConverterFromJson<Timestamp, DateTime>(
         json['createdAt'], const DateTimeConverter().fromJson);

@@ -12,7 +12,7 @@ part 'pg_bill.g.dart';
 class PgBill {
   String id;
   String customer;
-  Map data;
+  Map<String, dynamic> data;
   @DateTimeConverter()
   DateTime? createdAt;
 

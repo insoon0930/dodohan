@@ -32,14 +32,15 @@ class StoreSuccessPage extends GetView<StoreSuccessController> {
                       style: ThemeFonts.medium.getTextStyle()),
                 ],
               )),
+          const SizedBox(height: 30),
           ElevatedButton(
               style: BtStyle.standard(color: ThemeColors.blueLight),
               onPressed: () => controller.confirm(),
-              child: const Text('결제 승인하기'))
+              child: Text('결제 승인하기', style: ThemeFonts.medium.getTextStyle(color: Colors.white)))
           // Text('${Get.arguments}'),
           // Text('${Get.arguments['paymentKey']}'),
         ],
       ),
-    );
+    ).paddingAll(16);
   }
 }

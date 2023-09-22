@@ -11,9 +11,13 @@ class PgBillRepository extends ApiService {
 
   Future<void> create(PgBill pgBill) async {
     try {
+      print('pgBill: $pgBill');
       final doc = firestore.collection('pgBills').doc();
       pgBill.id = doc.id;
+      print('pgBill:1 $pgBill');
+      print('pgBill:2 ${pgBill.toJson()}');
       await doc.set(pgBill.toJson());
+      print('pgBill:3');
       return;
     } catch (e) {
       rethrow;

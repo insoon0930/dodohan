@@ -10,13 +10,13 @@ class TermsOfUsePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const DefaultAppBar('이용 약관'),
+      appBar: const DefaultAppBar('이용약관'),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             const Padding(
               padding: EdgeInsets.only(top : 12.0),
-              child: Text("이용 약관", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+              child: Text("이용약관", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
             ),
             Padding(
               padding: EdgeInsets.all(Get.width * 0.1),

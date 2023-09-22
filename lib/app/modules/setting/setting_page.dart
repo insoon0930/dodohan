@@ -27,6 +27,8 @@ class SettingPage extends StatelessWidget {
           const MyDivider(),
           SettingItem('자주하는 질문', onTap: () => Get.toNamed(Routes.questions)),
           const MyDivider(),
+          SettingItem('사업자 정보', onTap: () => Get.toNamed(Routes.businessInfo)),
+          const MyDivider(),
           SettingItem('이용약관', onTap: () => Get.toNamed(Routes.termsOfUse)),
           const MyDivider(),
           SettingItem('개인정보처리방침', onTap: () => Get.toNamed(Routes.privacy)),

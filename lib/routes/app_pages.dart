@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:stamp_now/app/modules/daily_card/daily_card_binding.dart';
+import 'package:stamp_now/app/modules/setting/business_info/page.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
 import '../app/modules/admin/application/application_binding.dart';
@@ -44,7 +45,6 @@ import '../app/modules/you_info/you_info_page.dart';
 import 'app_routes.dart';
 
 class AppPages {
-
   static final pages = [
     GetPage(
         name: Routes.splash,
@@ -106,35 +106,27 @@ class AppPages {
         name: Routes.dailyCard,
         page: () => const DailyCardPage(),
         binding: DailyCardBinding()),
-    GetPage(
-        name: Routes.termsOfUse,
-        page: () => const TermsOfUsePage()),
-    GetPage(
-        name: Routes.privacy,
-        page: () => const PrivacyPage()),
-    GetPage(
-        name: Routes.setting,
-        page: () => const SettingPage()),
-    GetPage(
-        name: Routes.inquire,
-        page: () => const InquirePage()),
-    GetPage(
-        name: Routes.updates,
-        page: () => const UpdatesPage()),
-    GetPage(
-        name: Routes.questions,
-        page: () => const QuestionsPage()),
+    GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
+    GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
+    GetPage(name: Routes.setting, page: () => const SettingPage(), children: [
+      GetPage(name: Paths.businessInfo, page: () => const BusinessInfoPage()),
+      GetPage(name: Paths.inquire, page: () => const InquirePage()),
+      GetPage(name: Paths.updates, page: () => const UpdatesPage()),
+      GetPage(name: Paths.questions, page: () => const QuestionsPage()),
+    ]),
     GetPage(
         name: Routes.store,
         page: () => const StorePage(),
-        binding: StoreBinding()),
-    GetPage(
-        name: Routes.storeSuccess,
-        page: () => const StoreSuccessPage(),
-        binding: StoreSuccessBinding()),
-    GetPage(
-        name: Routes.storeFail,
-        page: () => const StoreFailPage(),
-        binding: StoreFailBinding()),
+        binding: StoreBinding(),
+        children: [
+          GetPage(
+              name: Paths.success,
+              page: () => const StoreSuccessPage(),
+              binding: StoreSuccessBinding()),
+          GetPage(
+              name: Paths.fail,
+              page: () => const StoreFailPage(),
+              binding: StoreFailBinding()),
+        ]),
   ];
 }
