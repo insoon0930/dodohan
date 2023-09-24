@@ -32,5 +32,4 @@ final List<S2Choice<String>> majorHanYang = [
   S2Choice<String>(value: '간호대학', title: '간호대학', group: '간호대학'),
   S2Choice<String>(value: '산업융합학부', title: '산업융합학부', group: '산업융합학부'),
   S2Choice<String>(value: '기타', title: '기타', group: '기타'),
-  S2Choice<String>(value: '한양여대', title: '한양여대', group: '한양여대'),
 ];

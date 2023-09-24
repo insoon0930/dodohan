@@ -6,6 +6,6 @@ class WaitingBinding extends Bindings {
 
   @override
   void dependencies() {
-    Get.put(WaitingController());
+    Get.put(WaitingController(), permanent: true);
   }
 }

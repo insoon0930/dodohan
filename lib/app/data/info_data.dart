@@ -3,16 +3,18 @@ import 'package:stamp_now/app/data/majors/chung_ang.dart';
 import 'package:stamp_now/app/data/model/univ_info.dart';
 
 import 'majors/han_yang.dart';
+import 'majors/yon_sei.dart';
 
 class InfoData {
-
-  static List<String> univ = ['선택', '한양대', '중앙대(서울)', '중앙대(안성)'];
 
   static Map<String, UnivInfo> univInfo = {
     '한양대': UnivInfo(appTitleTail: '한양', major: majorHanYang, isForFree: true),
     '중앙대(서울)': UnivInfo(appTitleTail: '중앙', major: majorChungAng, isForFree: true),
     '중앙대(안성)': UnivInfo(appTitleTail: '중앙', major: majorChungAng, isForFree: true),
+    '연세대(신촌)': UnivInfo(appTitleTail: '연세', major: majorYonSei, isForFree: true),
   };
+
+  static List<String> univ = ['선택', ...InfoData.univInfo.keys.toList()];
 
   static List<S2Choice<String>> height = List.generate(
       50, (index) => S2Choice<String>(value: '${140 + index}', title: '${140 + index}'));

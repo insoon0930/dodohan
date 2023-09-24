@@ -13,6 +13,7 @@ import '../../../data/model/user.dart';
 import '../../../data/provider/storage_service.dart';
 import '../../../data/service/identity_service/service.dart';
 import '../../../widgets/dialogs/error_dialog.dart';
+import '../../splash/splash_controller.dart';
 
 class RegisterController extends GetxController {
   final StorageService storageService = Get.find();
@@ -28,6 +29,14 @@ class RegisterController extends GetxController {
   bool get ready => termsAgree.value && univ.value != '선택' && isMan.value != null && profileImage.value != null && studentIdImage.value != null;
   User get user => AuthService.to.user.value;
   int get selectedUnivIndex => InfoData.univ.indexOf(univ.value);
+
+  @override
+  void onInit() {
+    if (user.id == '') {
+      Get.put(SplashController());
+    }
+    super.onInit();
+  }
 
   @override
   void onReady() {

@@ -186,7 +186,7 @@ class RegisterPage extends GetView<RegisterController> {
                 deletedCallback: () => controller.studentIdImage.value = null),
           ),
           const SizedBox(height: 8),
-          Text('* 학교와 사진이 보여야 합니다\n '.tr,
+          Text('* 학교와 사진이 보여야 합니다\n* (모바일 학생증 권고)'.tr,
               style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.grayDark)),
         ],
       ),

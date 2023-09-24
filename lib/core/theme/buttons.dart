@@ -16,8 +16,8 @@ class BtStyle {
 
   static ButtonStyle get confirm => TextButton.styleFrom(
     backgroundColor: Colors.white,
-    foregroundColor: Colors.transparent,
-    surfaceTintColor: Colors.transparent,
+    // foregroundColor: Colors.transparent,
+    // surfaceTintColor: Colors.transparent,
     elevation: 0,
     textStyle: ThemeFonts.medium.getTextStyle(),
     shape: RoundedRectangleBorder(
