@@ -24,7 +24,10 @@ class WaitingController extends BaseController {
   @override
   Future<void> onInit() async {
     print('RegisterController onInit');
-    Get.put(SplashController());
+    if (AuthService.to.user.value.id == '') {
+      Get.put(SplashController());
+      await 1.delay();
+    }
     super.onInit();
   }
 

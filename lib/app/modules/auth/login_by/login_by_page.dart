@@ -47,7 +47,7 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
               const Spacer(),
               Text('두근두근캠퍼스', style: ThemeFonts.bold.getTextStyle(size: 24, color: ThemeColors.main)),
               const SizedBox(height: 8),
-              Text('한양 · 중앙 · 연세 · 건국 · 한국외국어', style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main)),
+              Text('한양 · 중앙 · 연세 · 건국 · 외대', style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main)),
               const Spacer(),
               Obx(() => Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -14,7 +14,7 @@ class WaitingPage extends GetView<WaitingController> {
 
   @override
   Widget build(BuildContext context) {
-    print('WaitingPage build!');
+    print('WaitingPage build!?');
     return Scaffold(
       body: Center(
         child: Column(
