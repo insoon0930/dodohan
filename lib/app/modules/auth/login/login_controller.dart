@@ -2,10 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/data/model/user.dart' as UserModel;
+import 'package:stamp_now/app/widgets/dialogs/error_dialog.dart';
 import '../../../../core/services/auth_service.dart';
 import '../../../data/service/user_service/service.dart';
 
 class LoginController extends GetxController {
+  final UserService _userService = UserService();
+  
   final Rxn<String> phone = Rxn<String>();
   final RxBool isCodeSent = false.obs;
   final Rxn<String> code = Rxn<String>();
@@ -50,6 +53,14 @@ class LoginController extends GetxController {
       Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
       UserCredential userCredential = await verifySMS();
       String resUid = userCredential.user!.uid;
+
+      //탈퇴회원 재가입 제한
+      final UserModel.User? user = await _userService.findOneByPhoneNum(
+          '+82${phone.value!.replaceAll('-', '').substring(1)}');
+      if((user != null) && (DateTime.now().difference(user.deletedAt!) > const Duration(days: 30))) {
+        Get.dialog(ErrorDialog(text: '재가입이 30일간 제한되었습니다\n(남은 기간: ${30 - DateTime.now().difference(user.deletedAt!).inDays})'));
+        return;
+      }
 
       //회원가입
       if (userCredential.additionalUserInfo!.isNewUser == true) {

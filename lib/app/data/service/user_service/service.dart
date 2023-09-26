@@ -32,6 +32,11 @@ class UserService {
   }
 
   //@Get
+  Future<User?> findOneByPhoneNum(String phoneNum) async {
+    return await _userRepository.findOneByPhoneNum(phoneNum);
+  }
+
+  //@Get
   Future<List<User>> findWomen() async {
     return await _userRepository.findWomen();
   }

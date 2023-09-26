@@ -46,6 +46,24 @@ class UserRepository extends ApiService {
     }
   }
 
+  Future<User?> findOneByPhoneNum(String phoneNum) async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('users')
+          .where('phoneNum', isEqualTo: phoneNum)
+          .where('deletedAt', isNull: false)
+          .orderBy('createdAt', descending: true)
+          .get();
+      if (querySnapshot.docs.isEmpty) {
+        return null;
+      }
+      return User.fromJson(querySnapshot.docs.last.data() as Map<String, dynamic>);
+    } catch (e) {
+      print('error: $e');
+      return null;
+    }
+  }
+
   Future<List<User>> findWomen() async {
     try {
       QuerySnapshot querySnapshot = await firestore

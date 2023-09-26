@@ -38,7 +38,8 @@ class SettingPage extends StatelessWidget {
             SettingItem('회원탈퇴',
                 onTap: () => Get.dialog(ActionDialog(
                     title: '회원 탈퇴',
-                    text: '이후 재가입에 제한이\n있을 수 있습니다',
+                    text: '30일간 재가입이 제한됩니다',
+                    // text: '이후 재가입에 제한이\n있을 수 있습니다',
                     buttonText: '탈퇴하기',
                     confirmCallback: () => AuthService.to.withdraw()))),
           if (AuthService.to.isAdmin)
