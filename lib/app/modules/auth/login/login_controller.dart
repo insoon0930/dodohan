@@ -55,10 +55,10 @@ class LoginController extends GetxController {
       String resUid = userCredential.user!.uid;
 
       //탈퇴회원 재가입 제한
-      final UserModel.User? user = await _userService.findOneByPhoneNum(
+      final UserModel.User? deletedUser = await _userService.findOneByPhoneNum(
           '+82${phone.value!.replaceAll('-', '').substring(1)}');
-      if((user != null) && (DateTime.now().difference(user.deletedAt!) > const Duration(days: 30))) {
-        Get.dialog(ErrorDialog(text: '재가입이 30일간 제한되었습니다\n(남은 기간: ${30 - DateTime.now().difference(user.deletedAt!).inDays})'));
+      if((deletedUser != null) && (DateTime.now().difference(deletedUser.deletedAt!) > const Duration(days: 30))) {
+        Get.dialog(ErrorDialog(text: '재가입이 30일간 제한되었습니다\n(남은 기간: ${30 - DateTime.now().difference(deletedUser.deletedAt!).inDays})'));
         return;
       }
 
