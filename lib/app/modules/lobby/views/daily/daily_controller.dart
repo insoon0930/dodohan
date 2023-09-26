@@ -15,6 +15,9 @@ class DailyController extends GetxController {
   final RxList<DailyCard> todayCards = <DailyCard>[].obs;
 
   User get user => AuthService.to.user.value;
+  bool get isFirstChoice => todayCards.every((card) =>
+      (card.meStatus == CardStatus.checked) ||
+      (card.meStatus == CardStatus.unChecked));
 
   @override
   Future<void> onInit() async {
@@ -30,9 +33,9 @@ class DailyController extends GetxController {
   }
 
   void tapCard(int index, DailyCard dailyCard) async {
-    if(todayCards[index].meStatus == MatchStatus.unChecked) {
-      _dailyCardService.updateMeStatus(dailyCard.id, MatchStatus.checked);
-      todayCards[index].meStatus = MatchStatus.checked;
+    if(todayCards[index].meStatus == CardStatus.unChecked) {
+      _dailyCardService.updateMeStatus(dailyCard.id, CardStatus.checked);
+      todayCards[index].meStatus = CardStatus.checked;
       todayCards.refresh();
     } else {
       Get.toNamed(Routes.dailyCard, arguments: {'index': index, 'dailyCard': dailyCard});

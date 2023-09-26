@@ -28,19 +28,24 @@ class DailyCardService extends ApiService  {
     return await _dailyCardRepository.findToday(user);
   }
 
-  // //@Get
-  // Future<List<DailyCard>> findWaiting() async {
-  //   return await _dailyCardRepository.findWaiting();
-  // }
-  //
+  //@Get
+  Future<List<DailyCard>> findSent(String user) async {
+    return await _dailyCardRepository.findSent(user);
+  }
+
+  //@Get
+  Future<List<DailyCard>> findReceived(String user) async {
+    return await _dailyCardRepository.findReceived(user);
+  }
+
 
   //@Patch
-  Future<void> updateMeStatus(String dailyCardId, MatchStatus status) async {
+  Future<void> updateMeStatus(String dailyCardId, CardStatus status) async {
     return await _dailyCardRepository.updateMeStatus(dailyCardId, status);
   }
 
   //@Patch
-  Future<void> updateYouStatus(String dailyCardId, MatchStatus status) async {
+  Future<void> updateYouStatus(String dailyCardId, CardStatus status) async {
     return await _dailyCardRepository.updateYouStatus(dailyCardId, status);
   }
 

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/daily_card/daily_card_binding.dart';
 import 'package:stamp_now/app/modules/setting/business_info/page.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
@@ -23,11 +22,16 @@ import '../app/modules/auth/register/register_binding.dart';
 import '../app/modules/auth/register/register_page.dart';
 import '../app/modules/auth/waiting/waiting_binding.dart';
 import '../app/modules/auth/waiting/waiting_page.dart';
-import '../app/modules/daily_card/daily_card_page.dart';
 import '../app/modules/lobby/lobby_binding.dart';
 import '../app/modules/lobby/lobby_page.dart';
-import '../app/modules/me_info/me_info_binding.dart';
-import '../app/modules/me_info/me_info_page.dart';
+import '../app/modules/lobby/views/daily/current_card/current_card_binding.dart';
+import '../app/modules/lobby/views/daily/current_card/current_card_page.dart';
+import '../app/modules/lobby/views/daily/daily_card/daily_card_binding.dart';
+import '../app/modules/lobby/views/daily/daily_card/daily_card_page.dart';
+import '../app/modules/lobby/views/home/me_info/me_info_binding.dart';
+import '../app/modules/lobby/views/home/me_info/me_info_page.dart';
+import '../app/modules/lobby/views/home/you_info/you_info_binding.dart';
+import '../app/modules/lobby/views/home/you_info/you_info_page.dart';
 import '../app/modules/setting/inquire/page.dart';
 import '../app/modules/setting/questions/page.dart';
 import '../app/modules/setting/setting_page.dart';
@@ -40,8 +44,6 @@ import '../app/modules/store/redirect/success/store_success_binding.dart';
 import '../app/modules/store/redirect/success/store_success_page.dart';
 import '../app/modules/store/store_binding.dart';
 import '../app/modules/store/store_page.dart';
-import '../app/modules/you_info/you_info_binding.dart';
-import '../app/modules/you_info/you_info_page.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -73,27 +75,29 @@ class AppPages {
     GetPage(
         name: Routes.admin,
         page: () => const AdminPage(),
-        binding: AdminBinding()),
-    GetPage(
-        name: Routes.test,
-        page: () => const TestPage(),
-        binding: TestBinding()),
-    GetPage(
-        name: Routes.profileImageRequest,
-        page: () => const ProfileImageRequestPage(),
-        binding: ProfileImageRequestBinding()),
-    GetPage(
-        name: Routes.womanUser,
-        page: () => const WomanUserPage(),
-        binding: WomanUserBinding()),
-    GetPage(
-        name: Routes.match,
-        page: () => const MatchPage(),
-        binding: MatchBinding()),
-    GetPage(
-        name: Routes.application,
-        page: () => const ApplicationPage(),
-        binding: ApplicationBinding()),
+        binding: AdminBinding(),
+        children: [
+          GetPage(
+              name: Paths.test,
+              page: () => const TestPage(),
+              binding: TestBinding()),
+          GetPage(
+              name: Paths.profileImageRequest,
+              page: () => const ProfileImageRequestPage(),
+              binding: ProfileImageRequestBinding()),
+          GetPage(
+              name: Paths.womanUser,
+              page: () => const WomanUserPage(),
+              binding: WomanUserBinding()),
+          GetPage(
+              name: Paths.match,
+              page: () => const MatchPage(),
+              binding: MatchBinding()),
+          GetPage(
+              name: Paths.application,
+              page: () => const ApplicationPage(),
+              binding: ApplicationBinding()),
+        ]),
     GetPage(
         name: Routes.meInfo,
         page: () => const MeInfoPage(),
@@ -106,6 +110,10 @@ class AppPages {
         name: Routes.dailyCard,
         page: () => const DailyCardPage(),
         binding: DailyCardBinding()),
+    GetPage(
+        name: Routes.currentCard,
+        page: () => const CurrentCardPage(),
+        binding: CurrentCardBinding()),
     GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
     GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
     GetPage(name: Routes.setting, page: () => const SettingPage(), children: [

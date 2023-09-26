@@ -1,13 +1,13 @@
 import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/theme/buttons.dart';
-import '../../../core/theme/fonts.dart';
-import '../../../core/theme/paddings.dart';
-import '../../data/info_data.dart';
-import '../../widgets/appbars/default_appbar.dart';
-import '../../widgets/multi_selector.dart';
-import '../../widgets/single_selector.dart';
+import '../../../../../../core/theme/buttons.dart';
+import '../../../../../../core/theme/fonts.dart';
+import '../../../../../../core/theme/paddings.dart';
+import '../../../../../data/info_data.dart';
+import '../../../../../widgets/appbars/default_appbar.dart';
+import '../../../../../widgets/multi_selector.dart';
+import '../../../../../widgets/single_selector.dart';
 import 'you_info_controller.dart';
 
 class YouInfoPage extends GetView<YouInfoController> {

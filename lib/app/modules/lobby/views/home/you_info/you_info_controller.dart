@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import '../../../core/services/auth_service.dart';
-import '../../data/model/user.dart';
-import '../../data/model/you_info.dart';
-import '../../data/service/you_info_service/service.dart';
+import '../../../../../../core/services/auth_service.dart';
+import '../../../../../data/model/user.dart';
+import '../../../../../data/model/you_info.dart';
+import '../../../../../data/service/you_info_service/service.dart';
 
 class YouInfoController extends GetxController {
   final YouInfoService _youInfoService = YouInfoService();

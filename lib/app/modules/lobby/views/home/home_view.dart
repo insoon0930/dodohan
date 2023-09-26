@@ -120,7 +120,7 @@ class HomeView extends GetView<HomeController> {
           ElevatedButton(
             style: BtStyle.standard(),
             onPressed: () => controller.getInfos(),
-            child: Text('이번 회차 신청하기',
+            child: Text('이번 회차 신청',
                 style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
           ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
           const SizedBox(height: 16),

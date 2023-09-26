@@ -8,6 +8,7 @@ import 'package:stamp_now/core/theme/buttons.dart';
 
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
+import '../../../../../routes/app_routes.dart';
 
 class DailyView extends GetView<DailyController> {
   const DailyView({Key? key}) : super(key: key);
@@ -34,16 +35,11 @@ class DailyView extends GetView<DailyController> {
                 const SizedBox(height: 32),
                 ElevatedButton(
                     style: BtStyle.standard(color: ThemeColors.mainLight),
-                    onPressed: () {  },
-                    child: Text('보낸 신청',
+                    onPressed: () => Get.toNamed(Routes.currentCard),
+                    child: Text('카드 현황',
                         style:
                         ThemeFonts.medium.getTextStyle(color: Colors.white))),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                    style: BtStyle.standard(color: ThemeColors.mainLight),
-                    onPressed: () {},
-                    child: Text('받은 신청',
-                        style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
               ],
             ),
           ),

@@ -14,10 +14,10 @@ DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
           json['meInfo'], const MeInfoConverter().fromJson),
       youProfileImage: json['youProfileImage'] as String? ?? '',
       meProfileImage: json['meProfileImage'] as String? ?? '',
-      youStatus: $enumDecodeNullable(_$MatchStatusEnumMap, json['youStatus']) ??
-          MatchStatus.unChecked,
-      meStatus: $enumDecodeNullable(_$MatchStatusEnumMap, json['meStatus']) ??
-          MatchStatus.unChecked,
+      youStatus: $enumDecodeNullable(_$CardStatusEnumMap, json['youStatus']) ??
+          CardStatus.unChecked,
+      meStatus: $enumDecodeNullable(_$CardStatusEnumMap, json['meStatus']) ??
+          CardStatus.unChecked,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const DateTimeConverter().fromJson),
     );
@@ -30,8 +30,8 @@ Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
           instance.meInfo, const MeInfoConverter().toJson),
       'youProfileImage': instance.youProfileImage,
       'meProfileImage': instance.meProfileImage,
-      'youStatus': _$MatchStatusEnumMap[instance.youStatus]!,
-      'meStatus': _$MatchStatusEnumMap[instance.meStatus]!,
+      'youStatus': _$CardStatusEnumMap[instance.youStatus]!,
+      'meStatus': _$CardStatusEnumMap[instance.meStatus]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
     };
@@ -42,11 +42,13 @@ Value? _$JsonConverterFromJson<Json, Value>(
 ) =>
     json == null ? null : fromJson(json as Json);
 
-const _$MatchStatusEnumMap = {
-  MatchStatus.unChecked: 'unChecked',
-  MatchStatus.checked: 'checked',
-  MatchStatus.confirmed: 'confirmed',
-  MatchStatus.rejected: 'rejected',
+const _$CardStatusEnumMap = {
+  CardStatus.unChecked: 'unChecked',
+  CardStatus.checked: 'checked',
+  CardStatus.confirmed1st: 'confirmed1st',
+  CardStatus.rejected1st: 'rejected1st',
+  CardStatus.confirmed2nd: 'confirmed2nd',
+  CardStatus.rejected2nd: 'rejected2nd',
 };
 
 Json? _$JsonConverterToJson<Json, Value>(

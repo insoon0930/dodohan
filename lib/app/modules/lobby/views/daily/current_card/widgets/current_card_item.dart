@@ -4,21 +4,19 @@ import 'package:get/get.dart';
 import 'package:stamp_now/app/data/enums.dart';
 import 'package:stamp_now/app/data/model/daily_card.dart';
 
-import '../../../../../../core/theme/colors.dart';
-import '../../../../../widgets/image/image_view_box.dart';
-import '../daily_controller.dart';
+import '../../../../../../../core/theme/colors.dart';
+import '../../../../../../widgets/image/image_view_box.dart';
 
-class CardItem extends GetView<DailyController> {
-  int index;
+class CurrentCardItem extends StatelessWidget {
+  final DailyCard dailyCard;
 
-  CardItem({required this.index, Key? key}) : super(key: key);
+  const CurrentCardItem({super.key, required this.dailyCard});
 
-  DailyCard get dailyCard => controller.todayCards[index];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => controller.tapCard(index, dailyCard),
+      // onTap: () => controller.tapCard(index, dailyCard),
       child: Card(
         margin: const EdgeInsets.all(4.0),
         shape: const RoundedRectangleBorder(
@@ -28,16 +26,16 @@ class CardItem extends GetView<DailyController> {
           () => Stack(
             children: [
               Container(
-                width: (Get.width - 64) / 2,
-                height: (Get.width - 64) / 2 * 1.4,
+                // width: (Get.width - 64) / 2,
+                // height: (Get.width - 64) / 2 * 1.4,
                 padding: const EdgeInsets.all(4.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ImageViewBox(
                         url: dailyCard.youProfileImage,
-                        width: (Get.width - 64) / 2 - 8,
-                        height: (Get.width - 64) / 2 - 8,
+                        // width: (Get.width - 64) / 2 - 8,
+                        // height: (Get.width - 64) / 2 - 8,
                         isBlurred: true),
                     const Spacer(),
                     Row(
@@ -59,7 +57,7 @@ class CardItem extends GetView<DailyController> {
                   ],
                 ),
               ),
-              if (controller.todayCards[index].meStatus == CardStatus.unChecked)
+              if (dailyCard.meStatus == CardStatus.unChecked)
                 _cardCover(),
             ],
           ),

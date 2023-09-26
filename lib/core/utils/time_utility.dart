@@ -13,8 +13,8 @@ abstract class TimeUtility {
     return DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   }
 
-  static String todayWithSlash() {
-    return DateFormat('yyyy-MM-dd').format(DateTime.now());
+  static String todayWithSlash({int subtractDay = 0}) {
+    return DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: subtractDay)));
   }
 
   static String formatDuration(Duration duration) {

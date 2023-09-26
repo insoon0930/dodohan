@@ -14,7 +14,7 @@ class DailyCard {
   @MeInfoConverter()
   MeInfo? youInfo, meInfo;
   String youProfileImage, meProfileImage;
-  MatchStatus youStatus, meStatus;
+  CardStatus youStatus, meStatus;
   @DateTimeConverter()
   DateTime? createdAt;
 
@@ -23,8 +23,8 @@ class DailyCard {
       this.meInfo,
       this.youProfileImage = '',
       this.meProfileImage = '',
-      this.youStatus = MatchStatus.unChecked,
-      this.meStatus = MatchStatus.unChecked,
+      this.youStatus = CardStatus.unChecked,
+      this.meStatus = CardStatus.unChecked,
       this.createdAt}) {
     createdAt ??= DateTime.now();
   }

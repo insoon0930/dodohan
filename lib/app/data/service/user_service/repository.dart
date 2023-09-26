@@ -52,15 +52,16 @@ class UserRepository extends ApiService {
           .collection('users')
           .where('phoneNum', isEqualTo: phoneNum)
           .where('deletedAt', isNull: false)
-          .orderBy('createdAt', descending: true)
+          .orderBy('deletedAt', descending: true)
           .get();
+      print('querySnapshot.docs: ${querySnapshot.docs}');
       if (querySnapshot.docs.isEmpty) {
         return null;
       }
       return User.fromJson(querySnapshot.docs.last.data() as Map<String, dynamic>);
     } catch (e) {
       print('error: $e');
-      return null;
+      rethrow;
     }
   }
 
