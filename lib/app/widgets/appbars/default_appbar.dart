@@ -7,7 +7,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
   final bool hasLeading;
-  const DefaultAppBar(this.title, {super.key, this.hasLeading = true});
+  final List<Widget>? actions;
+  const DefaultAppBar(this.title, {super.key, this.hasLeading = true, this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: hasLeading ? GestureDetector(
           onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios_new_rounded, size: 19,)) : null,
       title: Text(title, style: ThemeFonts.semiBold.getTextStyle(size: 18)),
-      // actions: [Text('완료', style: ThemeFonts.medium.getTextStyle(size: 17)).paddingOnly(right: 16)],
+      actions: actions,
       elevation: 0,
     );
   }

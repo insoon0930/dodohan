@@ -30,6 +30,7 @@ abstract class Routes {
   static const store = Paths.store;
   static const storeSuccess = Paths.store + Paths.success;
   static const storeFail = Paths.store + Paths.fail;
+  static const storeHistory = Paths.store + Paths.history;
 }
 
 abstract class Paths {
@@ -49,4 +50,5 @@ abstract class Paths {
   static const store = '/store';
   static const success = '/success';
   static const fail = '/fail';
+  static const history = '/history';
 }

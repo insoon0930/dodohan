@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:stamp_now/app/modules/setting/business_info/page.dart';
+import 'package:stamp_now/app/modules/store/history/history_page.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
 import '../app/modules/admin/application/application_binding.dart';
@@ -38,6 +39,7 @@ import '../app/modules/setting/setting_page.dart';
 import '../app/modules/setting/updates/page.dart';
 import '../app/modules/splash/splash_binding.dart';
 import '../app/modules/splash/splash_page.dart';
+import '../app/modules/store/history/history_binding.dart';
 import '../app/modules/store/redirect/fail/store_fail_binding.dart';
 import '../app/modules/store/redirect/fail/store_fail_page.dart';
 import '../app/modules/store/redirect/success/store_success_binding.dart';
@@ -135,6 +137,10 @@ class AppPages {
               name: Paths.fail,
               page: () => const StoreFailPage(),
               binding: StoreFailBinding()),
+          GetPage(
+              name: Paths.history,
+              page: () => const StoreHistoryPage(),
+              binding: StoreHistoryBinding()),
         ]),
   ];
 }

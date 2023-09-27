@@ -16,7 +16,7 @@ class StorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar('스토어'),
+      appBar: DefaultAppBar('스토어', actions: [const Text('이용 내역').paddingOnly(right:16)]),
       body: Stack(
         children: [
           Container(color: ThemeColors.mainLightest),
