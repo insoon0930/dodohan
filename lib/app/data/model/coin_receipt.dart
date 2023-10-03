@@ -30,6 +30,6 @@ class CoinReceipt {
 
   Map<String, dynamic> toJson() => _$CoinReceiptToJson(this);
 
-  bool get charge => (type == CoinReceiptType.chargeCoin) || (type == CoinReceiptType.rejectReward) || (type == CoinReceiptType.consoleReward);
-  bool get consume => (type == CoinReceiptType.dailyCard) || (type == CoinReceiptType.weeklyMatch);
+  bool get isCharge => (type == CoinReceiptType.chargeCoin) || (type == CoinReceiptType.rejectReward) || (type == CoinReceiptType.consoleReward);
+  bool get isConsume => (type == CoinReceiptType.dailyCard) || (type == CoinReceiptType.weeklyMatch);
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,7 @@ import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 import '../../../routes/app_routes.dart';
 import '../../widgets/appbars/default_appbar.dart';
-import 'js_helper/js_helper_web.dart';
+// import 'js_helper/js_helper_web.dart';
 
 class StorePage extends StatelessWidget {
   const StorePage({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class StorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar('스토어', actions: [const Text('이용 내역').paddingOnly(right:16)]),
+      appBar: const DefaultAppBar('스토어'),
+      // appBar: DefaultAppBar('스토어', actions: [const Text('이용 내역').paddingOnly(right:16)]),
       body: Stack(
         children: [
           Container(color: ThemeColors.mainLightest),
@@ -65,11 +67,13 @@ class StorePage extends StatelessWidget {
         NumberFormat.currency(locale: 'ko_KR', symbol: '₩').format(price);
     return GestureDetector(
       onTap: () async {
-        final JSHelper jsHelper = JSHelper();
-        await jsHelper.callJSPromise(
-            amount: price,
-            orderId: '${DateTime.now().millisecond}_${Utility.randomString(8)}',
-            orderName: '하트 ${coin + promotion}개');
+        if(kIsWeb) {
+          // final JSHelper jsHelper = JSHelper();
+          // await jsHelper.callJSPromise(
+          //     amount: price,
+          //     orderId: '${DateTime.now().millisecond}_${Utility.randomString(8)}',
+          //     orderName: '하트 ${coin + promotion}개');
+        }
       },
       child: Card(
         color: Colors.white,

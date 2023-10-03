@@ -27,4 +27,6 @@ abstract class TimeUtility {
   }
   static String _twoDigits(int n) => n.toString().padLeft(2, '0');
 
+  static String formatDateSimple(DateTime date) => DateFormat('yyyy-MM-dd').format(date);
+
 }

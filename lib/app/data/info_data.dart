@@ -5,6 +5,7 @@ import 'package:stamp_now/app/data/model/univ_info.dart';
 import 'majors/han_yang.dart';
 import 'majors/hufs.dart';
 import 'majors/kon_kuk.dart';
+import 'majors/seoul.dart';
 import 'majors/yon_sei.dart';
 
 class InfoData {
@@ -14,8 +15,9 @@ class InfoData {
     '중앙대(서울)': UnivInfo(appTitleTail: '중앙', major: majorChungAng, isForFree: true),
     '중앙대(안성)': UnivInfo(appTitleTail: '중앙', major: majorChungAng, isForFree: true),
     '연세대(신촌)': UnivInfo(appTitleTail: '연세', major: majorYonSei, isForFree: true),
-    '건국대(서울)': UnivInfo(appTitleTail: '건국', major: majorKonKuk, isForFree: true),
-    '한국외대(서울)': UnivInfo(appTitleTail: '외대', major: majorHUFS, isForFree: true),
+    // '건국대(서울)': UnivInfo(appTitleTail: '건국', major: majorKonKuk, isForFree: true),
+    // '한국외대(서울)': UnivInfo(appTitleTail: '외대', major: majorHUFS, isForFree: true),
+    '서울시립대': UnivInfo(appTitleTail: '시립', major: majorSeoul, isForFree: true),
   };
 
   static List<String> univ = ['선택', ...InfoData.univInfo.keys.toList()];

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stamp_now/app/data/model/user.dart' as UserModel;
@@ -81,7 +82,18 @@ class LoginController extends GetxController {
   Future<void> sendSMS() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     String phoneNum = '+82${phone.value!.replaceAll('-', '').substring(1)}';
-    confirmationResult = await auth.signInWithPhoneNumber(phoneNum);
+    // if(kIsWeb) {
+      confirmationResult = await auth.signInWithPhoneNumber(phoneNum);
+    // } else {
+    //   await FirebaseAuth.instance.verifyPhoneNumber(
+    //     phoneNumber: '+44 7123 123 456',
+    //     verificationCompleted: (PhoneAuthCredential credential) {},
+    //     verificationFailed: (FirebaseAuthException e) {},
+    //     codeSent: (String verificationId, int? resendToken) {},
+    //     codeAutoRetrievalTimeout: (String verificationId) {},
+    //   );
+    // }
+
     AuthService.to.user.value.phoneNum = phoneNum;
   }
 

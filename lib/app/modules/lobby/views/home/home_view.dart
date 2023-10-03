@@ -14,13 +14,15 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _upperBox(),
-        const Divider(thickness: 10, color: ThemeColors.grayLightest)
-            .paddingSymmetric(vertical: 16),
-        _lowerBox(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _upperBox(),
+          const Divider(thickness: 10, color: ThemeColors.grayLightest)
+              .paddingSymmetric(vertical: 16),
+          _lowerBox(),
+        ],
+      ),
     );
   }
 
