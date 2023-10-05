@@ -21,3 +21,4 @@ firebase hosting:channel:deploy TEST
 firebase hosting:channel:delete TEST
 flutter pub run build_runner build --delete-conflicting-outputs
 flutter run -d chrome --web-renderer html
+open /Applications/Android\ Studio.app

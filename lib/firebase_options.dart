@@ -68,7 +68,7 @@ class DefaultFirebaseOptions {
     projectId: 'dodohan-6c8fd',
     storageBucket: 'dodohan-6c8fd.appspot.com',
     iosClientId: '730253427437-2h6sjapt44cpj1i65hnestjlqfc0gvq2.apps.googleusercontent.com',
-    iosBundleId: 'com.stampNow',
+    iosBundleId: 'com.dodohan',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
