@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:get/get.dart';
@@ -94,7 +95,7 @@ class PhoneSMSWidget extends StatelessWidget {
         Obx(
           () => ElevatedButton(
             style: BtStyle.standard(),
-            onPressed: () => controller.onTapSMSButton(),
+            onPressed: () => kIsWeb ? controller.onTapSMSButtonInWeb() : controller.onTapSMSButtonInMobile(),
             child: Center(
               child: controller.isCodeSent.value
                   ? Text('인증 요청',
