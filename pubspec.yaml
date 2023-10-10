@@ -1,4 +1,4 @@
-name: stamp_now
+name: dodohan
 description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
@@ -68,6 +68,10 @@ dependencies:
 
   firebase_analytics: ^10.4.5
   js: ^0.6.4
+  expandable: ^5.0.1
+
+  cached_network_image: ^3.3.0
+
 
 dev_dependencies:
   flutter_test:

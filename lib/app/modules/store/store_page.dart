@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:stamp_now/core/utils/utility.dart';
+import 'package:dodohan/core/utils/utility.dart';
 
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';

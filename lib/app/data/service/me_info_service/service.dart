@@ -1,4 +1,4 @@
-import 'package:stamp_now/app/data/service/me_info_service/repository.dart';
+import 'package:dodohan/app/data/service/me_info_service/repository.dart';
 import '../../enums.dart';
 import '../../model/me_info.dart';
 

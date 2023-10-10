@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/data/model/image_update_request.dart';
+import 'package:dodohan/app/data/model/image_update_request.dart';
 
 import '../../../../core/services/auth_service.dart';
 import '../../../../routes/app_routes.dart';

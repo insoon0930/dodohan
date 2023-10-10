@@ -1,4 +1,4 @@
-import 'package:stamp_now/app/data/service/match_service/repository.dart';
+import 'package:dodohan/app/data/service/match_service/repository.dart';
 import '../../dto/admin_match.dart';
 import '../../enums.dart';
 import '../../model/application.dart';

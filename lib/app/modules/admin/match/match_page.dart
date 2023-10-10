@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/data/dto/admin_match.dart';
-import 'package:stamp_now/app/widgets/appbars/default_appbar.dart';
+import 'package:dodohan/app/data/dto/admin_match.dart';
+import 'package:dodohan/app/widgets/appbars/default_appbar.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../data/enums.dart';

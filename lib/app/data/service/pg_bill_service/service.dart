@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:stamp_now/app/data/service/daily_card_service/repository.dart';
-import 'package:stamp_now/app/data/service/identity_service/repository.dart';
-import 'package:stamp_now/app/data/service/pg_bill_service/repository.dart';
+import 'package:dodohan/app/data/service/daily_card_service/repository.dart';
+import 'package:dodohan/app/data/service/identity_service/repository.dart';
+import 'package:dodohan/app/data/service/pg_bill_service/repository.dart';
 import '../../enums.dart';
 import '../../model/daily_card.dart';
 import '../../model/identity.dart';

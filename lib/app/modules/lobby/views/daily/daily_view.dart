@@ -2,9 +2,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/lobby/views/daily/daily_controller.dart';
-import 'package:stamp_now/app/modules/lobby/views/daily/widgets/card_item.dart';
-import 'package:stamp_now/core/theme/buttons.dart';
+import 'package:dodohan/app/modules/lobby/views/daily/daily_controller.dart';
+import 'package:dodohan/app/modules/lobby/views/daily/widgets/card_item.dart';
+import 'package:dodohan/core/theme/buttons.dart';
 
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';

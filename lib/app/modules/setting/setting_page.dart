@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/core/theme/colors.dart';
-import 'package:stamp_now/core/theme/paddings.dart';
+import 'package:dodohan/core/theme/colors.dart';
+import 'package:dodohan/core/theme/paddings.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../routes/app_routes.dart';
 import '../../data/model/user.dart';

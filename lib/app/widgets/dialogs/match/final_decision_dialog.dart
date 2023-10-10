@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/data/service/match_service/service.dart';
-import 'package:stamp_now/app/widgets/dialogs/match/match_success_dialog.dart';
+import 'package:dodohan/app/data/service/match_service/service.dart';
+import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
 import '../../../../core/services/auth_service.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
@@ -30,6 +30,7 @@ class FinalDecisionDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('profileImage $profileImage');
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(

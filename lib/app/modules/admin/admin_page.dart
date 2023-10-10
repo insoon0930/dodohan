@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/widgets/appbars/default_appbar.dart';
+import 'package:dodohan/app/widgets/appbars/default_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/colors.dart';

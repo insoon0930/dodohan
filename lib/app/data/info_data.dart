@@ -1,6 +1,6 @@
 import 'package:awesome_select/awesome_select.dart';
-import 'package:stamp_now/app/data/majors/chung_ang.dart';
-import 'package:stamp_now/app/data/model/univ_info.dart';
+import 'package:dodohan/app/data/majors/chung_ang.dart';
+import 'package:dodohan/app/data/model/univ_info.dart';
 
 import 'majors/han_yang.dart';
 import 'majors/hufs.dart';

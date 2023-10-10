@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:stamp_now/app/modules/store/history/history_controller.dart';
-import 'package:stamp_now/core/utils/time_utility.dart';
-import 'package:stamp_now/core/utils/utility.dart';
+import 'package:dodohan/app/modules/store/history/history_controller.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
+import 'package:dodohan/core/utils/utility.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';

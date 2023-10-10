@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:stamp_now/app/data/model/identity.dart';
-import 'package:stamp_now/app/data/service/image_update_request_service/repository.dart';
+import 'package:dodohan/app/data/model/identity.dart';
+import 'package:dodohan/app/data/service/image_update_request_service/repository.dart';
 import '../../enums.dart';
 import '../../model/image_update_request.dart';
 import '../../provider/api_service.dart';

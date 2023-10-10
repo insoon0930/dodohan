@@ -1,5 +1,5 @@
-import 'package:stamp_now/app/data/dto/admin_application.dart';
-import 'package:stamp_now/app/data/service/application_service/repository.dart';
+import 'package:dodohan/app/data/dto/admin_application.dart';
+import 'package:dodohan/app/data/service/application_service/repository.dart';
 import '../../enums.dart';
 import '../../model/application.dart';
 import '../../model/me_info.dart';

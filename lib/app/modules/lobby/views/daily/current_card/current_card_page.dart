@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/lobby/views/daily/current_card/widgets/current_card_item.dart';
+import 'package:dodohan/app/modules/lobby/views/daily/current_card/widgets/current_card_item.dart';
 import '../../../../../../core/theme/colors.dart';
 import '../../../../../../core/theme/fonts.dart';
 import '../../../../../data/model/daily_card.dart';

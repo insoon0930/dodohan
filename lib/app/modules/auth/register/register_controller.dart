@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/data/model/identity.dart';
-import 'package:stamp_now/core/services/auth_service.dart';
+import 'package:dodohan/app/data/model/identity.dart';
+import 'package:dodohan/core/services/auth_service.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';

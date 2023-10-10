@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/core/theme/fonts.dart';
+import 'package:dodohan/core/theme/fonts.dart';
 import '../../../../core/theme/paddings.dart';
 import 'login_controller.dart';
 import 'widgets/phone_sms_widget.dart';

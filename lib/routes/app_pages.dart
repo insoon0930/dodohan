@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/setting/business_info/page.dart';
-import 'package:stamp_now/app/modules/store/history/history_page.dart';
+import 'package:dodohan/app/modules/setting/business_info/page.dart';
+import 'package:dodohan/app/modules/store/history/history_page.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
 import '../app/modules/admin/application/application_binding.dart';

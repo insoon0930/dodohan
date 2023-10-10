@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/lobby/lobby_controller.dart';
+import 'package:dodohan/app/modules/lobby/lobby_controller.dart';
 
 import '../../core/theme/colors.dart';
 import '../../core/theme/fonts.dart';

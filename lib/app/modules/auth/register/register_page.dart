@@ -1,9 +1,10 @@
 import 'package:camera/camera.dart';
+import 'package:dodohan/app/widgets/appbars/default_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/core/theme/buttons.dart';
-import 'package:stamp_now/core/theme/fonts.dart';
+import 'package:dodohan/core/theme/buttons.dart';
+import 'package:dodohan/core/theme/fonts.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/paddings.dart';
 import '../../../../routes/app_routes.dart';
@@ -18,24 +19,39 @@ class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16.0),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('정보를 입력해주세요', style: ThemeFonts.bold.getTextStyle(size: 24))),
-              Text('학교'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17)).paddingOnly(top: 32, bottom: 16),
-              Obx(() => _univ(context)),
-              Text('성별'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17)).paddingOnly(top: 32, bottom: 16),
-              Obx(() => _genderCheck()),
-              _imageRow(),
-              const SizedBox(height: 16),
-              _termsAgree().paddingOnly(bottom: 8),
-              Obx(
-                () => ElevatedButton(
+      body: SafeArea(
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //개발시
+                      // GestureDetector(
+                      //     onTap: () => Get.offAllNamed(Routes.loginBy), child: const Icon(Icons.arrow_back_ios_new_rounded, size: 19)),
+                      // const SizedBox(height: 16),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('정보를 입력해주세요', style: ThemeFonts.bold.getTextStyle(size: 24))),
+                    ],
+                  ),
+                  Text('학교'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17)).paddingOnly(top: 32, bottom: 16),
+                  Obx(() => _univ(context)),
+                  Text('성별'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17)).paddingOnly(top: 32, bottom: 16),
+                  Obx(() => _genderCheck()),
+                  _imageRow(),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+            _termsAgree().paddingOnly(bottom: 8),
+            const Spacer(),
+            Obx(
+                    () => ElevatedButton(
                   style: BtStyle.onOff(controller.ready),
                   onPressed: controller.ready ? () => controller.register() : null,
                   child: Center(
@@ -44,11 +60,10 @@ class RegisterPage extends GetView<RegisterController> {
                         ThemeFonts.medium.getTextStyle(color: Colors.white)),
                   ),
                 )
-              ),
-              const SizedBox(height: 16),
-            ],
-          ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
-        ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
       ),
     );
   }

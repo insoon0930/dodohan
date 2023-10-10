@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:stamp_now/app/data/service/coin_receipt_service/repository.dart';
-import 'package:stamp_now/app/data/service/daily_card_service/repository.dart';
-import 'package:stamp_now/app/data/service/identity_service/repository.dart';
-import 'package:stamp_now/app/data/service/pg_bill_service/repository.dart';
+import 'package:dodohan/app/data/service/coin_receipt_service/repository.dart';
+import 'package:dodohan/app/data/service/daily_card_service/repository.dart';
+import 'package:dodohan/app/data/service/identity_service/repository.dart';
+import 'package:dodohan/app/data/service/pg_bill_service/repository.dart';
 import '../../enums.dart';
 import '../../model/coin_receipt.dart';
 import '../../model/daily_card.dart';

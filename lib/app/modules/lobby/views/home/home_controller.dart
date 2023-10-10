@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stamp_now/app/data/model/image_update_request.dart';
-import 'package:stamp_now/app/modules/splash/splash_controller.dart';
-import 'package:stamp_now/app/widgets/dialogs/application_dialog.dart';
-import 'package:stamp_now/app/widgets/dialogs/match/final_decision_dialog.dart';
-import 'package:stamp_now/app/widgets/dialogs/match/match_success_dialog.dart';
-import 'package:stamp_now/core/utils/time_utility.dart';
+import 'package:dodohan/app/data/model/image_update_request.dart';
+import 'package:dodohan/app/modules/splash/splash_controller.dart';
+import 'package:dodohan/app/widgets/dialogs/application_dialog.dart';
+import 'package:dodohan/app/widgets/dialogs/match/final_decision_dialog.dart';
+import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/utils/utility.dart';
@@ -137,12 +137,12 @@ class HomeController extends GetxController {
   Future<void> getMatchResult() async {
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     //validation 1. 확인 가능 시간
-    final int currentWeekday = DateTime.now().weekday;
-    if(currentWeekday != 5) { //금요일
-      Get.back();
-      Get.dialog(const ErrorDialog(text: '금요일 외에는 확인이 불가능합니다'));
-      return;
-    }
+    // final int currentWeekday = DateTime.now().weekday;
+    // if(currentWeekday != 5) { //금요일
+    //   Get.back();
+    //   Get.dialog(const ErrorDialog(text: '금요일 외에는 확인이 불가능합니다'));
+    //   return;
+    // }
 
     //man: 6BqgdRdFUoZOPclxIzbD
     //woman: WdIHlWaTUAitbexvmW5E

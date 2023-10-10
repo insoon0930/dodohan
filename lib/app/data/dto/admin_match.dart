@@ -1,5 +1,5 @@
-import 'package:stamp_now/app/data/model/application.dart';
-import 'package:stamp_now/app/data/model/match.dart';
+import 'package:dodohan/app/data/model/application.dart';
+import 'package:dodohan/app/data/model/match.dart';
 
 class AdminMatch {
   final Application? nextWeekManApplication, nextWeekWomanApplication;

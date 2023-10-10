@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/splash/splash_controller.dart';
+import 'package:dodohan/app/modules/splash/splash_controller.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../data/enums.dart';

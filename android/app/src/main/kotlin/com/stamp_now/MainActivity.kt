@@ -1,4 +1,4 @@
-package com.stamp_now
+package com.dodohan
 
 import io.flutter.embedding.android.FlutterActivity
 

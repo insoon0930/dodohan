@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/store/redirect/fail/store_fail_controller.dart';
+import 'package:dodohan/app/modules/store/redirect/fail/store_fail_controller.dart';
 
 import '../../../../../core/theme/buttons.dart';
 import '../../../../../core/theme/colors.dart';

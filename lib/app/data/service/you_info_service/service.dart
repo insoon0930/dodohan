@@ -1,4 +1,4 @@
-import 'package:stamp_now/app/data/service/you_info_service/repository.dart';
+import 'package:dodohan/app/data/service/you_info_service/repository.dart';
 import '../../model/you_info.dart';
 
 class YouInfoService {

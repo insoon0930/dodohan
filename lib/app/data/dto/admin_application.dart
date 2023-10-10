@@ -1,4 +1,4 @@
-import 'package:stamp_now/app/data/model/application.dart';
+import 'package:dodohan/app/data/model/application.dart';
 
 class AdminApplication {
   final Application application;

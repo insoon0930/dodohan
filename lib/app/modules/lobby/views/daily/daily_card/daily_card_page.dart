@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/widgets/image/image_view_box.dart';
+import 'package:dodohan/app/widgets/image/image_view_box.dart';
 import '../../../../../../core/theme/buttons.dart';
 import '../../../../../../core/theme/fonts.dart';
 import '../../../../../data/enums.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/data/enums.dart';
-import 'package:stamp_now/app/data/model/daily_card.dart';
+import 'package:dodohan/app/data/enums.dart';
+import 'package:dodohan/app/data/model/daily_card.dart';
 
 import '../../../../../../core/theme/colors.dart';
 import '../../../../../widgets/image/image_view_box.dart';

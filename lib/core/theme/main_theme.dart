@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stamp_now/core/theme/colors.dart';
+import 'package:dodohan/core/theme/colors.dart';
 
 class MainTheme {
   static final ThemeData light = ThemeData.light().copyWith(

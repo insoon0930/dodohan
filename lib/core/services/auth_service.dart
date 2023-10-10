@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stamp_now/app/data/info_data.dart';
-import 'package:stamp_now/app/data/provider/api_service.dart';
+import 'package:dodohan/app/data/info_data.dart';
+import 'package:dodohan/app/data/provider/api_service.dart';
 import '../../app/data/enums.dart';
 import '../../app/data/model/user.dart';
 import '../../app/data/service/user_service/service.dart';
@@ -18,7 +18,9 @@ class AuthService extends ApiService {
   Rx<User> user = User().obs;
 
   bool get isForFree => InfoData.univInfo[user.value.univ]?.isForFree ?? true;
-  bool get isAdmin => user.value.phoneNum =='+821012341234' || user.value.phoneNum =='+821066192550';
+  //todo 다시 열기
+  bool get isAdmin => user.value.phoneNum =='+821066192550';
+  // bool get isAdmin => user.value.phoneNum =='+821012341234' || user.value.phoneNum =='+821066192550';
 
   Future<User> updateUser(User newUser) async {
     user.value = newUser;

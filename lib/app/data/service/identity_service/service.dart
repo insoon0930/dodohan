@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:stamp_now/app/data/service/identity_service/repository.dart';
+import 'package:dodohan/app/data/service/identity_service/repository.dart';
 import '../../enums.dart';
 import '../../model/identity.dart';
 import '../../model/me_info.dart';

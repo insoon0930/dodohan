@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:stamp_now/app/data/enums.dart';
+import 'package:dodohan/app/data/enums.dart';
 
 import '../../../data/provider/api_service.dart';
 import '../../model/image_update_request.dart';

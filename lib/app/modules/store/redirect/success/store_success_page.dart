@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stamp_now/app/modules/store/redirect/success/store_success_controller.dart';
-import 'package:stamp_now/app/widgets/card_container.dart';
+import 'package:dodohan/app/modules/store/redirect/success/store_success_controller.dart';
+import 'package:dodohan/app/widgets/card_container.dart';
 
 import '../../../../../core/theme/buttons.dart';
 import '../../../../../core/theme/colors.dart';
