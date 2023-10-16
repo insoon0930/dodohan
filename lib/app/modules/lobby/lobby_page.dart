@@ -28,8 +28,8 @@ class LobbyPage extends GetView<LobbyController> {
               ]),
         ),
         // body: Obx(() => tabPages[controller.selectedTabIndex.value]),
-        // todo 다시 열기
-        bottomNavigationBar: const MyBottomNavigationBar(),
+        //todo 개발시, 다시 열기
+        // bottomNavigationBar: const MyBottomNavigationBar(),
     );
   }
 }

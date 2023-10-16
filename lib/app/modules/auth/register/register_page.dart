@@ -30,10 +30,10 @@ class RegisterPage extends GetView<RegisterController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //개발시
-                      // GestureDetector(
-                      //     onTap: () => Get.offAllNamed(Routes.loginBy), child: const Icon(Icons.arrow_back_ios_new_rounded, size: 19)),
-                      // const SizedBox(height: 16),
+                      //todo 개발시
+                      GestureDetector(
+                          onTap: () => Get.offAllNamed(Routes.loginBy), child: const Icon(Icons.arrow_back_ios_new_rounded, size: 19)),
+                      const SizedBox(height: 16),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('정보를 입력해주세요', style: ThemeFonts.bold.getTextStyle(size: 24))),
