@@ -21,7 +21,7 @@ class LobbyPage extends GetView<LobbyController> {
               index: controller.selectedTabIndex.value,
               children: [
                 const HomeView(),
-                if(!AuthService.to.isForFree || AuthService.to.isAdmin)
+                if(AuthService.to.isAdmin)
                   const DailyView()
                 else
                   const DailyUpdatingView(),

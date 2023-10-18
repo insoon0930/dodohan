@@ -1,5 +1,6 @@
 import 'package:awesome_select/awesome_select.dart';
 import 'package:dodohan/app/data/majors/chung_ang.dart';
+import 'package:dodohan/app/data/majors/default_major.dart';
 import 'package:dodohan/app/data/model/univ_info.dart';
 
 import 'majors/han_yang.dart';
@@ -11,13 +12,20 @@ import 'majors/yon_sei.dart';
 class InfoData {
 
   static Map<String, UnivInfo> univInfo = {
-    '한양대': UnivInfo(appTitleTail: '한양', major: majorHanYang, isForFree: true),
-    '중앙대(서울)': UnivInfo(appTitleTail: '중앙', major: majorChungAng, isForFree: true),
-    '중앙대(안성)': UnivInfo(appTitleTail: '중앙', major: majorChungAng, isForFree: true),
-    '연세대(신촌)': UnivInfo(appTitleTail: '연세', major: majorYonSei, isForFree: true),
-    // '건국대(서울)': UnivInfo(appTitleTail: '건국', major: majorKonKuk, isForFree: true),
-    // '한국외대(서울)': UnivInfo(appTitleTail: '외대', major: majorHUFS, isForFree: true),
-    '서울시립대': UnivInfo(appTitleTail: '시립', major: majorSeoul, isForFree: true),
+    '한양대': UnivInfo(appTitleTail: '한양', major: majorHanYang),
+    '중앙대(서울)': UnivInfo(appTitleTail: '중앙', major: majorChungAng),
+    '중앙대(안성)': UnivInfo(appTitleTail: '중앙', major: majorChungAng),
+    '연세대(신촌)': UnivInfo(appTitleTail: '연세', major: majorYonSei),
+    '건국대(서울)': UnivInfo(appTitleTail: '건국', major: majorKonKuk),
+    '한국외대(서울)': UnivInfo(appTitleTail: '외대', major: majorHUFS),
+    '서울시립대': UnivInfo(appTitleTail: '시립', major: majorSeoul),
+
+    '가톨릭대(성신)': UnivInfo(appTitleTail: '가대', major: defaultMajor),
+    '가톨릭대(성의)': UnivInfo(appTitleTail: '가대', major: defaultMajor),
+    '강서대': UnivInfo(appTitleTail: '강대', major: defaultMajor),
+    '': UnivInfo(appTitleTail: '', major: defaultMajor),
+    '': UnivInfo(appTitleTail: '', major: defaultMajor),
+
   };
 
   static List<String> univ = ['선택', ...InfoData.univInfo.keys.toList()];
