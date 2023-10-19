@@ -23,3 +23,4 @@ flutter pub run build_runner build --delete-conflicting-outputs
 flutter run -d chrome --web-renderer html
 open /Applications/Android\ Studio.app
 //todo 개발시
+xcode 로 실행 & flutter attach

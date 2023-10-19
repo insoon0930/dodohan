@@ -391,7 +391,7 @@ class InfoData {
     '한국폴리텍(강서)': UnivInfo(appTitleTail: '폴리텍', major: defaultMajor),
   };
 
-  static List<String> univ = ['선택', ...InfoData.univInfo.keys.toList()];
+  static List<String> univ = [...InfoData.univInfo.keys.toList()];
 
   static List<S2Choice<String>> height = List.generate(
       50, (index) => S2Choice<String>(value: '${140 + index}', title: '${140 + index}'));
