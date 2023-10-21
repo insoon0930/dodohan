@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../data/provider/api_service.dart';
-import '../../enums.dart';
 import '../../model/me_info.dart';
 class MeInfoRepository extends ApiService {
 

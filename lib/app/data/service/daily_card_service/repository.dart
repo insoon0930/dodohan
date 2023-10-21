@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dodohan/app/data/enums.dart';
-import 'package:dodohan/core/services/auth_service.dart';
 import 'package:dodohan/core/utils/time_utility.dart';
 
-import '../../../../core/services/auth_service.dart';
 import '../../../data/provider/api_service.dart';
-import '../../../modules/lobby/views/daily/widgets/card_item.dart';
 import '../../model/daily_card.dart';
 
 class DailyCardRepository extends ApiService {

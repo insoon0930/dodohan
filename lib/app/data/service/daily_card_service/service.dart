@@ -1,20 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dodohan/app/data/service/daily_card_service/repository.dart';
-import 'package:dodohan/app/data/service/identity_service/repository.dart';
 import '../../enums.dart';
 import '../../model/daily_card.dart';
-import '../../model/identity.dart';
-import '../../model/me_info.dart';
-import '../../model/you_info.dart';
 import '../../provider/api_service.dart';
-import '../me_info_service/repository.dart';
 import '../user_service/repository.dart';
 import '../you_info_service/repository.dart';
 
 class DailyCardService extends ApiService  {
   final DailyCardRepository _dailyCardRepository = DailyCardRepository();
   final UserRepository _userRepository = UserRepository();
-  final MeInfoRepository _meInfoRepository = MeInfoRepository();
   final YouInfoRepository _youInfoRepository = YouInfoRepository();
 
   DailyCardService._privateConstructor();

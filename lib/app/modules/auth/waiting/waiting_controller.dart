@@ -1,21 +1,12 @@
-import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dodohan/app/data/model/identity.dart';
 import 'package:dodohan/core/services/auth_service.dart';
 
 import '../../../../core/base_controller.dart';
-import '../../../../core/theme/colors.dart';
-import '../../../../core/theme/fonts.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../data/enums.dart';
-import '../../../data/info_data.dart';
 import '../../../data/model/user.dart';
-import '../../../data/provider/storage_service.dart';
-import '../../../data/service/identity_service/service.dart';
 import '../../../data/service/user_service/service.dart';
-import '../../../widgets/dialogs/error_dialog.dart';
 import '../../splash/splash_controller.dart';
 
 class WaitingController extends BaseController {

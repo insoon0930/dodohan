@@ -1,9 +1,6 @@
-import 'package:dodohan/app/data/model/me_info.dart';
 import 'package:dodohan/app/data/service/user_service/repository.dart';
-import '../../enums.dart';
 import '../../model/user.dart';
 import '../application_service/repository.dart';
-import '../me_info_service/repository.dart';
 
 class UserService {
   final UserRepository _userRepository = UserRepository();

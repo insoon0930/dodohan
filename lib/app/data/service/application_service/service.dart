@@ -1,13 +1,10 @@
 import 'package:dodohan/app/data/dto/admin_application.dart';
 import 'package:dodohan/app/data/service/application_service/repository.dart';
-import '../../enums.dart';
 import '../../model/application.dart';
 import '../../model/me_info.dart';
 import '../../model/user.dart';
 import '../../model/you_info.dart';
-import '../me_info_service/repository.dart';
 import '../user_service/repository.dart';
-import '../you_info_service/repository.dart';
 
 class ApplicationService {
   final ApplicationRepository _applicationRepository = ApplicationRepository();

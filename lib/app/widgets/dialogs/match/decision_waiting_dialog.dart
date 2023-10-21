@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:dodohan/app/data/service/match_service/service.dart';
-import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
-import '../../../../core/services/auth_service.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
-import '../../../../core/utils/utility.dart';
 import '../../../data/enums.dart';
-import '../../../data/model/user.dart';
 import '../../image/image_view_box.dart';
-import '../../../data/model/match.dart';
 
 class DecisionWaitingDialog extends StatelessWidget {
   final String profileImage;

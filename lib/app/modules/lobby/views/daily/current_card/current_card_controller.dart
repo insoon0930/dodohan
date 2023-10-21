@@ -1,11 +1,7 @@
 import 'package:get/get.dart';
-import 'package:dodohan/app/modules/lobby/views/daily/daily_controller.dart';
-import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import '../../../../../../core/base_controller.dart';
 import '../../../../../../core/services/auth_service.dart';
-import '../../../../../data/enums.dart';
 import '../../../../../data/model/daily_card.dart';
-import '../../../../../data/model/me_info.dart';
 import '../../../../../data/model/user.dart';
 import '../../../../../data/service/daily_card_service/service.dart';
 

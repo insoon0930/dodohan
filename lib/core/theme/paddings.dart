@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class ThemePaddings {
   static const double mainPadding = 16.0;

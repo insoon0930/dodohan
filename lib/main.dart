@@ -7,6 +7,7 @@ import 'package:dodohan/routes/app_pages.dart';
 import 'package:dodohan/routes/app_routes.dart';
 import 'app/data/provider/api_service.dart';
 import 'app/data/service/user_service/service.dart';
+import 'app/modules/store/store_controller.dart';
 import 'core/services/auth_service.dart';
 import 'core/theme/main_theme.dart';
 import 'firebase_options.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         Get.put(ApiService(), permanent: true);
         Get.put(AuthService(UserService()), permanent: true);
         Get.put(StorageService(), permanent: true);
+        Get.put(StoreService(), permanent: true);
       }),
       theme: MainTheme.light,
       // darkTheme: MainTheme.dark,

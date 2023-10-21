@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:dodohan/app/data/model/you_info.dart';
 import '../converter/date_time_converter.dart';
-import '../converter/me_info_converter.dart';
-import '../enums.dart';
-import 'me_info.dart';
 
 part 'pg_bill.g.dart';
 

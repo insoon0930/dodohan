@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../widgets/appbars/default_appbar.dart';
-import '../../../widgets/my_divider.dart';
 
 class BusinessInfoPage extends StatelessWidget {
   const BusinessInfoPage({Key? key}) : super(key: key);
