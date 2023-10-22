@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:730253427437:android:7e7f2ff928fd25ea1d42e4",
+        "mobilesdk_app_id": "1:730253427437:android:4ea78dc9c5d8f0da1d42e4",
         "android_client_info": {
           "package_name": "com.dodohan"
         }
@@ -34,7 +34,7 @@
               "client_id": "730253427437-2h6sjapt44cpj1i65hnestjlqfc0gvq2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.dodohan"
+                "bundle_id": "com.stampNow"
               }
             }
           ]

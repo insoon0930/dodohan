@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -55,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDsk1e_j8H_oxQdfQnroGX3mgf9mPc4IEo',
-    appId: '1:730253427437:android:7e7f2ff928fd25ea1d42e4',
+    appId: '1:730253427437:android:4ea78dc9c5d8f0da1d42e4',
     messagingSenderId: '730253427437',
     projectId: 'dodohan-6c8fd',
     storageBucket: 'dodohan-6c8fd.appspot.com',
@@ -63,17 +66,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCMqNGypATPiiG8Iqor3-N3KINabjHIL48',
-    appId: '1:730253427437:ios:e0613b6cfe9ec8c11d42e4',
-    messagingSenderId: '730253427437',
-    projectId: 'dodohan-6c8fd',
-    storageBucket: 'dodohan-6c8fd.appspot.com',
-    iosClientId: '730253427437-2h6sjapt44cpj1i65hnestjlqfc0gvq2.apps.googleusercontent.com',
-    iosBundleId: 'com.dodohan',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCMqNGypATPiiG8Iqor3-N3KINabjHIL48',
-    appId: '1:730253427437:ios:3c7c24a388e494da1d42e4',
+    appId: '1:730253427437:ios:9bff0ad02b31b3331d42e4',
     messagingSenderId: '730253427437',
     projectId: 'dodohan-6c8fd',
     storageBucket: 'dodohan-6c8fd.appspot.com',
