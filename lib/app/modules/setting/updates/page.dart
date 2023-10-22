@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/theme/colors.dart';
 import '../../../widgets/appbars/default_appbar.dart';
 import '../../../widgets/expandableBox.dart';
 

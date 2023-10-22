@@ -152,7 +152,6 @@ class HomeController extends GetxController {
       Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
       return;
     }
-    print('match: ${match.toJson()}');
     String phoneNum;
     String profileImage;
     if(user.isMan!) {

@@ -30,7 +30,7 @@ class MatchSuccessDialog extends StatelessWidget {
               const SizedBox(height: 25),
               Text('🎉 매칭 성공! 🎉', style: ThemeFonts.semiBold.getTextStyle(size: 16)),
               const SizedBox(height: 25),
-              ImageViewBox(url: profileImage, width: 120, height: 120),
+              ImageViewBox(url: profileImage, width: 160, height: 160),
               const SizedBox(height: 16),
               Text(Utility.formatPhoneNum(phoneNum), style: ThemeFonts.medium.getTextStyle(size: 24)),
               ElevatedButton(

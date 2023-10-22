@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/widgets/appbars/default_appbar.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
-import '../../../core/theme/paddings.dart';
 import '../../../routes/app_routes.dart';
-import '../../data/enums.dart';
 import '../../data/model/identity.dart';
 import '../../widgets/image/image_view_box.dart';
 import 'admin_controller.dart';

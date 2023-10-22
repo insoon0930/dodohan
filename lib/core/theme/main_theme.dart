@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dodohan/core/theme/colors.dart';
+import 'package:flutter/services.dart';
 
 class MainTheme {
   static final ThemeData light = ThemeData.light().copyWith(
@@ -7,8 +8,7 @@ class MainTheme {
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        titleTextStyle: TextStyle(
-            fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black, height: 1),
+        titleTextStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black, height: 1),
         iconTheme: IconThemeData(color: Colors.black)),
     // todo
     // buttonTheme: const ButtonThemeData(

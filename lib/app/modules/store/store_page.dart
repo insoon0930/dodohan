@@ -46,15 +46,15 @@ class StorePage extends StatelessWidget {
                       const Color(0xfff9a909)
                     ]))
               ]),
-              const SizedBox(height: 16),
-              GestureDetector(
-                  onTap: () => Get.toNamed(Routes.termsOfUse),
-                  child: const Text('이용약관',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                      ))),
+              // const SizedBox(height: 16),
+              // GestureDetector(
+              //     onTap: () => Get.toNamed(Routes.termsOfUse),
+              //     child: const Text('이용약관',
+              //         style: TextStyle(
+              //           fontSize: 11,
+              //           color: Colors.blue,
+              //           decoration: TextDecoration.underline,
+              //         ))),
             ],
           ),
         ],
@@ -67,6 +67,7 @@ class StorePage extends StatelessWidget {
         NumberFormat.currency(locale: 'ko_KR', symbol: '₩').format(price);
     return GestureDetector(
       onTap: () async {
+        //pg 도입하려고 짜뒀는데 정책상 도입 어려울 듯해서 일단 기록만 해둠
         if(kIsWeb) {
           // final JSHelper jsHelper = JSHelper();
           // await jsHelper.callJSPromise(
@@ -74,6 +75,8 @@ class StorePage extends StatelessWidget {
           //     orderId: '${DateTime.now().millisecond}_${Utility.randomString(8)}',
           //     orderName: '하트 ${coin + promotion}개');
         }
+
+
       },
       child: Card(
         color: Colors.white,

@@ -1,5 +1,3 @@
-import 'package:awesome_select/awesome_select.dart';
-
 import 'model/me_info.dart';
 import 'model/you_info.dart';
 

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:dodohan/app/data/enums.dart';
 
 import '../../../data/provider/api_service.dart';

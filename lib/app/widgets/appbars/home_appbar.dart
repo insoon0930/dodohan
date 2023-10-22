@@ -23,7 +23,7 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: ThemeFonts.bold.getTextStyle(size: 22)),
       elevation: 0,
       actions: [
-        if(!AuthService.to.isForFree || AuthService.to.isAdmin)
+        if(AuthService.to.isAdmin)
           GestureDetector(
             onTap: () => Get.toNamed(Routes.store),
             child: Container(

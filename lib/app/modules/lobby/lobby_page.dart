@@ -5,7 +5,6 @@ import 'package:dodohan/app/modules/lobby/views/daily/widgets/updating_view.dart
 import 'package:dodohan/app/modules/lobby/views/home/home_view.dart';
 import 'package:dodohan/core/services/auth_service.dart';
 import '../../widgets/appbars/home_appbar.dart';
-import '../../widgets/my_bottom_navigation_bar.dart';
 import 'lobby_controller.dart';
 import 'views/daily/daily_view.dart';
 
@@ -21,7 +20,7 @@ class LobbyPage extends GetView<LobbyController> {
               index: controller.selectedTabIndex.value,
               children: [
                 const HomeView(),
-                if(!AuthService.to.isForFree || AuthService.to.isAdmin)
+                if(AuthService.to.isAdmin)
                   const DailyView()
                 else
                   const DailyUpdatingView(),

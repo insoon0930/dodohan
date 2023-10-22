@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:dodohan/app/data/dto/admin_match.dart';
 import 'package:dodohan/app/widgets/appbars/default_appbar.dart';
 import '../../../../core/theme/colors.dart';
-import '../../../../core/theme/fonts.dart';
 import '../../../data/enums.dart';
 import '../../../widgets/image/image_view_box.dart';
 import 'match_controller.dart';
-import '../../../data/model/match.dart';
 
 class MatchPage extends GetView<MatchController> {
   const MatchPage({super.key});

@@ -10,7 +10,6 @@ import '../../data/model/user.dart';
 import '../../data/model/you_info.dart';
 import '../../data/service/application_service/service.dart';
 import '../../data/service/identity_service/service.dart';
-import '../../data/service/user_service/service.dart';
 import '../../data/service/you_info_service/service.dart';
 
 class AdminController extends GetxController {

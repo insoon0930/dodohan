@@ -1,13 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dodohan/app/data/model/identity.dart';
 import 'package:dodohan/app/data/service/image_update_request_service/repository.dart';
 import '../../enums.dart';
 import '../../model/image_update_request.dart';
 import '../../provider/api_service.dart';
-import '../identity_service/repository.dart';
-import '../me_info_service/repository.dart';
 import '../user_service/repository.dart';
-import '../you_info_service/repository.dart';
 
 class ImageUpdateRequestService extends ApiService  {
   final ImageUpdateRequestRepository _imageUpdateRequestRepository = ImageUpdateRequestRepository();

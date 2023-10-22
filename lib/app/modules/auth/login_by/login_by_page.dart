@@ -1,6 +1,5 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:animated_digit/animated_digit.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -46,8 +45,8 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
             children: [
               const Spacer(),
               Text('두근두근캠퍼스', style: ThemeFonts.bold.getTextStyle(size: 24, color: ThemeColors.main)),
-              const SizedBox(height: 8),
-              Text('한양 · 중앙 · 연세 · 시립', style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main)),
+              // const SizedBox(height: 8),
+              // Text('한양 · 중앙 · 연세 · 시립', style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main)),
               // Text('한양 · 중앙 · 연세 · 건국 · 외대 · 시립', style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main)),
               const Spacer(),
               Obx(() => Row(

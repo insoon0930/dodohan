@@ -4,7 +4,6 @@ import 'package:dodohan/app/data/model/image_update_request.dart';
 
 import '../../../../core/services/auth_service.dart';
 import '../../../../routes/app_routes.dart';
-import '../../../data/model/identity.dart';
 import '../../../data/model/user.dart';
 import '../../../data/service/image_update_request_service/service.dart';
 

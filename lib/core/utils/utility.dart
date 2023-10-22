@@ -37,9 +37,11 @@ abstract class Utility {
       if(!hasPermission) {
         return null;
       }
+      print('hasPermission?? : $hasPermission');
     }
-
+    print('aa??');
     final ImagePicker picker = ImagePicker();
+    print('bb??');
     try {
       XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 80);
       if(pickedFile == null) {
@@ -55,7 +57,7 @@ abstract class Utility {
               toolbarTitle: '사진 편집',
               toolbarColor: Colors.black26,
               toolbarWidgetColor: Colors.white,
-              lockAspectRatio: false
+              lockAspectRatio: true,
           ),
           IOSUiSettings(minimumAspectRatio: 1.0),
           WebUiSettings(

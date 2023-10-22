@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../data/provider/api_service.dart';
 import '../../model/coin_receipt.dart';
-import '../../model/pg_bill.dart';
 
 class CoinReceiptRepository extends ApiService {
 

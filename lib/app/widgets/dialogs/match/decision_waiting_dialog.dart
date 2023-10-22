@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:dodohan/app/data/service/match_service/service.dart';
-import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
-import '../../../../core/services/auth_service.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
-import '../../../../core/utils/utility.dart';
 import '../../../data/enums.dart';
-import '../../../data/model/user.dart';
 import '../../image/image_view_box.dart';
-import '../../../data/model/match.dart';
 
 class DecisionWaitingDialog extends StatelessWidget {
   final String profileImage;
@@ -36,7 +30,8 @@ class DecisionWaitingDialog extends StatelessWidget {
                   const SizedBox(height: 25),
                   Text('🎉 1차 매칭 성공! 🎉', style: ThemeFonts.semiBold.getTextStyle(size: 16)),
                   const SizedBox(height: 25),
-                  ImageViewBox(url: profileImage, width: 120, height: 120),
+                  //https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/Rectangle%209.png
+                  ImageViewBox(url: profileImage, width: 160, height: 160),
                   const SizedBox(height: 16),
                   if(status == MatchStatus.unChecked)
                     Text('상대방이 아직 확인하지 않았어요!',
@@ -55,8 +50,6 @@ class DecisionWaitingDialog extends StatelessWidget {
                           textAlign: TextAlign.center)).paddingAll(16),
                 ]),
           ),
-          Text('asdasd'),
-          SvgPicture.asset('assets/dots.svg'),
         ],
       ),
     );

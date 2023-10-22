@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "730253427437",
+    "project_id": "dodohan-6c8fd",
+    "storage_bucket": "dodohan-6c8fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730253427437:android:4ea78dc9c5d8f0da1d42e4",
+        "android_client_info": {
+          "package_name": "com.dodohan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730253427437-ft5ms1apmofg0tp282ps1c3heh0jlhfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsk1e_j8H_oxQdfQnroGX3mgf9mPc4IEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730253427437-ft5ms1apmofg0tp282ps1c3heh0jlhfb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "730253427437-2h6sjapt44cpj1i65hnestjlqfc0gvq2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stampNow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730253427437:android:7e7f2ff928fd25ea1d42e4",
+        "android_client_info": {
+          "package_name": "com.stamp_now"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730253427437-ft5ms1apmofg0tp282ps1c3heh0jlhfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsk1e_j8H_oxQdfQnroGX3mgf9mPc4IEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730253427437-ft5ms1apmofg0tp282ps1c3heh0jlhfb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "730253427437-2h6sjapt44cpj1i65hnestjlqfc0gvq2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stampNow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

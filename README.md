@@ -24,3 +24,4 @@ flutter run -d chrome --web-renderer html
 open /Applications/Android\ Studio.app
 //todo 개발시
 ios 배포전에 flutter build ios 하기 
+xcode 로 실행 & flutter attach

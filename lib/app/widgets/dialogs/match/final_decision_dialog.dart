@@ -50,7 +50,8 @@ class FinalDecisionDialog extends StatelessWidget {
                   const SizedBox(height: 25),
                   Text('🎉 1차 매칭 성공! 🎉', style: ThemeFonts.semiBold.getTextStyle(size: 16)),
                   const SizedBox(height: 25),
-                  ImageViewBox(url: profileImage, width: 120, height: 120),
+                  //https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/Rectangle%209.png
+                  ImageViewBox(url: profileImage, width: 160, height: 160),
                   const SizedBox(height: 16),
                   Text('최종 선택을 해주세요', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
                   Row(

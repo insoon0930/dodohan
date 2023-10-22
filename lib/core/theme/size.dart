@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class ThemeSizes {
   static const double picture = 80;

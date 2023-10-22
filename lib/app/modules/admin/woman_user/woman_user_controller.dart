@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dodohan/app/data/model/image_update_request.dart';
 
 import '../../../../core/services/auth_service.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../data/model/user.dart';
-import '../../../data/service/image_update_request_service/service.dart';
 import '../../../data/service/user_service/service.dart';
 
 class WomanUserController extends GetxController {
