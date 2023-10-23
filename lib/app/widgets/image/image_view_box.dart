@@ -12,13 +12,17 @@ class ImageViewBox extends StatelessWidget {
   final String url;
   final double? width, height;
   final bool isBlurred;
+  final double borderRadius;
+  final double blurValue;
 
   const ImageViewBox(
       {Key? key,
       this.width,
       this.height,
       required this.url,
-      this.isBlurred = false})
+      this.isBlurred = false,
+      this.borderRadius = 10,
+      this.blurValue = 8.0})
       : super(key: key);
 
   @override
@@ -42,9 +46,9 @@ class ImageViewBox extends StatelessWidget {
             ),
           )
         : ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(borderRadius),
             child: Blur(
-                blur: isBlurred ? 8 : 0,
+                blur: isBlurred ? blurValue : 0,
                 colorOpacity: isBlurred ? 0.1 : 0,
                 child: CachedNetworkImage(
                   imageUrl: url,

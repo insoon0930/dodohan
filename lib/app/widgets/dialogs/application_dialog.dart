@@ -39,10 +39,7 @@ class ApplicationDialog extends StatelessWidget {
           ElevatedButton(
             style: BtStyle.standard(),
             onPressed: () => applyClicked(),
-            child: Center(
-              child: Text('신청',
-                  style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
-            ),
+            child: const Center(child: Text('신청')),
           ).paddingAll(16)
         ]),
       ),

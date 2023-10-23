@@ -5,7 +5,9 @@ import 'package:dodohan/app/data/enums.dart';
 import 'package:dodohan/app/data/model/daily_card.dart';
 
 import '../../../../../../../core/theme/colors.dart';
+import '../../../../../../../core/theme/fonts.dart';
 import '../../../../../../widgets/image/image_view_box.dart';
+import '../current_card_controller.dart';
 
 class CurrentCardItem extends StatelessWidget {
   final DailyCard dailyCard;
@@ -15,53 +17,39 @@ class CurrentCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onTap: () => controller.tapCard(index, dailyCard),
-      child: Card(
-        margin: const EdgeInsets.all(4.0),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(9.0))),
-        elevation: 3,
-        child: Obx(
-          () => Stack(
-            children: [
-              Container(
-                // width: (Get.width - 64) / 2,
-                // height: (Get.width - 64) / 2 * 1.4,
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+    return Card(
+      margin: const EdgeInsets.all(4.0),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(9.0))),
+      elevation: 3,
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Stack(
                   children: [
-                    ImageViewBox(
+                        ImageViewBox(
                         url: dailyCard.youProfileImage,
-                        // width: (Get.width - 64) / 2 - 8,
-                        // height: (Get.width - 64) / 2 - 8,
+                        borderRadius: 8,
+                        width: (Get.width - 64) / 3 - 4,
+                        height: (Get.width - 64) / 3 - 4,
                         isBlurred: true),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text('${dailyCard.youInfo!.height}cm'),
-                        Text('${dailyCard.youInfo!.age}살'),
                       ],
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(dailyCard.youInfo!.bodyShape!),
-                        Text(dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연'),
-                      ],
-                    ),
-                    const Spacer(),
-                  ],
                 ),
-              ),
-              if (dailyCard.meStatus == CardStatus.unChecked)
-                _cardCover(),
-            ],
+                const Spacer(),
+                Text('${dailyCard.youInfo!.univ}', style: ThemeFonts.medium.getTextStyle()),
+                const Spacer(),
+              ],
+            ),
           ),
-        ),
+          if (dailyCard.meStatus == CardStatus.unChecked)
+            _cardCover(),
+          if (dailyCard.meStatus != CardStatus.unChecked || dailyCard.meStatus != CardStatus.checked)
+            Positioned(top: 8, right: 8, child: _tag()),
+        ],
       ),
     );
   }
@@ -76,4 +64,36 @@ class CurrentCardItem extends StatelessWidget {
           child: SvgPicture.asset('assets/love.svg',
                   color: ThemeColors.mainLightest)
               .paddingAll((Get.width - 64) / 7)));
+
+  //todo 1차 성사, 1차 실패, 최종 성사, 최종 실패, 대기중, (내가 선택 안함)
+  Widget _tag() {
+    Color color;
+    String text;
+    if(dailyCard.youStatus == CardStatus.confirmed1st) {
+     color = ThemeColors.blueLight.withOpacity(0.9);
+     text = '1차 수락';
+    } else if(dailyCard.youStatus == CardStatus.rejected1st) {
+      color = ThemeColors.redLight.withOpacity(0.9);
+      text = '1차 거절';
+    } else if(dailyCard.youStatus == CardStatus.confirmed2nd) {
+      color = ThemeColors.blueLight.withOpacity(0.9);
+      text = '매칭 성공';
+    } else if(dailyCard.youStatus == CardStatus.rejected2nd) {
+      color = ThemeColors.redLight.withOpacity(0.9);
+      text = '매칭 실패';
+    } else {
+      return Container();
+    }
+    return Container(
+      height: 15,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Text(text,
+          style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 10),
+          textAlign: TextAlign.center)
+          .paddingSymmetric(horizontal: 7, vertical: 1),
+    );
+  }
 }

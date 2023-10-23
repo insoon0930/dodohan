@@ -36,9 +36,7 @@ class DailyView extends GetView<DailyController> {
                 ElevatedButton(
                     style: BtStyle.standard(color: ThemeColors.mainLight),
                     onPressed: () => Get.toNamed(Routes.currentCard),
-                    child: Text('카드 현황',
-                        style:
-                        ThemeFonts.medium.getTextStyle(color: Colors.white))),
+                    child: const Text('카드 현황')),
                 const SizedBox(height: 16),
               ],
             ),

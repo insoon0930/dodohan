@@ -10,13 +10,14 @@ class BtStyle {
 
   static ButtonStyle standard({Color? color = ThemeColors.main, double? height}) => ElevatedButton.styleFrom(
         backgroundColor: color,
-        textStyle: ThemeFonts.medium.getTextStyle(color: Colors.white),
+        foregroundColor: Colors.white,
+        textStyle: ThemeFonts.medium.getTextStyle(size: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         minimumSize: Size(Get.width, height ?? 54));
 
   static ButtonStyle get confirm => TextButton.styleFrom(
     backgroundColor: Colors.white,
-    // foregroundColor: Colors.transparent,
+    foregroundColor: Colors.transparent,
     // surfaceTintColor: Colors.transparent,
     elevation: 0,
     textStyle: ThemeFonts.medium.getTextStyle(),

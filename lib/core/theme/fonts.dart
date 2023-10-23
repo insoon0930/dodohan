@@ -13,7 +13,7 @@ enum ThemeFonts {
 
 extension TextSizeExt on ThemeFonts {
   // 변형이 필요하면 copyWith 메소드 사용
-  TextStyle getTextStyle({Color? color = Colors.black, double? size = 16}) {
+  TextStyle getTextStyle({Color? color = Colors.black, double? size = 14}) {
     const fontFamily = 'Pretendard';
 
     switch (this) {

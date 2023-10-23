@@ -47,12 +47,15 @@ class CurrentCardPage extends GetView<CurrentCardController> {
     padding: EdgeInsets.zero,
     shrinkWrap: true,
     itemCount: cardList.length,
-    itemBuilder: (context, index) => CurrentCardItem(dailyCard: cardList[index]),
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    itemBuilder: (context, index) =>
+        GestureDetector(
+            onTap: () => controller.tapCard(index, cardList[index]),
+            child: CurrentCardItem(dailyCard: cardList[index])),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 3,
       mainAxisSpacing: 0,
       crossAxisSpacing: 0,
-      childAspectRatio: 1,
+      childAspectRatio: 0.8,
     ),
   );
 

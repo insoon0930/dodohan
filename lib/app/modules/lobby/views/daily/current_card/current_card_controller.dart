@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import '../../../../../../core/base_controller.dart';
 import '../../../../../../core/services/auth_service.dart';
+import '../../../../../../routes/app_routes.dart';
+import '../../../../../data/enums.dart';
 import '../../../../../data/model/daily_card.dart';
 import '../../../../../data/model/user.dart';
 import '../../../../../data/service/daily_card_service/service.dart';
@@ -25,6 +27,16 @@ class CurrentCardController extends BaseController {
     sentCards.value = await _dailyCardService.findSent(user.id);
     receivedCards.value = await _dailyCardService.findReceived(user.id);
     super.onInit();
+  }
+
+  void tapCard(int index, DailyCard dailyCard) async {
+    if(dailyCard.meStatus == CardStatus.unChecked) {
+      _dailyCardService.updateMeStatus(dailyCard.id, CardStatus.checked);
+      dailyCard.meStatus = CardStatus.checked;
+      receivedCards.refresh();
+    } else {
+      Get.toNamed(Routes.currentCardItem, arguments: {'dailyCard': dailyCard});
+    }
   }
   //
   // Future<void> showChooseDialog() async {

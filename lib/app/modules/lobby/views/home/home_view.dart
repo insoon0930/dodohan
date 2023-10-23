@@ -66,8 +66,7 @@ class HomeView extends GetView<HomeController> {
               ElevatedButton(
                 style: BtStyle.standard(),
                 onPressed: () => controller.getMatchResult(),
-                child: Text('매칭 결과 확인',
-                    style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                child: const Text('매칭 결과 확인'),
               ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
               const SizedBox(height: 16),
               Text(
@@ -100,9 +99,7 @@ class HomeView extends GetView<HomeController> {
                 child: ElevatedButton(
                   style: BtStyle.standard(color: ThemeColors.mainLight),
                   onPressed: () => Get.toNamed(Routes.meInfo),
-                  child: Text('나',
-                      style:
-                          ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  child: const Text('나'),
                 ),
               ),
               const SizedBox(width: 16),
@@ -110,9 +107,7 @@ class HomeView extends GetView<HomeController> {
                 child: ElevatedButton(
                   style: BtStyle.standard(color: ThemeColors.mainLight),
                   onPressed: () => Get.toNamed(Routes.youInfo),
-                  child: Text('이상형',
-                      style:
-                          ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  child: const Text('이상형'),
                 ),
               ),
               const SizedBox(width: 16),
@@ -122,8 +117,7 @@ class HomeView extends GetView<HomeController> {
           ElevatedButton(
             style: BtStyle.standard(),
             onPressed: () => controller.getInfos(),
-            child: Text('이번 회차 신청',
-                style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+            child: const Text('이번 회차 신청'),
           ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
           const SizedBox(height: 16),
           Text(

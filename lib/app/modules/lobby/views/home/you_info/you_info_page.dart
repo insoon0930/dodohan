@@ -26,11 +26,7 @@ class YouInfoPage extends GetView<YouInfoController> {
             ElevatedButton(
               style: BtStyle.standard(),
               onPressed: () => controller.updateYouInfo(),
-              child: Center(
-                child: Text('저장',
-                    style:
-                    ThemeFonts.medium.getTextStyle(color: Colors.white)),
-              ),
+              child: const Center(child: Text('저장')),
             ).paddingSymmetric(horizontal: 16)
           ],
         ),

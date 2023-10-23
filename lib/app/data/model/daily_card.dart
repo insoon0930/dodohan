@@ -13,6 +13,7 @@ class DailyCard {
   @MeInfoConverter()
   MeInfo? youInfo, meInfo;
   String youProfileImage, meProfileImage;
+  String youPhoneNum, mePhoneNum;
   CardStatus youStatus, meStatus;
   @DateTimeConverter()
   DateTime? createdAt;
@@ -22,6 +23,8 @@ class DailyCard {
       this.meInfo,
       this.youProfileImage = '',
       this.meProfileImage = '',
+      this.youPhoneNum = '',
+      this.mePhoneNum = '',
       this.youStatus = CardStatus.unChecked,
       this.meStatus = CardStatus.unChecked,
       this.createdAt}) {

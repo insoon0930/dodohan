@@ -16,7 +16,9 @@ abstract class Routes {
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';
   static const dailyCard = '/daily-card';
-  static const currentCard = '/current-card';
+
+  static const currentCard = Paths.currentCard;
+  static const currentCardItem = Paths.currentCard + Paths.item;
 
   static const termsOfUse = '/terms-of-use';
   static const privacy = '/privacy';
@@ -40,6 +42,9 @@ abstract class Paths {
   static const womanUser = '/woman-user';
   static const match = '/match';
   static const application = '/application';
+
+  static const currentCard = '/current-card';
+  static const item = '/item';
 
   static const setting = '/setting';
   static const businessInfo = '/business-info';

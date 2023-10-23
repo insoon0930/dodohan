@@ -36,7 +36,7 @@ class StoreSuccessPage extends GetView<StoreSuccessController> {
           ElevatedButton(
               style: BtStyle.standard(color: ThemeColors.blueLight),
               onPressed: () => controller.confirm(),
-              child: Text('결제 승인하기', style: ThemeFonts.medium.getTextStyle(color: Colors.white)))
+              child: const Text('결제 승인하기'))
           // Text('${Get.arguments}'),
           // Text('${Get.arguments['paymentKey']}'),
         ],

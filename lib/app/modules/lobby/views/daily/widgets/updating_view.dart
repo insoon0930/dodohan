@@ -32,16 +32,12 @@ class DailyUpdatingView extends StatelessWidget {
                 ElevatedButton(
                     style: BtStyle.standard(color: ThemeColors.mainLight),
                     onPressed: () {},
-                    child: Text('보낸 신청',
-                        style: ThemeFonts.medium
-                            .getTextStyle(color: Colors.white))),
+                    child: const Text('보낸 신청')),
                 const SizedBox(height: 16),
                 ElevatedButton(
                     style: BtStyle.standard(color: ThemeColors.mainLight),
                     onPressed: () {},
-                    child: Text('받은 신청',
-                        style: ThemeFonts.medium
-                            .getTextStyle(color: Colors.white))),
+                    child: const Text('받은 신청')),
               ],
             ),
           ),

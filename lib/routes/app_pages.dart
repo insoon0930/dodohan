@@ -25,6 +25,8 @@ import '../app/modules/auth/waiting/waiting_page.dart';
 import '../app/modules/lobby/lobby_binding.dart';
 import '../app/modules/lobby/lobby_page.dart';
 import '../app/modules/lobby/views/daily/current_card/current_card_binding.dart';
+import '../app/modules/lobby/views/daily/current_card/current_card_item_page/current_card_item_binding.dart';
+import '../app/modules/lobby/views/daily/current_card/current_card_item_page/current_card_item_page.dart';
 import '../app/modules/lobby/views/daily/current_card/current_card_page.dart';
 import '../app/modules/lobby/views/daily/daily_card/daily_card_binding.dart';
 import '../app/modules/lobby/views/daily/daily_card/daily_card_page.dart';
@@ -108,7 +110,13 @@ class AppPages {
     GetPage(
         name: Routes.currentCard,
         page: () => const CurrentCardPage(),
-        binding: CurrentCardBinding()),
+        binding: CurrentCardBinding(),
+        children: [
+          GetPage(
+              name: Paths.item,
+              page: () => const CurrentCardItemPage(),
+              binding: CurrentCardItemBinding())
+        ]),
     GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
     GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
     GetPage(name: Routes.setting, page: () => const SettingPage(), children: [

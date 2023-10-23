@@ -98,15 +98,8 @@ class PhoneSMSWidget extends StatelessWidget {
             onPressed: () => kIsWeb ? controller.onTapSMSButtonInWeb() : controller.onTapSMSButtonInMobile(),
             child: Center(
               child: controller.isCodeSent.value
-                  ? Text('인증 요청',
-                      style:
-                          ThemeFonts.medium.getTextStyle(color: Colors.white))
-                  : Text(
-                      '로그인 및 가입 진행',
-                      style: ThemeFonts.medium.getTextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
+                  ? const Text('인증 요청')
+                  : const Text('로그인 및 가입 진행'),
             ),
           ).paddingAll(ThemePaddings.mainPadding),
         ),

@@ -25,8 +25,7 @@ class DailyCardPage extends GetView<DailyCardController> {
                 ElevatedButton(
                   style: BtStyle.standard(),
                   onPressed: () => controller.showChooseDialog(),
-                  child: Text('선택하기',
-                      style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  child: const Text('선택하기'),
                 ).paddingSymmetric(vertical: 16),
               if(controller.dailyCard.value.meStatus != CardStatus.checked)
                 const SizedBox(height: 16),
@@ -56,12 +55,14 @@ class DailyCardPage extends GetView<DailyCardController> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          width: Get.width * 0.2,
+          width: Get.width * 0.25,
+          height: 35,
           alignment: Alignment.centerLeft,
           child: Text(category, style: ThemeFonts.medium.getTextStyle(color: Colors.black45)).paddingOnly(left: 8),
         ),
         Container(
-          width: Get.width * 0.7,
+          width: Get.width * 0.65,
+          height: 35,
           alignment: Alignment.centerLeft,
           child: Text(value, style: ThemeFonts.medium.getTextStyle()).paddingOnly(left: 8),
         ),
