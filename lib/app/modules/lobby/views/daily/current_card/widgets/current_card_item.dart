@@ -65,7 +65,7 @@ class CurrentCardItem extends StatelessWidget {
                   color: ThemeColors.mainLightest)
               .paddingAll((Get.width - 64) / 7)));
 
-  //todo 1차 성사, 1차 실패, 최종 성사, 최종 실패, 대기중, (내가 선택 안함)
+  //1차 성사, 1차 실패, 최종 성사, 최종 실패, 대기중, (내가 선택 안함)
   Widget _tag() {
     Color color;
     String text;

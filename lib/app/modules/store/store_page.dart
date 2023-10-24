@@ -1,3 +1,4 @@
+import 'package:dodohan/app/modules/store/store_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +12,7 @@ import '../../../routes/app_routes.dart';
 import '../../widgets/appbars/default_appbar.dart';
 // import 'js_helper/js_helper_web.dart';
 
-class StorePage extends StatelessWidget {
+class StorePage extends GetView<StoreService> {
   const StorePage({Key? key}) : super(key: key);
 
   @override
@@ -24,10 +25,10 @@ class StorePage extends StatelessWidget {
           Container(color: ThemeColors.mainLightest),
           Column(
             children: [
-              _purchaseItem(coin: 3, price: 3900, promotion: 0),
-              _purchaseItem(coin: 5, price: 5900, promotion: 1),
+              _purchaseItem(coin: 3, price: 3900, promotion: 0, index: 0),
+              _purchaseItem(coin: 5, price: 5900, promotion: 1, index: 1),
               Stack(children: [
-                _purchaseItem(coin: 10, price: 10900, promotion: 2),
+                _purchaseItem(coin: 10, price: 10900, promotion: 2, index: 2),
                 Positioned(
                     right: 18,
                     top: 18,
@@ -37,7 +38,7 @@ class StorePage extends StatelessWidget {
                     ]))
               ]),
               Stack(children: [
-                _purchaseItem(coin: 20, price: 18900, promotion: 4),
+                _purchaseItem(coin: 20, price: 18900, promotion: 4, index: 3),
                 Positioned(
                     right: 18,
                     top: 18,
@@ -62,7 +63,7 @@ class StorePage extends StatelessWidget {
     );
   }
 
-  Widget _purchaseItem({required int coin, required int price, required int promotion}) {
+  Widget _purchaseItem({required int coin, required int price, required int promotion, required int index}) {
     String formattedPrice =
         NumberFormat.currency(locale: 'ko_KR', symbol: '₩').format(price);
     return GestureDetector(
@@ -74,9 +75,9 @@ class StorePage extends StatelessWidget {
           //     amount: price,
           //     orderId: '${DateTime.now().millisecond}_${Utility.randomString(8)}',
           //     orderName: '하트 ${coin + promotion}개');
+        } else {
+          controller.buyProduct(StoreService.to.productDetails[index]);
         }
-
-
       },
       child: Card(
         color: Colors.white,

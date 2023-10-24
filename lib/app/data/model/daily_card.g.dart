@@ -14,6 +14,8 @@ DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
           json['meInfo'], const MeInfoConverter().fromJson),
       youProfileImage: json['youProfileImage'] as String? ?? '',
       meProfileImage: json['meProfileImage'] as String? ?? '',
+      youPhoneNum: json['youPhoneNum'] as String? ?? '',
+      mePhoneNum: json['mePhoneNum'] as String? ?? '',
       youStatus: $enumDecodeNullable(_$CardStatusEnumMap, json['youStatus']) ??
           CardStatus.unChecked,
       meStatus: $enumDecodeNullable(_$CardStatusEnumMap, json['meStatus']) ??
@@ -30,6 +32,8 @@ Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
           instance.meInfo, const MeInfoConverter().toJson),
       'youProfileImage': instance.youProfileImage,
       'meProfileImage': instance.meProfileImage,
+      'youPhoneNum': instance.youPhoneNum,
+      'mePhoneNum': instance.mePhoneNum,
       'youStatus': _$CardStatusEnumMap[instance.youStatus]!,
       'meStatus': _$CardStatusEnumMap[instance.meStatus]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(

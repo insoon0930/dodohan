@@ -14,13 +14,6 @@ class CurrentCardController extends BaseController {
   final RxList<DailyCard> sentCards = <DailyCard>[].obs;
   final RxList<DailyCard> receivedCards = <DailyCard>[].obs;
 
-  // final DailyController dailyController = Get.find();
-  //
-  // final Rx<DailyCard> dailyCard = DailyCard().obs;
-  // late final int cardIndex;
-  // MeInfo get youInfo => dailyCard.value.youInfo!;
-  // User get user => AuthService.to.user.value;
-  //
   @override
   Future<void> onInit() async {
     print('CurrentCardController OnInit started');

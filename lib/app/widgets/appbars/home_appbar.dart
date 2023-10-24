@@ -32,7 +32,7 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   SvgPicture.asset('assets/love.svg'),
                   const SizedBox(width: 6),
-                  Text('${controller.user.coin}', style: ThemeFonts.semiBold.getTextStyle(size: 20))
+                  Obx(() => Text('${controller.user.coin}', style: ThemeFonts.semiBold.getTextStyle(size: 20)))
                 ],
               ).paddingOnly(right: 16),
             ),

@@ -37,13 +37,10 @@ abstract class Utility {
       if(!hasPermission) {
         return null;
       }
-      print('hasPermission?? : $hasPermission');
     }
-    print('aa??');
     final ImagePicker picker = ImagePicker();
-    print('bb??');
     try {
-      XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 80);
+      XFile? pickedFile = await picker.pickImage(source: source, maxWidth: 2048, maxHeight: 2048, imageQuality: 100);
       if(pickedFile == null) {
         return Future.value(null);
       }

@@ -1,5 +1,7 @@
+import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import 'package:dodohan/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/widgets/image/image_view_box.dart';
 import '../../../../../../../core/theme/buttons.dart';
@@ -9,8 +11,6 @@ import '../../../../../../data/enums.dart';
 import '../../../../../../widgets/appbars/default_appbar.dart';
 import 'current_card_item_controller.dart';
 
-//todo 아. me & you 는 상대적인거임. '보낸 신청' 과 '받은 신청' 에서는 전부 반대지 않음??
-//여기는 일단 내가 받은걸로 진행했음 //해당 페이지 들어올 때 그 역할 정하게 하면 될듯?
 class CurrentCardItemPage extends GetView<CurrentCardItemController> {
   const CurrentCardItemPage({super.key});
 
@@ -26,7 +26,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: true, blurValue: 24, width: Get.width - 32, height: Get.width - 32),
               //거절함
               if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
-                Text('거절한 카드입니다', style: ThemeFonts.medium.getTextStyle(size: 14, color: ThemeColors.redLight))
+                _disabledBt('거절한 카드입니다')
               //1차 선택
               else if (controller.meStatus == CardStatus.checked || controller.meStatus == CardStatus.unChecked)
                 _firstChoice()
@@ -35,11 +35,12 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
                 _secondChoice()
               //거절됨
               else if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
-                Text('매칭 실패', style: ThemeFonts.medium.getTextStyle(size: 14, color: ThemeColors.redLight))
+                _disabledBt('매칭 실패')
               //매칭 성공
               else if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
-                Text(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum), style: ThemeFonts.medium.getTextStyle(size: 14, color: ThemeColors.redLight)),
-              if(controller.dailyCard.value.meStatus != CardStatus.checked)
+                GestureDetector(onTap: () => controller.copyPhoneNum(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum)),
+                  child: Text(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum), style: ThemeFonts.semiBold.getTextStyle(size: 25, color: ThemeColors.main, decoration: TextDecoration.underline)).paddingOnly(top: 16)),
+              if (controller.dailyCard.value.meStatus != CardStatus.checked)
                 const SizedBox(height: 16),
               _infoForm('학교', controller.youInfo.univ!),
               const Divider(),
@@ -87,15 +88,23 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
       Flexible(
         child: ElevatedButton(
           style: BtStyle.standard(color: ThemeColors.main),
-          onPressed: () {}, //todo
-          child: const Text('수락'),
+          onPressed: () => Get.dialog(ActionDialog(
+                  title: '1차 수락',
+                  text: '하트 1개가 소모됩니다',
+                  confirmCallback: () => controller.firstConfirm(),
+                  buttonText: '수락하기')),
+              child: const Text('수락'),
         ),
       ),
       const SizedBox(width: 16),
       Flexible(
         child: ElevatedButton(
           style: BtStyle.standard(color: ThemeColors.mainLight),
-          onPressed: () {}, //todo
+          onPressed: () => Get.dialog(ActionDialog(
+              title: '거절',
+              text: '하트 1개를 지급받습니다',
+              confirmCallback: () => controller.firstReject(),
+              buttonText: '거절하기')),
           child: const Text('거절'),
         ),
       ),
@@ -107,7 +116,11 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
       Flexible(
         child: ElevatedButton(
           style: BtStyle.standard(color: ThemeColors.main),
-          onPressed: () {}, //todo
+          onPressed: () => Get.dialog(ActionDialog(
+              title: '최종 수락',
+              text: '하트 5개가 소모됩니다',
+              confirmCallback: () => controller.secondConfirm(),
+              buttonText: '수락하기')),
           child: const Text('수락'),
         ),
       ),
@@ -115,10 +128,19 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
       Flexible(
         child: ElevatedButton(
           style: BtStyle.standard(color: ThemeColors.mainLight),
-          onPressed: () {}, //todo
+          onPressed: () => Get.dialog(ActionDialog(
+              title: '거절',
+              text: '하트 1개를 지급받습니다',
+              confirmCallback: () => controller.secondReject(),
+              buttonText: '거절하기')),
           child: const Text('거절'),
         ),
       ),
     ],
   ).paddingSymmetric(vertical: 16);
+
+  Widget _disabledBt(String text) => ElevatedButton(
+      onPressed: null,
+      style: BtStyle.standard(color: ThemeColors.grayLightest),
+      child: Text(text)).paddingOnly(top: 16);
 }

@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import '../../../core/base_controller.dart';
 import '../../../core/services/auth_service.dart';
+import '../../data/service/user_service/service.dart';
 import '../../widgets/dialogs/error_dialog.dart';
 
 class StoreService extends BaseController {
   static StoreService get to => Get.find();
+  final UserService _userService = UserService();
 
   AuthService authService = Get.find();
   late StreamSubscription<dynamic> _subscription;
@@ -47,8 +49,11 @@ class StoreService extends BaseController {
             purchaseDetails.status == PurchaseStatus.restored) {
           bool isValid = await _verifyPurchase(purchaseDetails);
           if (isValid) {
-            authService.user.update((user) =>
-            user!.coin = user.coin + int.parse(purchaseDetails.productID.split('_')[0]));
+            hideLoading();
+            final int coin = int.parse(purchaseDetails.productID.split('_')[0]);
+            await _userService.increaseCoin(AuthService.to.user.value.id, coin);
+            AuthService.to.user.update((user) => user!.coin = user.coin + coin);
+            Get.snackbar('결제 성공!', '$coin 하트가 지급되었습니다');
           } else {
             Get.dialog(ErrorDialog(text: '유효하지 않은 거래 발생'.tr));
           }
