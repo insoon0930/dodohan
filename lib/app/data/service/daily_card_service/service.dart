@@ -31,7 +31,6 @@ class DailyCardService extends ApiService  {
     return await _dailyCardRepository.findReceived(user);
   }
 
-
   //@Patch
   Future<void> updateMeStatus(DailyCard dailyCard, CardStatus status) async {
     return await _dailyCardRepository.updateMeStatus(dailyCard, status);
