@@ -1,3 +1,4 @@
+import 'package:dodohan/app/widgets/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,16 +10,18 @@ import '../../../../../widgets/image/image_view_box.dart';
 import '../daily_controller.dart';
 
 class CardItem extends GetView<DailyController> {
-  int index;
+  final int index;
 
-  CardItem({required this.index, Key? key}) : super(key: key);
+  const CardItem({required this.index, Key? key}) : super(key: key);
 
   DailyCard get dailyCard => controller.todayCards[index];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => controller.tapCard(index, dailyCard),
+      onTap: dailyCard.meBlockedYou
+          ? () => Get.dialog(const ErrorDialog(text: '차단한 카드입니다'))
+          : () => controller.tapCard(index, dailyCard),
       child: Card(
         margin: const EdgeInsets.all(4.0),
         shape: const RoundedRectangleBorder(
@@ -61,6 +64,8 @@ class CardItem extends GetView<DailyController> {
               ),
               if (controller.todayCards[index].meStatus == CardStatus.unChecked)
                 _cardCover(),
+              if (dailyCard.meBlockedYou)
+                _blockedCover(),
             ],
           ),
         ),
@@ -72,10 +77,16 @@ class CardItem extends GetView<DailyController> {
       child: Card(
           color: ThemeColors.main,
           margin: const EdgeInsets.all(4.0),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(9.0))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
           elevation: 0,
-          child: SvgPicture.asset('assets/love.svg',
-                  color: ThemeColors.mainLightest)
-              .paddingAll((Get.width - 64) / 7)));
+          child:
+              SvgPicture.asset('assets/love.svg', color: ThemeColors.mainLightest).paddingAll((Get.width - 64) / 7)));
+
+  Widget _blockedCover() => Positioned.fill(
+          child: Card(
+              color: ThemeColors.main,
+              margin: const EdgeInsets.all(4.0),
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
+              elevation: 0,
+              child: FittedBox(child: const Icon(Icons.block, color: ThemeColors.mainLightest).paddingAll(13))));
 }

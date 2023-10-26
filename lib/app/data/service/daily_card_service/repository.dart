@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dodohan/app/data/enums.dart';
 import 'package:dodohan/core/utils/time_utility.dart';
@@ -53,12 +55,12 @@ class DailyCardRepository extends ApiService {
     }
   }
 
-  Future<void> updateMeStatus(String dailyCardId, CardStatus status) async {
+  Future<void> updateMeStatus(DailyCard dailyCard, CardStatus status) async {
     try {
       final DocumentReference todayCardsRef =
-          firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash());
+          firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash(subtractDay: dailyCard.differenceInDays));
       final DocumentReference dailyCardDocRef =
-          todayCardsRef.collection('cards').doc(dailyCardId);
+          todayCardsRef.collection('cards').doc(dailyCard.id);
       await dailyCardDocRef.update({'meStatus': status.name});
       return;
     } catch (e) {
@@ -66,13 +68,30 @@ class DailyCardRepository extends ApiService {
     }
   }
 
-  Future<void> updateYouStatus(String dailyCardId, CardStatus status) async {
+  Future<void> updateYouStatus(DailyCard dailyCard, CardStatus status) async {
     try {
       final DocumentReference todayCardsRef =
-          firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash());
+          firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash(subtractDay: dailyCard.differenceInDays));
       final DocumentReference dailyCardDocRef =
-          todayCardsRef.collection('cards').doc(dailyCardId);
+          todayCardsRef.collection('cards').doc(dailyCard.id);
       await dailyCardDocRef.update({'youStatus': status.name});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateBlock(DailyCard dailyCard) async {
+    try {
+      final DocumentReference todayCardsRef =
+        firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash(subtractDay: dailyCard.differenceInDays));
+      final DocumentReference dailyCardDocRef =
+        todayCardsRef.collection('cards').doc(dailyCard.id);
+      if (dailyCard.iAmMe) {
+        await dailyCardDocRef.update({'meBlockedYou': true});
+      } else {
+        await dailyCardDocRef.update({'youBlockedMe': true});
+      }
       return;
     } catch (e) {
       rethrow;
@@ -86,6 +105,7 @@ class DailyCardRepository extends ApiService {
           .collection('cards')
           .where('meInfo.user', isEqualTo: user)
           .where('meStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
+          .where('meBlockedYou', isEqualTo: false)
           .get();
       return myCardsSnapShot.docs
           .map((e) => DailyCard.fromJson(e.data() as Map<String, dynamic>))
@@ -101,7 +121,8 @@ class DailyCardRepository extends ApiService {
       final QuerySnapshot myCardsSnapShot = await todayCardsRef
           .collection('cards')
           .where('youInfo.user', isEqualTo: user)
-          .where('meStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
+          .where('youStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
+          .where('youBlockedMe', isEqualTo: false)
           .get();
       return myCardsSnapShot.docs
           .map((e) => DailyCard.fromJson(e.data() as Map<String, dynamic>))

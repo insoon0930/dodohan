@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:dodohan/app/data/enums.dart';
 import 'package:dodohan/app/data/model/daily_card.dart';
 
+import '../../../../../../../core/services/auth_service.dart';
 import '../../../../../../../core/theme/colors.dart';
 import '../../../../../../../core/theme/fonts.dart';
 import '../../../../../../widgets/image/image_view_box.dart';
@@ -13,7 +14,6 @@ class CurrentCardItem extends StatelessWidget {
   final DailyCard dailyCard;
 
   const CurrentCardItem({super.key, required this.dailyCard});
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +31,15 @@ class CurrentCardItem extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                        ImageViewBox(
+                    ImageViewBox(
                         url: dailyCard.youProfileImage,
                         borderRadius: 8,
                         width: (Get.width - 64) / 3 - 4,
                         height: (Get.width - 64) / 3 - 4,
-                        isBlurred: true),
-                      ],
+                        isBlurred: dailyCard.isNotBlurred ? false : true),
+                    if (dailyCard.meStatus != CardStatus.unChecked || dailyCard.meStatus != CardStatus.checked)
+                      Positioned(bottom: 4, right: 4, child: _leftDayTag()),
+                  ],
                 ),
                 const Spacer(),
                 Text('${dailyCard.youInfo!.univ}', style: ThemeFonts.medium.getTextStyle()),
@@ -70,16 +72,16 @@ class CurrentCardItem extends StatelessWidget {
     Color color;
     String text;
     if(dailyCard.youStatus == CardStatus.confirmed1st) {
-     color = ThemeColors.blueLight.withOpacity(0.9);
+     color = ThemeColors.blueLight.withOpacity(0.5);
      text = '1차 수락';
     } else if(dailyCard.youStatus == CardStatus.rejected1st) {
-      color = ThemeColors.redLight.withOpacity(0.9);
+      color = ThemeColors.redLight.withOpacity(0.5);
       text = '1차 거절';
     } else if(dailyCard.youStatus == CardStatus.confirmed2nd) {
-      color = ThemeColors.blueLight.withOpacity(0.9);
+      color = ThemeColors.main.withOpacity(0.6);
       text = '매칭 성공';
     } else if(dailyCard.youStatus == CardStatus.rejected2nd) {
-      color = ThemeColors.redLight.withOpacity(0.9);
+      color = ThemeColors.redLight.withOpacity(0.5);
       text = '매칭 실패';
     } else {
       return Container();
@@ -92,6 +94,32 @@ class CurrentCardItem extends StatelessWidget {
       ),
       child: Text(text,
           style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 10),
+          textAlign: TextAlign.center)
+          .paddingSymmetric(horizontal: 7, vertical: 1),
+    );
+  }
+
+  Widget _leftDayTag() {
+    String text;
+    if(dailyCard.youStatus == CardStatus.confirmed1st) {
+      text = 'D-2';
+    } else if(dailyCard.youStatus == CardStatus.rejected1st) {
+      text = 'D-1';
+    } else if(dailyCard.youStatus == CardStatus.confirmed2nd) {
+      text = '매칭 성공';
+    } else if(dailyCard.youStatus == CardStatus.rejected2nd) {
+      text = '매칭 실패';
+    } else {
+      return Container();
+    }
+    return Container(
+      height: 15,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Text(dailyCard.leftDay,
+          style: ThemeFonts.medium.getTextStyle(color: Colors.black, size: 10),
           textAlign: TextAlign.center)
           .paddingSymmetric(horizontal: 7, vertical: 1),
     );

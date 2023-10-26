@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/widgets/image/image_view_box.dart';
 import '../../../../../../core/theme/buttons.dart';
+import '../../../../../../core/theme/colors.dart';
 import '../../../../../../core/theme/fonts.dart';
 import '../../../../../data/enums.dart';
 import '../../../../../widgets/appbars/default_appbar.dart';
+import '../../../../../widgets/dialogs/report_dialog.dart';
+import '../../../../../widgets/dialogs/select/select_dialog.dart';
+import '../../../../../widgets/dialogs/select/select_dialog_item.dart';
 import 'daily_card_controller.dart';
 
 class DailyCardPage extends GetView<DailyCardController> {
@@ -13,7 +18,22 @@ class DailyCardPage extends GetView<DailyCardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar('오늘의 카드'),
+      appBar: DefaultAppBar('오늘의 카드', actions: [GestureDetector(
+              onTap: () => Get.dialog(ReportDialog(
+                    reportCallback: () async {
+                      return;
+                    },
+                    blockText: '차단하기(카드 삭제)',
+                    blockCallback: () => controller.block(),
+                  )),
+              child: Container(
+                width: 40,
+                height: 20,
+                color: Colors.transparent,
+                child: SvgPicture.asset('assets/dots.svg', color: ThemeColors.grayDark).paddingOnly(left: 20),
+              )).paddingOnly(right: 16),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Obx(
           () => Column(

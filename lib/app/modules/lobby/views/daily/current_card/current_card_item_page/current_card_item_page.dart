@@ -2,6 +2,7 @@ import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import 'package:dodohan/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/widgets/image/image_view_box.dart';
 import '../../../../../../../core/theme/buttons.dart';
@@ -9,6 +10,7 @@ import '../../../../../../../core/theme/fonts.dart';
 import '../../../../../../../core/utils/utility.dart';
 import '../../../../../../data/enums.dart';
 import '../../../../../../widgets/appbars/default_appbar.dart';
+import '../../../../../../widgets/dialogs/report_dialog.dart';
 import 'current_card_item_controller.dart';
 
 class CurrentCardItemPage extends GetView<CurrentCardItemController> {
@@ -17,27 +19,44 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar('오늘의 카드'),
+      appBar: DefaultAppBar('오늘의 카드', actions: [GestureDetector(
+          onTap: () => Get.dialog(ReportDialog(
+                  reportCallback: () async {
+                    return;
+                  },
+                  blockText: '차단하기(카드 삭제)',
+                  blockCallback: () async => await controller.block(),
+                )),
+            child: Container(
+            width: 40,
+            height: 20,
+            color: Colors.transparent,
+            child: SvgPicture.asset('assets/dots.svg', color: ThemeColors.grayDark).paddingOnly(left: 20),
+          )).paddingOnly(right: 16),
+      ]),
       body: SingleChildScrollView(
         child: Obx(
           () => Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: true, blurValue: 24, width: Get.width - 32, height: Get.width - 32),
+              ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: controller.dailyCard.value.isNotBlurred ? false : true, blurValue: 24, width: Get.width - 32, height: Get.width - 32),
               //거절함
               if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
                 _disabledBt('거절한 카드입니다')
               //1차 선택
               else if (controller.meStatus == CardStatus.checked || controller.meStatus == CardStatus.unChecked)
                 _firstChoice()
+              //거절됨
+              else if (controller.youStatus == CardStatus.rejected1st)
+                  _disabledBt('매칭 실패')
               //2차 선택
               else if (controller.meStatus == CardStatus.confirmed1st && controller.youMadeAFirstChoice)
                 _secondChoice()
               //거절됨
-              else if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
+              else if (controller.youStatus == CardStatus.rejected2nd)
                 _disabledBt('매칭 실패')
               //매칭 성공
-              else if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
+              else if (controller.meStatus == CardStatus.confirmed2nd || controller.meStatus == CardStatus.confirmed2nd)
                 GestureDetector(onTap: () => controller.copyPhoneNum(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum)),
                   child: Text(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum), style: ThemeFonts.semiBold.getTextStyle(size: 25, color: ThemeColors.main, decoration: TextDecoration.underline)).paddingOnly(top: 16)),
               if (controller.dailyCard.value.meStatus != CardStatus.checked)
@@ -91,7 +110,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           onPressed: () => Get.dialog(ActionDialog(
                   title: '1차 수락',
                   text: '하트 1개가 소모됩니다',
-                  confirmCallback: () => controller.firstConfirm(),
+                  confirmCallback: () => controller.confirm(coin: 1, cardStatus: CardStatus.confirmed1st),
                   buttonText: '수락하기')),
               child: const Text('수락'),
         ),
@@ -103,8 +122,8 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           onPressed: () => Get.dialog(ActionDialog(
               title: '거절',
               text: '하트 1개를 지급받습니다',
-              confirmCallback: () => controller.firstReject(),
-              buttonText: '거절하기')),
+              confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected1st),
+                  buttonText: '거절하기')),
           child: const Text('거절'),
         ),
       ),
@@ -119,7 +138,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           onPressed: () => Get.dialog(ActionDialog(
               title: '최종 수락',
               text: '하트 5개가 소모됩니다',
-              confirmCallback: () => controller.secondConfirm(),
+              confirmCallback: () => controller.confirm(coin: 5, cardStatus: CardStatus.confirmed2nd),
               buttonText: '수락하기')),
           child: const Text('수락'),
         ),
@@ -131,8 +150,8 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           onPressed: () => Get.dialog(ActionDialog(
               title: '거절',
               text: '하트 1개를 지급받습니다',
-              confirmCallback: () => controller.secondReject(),
-              buttonText: '거절하기')),
+              confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected2nd),
+                  buttonText: '거절하기')),
           child: const Text('거절'),
         ),
       ),

@@ -22,6 +22,8 @@ DailyCard _$DailyCardFromJson(Map<String, dynamic> json) => DailyCard(
           CardStatus.unChecked,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const DateTimeConverter().fromJson),
+      youBlockedMe: json['youBlockedMe'] as bool? ?? false,
+      meBlockedYou: json['meBlockedYou'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
@@ -38,6 +40,8 @@ Map<String, dynamic> _$DailyCardToJson(DailyCard instance) => <String, dynamic>{
       'meStatus': _$CardStatusEnumMap[instance.meStatus]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
+      'youBlockedMe': instance.youBlockedMe,
+      'meBlockedYou': instance.meBlockedYou,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

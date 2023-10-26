@@ -34,7 +34,7 @@ class DailyCardController extends BaseController {
 
   Future<void> choose() async {
     showLoading();
-    _dailyCardService.updateMeStatus(dailyCard.value.id, CardStatus.confirmed1st);
+    _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
     hideLoading();
     Get.back();
     dailyCard.value.meStatus = CardStatus.confirmed1st;
@@ -42,11 +42,15 @@ class DailyCardController extends BaseController {
     dailyController.todayCards.refresh();
   }
 
-  //
-  // Future<void> updateDailyCard() async {
-  //   await _dailyCardService.updateOne(dailyCard.value.id!, dailyCard.value);
-  //   Get.back();
-  //   return;
-  // }
+  Future<void> block() async {
+    showLoading();
+    await _dailyCardService.block(dailyCard.value);
+    hideLoading();
+    Get.back();
+    dailyCard.value.meBlockedYou = true;
+    dailyController.todayCards[cardIndex].meBlockedYou = true;
+    dailyController.todayCards.refresh();
+    Get.back(); // 카드에서 나가기
+  }
 }
 

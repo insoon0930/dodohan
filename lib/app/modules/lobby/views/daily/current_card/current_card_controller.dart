@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import '../../../../../../core/base_controller.dart';
 import '../../../../../../core/services/auth_service.dart';
@@ -24,35 +26,12 @@ class CurrentCardController extends BaseController {
 
   void tapCard(int index, DailyCard dailyCard) async {
     if(dailyCard.meStatus == CardStatus.unChecked) {
-      _dailyCardService.updateMeStatus(dailyCard.id, CardStatus.checked);
+      _dailyCardService.updateMeStatus(dailyCard, CardStatus.checked);
       dailyCard.meStatus = CardStatus.checked;
       receivedCards.refresh();
     } else {
-      Get.toNamed(Routes.currentCardItem, arguments: {'dailyCard': dailyCard});
+      Get.toNamed(Routes.currentCardItem, arguments: {'index': index, 'dailyCard': dailyCard});
     }
   }
-  //
-  // Future<void> showChooseDialog() async {
-  //   //todo 이후에는 추가 선택 과금하는 식으로
-  //   Get.dialog(ActionDialog(
-  //       title: '오늘의 카드', text: '선택하시겠습니까?', confirmCallback: () => choose()));
-  // }
-  //
-  // Future<void> choose() async {
-  //   showLoading();
-  //   _dailyCardService.updateMeStatus(dailyCard.value.id, CardStatus.confirmed1st);
-  //   hideLoading();
-  //
-  //   dailyCard.value.meStatus = CardStatus.confirmed1st;
-  //   dailyController.todayCards[cardIndex].meStatus = CardStatus.confirmed1st;
-  //   dailyController.todayCards.refresh();
-  // }
-  //
-  // //
-  // // Future<void> updateDailyCard() async {
-  // //   await _dailyCardService.updateOne(dailyCard.value.id!, dailyCard.value);
-  // //   Get.back();
-  // //   return;
-  // // }
 }
 

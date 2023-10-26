@@ -34,7 +34,7 @@ class DailyController extends GetxController {
 
   void tapCard(int index, DailyCard dailyCard) async {
     if(todayCards[index].meStatus == CardStatus.unChecked) {
-      _dailyCardService.updateMeStatus(dailyCard.id, CardStatus.checked);
+      _dailyCardService.updateMeStatus(dailyCard, CardStatus.checked);
       todayCards[index].meStatus = CardStatus.checked;
       todayCards.refresh();
     } else {

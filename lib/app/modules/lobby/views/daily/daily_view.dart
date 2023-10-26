@@ -25,7 +25,7 @@ class DailyView extends GetView<DailyController> {
                 if(controller.todayCards.isEmpty)
                   _progressIndicator(),
                 if(controller.todayCards.isNotEmpty)
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CardItem(index: 0),
@@ -58,7 +58,7 @@ class DailyView extends GetView<DailyController> {
 
   Widget _progressIndicator() => Container(
     alignment: Alignment.center,
-    height: (Get.width - 64) / 2 * 1.4,
+    height: (Get.width - 64) / 2 * 1.4 + 8,
     child: DefaultTextStyle(
       style: ThemeFonts.medium.getTextStyle(size: 18),
       child: AnimatedTextKit(

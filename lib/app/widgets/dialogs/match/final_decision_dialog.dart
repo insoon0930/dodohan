@@ -14,6 +14,7 @@ import '../../../data/model/user.dart';
 import '../../image/image_view_box.dart';
 import '../../../data/model/match.dart';
 import '../action_dialog.dart';
+import '../report_dialog.dart';
 import '../select/select_dialog.dart';
 import '../select/select_dialog_item.dart';
 
@@ -92,32 +93,20 @@ class FinalDecisionDialog extends StatelessWidget {
             top: 8,
             right: 16,
             child: GestureDetector(
-                onTap: () => Get.dialog(SelectDialog(itemHeight: 60, items: [
-                  SelectDialogItem(
-                      text: '신고하기',
-                      onTap: () {
-                        Get.back();
-                        Get.dialog(const ErrorDialog(text: '신고가 완료되었습니다'));
+                onTap: () => Get.dialog(ReportDialog(
+                      reportCallback: () async {
+                        return;
                       },
-                      first: true,
-                      style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-                  SelectDialogItem(
-                      text: '차단하기(즉시 거절됨)',
-                      onTap: () async {
-                        Get.back();
-                        Get.back();
+                      blockCallback: () async {
                         await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
-                        Get.dialog(const ErrorDialog(text: '차단이 완료되었습니다'));
+                        Get.back();
                       },
-                      last: true,
-                      style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-                ])),
+                    )),
                 child: Container(
                   width: 20,
                   height: 20,
                   color: Colors.transparent,
-                  child: SvgPicture.asset('assets/dots.svg',
-                      color: ThemeColors.grayDark),
+                  child: SvgPicture.asset('assets/dots.svg', color: ThemeColors.grayDark),
                 )),
           ),
         ],
