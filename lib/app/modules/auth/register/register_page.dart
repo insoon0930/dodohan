@@ -8,6 +8,7 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/paddings.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../data/info_data.dart';
+import '../../../widgets/appbars/default_appbar.dart';
 import '../../../widgets/image/image_pick_box.dart';
 import 'register_controller.dart';
 
@@ -32,8 +33,11 @@ class RegisterPage extends GetView<RegisterController> {
                       //todo 개발시
                       GestureDetector(
                           onTap: () => Get.offAllNamed(Routes.loginBy),
-                          child: const Icon(Icons.arrow_back_ios_new_rounded,
-                              size: 19)),
+                          child: Container(
+                            color: Colors.transparent,
+                            child: const Icon(Icons.arrow_back_ios_new_rounded,
+                                size: 19),
+                          )),
                       const SizedBox(height: 16),
                       Align(
                           alignment: Alignment.centerLeft,

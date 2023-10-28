@@ -15,30 +15,46 @@ class CurrentCardPage extends GetView<CurrentCardController> {
     return Scaffold(
       appBar: const DefaultAppBar('오늘의 카드'),
       body: Obx(
-        () => Column(
+        () => Stack(
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  _divider('보낸 신청').paddingOnly(top: 4, bottom: 8),
-                  if(controller.sentCards.isEmpty)
-                    Text('보낸 신청이 없습니다', style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14)).paddingOnly(top: 8),
-                  _gridView(controller.sentCards),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  _divider('받은 신청').paddingOnly(top: 4, bottom: 8),
-                  if(controller.sentCards.isEmpty)
-                    Text('받은 신청이 없습니다', style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14)).paddingOnly(top: 8),
-                  _gridView(controller.receivedCards),
-                ],
-              ),
-            ),
+            if (!controller.loading.value)
+              Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      _divider('보낸 신청').paddingOnly(top: 4, bottom: 8),
+                      if(controller.sentCards.isEmpty)
+                        Text('보낸 신청이 없습니다', style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14)).paddingOnly(top: 8),
+                      _gridView(controller.sentCards),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      _divider('받은 신청').paddingOnly(top: 4, bottom: 8),
+                      if(controller.sentCards.isEmpty)
+                        Text('받은 신청이 없습니다', style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14)).paddingOnly(top: 8),
+                      _gridView(controller.receivedCards),
+                    ],
+                  ),
+                ),
+              ],
+            ).paddingAll(16),
+            if (controller.loading.value)
+              const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 28.0),
+                    child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: ThemeColors.main,
+                        )),
+                  ))
           ],
-        ).paddingAll(16),
+        ),
       ),
     );
   }

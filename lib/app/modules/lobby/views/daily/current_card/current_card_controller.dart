@@ -21,6 +21,7 @@ class CurrentCardController extends BaseController {
     print('CurrentCardController OnInit started');
     sentCards.value = await _dailyCardService.findSent(user.id);
     receivedCards.value = await _dailyCardService.findReceived(user.id);
+    loading.value = false;
     super.onInit();
   }
 

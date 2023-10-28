@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:dodohan/app/modules/splash/splash_controller.dart';
+import '../../../../../core/base_controller.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../data/enums.dart';
@@ -9,7 +10,7 @@ import '../../../../data/model/daily_card.dart';
 import '../../../../data/model/user.dart';
 import '../../../../data/service/daily_card_service/service.dart';
 
-class DailyController extends GetxController {
+class DailyController extends BaseController {
   final DailyCardService _dailyCardService = DailyCardService();
 
   final RxList<DailyCard> todayCards = <DailyCard>[].obs;
@@ -28,6 +29,7 @@ class DailyController extends GetxController {
     }
 
     todayCards.value = await _dailyCardService.findToday(user.id);
+    loading.value = false;
     //todo 오늘 날짜 내 카드들 들고오기
     super.onInit();
   }

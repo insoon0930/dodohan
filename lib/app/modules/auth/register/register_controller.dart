@@ -32,7 +32,7 @@ class RegisterController extends GetxController {
 
   @override
   void onInit() {
-    if (user.id == '') {
+    if (user.id == '' || user.phoneNum == '') {
       Get.put(SplashController());
     }
     super.onInit();

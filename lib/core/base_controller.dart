@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 class BaseController extends GetxController {
 
+  final RxBool loading = true.obs;
+
   //todo 기존에 써둔것들 바꿔주기 (급한거 아님)
   void showLoading({bool isDismissible = false}) {
     Get.dialog(const Center(child: CircularProgressIndicator()),
@@ -12,4 +14,5 @@ class BaseController extends GetxController {
   void hideLoading() {
     Get.back();
   }
+
 }

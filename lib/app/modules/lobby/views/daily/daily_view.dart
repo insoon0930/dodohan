@@ -22,8 +22,10 @@ class DailyView extends GetView<DailyController> {
           child: Obx(
             () => Column(
               children: [
-                if(controller.todayCards.isEmpty)
+                if(controller.loading.value)
                   _progressIndicator(),
+                if(!controller.loading.value && controller.todayCards.isEmpty)
+                  _noCardText(),
                 if(controller.todayCards.isNotEmpty)
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,4 +70,10 @@ class DailyView extends GetView<DailyController> {
       ),
     ),
   );
+
+  Widget _noCardText() => Container(
+        alignment: Alignment.center,
+        height: (Get.width - 64) / 2 * 1.4 + 8,
+        child: Text("홈의 '나' 프로필을 완성해주세요 (필수)\n유효한 상대방이 있는 경우 매일 밤 12시에 제공됩니다", style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14), textAlign: TextAlign.center,),
+      );
 }

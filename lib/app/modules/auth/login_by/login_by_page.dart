@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animated_background/animated_background.dart';
 import 'package:animated_digit/animated_digit.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/paddings.dart';
 import '../../../../routes/app_routes.dart';
+import '../../../data/info_data.dart';
 
 class LoginByPage extends StatefulWidget {
   const LoginByPage({Key? key}) : super(key: key);
@@ -60,6 +63,12 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
               )),
               ElevatedButton(
                 style: BtStyle.loginBy,
+                // onPressed: () {
+                //   final Map<String, String> asd = InfoData.univInfo.map((key, value) {
+                //     return MapEntry("'$key'", "'${value.region.name}'");
+                //   });
+                //   log('$asd');
+                // },
                 onPressed: () => Get.toNamed(Routes.login),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
