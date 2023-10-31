@@ -20,13 +20,10 @@ class StoreService extends BaseController {
   @override
   void onInit() async {
     List<ProductDetails> unsortedProductDetails = await getProductDetails();
-    print('unsortedProductDetails: $unsortedProductDetails');
     productDetails.value = unsortedProductDetails..sort((a, b) => a.rawPrice.compareTo(b.rawPrice));
-    print('productDetails.value: ${productDetails.value}');
 
     final Stream purchaseUpdated = InAppPurchase.instance.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      print('purchaseDetailsList?: $purchaseDetailsList');
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
       _subscription.cancel();
@@ -34,9 +31,7 @@ class StoreService extends BaseController {
       print('error: $error');
       // handle error here.
     });
-    print('aaaa');
     await initInAppPurchase();
-    print('bbb');
     super.onInit();
   }
 
@@ -48,10 +43,9 @@ class StoreService extends BaseController {
 
   //In-App Purchase 구매 확인: 구매가 성공적으로 완료되면, InAppPurchaseConnection 인스턴스를 사용하여 구매 확인을 수행하고, PurchaseDetails 객체를 가져올 수 있습니다.
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
-    print('purchaseDetailsList: $purchaseDetailsList');
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.pending) {
-        // showLoading(); //추가됨
+        showLoading(); //추가됨
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
           Get.dialog(ErrorDialog(text: '구매 실패'.tr));
@@ -59,18 +53,18 @@ class StoreService extends BaseController {
             purchaseDetails.status == PurchaseStatus.restored) {
           bool isValid = await _verifyPurchase(purchaseDetails);
           if (isValid) {
-            // hideLoading();
+            hideLoading();
             final int coin = int.parse(purchaseDetails.productID.split('_')[0]);
             await _userService.increaseCoin(AuthService.to.user.value.id, coin);
             AuthService.to.user.update((user) => user!.coin = user.coin + coin);
             Get.snackbar('결제 성공!', '$coin 하트가 지급되었습니다');
           } else {
+            hideLoading();
             Get.dialog(ErrorDialog(text: '유효하지 않은 거래 발생'.tr));
           }
         }
         if (purchaseDetails.pendingCompletePurchase) {
-          // hideLoading(); //추가됨
-          print('pendingCompletePurchaseL: $purchaseDetails');
+          hideLoading(); //추가됨
           await InAppPurchase.instance.completePurchase(purchaseDetails);
         }
       }
@@ -81,7 +75,6 @@ class StoreService extends BaseController {
   //In-App Purchase 초기화
   Future<void> initInAppPurchase() async {
     final bool isAvailable = await InAppPurchase.instance.isAvailable();
-    print('initInAppPurchase: $isAvailable');
     if (!isAvailable) {
       // In-App Purchase 미지원 기기 예외처리
       return;
@@ -95,7 +88,6 @@ class StoreService extends BaseController {
     // 총 1550코인이 지급됩니다.
     const Set<String> productIds = <String>{'3_coins', '6_coins', '12_coins', '24_coins'};
     final ProductDetailsResponse response = await InAppPurchase.instance.queryProductDetails(productIds);
-    print('response!!: ${response.productDetails}');
     if (response.notFoundIDs.isNotEmpty) {
       // 상품ID를 찾지 못한 예외처리
       return [];
@@ -110,39 +102,46 @@ class StoreService extends BaseController {
   }
 
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    // //https://applereceiptverify-m2rvoqphsq-uc.a.run.app
-    // // var url = Uri.https('example.com', 'whatsit/create');
-    // http.Response response;
-    // //todo 주소 프로덕션 레벨로 업데이트 ++ http > https 수정
-    // if(Platform.isAndroid) {
-    //   var url = Uri.https('127.0.0.1:5001', 'dodohan-6c8fd/us-central1/googleReceiptVerify');
-    //   response = await http.post(url, body: {'receiptDto': {
-    //     'productId': purchaseDetails.productID,
-    //     'purchaseToken': purchaseDetails.verificationData.serverVerificationData
-    //   }, 'buyerId': AuthService.to.user.value.id});
-    //   print('Response status: ${response.statusCode}');
-    //   print('Response body: ${response.body}');
-    // } else {
-    //   print('here~!!');
-    //   var url = Uri.https('https://applereceiptverify-m2rvoqphsq-uc.a.run.app');
-    //   print('here~!!222 :$url');
-    //   Map<String, dynamic> data = {
-    //     'receiptDto': {
-    //       'productId': purchaseDetails.productID,
-    //       'receipt': purchaseDetails.verificationData.serverVerificationData,
-    //     },
-    //     'buyerId': AuthService.to.user.value.id,
-    //   };
-    //   String encodedData = jsonEncode(data);
-    //   response = await http.post(url, body: encodedData);
-    //   print('Response status: ${response.statusCode}');
-    //   print('Response body: ${response.body}');
-    // }
-    // if (response.statusCode == 200) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
+    //https://applereceiptverify-m2rvoqphsq-uc.a.run.app
+    // var url = Uri.https('example.com', 'whatsit/create');
+    http.Response response;
+    //todo 주소 프로덕션 레벨로 업데이트 ++ http > https 수정
+    const headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+    if(Platform.isAndroid) {
+      var url = Uri.parse('https://googlereceiptverify-m2rvoqphsq-uc.a.run.app');
+      Map<String, dynamic> data = {'receiptDto': {
+        'productId': purchaseDetails.productID,
+        'purchaseToken': purchaseDetails.verificationData.serverVerificationData
+      }, 'buyerId': AuthService.to.user.value.id};
+      print('data!!: ${data.toString()}');
+      String encodedData = jsonEncode(data);
+      response = await http.post(url, body: encodedData, headers: headers);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    } else {
+      print('here~!!');
+      var url = Uri.parse('https://applereceiptverify-m2rvoqphsq-uc.a.run.app');
+      Map<String, dynamic> data = {
+        'receiptDto': {
+          'productId': purchaseDetails.productID,
+          'receipt': purchaseDetails.verificationData.serverVerificationData,
+        },
+        'buyerId': AuthService.to.user.value.id,
+      };
+      print('data!!: ${data.toString()}');
+      String encodedData = jsonEncode(data);
+      response = await http.post(url, body: encodedData, headers: headers);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
     return true;
   }
 
