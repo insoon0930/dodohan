@@ -36,8 +36,10 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
+
 # Start of the permission_handler configuration
     target.build_configurations.each do |config|
+
 
       # You can enable the permissions needed here. For example to enable camera
       # permission, just remove the `#` character in front so it looks like this:
