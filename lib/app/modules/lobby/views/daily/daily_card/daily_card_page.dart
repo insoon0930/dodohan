@@ -38,7 +38,23 @@ class DailyCardPage extends GetView<DailyCardController> {
         child: Obx(
           () => Column(
             children: [
-              ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: true, width: Get.width - 32, height: Get.width - 32),
+              Stack(alignment: Alignment.center, children: [
+                //todo 이것도 current card 랑 일맥상통하게 해주는게 좋을듯(블러, 버튼)
+                ImageViewBox(
+                    url: controller.dailyCard.value.youProfileImage,
+                    isBlurred: true,
+                    blurValue: 24,
+                    width: Get.width - 32,
+                    height: Get.width - 32),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 1.5),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
+                ),
+              ]),
               //todo 추가 선택 가능하게 되면 아래껄로
               //if(controller.dailyCard.value.meStatus == MatchStatus.checked)
               if (controller.dailyController.isFirstChoice)

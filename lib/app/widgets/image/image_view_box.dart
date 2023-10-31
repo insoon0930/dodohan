@@ -22,7 +22,7 @@ class ImageViewBox extends StatelessWidget {
       required this.url,
       this.isBlurred = false,
       this.borderRadius = 10,
-      this.blurValue = 8.0})
+      this.blurValue = 10.0})
       : super(key: key);
 
   @override
@@ -49,7 +49,8 @@ class ImageViewBox extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
             child: Blur(
                 blur: isBlurred ? blurValue : 0,
-                colorOpacity: isBlurred ? 0.1 : 0,
+                colorOpacity: isBlurred ? 0.2 : 0,
+                // blurColor: Colors.white,
                 child: CachedNetworkImage(
                   imageUrl: url,
                   width: width ?? Get.width * 0.4,

@@ -39,7 +39,23 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           () => Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ImageViewBox(url: controller.dailyCard.value.youProfileImage, isBlurred: controller.dailyCard.value.isNotBlurred ? false : true, blurValue: 24, width: Get.width - 32, height: Get.width - 32),
+              Stack(alignment: Alignment.center, children: [
+                ImageViewBox(
+                    url: controller.dailyCard.value.youProfileImage,
+                    isBlurred: controller.dailyCard.value.isNotBlurred ? false : true,
+                    blurValue: 24,
+                    width: Get.width - 32,
+                    height: Get.width - 32),
+                if(!controller.dailyCard.value.isNotBlurred)
+                  Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 1.5),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
+                ),
+              ]),
               //거절함
               if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
                 _disabledBt('거절한 카드입니다')
