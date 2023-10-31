@@ -21,6 +21,7 @@ class StoreService extends BaseController {
   void onInit() async {
     List<ProductDetails> unsortedProductDetails = await getProductDetails();
     productDetails.value = unsortedProductDetails..sort((a, b) => a.rawPrice.compareTo(b.rawPrice));
+    print('productDetails.value: ${productDetails.value}');
 
     final Stream purchaseUpdated = InAppPurchase.instance.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
@@ -48,6 +49,7 @@ class StoreService extends BaseController {
         showLoading(); //추가됨
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
+          print('???: ${purchaseDetails.error}');
           Get.dialog(ErrorDialog(text: '구매 실패'.tr));
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
             purchaseDetails.status == PurchaseStatus.restored) {
@@ -122,7 +124,6 @@ class StoreService extends BaseController {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
     } else {
-      print('here~!!');
       var url = Uri.parse('https://applereceiptverify-m2rvoqphsq-uc.a.run.app');
       Map<String, dynamic> data = {
         'receiptDto': {
@@ -131,7 +132,6 @@ class StoreService extends BaseController {
         },
         'buyerId': AuthService.to.user.value.id,
       };
-      print('data!!: ${data.toString()}');
       String encodedData = jsonEncode(data);
       response = await http.post(url, body: encodedData, headers: headers);
       print('Response status: ${response.statusCode}');

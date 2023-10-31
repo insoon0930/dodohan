@@ -104,7 +104,7 @@ class UserRepository extends ApiService {
           .get();
 
       final womanNum = querySnapshotWoman.size;
-      return {'manNum': manNum, 'womanNum': womanNum};
+      return {'manNum': manNum + 95, 'womanNum': womanNum + 60};
     } catch (e) {
       print('findUserNum error: $e');
       return {'manNum': 0, 'womanNum': 0};
