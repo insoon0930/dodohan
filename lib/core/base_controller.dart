@@ -12,7 +12,8 @@ class BaseController extends GetxController {
   }
 
   void hideLoading() {
-    Get.back();
+    if(Get.isDialogOpen!) {
+      Get.back();
+    }
   }
-
 }
