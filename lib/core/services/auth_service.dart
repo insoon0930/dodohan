@@ -19,8 +19,8 @@ class AuthService extends ApiService {
   Rx<User> user = User().obs;
 
   //todo 개발시, 다시 열기
-  // bool get isAdmin => user.value.phoneNum =='+821066192550';
-  bool get isAdmin => user.value.phoneNum =='+821012341234' || user.value.phoneNum =='+821066192550';
+  bool get isAdmin => user.value.phoneNum =='+821066192550';
+  // bool get isAdmin => user.value.phoneNum =='+821012341234' || user.value.phoneNum =='+821066192550';
 
   Future<User> updateUser(User newUser) async {
     user.value = newUser;
