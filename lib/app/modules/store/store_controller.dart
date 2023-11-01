@@ -112,10 +112,13 @@ class StoreService extends BaseController {
     };
     if(Platform.isAndroid) {
       var url = Uri.parse('https://googlereceiptverify-m2rvoqphsq-uc.a.run.app');
-      Map<String, dynamic> data = {'receiptDto': {
-        'productId': purchaseDetails.productID,
-        'purchaseToken': purchaseDetails.verificationData.serverVerificationData
-      }, 'buyerId': AuthService.to.user.value.id};
+      Map<String, dynamic> data = {
+        'receiptDto': {
+          'productId': purchaseDetails.productID,
+          'purchaseToken': purchaseDetails.verificationData.serverVerificationData
+        },
+        'buyerId': AuthService.to.user.value.id
+      };
       print('data!!: ${data.toString()}');
       String encodedData = jsonEncode(data);
       response = await http.post(url, body: encodedData, headers: headers);
