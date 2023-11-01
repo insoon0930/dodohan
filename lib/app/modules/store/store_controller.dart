@@ -49,16 +49,15 @@ class StoreService extends BaseController {
         showLoading(); //추가됨
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
-          print('???: ${purchaseDetails.error}');
           Get.dialog(ErrorDialog(text: '구매 실패'.tr));
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
             purchaseDetails.status == PurchaseStatus.restored) {
           bool isValid = await _verifyPurchase(purchaseDetails);
           if (isValid) {
-            hideLoading();
             final int coin = int.parse(purchaseDetails.productID.split('_')[0]);
             await _userService.increaseCoin(AuthService.to.user.value.id, coin);
             AuthService.to.user.update((user) => user!.coin = user.coin + coin);
+            hideLoading();
             Get.snackbar('결제 성공!', '$coin 하트가 지급되었습니다');
           } else {
             hideLoading();
@@ -66,7 +65,6 @@ class StoreService extends BaseController {
           }
         }
         if (purchaseDetails.pendingCompletePurchase) {
-          hideLoading(); //추가됨
           await InAppPurchase.instance.completePurchase(purchaseDetails);
         }
       }
@@ -132,6 +130,7 @@ class StoreService extends BaseController {
         },
         'buyerId': AuthService.to.user.value.id,
       };
+      print('data!!: $data');
       String encodedData = jsonEncode(data);
       response = await http.post(url, body: encodedData, headers: headers);
       print('Response status: ${response.statusCode}');
