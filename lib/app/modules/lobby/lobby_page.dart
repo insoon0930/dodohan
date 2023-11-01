@@ -19,17 +19,14 @@ class LobbyPage extends GetView<LobbyController> {
         body: Obx(
           () => LazyLoadIndexedStack(
               index: controller.selectedTabIndex.value,
-              children: [
-                const HomeView(),
-                if(AuthService.to.isAdmin)
-                  const DailyView()
-                else
-                  const DailyUpdatingView(),
+              children: const [
+                HomeView(),
+                DailyView()
               ]),
         ),
         // body: Obx(() => tabPages[controller.selectedTabIndex.value]),
         //todo 개발시, 다시 열기
-        bottomNavigationBar: AuthService.to.isAdmin ? const MyBottomNavigationBar() : null,
+        bottomNavigationBar: const MyBottomNavigationBar(),
     );
   }
 }

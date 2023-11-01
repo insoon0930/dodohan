@@ -23,8 +23,7 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: ThemeFonts.bold.getTextStyle(size: 22)),
       elevation: 0,
       actions: [
-        if(AuthService.to.isAdmin)
-          GestureDetector(
+        GestureDetector(
             onTap: () => Get.toNamed(Routes.store),
             child: Container(
               color: Colors.transparent,
@@ -36,9 +35,7 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ).paddingOnly(right: 16),
             ),
-          )
-        else
-          const SettingIconButton().paddingOnly(right: 8),
+          ),
         const SizedBox(width: 1),
       ],
     );

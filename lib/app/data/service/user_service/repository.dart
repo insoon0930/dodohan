@@ -149,7 +149,7 @@ class UserRepository extends ApiService {
     try {
       QuerySnapshot snapshot = await firestore.collection('users').get();
       for (final doc in snapshot.docs) {
-        await doc.reference.update({'coin': 5});
+        await doc.reference.update({'coin': 10});
       }
       return;
     } catch (e) {

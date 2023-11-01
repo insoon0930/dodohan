@@ -81,10 +81,7 @@ class HomeView extends GetView<HomeController> {
               GestureDetector(
                   onTap: () => controller.updateProfileImage(),
                   child: CircleAvatar(backgroundImage: NetworkImage(controller.user.profileImage))),
-              if(AuthService.to.isAdmin)
-                const SettingIconButton()
-              else
-                const SizedBox()
+              const SettingIconButton(),
             ],
           ).paddingSymmetric(horizontal: 16),
         ],

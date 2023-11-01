@@ -102,10 +102,7 @@ class StoreService extends BaseController {
   }
 
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    //https://applereceiptverify-m2rvoqphsq-uc.a.run.app
-    // var url = Uri.https('example.com', 'whatsit/create');
     http.Response response;
-    //todo 주소 프로덕션 레벨로 업데이트 ++ http > https 수정
     const headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -119,11 +116,8 @@ class StoreService extends BaseController {
         },
         'buyerId': AuthService.to.user.value.id
       };
-      print('data!!: ${data.toString()}');
       String encodedData = jsonEncode(data);
       response = await http.post(url, body: encodedData, headers: headers);
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
     } else {
       var url = Uri.parse('https://applereceiptverify-m2rvoqphsq-uc.a.run.app');
       Map<String, dynamic> data = {
@@ -133,18 +127,14 @@ class StoreService extends BaseController {
         },
         'buyerId': AuthService.to.user.value.id,
       };
-      print('data!!: $data');
       String encodedData = jsonEncode(data);
       response = await http.post(url, body: encodedData, headers: headers);
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
     }
     if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
-    return true;
   }
 
 }

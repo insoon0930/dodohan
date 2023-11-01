@@ -31,7 +31,7 @@ class AuthService extends ApiService {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('uid', uid);
     user.uid = uid;
-    user.coin = 5;
+    user.coin = 10;
     User res = await _userService.create(user);
     return await updateUser(res);
   }
