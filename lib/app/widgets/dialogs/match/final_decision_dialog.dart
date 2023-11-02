@@ -9,8 +9,10 @@ import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../../core/utils/utility.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../data/enums.dart';
 import '../../../data/model/user.dart';
+import '../../../data/service/user_service/service.dart';
 import '../../image/image_view_box.dart';
 import '../../../data/model/match.dart';
 import '../action_dialog.dart';
@@ -19,12 +21,13 @@ import '../select/select_dialog.dart';
 import '../select/select_dialog_item.dart';
 
 class FinalDecisionDialog extends StatelessWidget {
+  final UserService _userService = UserService();
   final MatchService matchService;
   final Match match;
   final String phoneNum, profileImage;
   final Function function;
 
-  const FinalDecisionDialog(this.matchService,
+  FinalDecisionDialog(this.matchService,
       {Key? key,
       required this.match,
       required this.phoneNum,
@@ -54,13 +57,28 @@ class FinalDecisionDialog extends StatelessWidget {
                   //https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/Rectangle%209.png
                   ImageViewBox(url: profileImage, width: 160, height: 160),
                   const SizedBox(height: 16),
-                  Text('최종 선택을 해주세요', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
+                  Text('최종 선택을 해주세요\n(수락시 5 하트가 소모됩니다)', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
                   Row(
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              if (user.coin < 5) {
+                                Get.back();
+                                Get.dialog(ActionDialog(title: '하트 부족', text: '충전하러 가시겠습니까?', confirmCallback: () {
+                                  Get.back();
+                                  return Get.toNamed(Routes.store);
+                                }));
+                                return;
+                              }
+
+                              Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
                               matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.confirmed);
+                              //3. 유저 하트 갯수 차감 (백, 프론트)
+                              await _userService.increaseCoin(user.id, -5);
+                              AuthService.to.user.update((user) => user!.coin = user.coin - 5);
+
+                              Get.back();
                               Get.back();
                               //상대가 수락했을 때만,
                               function();
@@ -76,7 +94,9 @@ class FinalDecisionDialog extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () async {
+                              Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
                               await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
+                              Get.back();
                               Get.back();
                             },
                             style: BtStyle.confirm,

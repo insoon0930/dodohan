@@ -44,20 +44,18 @@ class CardItem extends GetView<DailyController> {
                         isBlurred: true),
                     const Spacer(),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('${dailyCard.youInfo!.height}cm'),
-                        Text('${dailyCard.youInfo!.age}살'),
+                        Expanded(child: Text('${dailyCard.youInfo!.height}cm', textAlign: TextAlign.center)),
+                        Expanded(child: Text('${dailyCard.youInfo!.age}살', textAlign: TextAlign.center)),
                       ],
-                    ),
+                    ).paddingSymmetric(horizontal: 4),
                     const SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(dailyCard.youInfo!.bodyShape!),
-                        Text(dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연'),
+                        Expanded(child: Text(dailyCard.youInfo!.bodyShape!, textAlign: TextAlign.center)),
+                        Expanded(child: Text(dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연', textAlign: TextAlign.center)),
                       ],
-                    ),
+                    ).paddingSymmetric(horizontal: 4),
                     const Spacer(),
                   ],
                 ),

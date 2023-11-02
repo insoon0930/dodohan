@@ -19,8 +19,8 @@ class CurrentCardController extends BaseController {
   @override
   Future<void> onInit() async {
     print('CurrentCardController OnInit started');
-    sentCards.value = [];
-    receivedCards.value = [];
+    sentCards.value = await _dailyCardService.findSent(user.id);
+    receivedCards.value = await _dailyCardService.findReceived(user.id);
     loading.value = false;
     super.onInit();
   }

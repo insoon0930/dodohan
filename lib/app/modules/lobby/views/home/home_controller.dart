@@ -136,13 +136,13 @@ class HomeController extends GetxController {
 
   Future<void> getMatchResult() async {
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-    //validation 1. 확인 가능 시간
-    // final int currentWeekday = DateTime.now().weekday;
-    // if(currentWeekday != 5) { //금요일
-    //   Get.back();
-    //   Get.dialog(const ErrorDialog(text: '금요일 외에는 확인이 불가능합니다'));
-    //   return;
-    // }
+    // validation 1. 확인 가능 시간
+    final int currentWeekday = DateTime.now().weekday;
+    if(currentWeekday != 5) { //금요일
+      Get.back();
+      Get.dialog(const ErrorDialog(text: '금요일 외에는 확인이 불가능합니다'));
+      return;
+    }
 
     //man: 6BqgdRdFUoZOPclxIzbD
     //woman: WdIHlWaTUAitbexvmW5E
@@ -210,7 +210,7 @@ class HomeController extends GetxController {
     //상대가 거절했음
     if((user.isMan! && match.womanStatus == MatchStatus.rejected) || (!user.isMan! && match.manStatus == MatchStatus.rejected)) {
       Get.back();
-      Get.dialog(const ErrorDialog(text: '최종 매칭 실패'));
+      Get.dialog(ActionDialog(title: '최종 매칭 실패', text: '상대방이 거절한 매치입니다', confirmCallback: () => Get.back()));
       return;
     }
 

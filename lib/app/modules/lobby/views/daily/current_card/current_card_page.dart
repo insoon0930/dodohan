@@ -48,14 +48,11 @@ class CurrentCardPage extends GetView<CurrentCardController> {
               ),
             if (controller.loading.value)
               const Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 28.0),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      color: ThemeColors.main,
-                    ),
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    color: ThemeColors.main,
                   ),
                 ),
               ),
