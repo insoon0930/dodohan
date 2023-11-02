@@ -65,6 +65,7 @@ class StoreService extends BaseController {
           }
         }
         if (purchaseDetails.pendingCompletePurchase) {
+          hideLoading(); //추가(결제 취소시?)
           await InAppPurchase.instance.completePurchase(purchaseDetails);
         }
       }

@@ -121,8 +121,8 @@ class DailyCardRepository extends ApiService {
       final QuerySnapshot myCardsSnapShot = await todayCardsRef
           .collection('cards')
           .where('youInfo.user', isEqualTo: user)
-          .where('youStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
-          .where('youBlockedMe', isEqualTo: false)
+          .where('meStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
+          .where('meBlockedYou', isEqualTo: false)
           .get();
       return myCardsSnapShot.docs
           .map((e) => DailyCard.fromJson(e.data() as Map<String, dynamic>))

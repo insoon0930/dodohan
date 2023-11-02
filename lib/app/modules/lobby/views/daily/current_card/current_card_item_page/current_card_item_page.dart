@@ -41,7 +41,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
             children: [
               Stack(alignment: Alignment.center, children: [
                 ImageViewBox(
-                    url: controller.dailyCard.value.youProfileImage,
+                    url: controller.dailyCard.value.oppositeProfileImage,
                     isBlurred: controller.dailyCard.value.isNotBlurred ? false : true,
                     blurValue: 24,
                     width: Get.width - 32,
@@ -57,24 +57,24 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
                 ),
               ]),
               //거절함
-              if (controller.meStatus == CardStatus.rejected1st || controller.meStatus == CardStatus.rejected2nd)
+              if (controller.myStatus == CardStatus.rejected1st || controller.myStatus == CardStatus.rejected2nd)
                 _disabledBt('거절한 카드입니다')
               //1차 선택
-              else if (controller.meStatus == CardStatus.checked || controller.meStatus == CardStatus.unChecked)
+              else if (controller.myStatus == CardStatus.checked || controller.myStatus == CardStatus.unChecked)
                 _firstChoice()
               //거절됨
-              else if (controller.youStatus == CardStatus.rejected1st)
+              else if (controller.yourStatus == CardStatus.rejected1st)
                   _disabledBt('매칭 실패')
               //2차 선택
-              else if (controller.meStatus == CardStatus.confirmed1st && controller.youMadeAFirstChoice)
+              else if (controller.myStatus == CardStatus.confirmed1st && (controller.youMadeAFirstChoice || controller.youMadeASecondChoice))
                 _secondChoice()
               //거절됨
-              else if (controller.youStatus == CardStatus.rejected2nd)
+              else if (controller.yourStatus == CardStatus.rejected2nd)
                 _disabledBt('매칭 실패')
               //매칭 성공
-              else if (controller.meStatus == CardStatus.confirmed2nd || controller.meStatus == CardStatus.confirmed2nd)
-                GestureDetector(onTap: () => controller.copyPhoneNum(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum)),
-                  child: Text(Utility.formatPhoneNum(controller.dailyCard.value.youPhoneNum), style: ThemeFonts.semiBold.getTextStyle(size: 25, color: ThemeColors.main, decoration: TextDecoration.underline)).paddingOnly(top: 16)),
+              else if (controller.myStatus == CardStatus.confirmed2nd && controller.yourStatus == CardStatus.confirmed2nd)
+                GestureDetector(onTap: () => controller.copyPhoneNum(Utility.formatPhoneNum(controller.dailyCard.value.yourPhoneNum)),
+                  child: Text(Utility.formatPhoneNum(controller.dailyCard.value.yourPhoneNum), style: ThemeFonts.semiBold.getTextStyle(size: 25, color: ThemeColors.main, decoration: TextDecoration.underline)).paddingOnly(top: 16)),
               if (controller.dailyCard.value.meStatus != CardStatus.checked)
                 const SizedBox(height: 16),
               _infoForm('학교', controller.youInfo.univ!),

@@ -39,10 +39,20 @@ class DailyCard {
 
   Map<String, dynamic> toJson() => _$DailyCardToJson(this);
 
+  ////confirmed1st, confirmed2nd, rejected2nd
   bool get iAmMe => AuthService.to.user.value.id == meInfo!.user;
-  bool get isNotBlurred => iAmMe
-      ? (youStatus == CardStatus.confirmed1st) || (youStatus == CardStatus.confirmed2nd) || (youStatus == CardStatus.rejected2nd)
-      : (meStatus == CardStatus.confirmed1st) || (meStatus == CardStatus.confirmed2nd) || (youStatus == CardStatus.rejected2nd);
+  CardStatus get myStatus => iAmMe ? meStatus : youStatus;
+  CardStatus get yourStatus => iAmMe ? youStatus : meStatus;
+  String get yourPhoneNum => iAmMe ? youPhoneNum : mePhoneNum;
+  bool get isNotBlurred =>
+      (myStatus == CardStatus.confirmed1st ||
+          myStatus == CardStatus.confirmed2nd ||
+          myStatus == CardStatus.rejected2nd) &&
+          (youStatus == CardStatus.confirmed1st ||
+              youStatus == CardStatus.confirmed2nd ||
+              youStatus == CardStatus.rejected2nd);
   int get differenceInDays => DateTime.now().difference(createdAt!).inDays;
   String get leftDay => 'D-${3 - differenceInDays}';
+  String get oppositeProfileImage => iAmMe ? youProfileImage : meProfileImage;
+  //ProfileImage
 }

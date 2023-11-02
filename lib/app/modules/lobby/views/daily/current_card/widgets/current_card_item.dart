@@ -32,13 +32,13 @@ class CurrentCardItem extends StatelessWidget {
                 Stack(
                   children: [
                     ImageViewBox(
-                        url: dailyCard.youProfileImage,
+                        url: dailyCard.oppositeProfileImage,
                         borderRadius: 8,
                         width: (Get.width - 64) / 3 - 4,
                         height: (Get.width - 64) / 3 - 4,
                         isBlurred: dailyCard.isNotBlurred ? false : true),
-                    if (dailyCard.meStatus != CardStatus.unChecked || dailyCard.meStatus != CardStatus.checked)
-                      Positioned(bottom: 4, right: 4, child: _leftDayTag()),
+                    // if (dailyCard.meStatus != CardStatus.unChecked || dailyCard.meStatus != CardStatus.checked)
+                    Positioned(bottom: 4, right: 4, child: _leftDayTag()),
                   ],
                 ),
                 const Spacer(),
@@ -71,16 +71,34 @@ class CurrentCardItem extends StatelessWidget {
   Widget _tag() {
     Color color;
     String text;
-    if(dailyCard.youStatus == CardStatus.confirmed1st) {
-     color = ThemeColors.blueLight.withOpacity(0.5);
-     text = '1차 수락';
-    } else if(dailyCard.youStatus == CardStatus.rejected1st) {
+    //내가 선택안하고 있는 경우 빈칸 보내주자 어떰(내가1confirm인데 상대가 2conf or 2rej 인경우)
+    //내가 선택안하고 있는 경우 빈칸 보내주자 어떰(내가unchecked or checked인데 상대가 1conf 인경우)
+      //내 상태 판단
+    if (dailyCard.myStatus == CardStatus.rejected1st || dailyCard.myStatus == CardStatus.rejected2nd) {
+      color = ThemeColors.redLight.withOpacity(0.4);
+      text = '거절 완료';
+    } else if ((dailyCard.myStatus == CardStatus.unChecked || dailyCard.myStatus == CardStatus.checked) && dailyCard.yourStatus == CardStatus.confirmed1st) {
+      return Container();
+    } else if (dailyCard.myStatus == CardStatus.confirmed1st && (dailyCard.yourStatus == CardStatus.confirmed2nd || dailyCard.yourStatus == CardStatus.rejected2nd)) {
+      return Container();
+    } else if (dailyCard.myStatus == CardStatus.confirmed1st &&
+        (dailyCard.yourStatus == CardStatus.unChecked || dailyCard.yourStatus == CardStatus.checked)) {
+      color = ThemeColors.yellowLight.withOpacity(0.5);
+      text = '대기중'; //1차
+    } else if (dailyCard.myStatus == CardStatus.confirmed2nd && dailyCard.yourStatus == CardStatus.confirmed1st) {
+      color = ThemeColors.yellowLight.withOpacity(0.5);
+      text = '대기중'; //2차
+      //상대방 상태만 판단
+    } else if (dailyCard.yourStatus == CardStatus.confirmed1st) {
+      color = ThemeColors.blueLight.withOpacity(0.5);
+      text = '1차 수락';
+    } else if (dailyCard.yourStatus == CardStatus.rejected1st) {
       color = ThemeColors.redLight.withOpacity(0.5);
       text = '1차 거절';
-    } else if(dailyCard.youStatus == CardStatus.confirmed2nd) {
+    } else if (dailyCard.yourStatus == CardStatus.confirmed2nd) {
       color = ThemeColors.main.withOpacity(0.6);
       text = '매칭 성공';
-    } else if(dailyCard.youStatus == CardStatus.rejected2nd) {
+    } else if (dailyCard.yourStatus == CardStatus.rejected2nd) {
       color = ThemeColors.redLight.withOpacity(0.5);
       text = '매칭 실패';
     } else {
@@ -100,18 +118,6 @@ class CurrentCardItem extends StatelessWidget {
   }
 
   Widget _leftDayTag() {
-    String text;
-    if(dailyCard.youStatus == CardStatus.confirmed1st) {
-      text = 'D-2';
-    } else if(dailyCard.youStatus == CardStatus.rejected1st) {
-      text = 'D-1';
-    } else if(dailyCard.youStatus == CardStatus.confirmed2nd) {
-      text = '매칭 성공';
-    } else if(dailyCard.youStatus == CardStatus.rejected2nd) {
-      text = '매칭 실패';
-    } else {
-      return Container();
-    }
     return Container(
       height: 15,
       decoration: BoxDecoration(

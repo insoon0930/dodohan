@@ -18,41 +18,47 @@ class CurrentCardPage extends GetView<CurrentCardController> {
         () => Stack(
           children: [
             if (!controller.loading.value)
-              Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      _divider('보낸 신청').paddingOnly(top: 4, bottom: 8),
-                      if(controller.sentCards.isEmpty)
-                        Text('보낸 신청이 없습니다', style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14)).paddingOnly(top: 8),
-                      _gridView(controller.sentCards),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      _divider('받은 신청').paddingOnly(top: 4, bottom: 8),
-                      if(controller.sentCards.isEmpty)
-                        Text('받은 신청이 없습니다', style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14)).paddingOnly(top: 8),
-                      _gridView(controller.receivedCards),
-                    ],
-                  ),
-                ),
-              ],
-            ).paddingAll(16),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        _divider('보낸 신청').paddingOnly(top: 4, bottom: 8),
+                        if (controller.sentCards.isEmpty)
+                          Text(
+                            '보낸 신청이 없습니다',
+                            style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                          ).paddingOnly(top: 58, bottom: 50),
+                        _gridView(controller.sentCards),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        _divider('받은 신청').paddingOnly(top: 12, bottom: 8),
+                        if (controller.receivedCards.isEmpty)
+                          Text(
+                            '받은 신청이 없습니다',
+                            style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                          ).paddingOnly(top: 58, bottom: 50),
+                        _gridView(controller.receivedCards),
+                      ],
+                    ),
+                  ],
+                ).paddingAll(16),
+              ),
             if (controller.loading.value)
               const Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 28.0),
-                    child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          color: ThemeColors.main,
-                        )),
-                  ))
+                child: Padding(
+                  padding: EdgeInsets.only(top: 28.0),
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      color: ThemeColors.main,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -60,26 +66,26 @@ class CurrentCardPage extends GetView<CurrentCardController> {
   }
 
   Widget _gridView(List<DailyCard> cardList) => GridView.builder(
-    padding: EdgeInsets.zero,
-    shrinkWrap: true,
-    itemCount: cardList.length,
-    itemBuilder: (context, index) =>
-        GestureDetector(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        itemCount: cardList.length,
+        itemBuilder: (context, index) => GestureDetector(
             onTap: () => controller.tapCard(index, cardList[index]),
             child: CurrentCardItem(dailyCard: cardList[index])),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 3,
-      mainAxisSpacing: 0,
-      crossAxisSpacing: 0,
-      childAspectRatio: 0.8,
-    ),
-  );
+          crossAxisCount: 3,
+          mainAxisSpacing: 0,
+          crossAxisSpacing: 0,
+          childAspectRatio: 0.8,
+        ),
+      );
 
   Widget _divider(String text) => Row(
-    children: [
-      const Expanded(child: Divider()),
-      Text(text, style: ThemeFonts.semiBold.getTextStyle()).paddingSymmetric(horizontal: 8),
-      const Expanded(child: Divider()),
-    ],
-  );
+        children: [
+          const Expanded(child: Divider()),
+          Text(text, style: ThemeFonts.semiBold.getTextStyle()).paddingSymmetric(horizontal: 8),
+          const Expanded(child: Divider()),
+        ],
+      );
 }

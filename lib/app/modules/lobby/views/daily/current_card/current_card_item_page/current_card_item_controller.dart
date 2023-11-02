@@ -23,12 +23,15 @@ class CurrentCardItemController extends BaseController {
 
   User get user => AuthService.to.user.value;
   bool get iAmMe => dailyCard.value.iAmMe;
-  CardStatus get meStatus => iAmMe ? dailyCard.value.meStatus : dailyCard.value.youStatus;
-  CardStatus get youStatus => iAmMe ? dailyCard.value.youStatus : dailyCard.value.meStatus;
+  CardStatus get myStatus => dailyCard.value.myStatus;
+  CardStatus get yourStatus => dailyCard.value.yourStatus;
   MeInfo get youInfo => iAmMe ? dailyCard.value.youInfo! : dailyCard.value.meInfo!;
   bool get youMadeAFirstChoice => iAmMe
       ? (dailyCard.value.youStatus == CardStatus.confirmed1st) || (dailyCard.value.youStatus == CardStatus.rejected1st)
       : (dailyCard.value.meStatus == CardStatus.confirmed1st) || (dailyCard.value.meStatus == CardStatus.rejected1st);
+  bool get youMadeASecondChoice => iAmMe
+      ? (dailyCard.value.youStatus == CardStatus.confirmed2nd) || (dailyCard.value.youStatus == CardStatus.rejected2nd)
+      : (dailyCard.value.meStatus == CardStatus.confirmed2nd) || (dailyCard.value.meStatus == CardStatus.rejected2nd);
 
   @override
   Future<void> onInit() async {
@@ -45,23 +48,34 @@ class CurrentCardItemController extends BaseController {
 
   Future<void> confirm({required int coin, required CardStatus cardStatus}) async {
     showLoading();
+    if(Get.isSnackbarOpen) {
+      await Get.closeCurrentSnackbar();
+    }
     //1. 하트있는지 확인하고 없으면 부족하다는 다이얼로그 띄우기
     if (user.coin < coin) {
-      Get.dialog(ActionDialog(title: '하트 부족', text: '충전하러 가시겠습니까?', confirmCallback: () => Get.to(Routes.store)));
+      hideLoading();
+      Get.back();
+      Get.dialog(ActionDialog(title: '하트 부족', text: '충전하러 가시겠습니까?', confirmCallback: () {
+        Get.back();
+        return Get.toNamed(Routes.store);
+      }));
+      return;
     }
     //2. 있으면 데일리매치 상태 업데이트 (백, 프론트)
     if (iAmMe) {
-      //백 //todo 아 이게 오늘자 껄로 업데이트하네 함수 따뤄둬야할 듯? 최근 삼일날짜 중에 찾아서 업데이트하는 식으로
+      //백
       await _dailyCardService.updateMeStatus(dailyCard.value, cardStatus);
       //프론트
       dailyCard.update((val) => val!.meStatus = cardStatus);
       currentCardController.sentCards[cardIndex].meStatus = cardStatus;
+      currentCardController.sentCards.refresh();
     } else {
       //백
       await _dailyCardService.updateYouStatus(dailyCard.value, cardStatus);
       //프론트
       dailyCard.update((val) => val!.youStatus = cardStatus);
       currentCardController.receivedCards[cardIndex].youStatus = cardStatus;
+      currentCardController.receivedCards.refresh();
     }
     //3. 유저 하트 갯수 차감 (백, 프론트)
     //백
@@ -70,11 +84,20 @@ class CurrentCardItemController extends BaseController {
     AuthService.to.user.update((user) => user!.coin = user.coin - coin);
     hideLoading();
     Get.back();
+
+    if (dailyCard.value.yourStatus == CardStatus.confirmed2nd) {
+      Get.snackbar('매칭 성공', '상대방의 전화번호를 확인하세요!');
+    } else if (dailyCard.value.yourStatus == CardStatus.rejected2nd) {
+      Get.snackbar('매칭 실패', '상대방이 거절한 상태입니다');
+    }
     Get.snackbar('수락 완료', '상대방의 선택을 기다려주세요');
   }
 
   Future<void> reject({required CardStatus cardStatus}) async {
     showLoading();
+    if(Get.isSnackbarOpen) {
+      await Get.closeCurrentSnackbar();
+    }
     //1. 데일리매치 상태 업데이트 (백, 프론트)
     if (iAmMe) {
       //백

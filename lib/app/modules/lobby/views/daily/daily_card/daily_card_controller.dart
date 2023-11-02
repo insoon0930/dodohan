@@ -8,9 +8,11 @@ import '../../../../../data/model/daily_card.dart';
 import '../../../../../data/model/me_info.dart';
 import '../../../../../data/model/user.dart';
 import '../../../../../data/service/daily_card_service/service.dart';
+import '../../../../../data/service/user_service/service.dart';
 
 class DailyCardController extends BaseController {
   final DailyCardService _dailyCardService = DailyCardService();
+  final UserService _userService = UserService();
   final DailyController dailyController = Get.find();
 
   final Rx<DailyCard> dailyCard = DailyCard().obs;
@@ -40,6 +42,12 @@ class DailyCardController extends BaseController {
     dailyCard.value.meStatus = CardStatus.confirmed1st;
     dailyController.todayCards[cardIndex].meStatus = CardStatus.confirmed1st;
     dailyController.todayCards.refresh();
+
+    //유저 하트 갯수 증가 (백, 프론트)
+    const int rewardCoin = 1;
+    await _userService.increaseCoin(user.id, rewardCoin);
+    AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
+    Get.snackbar('하트 지급', '참여 보상으로 하트가 1개 지급되었습니다');
   }
 
   Future<void> block() async {
