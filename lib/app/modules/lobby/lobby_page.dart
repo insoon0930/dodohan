@@ -24,8 +24,6 @@ class LobbyPage extends GetView<LobbyController> {
                 DailyView()
               ]),
         ),
-        // body: Obx(() => tabPages[controller.selectedTabIndex.value]),
-        //todo 개발시, 다시 열기
         bottomNavigationBar: const MyBottomNavigationBar(),
     );
   }

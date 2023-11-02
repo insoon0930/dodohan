@@ -1,17 +1,23 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:animated_background/animated_background.dart';
 import 'package:animated_digit/animated_digit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/modules/auth/login_by/login_by_controller.dart';
 import 'package:dodohan/core/theme/fonts.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/paddings.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../data/info_data.dart';
+import '../../../widgets/dialogs/action_dialog.dart';
+import '../../../widgets/dialogs/store_routing_dialog.dart';
 
 class LoginByPage extends StatefulWidget {
   const LoginByPage({Key? key}) : super(key: key);
@@ -69,7 +75,13 @@ class _LoginByPageState extends State<LoginByPage> with TickerProviderStateMixin
                 //   });
                 //   log('$asd');
                 // },
-                onPressed: () => Get.toNamed(Routes.login),
+                onPressed: () {
+                  if (kIsWeb) {
+                    Get.dialog(const StoreRoutingDialog());
+                    return;
+                  }
+                  Get.toNamed(Routes.login);
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +11,8 @@ import 'package:dodohan/app/widgets/dialogs/application_dialog.dart';
 import 'package:dodohan/app/widgets/dialogs/match/final_decision_dialog.dart';
 import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
 import 'package:dodohan/core/utils/time_utility.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/utils/utility.dart';
@@ -30,6 +34,7 @@ import '../../../../widgets/dialogs/error_dialog.dart';
 import '../../../../widgets/dialogs/match/decision_waiting_dialog.dart';
 import '../../../../widgets/dialogs/select/select_dialog.dart';
 import '../../../../widgets/dialogs/select/select_dialog_item.dart';
+import '../../../../widgets/dialogs/store_routing_dialog.dart';
 
 class HomeController extends GetxController {
   final StorageService storageService = Get.find();
@@ -137,6 +142,11 @@ class HomeController extends GetxController {
   }
 
   Future<void> getMatchResult() async {
+    if (kIsWeb) {
+      Get.dialog(const StoreRoutingDialog());
+      return;
+    }
+
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     // validation 1. 확인 가능 시간
     final int currentWeekday = DateTime.now().weekday;

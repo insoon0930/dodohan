@@ -30,7 +30,6 @@ class RegisterPage extends GetView<RegisterController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //todo 개발시
                       GestureDetector(
                           onTap: () => Get.offAllNamed(Routes.loginBy),
                           child: Container(
