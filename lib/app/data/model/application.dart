@@ -19,8 +19,15 @@ class Application {
   YouInfo? youInfo;
   @DateTimeConverter()
   DateTime? createdAt;
+  bool isRewarded;
 
-  Application({this.id = '', this.user, this.meInfo, this.youInfo, this.createdAt}) {
+  Application(
+      {this.id = '',
+      this.user,
+      this.meInfo,
+      this.youInfo,
+      this.createdAt,
+      this.isRewarded = false}) {
     createdAt ??= DateTime.now();
   }
 

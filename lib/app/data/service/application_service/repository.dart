@@ -130,6 +130,16 @@ class ApplicationRepository extends ApiService {
     }
   }
 
+  Future<void> updateIsRewarded(String applicationId) async {
+    try {
+      DocumentReference applicationRef = firestore.collection('applications').doc(applicationId);
+      await applicationRef.update({'isRewarded': true});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> deleteMany(String user) async {
     try {
       CollectionReference collection = firestore.collection('applications');

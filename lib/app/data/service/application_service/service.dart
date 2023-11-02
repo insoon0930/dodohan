@@ -28,13 +28,8 @@ class ApplicationService {
   }
 
   //@Get
-  Future<bool> isAlreadyApplied(String user) async {
-    Application? application = await _applicationRepository.findThisWeekOne(user);
-    if(application == null) {
-      return false;
-    } else {
-      return true;
-    }
+  Future<Application?> findThisWeekOne(String user) async {
+    return await _applicationRepository.findThisWeekOne(user);
   }
 
   //@Get
@@ -50,6 +45,12 @@ class ApplicationService {
   //@Path
   Future<void> updateBodyShapeType() async {
     await _applicationRepository.updateBodyShapeType();
+    return;
+  }
+
+  //@Path
+  Future<void> updateIsRewarded(String applicationId) async {
+    await _applicationRepository.updateIsRewarded(applicationId);
     return;
   }
 }

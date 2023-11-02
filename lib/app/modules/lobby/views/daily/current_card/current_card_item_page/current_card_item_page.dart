@@ -125,8 +125,8 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           style: BtStyle.standard(color: ThemeColors.main),
           onPressed: () => Get.dialog(ActionDialog(
                   title: '1차 수락',
-                  text: '하트 1개가 소모됩니다',
-                  confirmCallback: () => controller.confirm(coin: 1, cardStatus: CardStatus.confirmed1st),
+                  text: '하트 2개가 소모됩니다',
+                  confirmCallback: () => controller.confirm(coin: 2, cardStatus: CardStatus.confirmed1st),
                   buttonText: '수락하기')),
               child: const Text('수락'),
         ),

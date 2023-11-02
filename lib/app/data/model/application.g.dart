@@ -20,6 +20,7 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
         json['youInfo'], const YouInfoConverter().fromJson),
     createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
         json['createdAt'], const DateTimeConverter().fromJson),
+    isRewarded: json['isRewarded'] as bool? ?? false,
   );
 }
 
@@ -33,6 +34,7 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) =>
           instance.youInfo, const YouInfoConverter().toJson),
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
+      'isRewarded': instance.isRewarded,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

@@ -13,6 +13,7 @@ import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/utils/utility.dart';
 import '../../../../data/enums.dart';
+import '../../../../data/model/application.dart';
 import '../../../../data/model/me_info.dart';
 import '../../../../data/model/match.dart';
 import '../../../../data/model/user.dart';
@@ -114,7 +115,8 @@ class HomeController extends GetxController {
     }
 
     //validation 3. 이번주 신청한 기록 없는지 _applicationService
-    if (await _applicationService.isAlreadyApplied(user.id)) {
+    Application? application = await _applicationService.findThisWeekOne(user.id);
+    if (application != null) {
       Get.back();
       Get.dialog(const ErrorDialog(text: "신청된 상태입니다"));
       return;
@@ -148,8 +150,23 @@ class HomeController extends GetxController {
     //woman: WdIHlWaTUAitbexvmW5E
     Match? match = await _matchService.findOne(user.id, user.isMan!);
     if (match == null) {
+      //todo 여기서 분기. 어플리케이션 찾아봄(없음 - 이번 회차에 신청하지 않았습니다, 있음 - 분기.
+      Application? application = await _applicationService.findThisWeekOne(user.id);
       Get.back();
-      Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
+      if (application == null) {
+        Get.dialog(const ErrorDialog(text: "이번 회차에\n신청하지 않은 계정입니다"));
+        return;
+      }
+      if (application.isRewarded) {
+        Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
+      } else {
+        //todo (rewarded 없으면 지급다이얼로그) ++ 리워드 업데이트
+        const int rewardCoin = 1;
+        await _userService.increaseCoin(user.id, rewardCoin);
+        await _applicationService.updateIsRewarded(application.id);
+        AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
+        Get.dialog(ActionDialog(title: '매칭 실패', text: '다음을 기약하며\n하트 1개를 지급해드렸어요', confirmCallback: () => Get.back()));
+      }
       return;
     }
     String phoneNum;
