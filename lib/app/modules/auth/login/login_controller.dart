@@ -44,6 +44,7 @@ class LoginController extends BaseController {
       isCodeSent.value = true;
       Get.focusScope?.unfocus();
       codeFocusNode.requestFocus();
+      print('!!!!!');
     } else if (isCodeSent.value && code.value?.length == 6) {
       Get.focusScope?.unfocus();
       showLoading();
@@ -94,6 +95,7 @@ class LoginController extends BaseController {
           Get.dialog(ErrorDialog(text: '$e'));
         },
         codeSent: (String verificationId, int? resendToken) async {
+          AuthService.to.user.value.phoneNum = '+82${phone.value!.replaceAll('-', '').substring(1)}';
           hideLoading();
           print('codeSent: $verificationId, $resendToken');
           isCodeSent.value = true;
