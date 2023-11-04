@@ -44,6 +44,7 @@ class DailyCard {
   CardStatus get myStatus => iAmMe ? meStatus : youStatus;
   CardStatus get yourStatus => iAmMe ? youStatus : meStatus;
   String get yourPhoneNum => iAmMe ? youPhoneNum : mePhoneNum;
+  MeInfo? get yourInfo => iAmMe ? youInfo : meInfo;
   bool get isNotBlurred =>
       (myStatus == CardStatus.confirmed1st ||
           myStatus == CardStatus.confirmed2nd ||

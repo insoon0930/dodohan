@@ -42,7 +42,7 @@ class CurrentCardItem extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Text('${dailyCard.youInfo!.univ}', style: ThemeFonts.medium.getTextStyle()),
+                Text('${dailyCard.yourInfo!.univ}', style: ThemeFonts.medium.getTextStyle()),
                 const Spacer(),
               ],
             ),

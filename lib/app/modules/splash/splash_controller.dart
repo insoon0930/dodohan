@@ -12,8 +12,8 @@ class SplashController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     String? uid = prefs.getString('uid');
 
-    if (uid != null && AuthService.to.user.value.phoneNum != '') {
-      await AuthService.to.loginByUid(uid!);
+    if (uid != null) {
+      await AuthService.to.loginByUid(uid);
     } else {
       Get.offAllNamed(Routes.loginBy);
     }
