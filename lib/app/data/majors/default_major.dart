@@ -1,7 +1,7 @@
 import 'package:awesome_select/awesome_select.dart';
 
 final List<S2Choice<String>> defaultMajor = [
-  ...['경영', '경제', '광광', '광고홍보', '금융보험', '무역', '부동산', '비서', '세무', '회계']
+  ...['경영', '경제', '관광', '광고홍보', '금융보험', '무역', '부동산', '비서', '세무', '회계']
       .map((major) => S2Choice<String>(value: major, title: major, group: '상경')).toList(),
   ...['국제', '사회', '사회과학', '사회복지', '소비자', '심리', '아동가족', '언론정보', '정치외교', '지리', '행정']
       .map((major) => S2Choice<String>(value: major, title: major, group: '사회과학')).toList(),
