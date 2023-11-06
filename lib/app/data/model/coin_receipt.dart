@@ -8,18 +8,16 @@ part 'coin_receipt.g.dart';
 @JsonSerializable()
 class CoinReceipt {
   String id;
-  String customer;
+  String user;
   int amount;
   CoinReceiptType type;
-  Map<String, dynamic>? data;
   @DateTimeConverter()
   DateTime? createdAt;
 
   CoinReceipt({this.id = '',
-      required this.customer,
+      required this.user,
       required this.amount,
-      required this.type,
-      this.data}) {
+      required this.type}) {
     createdAt ??= DateTime.now();
   }
 
@@ -27,6 +25,6 @@ class CoinReceipt {
 
   Map<String, dynamic> toJson() => _$CoinReceiptToJson(this);
 
-  bool get isCharge => (type == CoinReceiptType.chargeCoin) || (type == CoinReceiptType.rejectReward) || (type == CoinReceiptType.consoleReward);
+  bool get isCharge => (type == CoinReceiptType.chargeCoin) || (type == CoinReceiptType.dailyReject) || (type == CoinReceiptType.weeklyReject) || (type == CoinReceiptType.consoleReward);
   bool get isConsume => (type == CoinReceiptType.dailyCard) || (type == CoinReceiptType.weeklyMatch);
 }

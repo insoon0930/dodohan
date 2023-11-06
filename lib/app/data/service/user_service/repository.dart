@@ -203,4 +203,14 @@ class UserRepository extends ApiService {
       rethrow;
     }
   }
+
+  Future<void> updateReviewRequestedAt(String userId) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      ref.update({'reviewRequestedAt': DateTime.now()});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

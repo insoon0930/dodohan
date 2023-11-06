@@ -170,9 +170,8 @@ class HomeController extends GetxController {
       if (application.isRewarded) {
         Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
       } else {
-        //todo (rewarded 없으면 지급다이얼로그) ++ 리워드 업데이트
         const int rewardCoin = 1;
-        await _userService.increaseCoin(user.id, rewardCoin);
+        await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.consoleReward);
         await _applicationService.updateIsRewarded(application.id);
         AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
         Get.dialog(ActionDialog(title: '매칭 실패', text: '다음을 기약하며\n하트 1개를 지급해드렸어요', confirmCallback: () => Get.back()));

@@ -1,5 +1,6 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dodohan/app/data/provider/api_service.dart';
@@ -63,6 +64,7 @@ class AuthService extends ApiService {
       return;
     } else if (user.value.idStatus == IdStatus.confirmed) {
       Get.offAllNamed(Routes.lobby);
+      1.delay().then((value) => _reviewRequest(user.value));
       return;
     }
     return;
@@ -110,5 +112,15 @@ class AuthService extends ApiService {
     }
 
     return needForceUpdate;
+  }
+
+  Future<void> _reviewRequest(User user) async {
+    final InAppReview inAppReview = InAppReview.instance;
+    bool isAvailable = await inAppReview.isAvailable();
+    Duration diff = DateTime.now().difference(user.reviewRequestedAt ?? user.createdAt!);
+    if(isAvailable && diff.inDays > 7) {
+      inAppReview.requestReview();
+      _userService.updateReviewRequestedAt(user.id);
+    }
   }
 }

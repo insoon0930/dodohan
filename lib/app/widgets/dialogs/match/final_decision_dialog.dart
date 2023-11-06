@@ -75,7 +75,7 @@ class FinalDecisionDialog extends StatelessWidget {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
                               matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.confirmed);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
-                              await _userService.increaseCoin(user.id, -5);
+                              await _userService.increaseCoin(user.id, -5, type: CoinReceiptType.weeklyMatch);
                               AuthService.to.user.update((user) => user!.coin = user.coin - 5);
 
                               Get.back();
@@ -96,6 +96,9 @@ class FinalDecisionDialog extends StatelessWidget {
                             onPressed: () async {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
                               await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
+                              //3. 유저 하트 갯수 차감 (백, 프론트)
+                              await _userService.increaseCoin(user.id, 1, type: CoinReceiptType.weeklyReject);
+                              AuthService.to.user.update((user) => user!.coin = user.coin + 1);
                               Get.back();
                               Get.back();
                             },

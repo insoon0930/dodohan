@@ -10,13 +10,15 @@ class User {
   @JsonKey(name: 'id', required: true)
   String id;
   String uid, phoneNum, profileImage, univ;
-  bool? isMan;
+  bool? isMan, isAndroid;
   int coin;
   IdStatus? idStatus;
   @DateTimeConverter()
   DateTime? createdAt;
   @DateTimeConverter()
   DateTime? deletedAt;
+  @DateTimeConverter()
+  DateTime? reviewRequestedAt;
 
   User({this.id = '',
     this.uid = '',
@@ -24,10 +26,12 @@ class User {
     this.profileImage = '',
     this.univ = '',
     this.isMan,
+    this.isAndroid,
     this.coin = 0,
     this.idStatus,
     this.createdAt,
     this.deletedAt,
+    this.reviewRequestedAt,
   }) {
     createdAt ??= DateTime.now();
   }
@@ -35,13 +39,4 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
-
-  // bool get saveOriginal => cameraSetting['saveOriginal'];
-  // bool get saveImmediately => cameraSetting['saveImmediately'];
-  // bool get cameraImmediately => cameraSetting['cameraImmediately'];
-  //
-  // bool get color => stampSetting['color'];
-  // bool get stamp => stampSetting['stamp'];
-  // bool get time => stampSetting['time'];
-  // bool get format => stampSetting['format'];
 }

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import '../../../core/base_controller.dart';
 import '../../../core/services/auth_service.dart';
+import '../../data/enums.dart';
 import '../../data/service/user_service/service.dart';
 import '../../widgets/dialogs/error_dialog.dart';
 import 'package:http/http.dart' as http;
@@ -55,7 +56,7 @@ class StoreService extends BaseController {
           bool isValid = await _verifyPurchase(purchaseDetails);
           if (isValid) {
             final int coin = int.parse(purchaseDetails.productID.split('_')[0]);
-            await _userService.increaseCoin(AuthService.to.user.value.id, coin);
+            await _userService.increaseCoin(AuthService.to.user.value.id, coin, type: CoinReceiptType.chargeCoin);
             AuthService.to.user.update((user) => user!.coin = user.coin + coin);
             hideLoading();
             Get.snackbar('결제 성공!', '$coin 하트가 지급되었습니다');

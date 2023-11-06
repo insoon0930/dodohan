@@ -79,7 +79,7 @@ class CurrentCardItemController extends BaseController {
     }
     //3. 유저 하트 갯수 차감 (백, 프론트)
     //백
-    await _userService.increaseCoin(user.id, -coin);
+    await _userService.increaseCoin(user.id, -coin, type: CoinReceiptType.dailyCard);
     //프론트
     AuthService.to.user.update((user) => user!.coin = user.coin - coin);
     hideLoading();
@@ -117,7 +117,7 @@ class CurrentCardItemController extends BaseController {
     //2. 유저 하트 갯수 증가 (백, 프론트)
     const int rewardCoin = 1;
     //백
-    await _userService.increaseCoin(user.id, rewardCoin);
+    await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReject);
     //프론트
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
     hideLoading();

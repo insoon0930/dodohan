@@ -1,10 +1,14 @@
+import 'package:dodohan/app/data/model/coin_receipt.dart';
 import 'package:dodohan/app/data/service/user_service/repository.dart';
+import '../../enums.dart';
 import '../../model/user.dart';
 import '../application_service/repository.dart';
+import '../coin_receipt_service/repository.dart';
 
 class UserService {
   final UserRepository _userRepository = UserRepository();
   final ApplicationRepository _applicationRepository = ApplicationRepository();
+  final CoinReceiptRepository _coinReceiptRepository = CoinReceiptRepository();
 
   UserService._privateConstructor();
   static final UserService _instance = UserService._privateConstructor();
@@ -50,12 +54,18 @@ class UserService {
   }
 
   //@Patch
+  Future<void> updateReviewRequestedAt(String userId) async {
+    return await _userRepository.updateReviewRequestedAt(userId);
+  }
+
+  //@Patch
   Future<void> updateDefaultCoin() async {
     return await _userRepository.updateDefaultCoin();
   }
 
   //@Patch
-  Future<void> increaseCoin(String userId, int coin) async {
+  Future<void> increaseCoin(String userId, int coin, {required CoinReceiptType type}) async {
+    await _coinReceiptRepository.create(CoinReceipt(user: userId, amount: coin, type: type));
     return await _userRepository.increaseCoin(userId, coin);
   }
 }

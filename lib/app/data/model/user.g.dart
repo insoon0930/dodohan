@@ -18,12 +18,15 @@ User _$UserFromJson(Map<String, dynamic> json) {
     profileImage: json['profileImage'] as String? ?? '',
     univ: json['univ'] as String? ?? '',
     isMan: json['isMan'] as bool?,
+    isAndroid: json['isAndroid'] as bool?,
     coin: json['coin'] as int? ?? 0,
     idStatus: $enumDecodeNullable(_$IdStatusEnumMap, json['idStatus']),
     createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
         json['createdAt'], const DateTimeConverter().fromJson),
     deletedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
         json['deletedAt'], const DateTimeConverter().fromJson),
+    reviewRequestedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
+        json['reviewRequestedAt'], const DateTimeConverter().fromJson),
   );
 }
 
@@ -34,12 +37,15 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'profileImage': instance.profileImage,
       'univ': instance.univ,
       'isMan': instance.isMan,
+      'isAndroid': instance.isAndroid,
       'coin': instance.coin,
       'idStatus': _$IdStatusEnumMap[instance.idStatus],
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
       'deletedAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.deletedAt, const DateTimeConverter().toJson),
+      'reviewRequestedAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.reviewRequestedAt, const DateTimeConverter().toJson),
     };
 
 const _$IdStatusEnumMap = {

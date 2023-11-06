@@ -45,7 +45,7 @@ class DailyCardController extends BaseController {
 
     //유저 하트 갯수 증가 (백, 프론트)
     const int rewardCoin = 1;
-    await _userService.increaseCoin(user.id, rewardCoin);
+    await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReward);
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
     Get.snackbar('하트 지급', '참여 보상으로 하트가 1개 지급되었습니다');
   }

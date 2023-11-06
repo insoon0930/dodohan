@@ -16,10 +16,8 @@ class CoinReceiptRepository extends ApiService {
       print('coinReceipt: $coinReceipt');
       final doc = firestore.collection('coinReceipts').doc();
       coinReceipt.id = doc.id;
-      print('coinReceipt:1 $coinReceipt');
       print('coinReceipt:2 ${coinReceipt.toJson()}');
       await doc.set(coinReceipt.toJson());
-      print('coinReceipt:3');
       return;
     } catch (e) {
       rethrow;

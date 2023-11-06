@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import '../../../../../core/base_controller.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../routes/app_routes.dart';
+import '../../../../data/enums.dart';
 import '../../../../data/model/pg_bill.dart';
 import '../../../../data/service/pg_bill_service/service.dart';
 import '../../../../data/service/user_service/service.dart';
@@ -72,7 +73,7 @@ class StoreSuccessController extends BaseController {
     final int endIndex =  orderName.indexOf('개');
     final String extractedString = orderName.substring(startIndex, endIndex);
     final int coin = int.parse(extractedString);
-    await _userService.increaseCoin(AuthService.to.user.value.id, coin);
+    await _userService.increaseCoin(AuthService.to.user.value.id, coin, type: CoinReceiptType.chargeCoin);
 
     hideLoading();
     AuthService.to.user.update((user) => user!.coin = user.coin + coin);
