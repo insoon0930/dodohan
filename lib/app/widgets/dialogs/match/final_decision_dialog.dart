@@ -57,13 +57,13 @@ class FinalDecisionDialog extends StatelessWidget {
                   //https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/Rectangle%209.png
                   ImageViewBox(url: profileImage, width: 160, height: 160),
                   const SizedBox(height: 16),
-                  Text('최종 선택을 해주세요\n(수락시 5 하트가 소모됩니다)', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
+                  Text('최종 선택을 해주세요\n(수락시 6 하트가 소모됩니다)', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
                   Row(
                     children: [
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () async {
-                              if (user.coin < 5) {
+                              if (user.coin < 6) {
                                 Get.back();
                                 Get.dialog(ActionDialog(title: '하트 부족', text: '충전하러 가시겠습니까?', confirmCallback: () {
                                   Get.back();
@@ -75,8 +75,8 @@ class FinalDecisionDialog extends StatelessWidget {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
                               matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.confirmed);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
-                              await _userService.increaseCoin(user.id, -5, type: CoinReceiptType.weeklyMatch);
-                              AuthService.to.user.update((user) => user!.coin = user.coin - 5);
+                              await _userService.increaseCoin(user.id, -6, type: CoinReceiptType.weeklyMatch);
+                              AuthService.to.user.update((user) => user!.coin = user.coin - 6);
 
                               Get.back();
                               Get.back();
@@ -97,10 +97,12 @@ class FinalDecisionDialog extends StatelessWidget {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
                               await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
-                              await _userService.increaseCoin(user.id, 1, type: CoinReceiptType.weeklyReject);
-                              AuthService.to.user.update((user) => user!.coin = user.coin + 1);
+                              final int rewardCoin = user.isMan! ? 1 : 2;
+                              await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.weeklyReject);
+                              AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
                               Get.back();
                               Get.back();
+                              Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
                             },
                             style: BtStyle.confirm,
                             child: Text('거절',

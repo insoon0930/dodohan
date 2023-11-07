@@ -52,7 +52,7 @@ class ApplicationRepository extends ApiService {
           .collection('applications')
           .where('user', isEqualTo: user)
           .where('createdAt',
-              isGreaterThanOrEqualTo: thisWeekDay < 5
+              isGreaterThanOrEqualTo: thisWeekDay < 6
                   ? lastFriday
                   : thisFriday)
           .get();
@@ -74,7 +74,7 @@ class ApplicationRepository extends ApiService {
           .collection('applications')
           .where('meInfo.isMan', isEqualTo: false)
           .where('createdAt',
-          isGreaterThanOrEqualTo: thisWeekDay < 5
+          isGreaterThanOrEqualTo: thisWeekDay < 6
               ? lastFriday
               : thisFriday)
           .get();

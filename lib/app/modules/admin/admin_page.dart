@@ -103,8 +103,12 @@ class AdminPage extends GetView<AdminController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ImageViewBox(url: item.studentIdImage),
-                ImageViewBox(url: item.profileImage),
+                GestureDetector(
+                    onTap: () => controller.openFullImage(item.studentIdImage),
+                    child: ImageViewBox(url: item.studentIdImage)),
+                GestureDetector(
+                    onTap: () => controller.openFullImage(item.profileImage),
+                    child: ImageViewBox(url: item.profileImage)),
               ],
             ).paddingOnly(bottom: 8),
             Row(

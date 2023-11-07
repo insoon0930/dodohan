@@ -160,7 +160,7 @@ class HomeController extends GetxController {
     //woman: WdIHlWaTUAitbexvmW5E
     Match? match = await _matchService.findOne(user.id, user.isMan!);
     if (match == null) {
-      //todo 여기서 분기. 어플리케이션 찾아봄(없음 - 이번 회차에 신청하지 않았습니다, 있음 - 분기.
+      //여기서 분기. 어플리케이션 찾아봄(없음 - 이번 회차에 신청하지 않았습니다, 있음 - 분기.)
       Application? application = await _applicationService.findThisWeekOne(user.id);
       Get.back();
       if (application == null) {
@@ -170,11 +170,11 @@ class HomeController extends GetxController {
       if (application.isRewarded) {
         Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
       } else {
-        const int rewardCoin = 1;
+        const int rewardCoin = 2;
         await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.consoleReward);
         await _applicationService.updateIsRewarded(application.id);
         AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
-        Get.dialog(ActionDialog(title: '매칭 실패', text: '다음을 기약하며\n하트 1개를 지급해드렸어요', confirmCallback: () => Get.back()));
+        Get.dialog(ActionDialog(title: '매칭 실패', text: '다음을 기약하며\n하트 $rewardCoin개를 지급해드렸어요', confirmCallback: () => Get.back()));
       }
       return;
     }

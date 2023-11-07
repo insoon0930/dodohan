@@ -33,7 +33,7 @@ class ApplicationDialog extends StatelessWidget {
           _youInfo(),
           const SizedBox(height: 16),
           Text(
-            "* 매칭 시, '전화번호'와 '프로필 사진'이 전달됩니다",
+            "* 1차 매칭 성사 시, '프로필 사진' 이 전달됩니다",
             style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 11),
           ),
           ElevatedButton(
@@ -49,8 +49,8 @@ class ApplicationDialog extends StatelessWidget {
   Widget _item(String type, String value) => Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text('$type : ', style: ThemeFonts.medium.getTextStyle(size: 14)),
-      Text(value, style: ThemeFonts.medium.getTextStyle(size: 14)),
+      Flexible(child: Text('$type : ', style: ThemeFonts.medium.getTextStyle(size: 14))),
+      Flexible(child: Text(value, style: ThemeFonts.medium.getTextStyle(size: 14))),
     ],
   ).paddingSymmetric(vertical: 6, horizontal: 16);
 
@@ -61,9 +61,9 @@ class ApplicationDialog extends StatelessWidget {
       Row(
         children: [
           Expanded(
-                  child: Text('나',
+                  child: Text('< 나 >',
                           textAlign: TextAlign.center,
-                          style: ThemeFonts.medium.getTextStyle(size: 14))
+                          style: ThemeFonts.semiBold.getTextStyle(size: 14))
                       .paddingSymmetric(vertical: 6)),
               Expanded(child: _item('학과', meInfo.major!)),
         ],
@@ -89,8 +89,8 @@ class ApplicationDialog extends StatelessWidget {
     children: [
       Row(
         children: [
-          Expanded(child: Text('이상형', textAlign: TextAlign.center, style: ThemeFonts.medium.getTextStyle(size: 14)).paddingSymmetric(vertical: 6)),
-          Expanded(child: _item('동일 학과 배제', youInfo.exceptSameMajor! ? '예' : '아니오')),
+          Expanded(child: Text('< 이상형 >', textAlign: TextAlign.center, style: ThemeFonts.semiBold.getTextStyle(size: 14)).paddingSymmetric(vertical: 6)),
+          Expanded(child: _item('동일 학과', youInfo.exceptSameMajor! ? '배제' : '상관 없음')),
         ],
       ),
       Row(

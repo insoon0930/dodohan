@@ -115,14 +115,14 @@ class CurrentCardItemController extends BaseController {
       currentCardController.sentCards.refresh();
     }
     //2. 유저 하트 갯수 증가 (백, 프론트)
-    const int rewardCoin = 1;
+    final int rewardCoin = user.isMan! ? 1 : 2;
     //백
     await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReject);
     //프론트
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
     hideLoading();
     Get.back();
-    Get.snackbar('하트 지급', '참여 보상으로 하트가 1개 지급되었습니다');
+    Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
   }
 
   Future<void> block() async {

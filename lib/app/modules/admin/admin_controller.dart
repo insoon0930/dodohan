@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +13,7 @@ import '../../data/model/you_info.dart';
 import '../../data/service/application_service/service.dart';
 import '../../data/service/identity_service/service.dart';
 import '../../data/service/you_info_service/service.dart';
+import '../../widgets/image/image_view_box.dart';
 
 class AdminController extends GetxController {
   final IdentityService identityService = IdentityService();
@@ -70,15 +73,8 @@ class AdminController extends GetxController {
   }
 
   //todo 404 해결 아마 공개 권한? 문제일듯
-  void launchDefaultUrl(String url) {
-    launchUrl(
-      Uri(
-        scheme: 'https',
-        host: 'firebasestorage.googleapis.com',
-        path: url.split('https://firebasestorage.googleapis.com/')[1],
-      ),
-      mode: LaunchMode.externalApplication,
-    );
+  void openFullImage(String url) {
+    Get.dialog(Dialog(child: CachedNetworkImage(imageUrl: url)));
   }
 
 
