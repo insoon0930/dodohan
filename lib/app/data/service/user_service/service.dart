@@ -59,6 +59,11 @@ class UserService {
   }
 
   //@Patch
+  void updateLastVisitedAt(String userId) {
+    return _userRepository.updateLastVisitedAt(userId);
+  }
+
+  //@Patch
   Future<void> updateDefaultCoin() async {
     return await _userRepository.updateDefaultCoin();
   }

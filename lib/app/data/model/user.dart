@@ -19,6 +19,8 @@ class User {
   DateTime? deletedAt;
   @DateTimeConverter()
   DateTime? reviewRequestedAt;
+  @DateTimeConverter()
+  DateTime? lastVisitedAt;
 
   User({this.id = '',
     this.uid = '',
@@ -34,6 +36,7 @@ class User {
     this.reviewRequestedAt,
   }) {
     createdAt ??= DateTime.now();
+    lastVisitedAt ??= DateTime.now();
   }
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

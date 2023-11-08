@@ -27,7 +27,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
         json['deletedAt'], const DateTimeConverter().fromJson),
     reviewRequestedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
         json['reviewRequestedAt'], const DateTimeConverter().fromJson),
-  );
+  )..lastVisitedAt = _$JsonConverterFromJson<Timestamp, DateTime>(
+      json['lastVisitedAt'], const DateTimeConverter().fromJson);
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -46,6 +47,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
           instance.deletedAt, const DateTimeConverter().toJson),
       'reviewRequestedAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.reviewRequestedAt, const DateTimeConverter().toJson),
+      'lastVisitedAt': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.lastVisitedAt, const DateTimeConverter().toJson),
     };
 
 const _$IdStatusEnumMap = {

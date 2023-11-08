@@ -54,6 +54,7 @@ class AuthService extends ApiService {
       prefs.setString('uid', uid);
     }
 
+    _userService.updateLastVisitedAt(user.value.id);
     Get.back();
     if (user.value.idStatus == null ||
         user.value.idStatus == IdStatus.rejected) {

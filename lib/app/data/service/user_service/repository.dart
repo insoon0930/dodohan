@@ -213,4 +213,14 @@ class UserRepository extends ApiService {
       rethrow;
     }
   }
+
+  void updateLastVisitedAt(String userId) {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      ref.update({'lastVisitedAt': DateTime.now()});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
