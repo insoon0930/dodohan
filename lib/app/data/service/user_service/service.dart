@@ -73,4 +73,9 @@ class UserService {
     await _coinReceiptRepository.create(CoinReceipt(user: userId, amount: coin, type: type));
     return await _userRepository.increaseCoin(userId, coin);
   }
+
+  //@Patch
+  Future<void> updateFcmToken(String userId, String? deviceToken) async {
+    return await _userRepository.updateFcmToken(userId, deviceToken);
+  }
 }

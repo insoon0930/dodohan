@@ -9,6 +9,7 @@ part 'user.g.dart';
 class User {
   @JsonKey(name: 'id', required: true)
   String id;
+  String? fcmToken;
   String uid, phoneNum, profileImage, univ;
   bool? isMan, isAndroid;
   int coin;
@@ -23,6 +24,7 @@ class User {
   DateTime? lastVisitedAt;
 
   User({this.id = '',
+    this.fcmToken,
     this.uid = '',
     this.phoneNum = '',
     this.profileImage = '',

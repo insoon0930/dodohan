@@ -223,4 +223,14 @@ class UserRepository extends ApiService {
       rethrow;
     }
   }
+
+  Future<void> updateFcmToken(String userId, String? fcmToken) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      ref.update({'fcmToken': fcmToken});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

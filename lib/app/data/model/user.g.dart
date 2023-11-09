@@ -13,6 +13,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
   );
   return User(
     id: json['id'] as String? ?? '',
+    fcmToken: json['fcmToken'] as String?,
     uid: json['uid'] as String? ?? '',
     phoneNum: json['phoneNum'] as String? ?? '',
     profileImage: json['profileImage'] as String? ?? '',
@@ -33,6 +34,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
+      'fcmToken': instance.fcmToken,
       'uid': instance.uid,
       'phoneNum': instance.phoneNum,
       'profileImage': instance.profileImage,

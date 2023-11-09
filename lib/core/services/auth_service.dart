@@ -1,3 +1,4 @@
+import 'package:dodohan/core/services/push_service.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -64,6 +65,7 @@ class AuthService extends ApiService {
       Get.offAllNamed(Routes.waiting);
       return;
     } else if (user.value.idStatus == IdStatus.confirmed) {
+      FcmService().init();
       Get.offAllNamed(Routes.lobby);
       1.delay().then((value) => _reviewRequest(user.value));
       return;
@@ -89,7 +91,7 @@ class AuthService extends ApiService {
     final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(seconds: 20),
-      minimumFetchInterval: const Duration(hours: 12),
+      minimumFetchInterval: const Duration(hours: 6),
     ));
     await remoteConfig.fetchAndActivate();
     return remoteConfig;
