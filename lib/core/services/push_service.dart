@@ -142,7 +142,7 @@ class FcmService extends GetxService {
     Map<String, dynamic> data = {
       'receiverId': receiverId,
       'type': type.name, //지금 안쓰긴 함
-      'title': '두근두근${InfoData.univInfo[user.univ]?.appTitleTail}',
+      'title': type == FcmPushType.weeklyDone ? '두근두근${InfoData.univInfo[user.univ]?.appTitleTail}' : type.title,
       'body': type.body,
     };
     String encodedData = jsonEncode(data);

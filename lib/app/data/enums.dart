@@ -6,15 +6,17 @@ enum CoinReceiptType { chargeCoin, dailyReject, weeklyReject, consoleReward, dai
 enum Region { seoul, busan, daegu, incheon, gwangju, daejeon, ulsan, sejong, gyeonggi, gangwon, chungbuk, chungnam, jeonbuk, jeonnam, gyeongbuk, gyeongnam, jeju }
 
 enum FcmPushType {
-  checkWeekly(body: "교내 소개팅 - 매칭 결과가 발표되었습니다!"),
-  weeklyDone(body: "교내 소개팅 - 상대방이 최종 결정을 내렸어요!"),
-  dailyDone1st(body: "오늘의 카드 - 누군가 나를 선택했어요!"),
-  dailyDone2nd(body: "오늘의 카드 - 상대방이 최종 결정을 내렸어요!"),
-  identity(body: "본인인증 심사 요청이 들어왔습니다"),
-  imageUpdateRequest(body: "이미지 변경 요청이 들어왔습니다");
+  checkWeekly(title: '', body: "금주의 매칭 결과가 발표되었습니다!"),
+  weeklyDone(title: '', body: "상대방이 최종 결정을 내렸어요!"),
+  dailyDone1st(title: '오늘의 카드', body: "누군가 나를 선택했어요!"),
+  dailyDone2nd(title: '오늘의 카드', body: "상대방이 최종 결정을 내렸어요!"),
+  identity(title: '관리자 알림', body: "본인인증 심사 요청이 들어왔습니다"),
+  imageUpdateRequest(title: '관리자 알림', body: "이미지 변경 요청이 들어왔습니다");
 
+  final String title;
   final String body;
   const FcmPushType({
+    required this.title,
     required this.body,
   });
 }
