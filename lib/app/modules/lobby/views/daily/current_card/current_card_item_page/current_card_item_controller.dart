@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import '../../../../../../../core/base_controller.dart';
 import '../../../../../../../core/services/auth_service.dart';
+import '../../../../../../../core/services/push_service.dart';
 import '../../../../../../../routes/app_routes.dart';
 import '../../../../../../data/enums.dart';
 import '../../../../../../data/model/daily_card.dart';
@@ -61,7 +62,7 @@ class CurrentCardItemController extends BaseController {
       }));
       return;
     }
-    //2. 있으면 데일리매치 상태 업데이트 (백, 프론트)
+    //2. 데일리매치 상태 업데이트 (백, 프론트)
     if (iAmMe) {
       //백
       await _dailyCardService.updateMeStatus(dailyCard.value, cardStatus);
@@ -91,6 +92,10 @@ class CurrentCardItemController extends BaseController {
       Get.snackbar('매칭 실패', '상대방이 거절한 상태입니다');
     }
     Get.snackbar('수락 완료', '상대방의 선택을 기다려주세요');
+
+    //fcm push
+    FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!,
+        cardStatus == CardStatus.confirmed1st ? FcmPushType.dailyDone1st : FcmPushType.dailyDone2nd);
   }
 
   Future<void> reject({required CardStatus cardStatus}) async {
@@ -123,6 +128,10 @@ class CurrentCardItemController extends BaseController {
     hideLoading();
     Get.back();
     Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
+
+    //fcm push
+    FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!,
+        cardStatus == CardStatus.rejected1st ? FcmPushType.dailyDone1st : FcmPushType.dailyDone2nd);
   }
 
   Future<void> block() async {

@@ -14,6 +14,7 @@ import 'package:dodohan/core/utils/time_utility.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/services/auth_service.dart';
+import '../../../../../core/services/push_service.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/utils/utility.dart';
 import '../../../../data/enums.dart';
@@ -294,6 +295,10 @@ class HomeController extends GetxController {
           user: user.id,
           newProfileImage: profileUrl,
           preProfileImage: user.profileImage));
+
+      //fcm push //todo 나중에 .env 도입해주던가
+      FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', FcmPushType.imageUpdateRequest);
+
       Get.back();
       Get.snackbar('신청 완료', '심사 통과시 반영됩니다');
     }

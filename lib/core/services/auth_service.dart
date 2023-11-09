@@ -65,7 +65,7 @@ class AuthService extends ApiService {
       Get.offAllNamed(Routes.waiting);
       return;
     } else if (user.value.idStatus == IdStatus.confirmed) {
-      FcmService().init();
+      FcmService.to.init();
       Get.offAllNamed(Routes.lobby);
       1.delay().then((value) => _reviewRequest(user.value));
       return;

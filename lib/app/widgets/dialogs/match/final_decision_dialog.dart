@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:dodohan/app/data/service/match_service/service.dart';
 import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
 import '../../../../core/services/auth_service.dart';
+import '../../../../core/services/push_service.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
@@ -73,6 +74,7 @@ class FinalDecisionDialog extends StatelessWidget {
                               }
 
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+                              FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
                               matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.confirmed);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
                               await _userService.increaseCoin(user.id, -6, type: CoinReceiptType.weeklyMatch);
@@ -95,6 +97,7 @@ class FinalDecisionDialog extends StatelessWidget {
                         child: ElevatedButton(
                             onPressed: () async {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+                              FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
                               await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
                               final int rewardCoin = user.isMan! ? 1 : 2;
@@ -123,6 +126,7 @@ class FinalDecisionDialog extends StatelessWidget {
                         return;
                       },
                       blockCallback: () async {
+                        FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
                         await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
                         Get.back();
                       },

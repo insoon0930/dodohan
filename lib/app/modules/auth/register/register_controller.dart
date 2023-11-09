@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:dodohan/app/data/model/identity.dart';
 import 'package:dodohan/core/services/auth_service.dart';
 
+import '../../../../core/services/push_service.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../../routes/app_routes.dart';
@@ -67,6 +68,9 @@ class RegisterController extends GetxController {
         profileImage: profileUrl,
         studentIdImage: studentIdUrl,
         isMan: isMan.value!, univ: univ.value));
+
+    //fcm push //todo 나중에 .env 도입해주던가
+    FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', FcmPushType.identity);
 
     //유저 모델 상태 업데이트
     user.idStatus = IdStatus.waiting;

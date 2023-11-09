@@ -11,6 +11,7 @@ import 'app/data/provider/api_service.dart';
 import 'app/data/service/user_service/service.dart';
 import 'app/modules/store/store_controller.dart';
 import 'core/services/auth_service.dart';
+import 'core/services/push_service.dart';
 import 'core/theme/main_theme.dart';
 import 'firebase_options.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         Get.put(AuthService(UserService()), permanent: true);
         Get.put(StorageService(), permanent: true);
         Get.put(StoreService(), permanent: true);
+        Get.put(FcmService(), permanent: true);
       }),
       theme: MainTheme.light,
       // darkTheme: MainTheme.dark,

@@ -62,13 +62,15 @@ class WomanUserPage extends GetView<WomanUserController> {
                     height: Get.width * 0.5,
               child: Text('${item.deletedAt}', style: const TextStyle(color: Colors.white)),)
             ]),
-        Column(
-          children: [
-            SelectableText(item.id),
-            const Text('createdAt:'),
-            Text('${item.createdAt}'),
-            //todo 해당 유저의 meInfo youInfo 들고오기
-          ],
+        Flexible(
+          child: Column(
+            children: [
+              SelectableText(item.id),
+              const Text('createdAt:'),
+              Text('${item.createdAt}'),
+              //todo 해당 유저의 meInfo youInfo 들고오기
+            ],
+          ),
         ),
       ],
     ),
