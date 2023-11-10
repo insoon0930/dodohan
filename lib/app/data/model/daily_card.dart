@@ -35,7 +35,7 @@ class DailyCard {
     createdAt ??= DateTime.now();
   }
 
-  factory DailyCard.fromJson(Map<String, dynamic> json) => _$DailyCardFromJson(json);
+  factory DailyCard.fromJson(json) => _$DailyCardFromJson(json as Map<String, dynamic>);
 
   Map<String, dynamic> toJson() => _$DailyCardToJson(this);
 

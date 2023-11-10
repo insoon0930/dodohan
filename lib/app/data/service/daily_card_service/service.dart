@@ -1,14 +1,15 @@
+import 'package:dodohan/app/data/model/daily_opened_card.dart';
 import 'package:dodohan/app/data/service/daily_card_service/repository.dart';
 import '../../enums.dart';
 import '../../model/daily_card.dart';
 import '../../provider/api_service.dart';
+import '../daily_opened_card_service/repository.dart';
 import '../user_service/repository.dart';
 import '../you_info_service/repository.dart';
 
 class DailyCardService extends ApiService  {
   final DailyCardRepository _dailyCardRepository = DailyCardRepository();
-  final UserRepository _userRepository = UserRepository();
-  final YouInfoRepository _youInfoRepository = YouInfoRepository();
+  final DailyOpenedCardRepository _dailyOpenedCardRepository = DailyOpenedCardRepository();
 
   DailyCardService._privateConstructor();
   static final DailyCardService _instance = DailyCardService._privateConstructor();
@@ -33,7 +34,11 @@ class DailyCardService extends ApiService  {
 
   //@Patch
   Future<void> updateMeStatus(DailyCard dailyCard, CardStatus status) async {
-    return await _dailyCardRepository.updateMeStatus(dailyCard, status);
+    final DailyCard updatedDailyCard = await _dailyCardRepository.updateMeStatus(dailyCard, status);
+    if (updatedDailyCard.meStatus == CardStatus.confirmed1st && updatedDailyCard.youStatus == CardStatus.confirmed1st) {
+      _dailyOpenedCardRepository.create(DailyOpenedCard(me: dailyCard.meInfo!.user!, you: dailyCard.youInfo!.user!));
+    }
+    return;
   }
 
   //@Patch
@@ -43,7 +48,11 @@ class DailyCardService extends ApiService  {
 
   //@Patch
   Future<void> updateYouStatus(DailyCard dailyCard, CardStatus status) async {
-    return await _dailyCardRepository.updateYouStatus(dailyCard, status);
+    final DailyCard updatedDailyCard = await _dailyCardRepository.updateYouStatus(dailyCard, status);
+    if (updatedDailyCard.meStatus == CardStatus.confirmed1st && updatedDailyCard.youStatus == CardStatus.confirmed1st) {
+      _dailyOpenedCardRepository.create(DailyOpenedCard(me: dailyCard.meInfo!.user!, you: dailyCard.youInfo!.user!));
+    }
+    return;
   }
 
   // //@Patch

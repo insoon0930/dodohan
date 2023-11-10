@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import '../../../core/base_controller.dart';
 import '../../../core/services/auth_service.dart';
+import '../../../core/services/push_service.dart';
 import '../../data/enums.dart';
 import '../../data/service/user_service/service.dart';
 import '../../widgets/dialogs/error_dialog.dart';
@@ -59,6 +60,24 @@ class StoreService extends BaseController {
             await _userService.increaseCoin(AuthService.to.user.value.id, coin, type: CoinReceiptType.chargeCoin);
             AuthService.to.user.update((user) => user!.coin = user.coin + coin);
             hideLoading();
+
+            FcmPushType fcmPushType = FcmPushType.coinPurchased3;
+            switch (coin) {
+              case 3:
+                fcmPushType = FcmPushType.coinPurchased3;
+                break;
+              case 6:
+                fcmPushType = FcmPushType.coinPurchased6;
+                break;
+              case 12:
+                fcmPushType = FcmPushType.coinPurchased12;
+                break;
+              case 24:
+                fcmPushType = FcmPushType.coinPurchased24;
+                break;
+            }
+            FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', fcmPushType);
+
             Get.snackbar('결제 성공!', '$coin 하트가 지급되었습니다');
           } else {
             hideLoading();

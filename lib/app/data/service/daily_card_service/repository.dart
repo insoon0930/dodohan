@@ -26,7 +26,7 @@ class DailyCardRepository extends ApiService {
           .where('meInfo.user', isEqualTo: user)
           .get();
       return myCardsSnapShot.docs
-          .map((e) => DailyCard.fromJson(e.data() as Map<String, dynamic>))
+          .map((e) => DailyCard.fromJson(e.data()))
           .toList();
     } catch (e) {
       return [];
@@ -55,27 +55,27 @@ class DailyCardRepository extends ApiService {
     }
   }
 
-  Future<void> updateMeStatus(DailyCard dailyCard, CardStatus status) async {
+  Future<DailyCard> updateMeStatus(DailyCard dailyCard, CardStatus status) async {
     try {
       final DocumentReference todayCardsRef =
           firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash(subtractDay: dailyCard.differenceInDays));
-      final DocumentReference dailyCardDocRef =
-          todayCardsRef.collection('cards').doc(dailyCard.id);
+      final DocumentReference dailyCardDocRef = todayCardsRef.collection('cards').doc(dailyCard.id);
       await dailyCardDocRef.update({'meStatus': status.name});
-      return;
+      final updatedDailyCard = await dailyCardDocRef.get();
+      return DailyCard.fromJson(updatedDailyCard.data());
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> updateYouStatus(DailyCard dailyCard, CardStatus status) async {
+  Future<DailyCard> updateYouStatus(DailyCard dailyCard, CardStatus status) async {
     try {
       final DocumentReference todayCardsRef =
           firestore.collection('dailyCards').doc(TimeUtility.todayWithSlash(subtractDay: dailyCard.differenceInDays));
-      final DocumentReference dailyCardDocRef =
-          todayCardsRef.collection('cards').doc(dailyCard.id);
+      final DocumentReference dailyCardDocRef = todayCardsRef.collection('cards').doc(dailyCard.id);
       await dailyCardDocRef.update({'youStatus': status.name});
-      return;
+      final updatedDailyCard = await dailyCardDocRef.get();
+      return DailyCard.fromJson(updatedDailyCard.data());
     } catch (e) {
       rethrow;
     }
@@ -108,7 +108,7 @@ class DailyCardRepository extends ApiService {
           .where('meBlockedYou', isEqualTo: false)
           .get();
       return myCardsSnapShot.docs
-          .map((e) => DailyCard.fromJson(e.data() as Map<String, dynamic>))
+          .map((e) => DailyCard.fromJson(e.data()))
           .toList();
     } catch (e) {
       return [];
@@ -125,7 +125,7 @@ class DailyCardRepository extends ApiService {
           .where('meBlockedYou', isEqualTo: false)
           .get();
       return myCardsSnapShot.docs
-          .map((e) => DailyCard.fromJson(e.data() as Map<String, dynamic>))
+          .map((e) => DailyCard.fromJson(e.data()))
           .toList();
     } catch (e) {
       return [];
