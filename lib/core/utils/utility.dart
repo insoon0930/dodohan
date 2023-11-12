@@ -25,7 +25,7 @@ abstract class Utility {
     );
   }
 
-  static Future<XFile?> getImage({ImageSource source = ImageSource.gallery}) async {
+  static Future<XFile?> getImage({ImageSource source = ImageSource.gallery, bool onlySquare = false}) async {
     if (!kIsWeb) {
       final Permission requiredPermission;
       if(source == ImageSource.camera) {
@@ -48,6 +48,7 @@ abstract class Utility {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
         aspectRatioPresets: [CropAspectRatioPreset.square],
+        aspectRatio: onlySquare ? const CropAspectRatio(ratioX: 1, ratioY: 1) : null,
         compressQuality: 100,
         uiSettings: [
           AndroidUiSettings(

@@ -56,7 +56,7 @@ class CurrentCardItemController extends BaseController {
     if (user.coin < coin) {
       hideLoading();
       Get.back();
-      Get.dialog(ActionDialog(title: '하트 부족', text: '충전하러 가시겠습니까?', confirmCallback: () {
+      Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
         Get.back();
         return Get.toNamed(Routes.store);
       }));

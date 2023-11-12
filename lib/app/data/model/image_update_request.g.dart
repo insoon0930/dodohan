@@ -20,6 +20,7 @@ ImageUpdateRequest _$ImageUpdateRequestFromJson(Map<String, dynamic> json) {
         IdStatus.waiting,
     createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
         json['createdAt'], const DateTimeConverter().fromJson),
+    coinUsed: json['coinUsed'] as bool? ?? false,
   );
 }
 
@@ -32,6 +33,7 @@ Map<String, dynamic> _$ImageUpdateRequestToJson(ImageUpdateRequest instance) =>
       'status': _$IdStatusEnumMap[instance.status]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
+      'coinUsed': instance.coinUsed,
     };
 
 const _$IdStatusEnumMap = {

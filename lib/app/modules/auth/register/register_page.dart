@@ -223,7 +223,8 @@ class RegisterPage extends GetView<RegisterController> {
                     addedCallback: (XFile file) =>
                         controller.profileImage.value = file,
                     deletedCallback: () =>
-                        controller.profileImage.value = null),
+                        controller.profileImage.value = null,
+                    onlySquare: true),
               ),
               Text('* 이목구비 뚜렷한 정면 사진 필수'.tr,
                   style: ThemeFonts.extraBold

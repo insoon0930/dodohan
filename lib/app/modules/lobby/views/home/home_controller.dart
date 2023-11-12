@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/services/push_service.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/utils/utility.dart';
+import '../../../../../routes/app_routes.dart';
 import '../../../../data/enums.dart';
 import '../../../../data/model/application.dart';
 import '../../../../data/model/me_info.dart';
@@ -250,7 +252,26 @@ class HomeController extends GetxController {
     return _applicationService.getApplicantsNumStream();
   }
 
-  Future<void> updateProfileImage() async {
+  Future<void> tapProfileImage() async {
+    Get.dialog(SelectDialog(itemHeight: 60, items: [
+      SelectDialogItem(
+          text: '사진 변경',
+          onTap: () {
+            Get.back();
+            _updateProfileImage();
+          },
+          first: true,
+          style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+      SelectDialogItem(
+          text: '사진 보기',
+          onTap: () => Get.dialog(Dialog(child: CachedNetworkImage(imageUrl: user.profileImage))),
+          last: true,
+          style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+    ]));
+    return ;
+  }
+
+  Future<void> _updateProfileImage() async {
     //신청중인 상태인지 확인
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     ImageUpdateRequest? waitingRequest = await _imageUpdateRequestService.findOneWaiting(user.id);
@@ -261,10 +282,17 @@ class HomeController extends GetxController {
 
     Get.dialog(ActionDialog(
       title: '프로필 변경 신청',
-      text: '본인 확인이 어려운 사진은 반려될 수 있습니다 (마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...)',
+      text: '본인 확인이 어려운 사진은 반려될 수 있습니다 (마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...) \n\n * 하트 1개가 소모됩니다',
       confirmCallback: () {
         Get.back();
-        return Get.dialog(SelectDialog(itemHeight: 60, items: [
+        if (user.coin < 1) {
+          Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
+            Get.back();
+            Get.toNamed(Routes.store);
+          }));
+          return;
+        }
+        Get.dialog(SelectDialog(itemHeight: 60, items: [
           SelectDialogItem(
               text: '카메라',
               onTap: () => _createRequest(ImageSource.camera),
@@ -278,13 +306,12 @@ class HomeController extends GetxController {
         ]));
       },
     ));
-
     return ;
   }
 
   Future<void> _createRequest(ImageSource imageSource) async {
     Get.back();
-    XFile? result = await Utility.getImage(source: imageSource);
+    XFile? result = await Utility.getImage(source: imageSource, onlySquare: true);
     if (result != null) {
       Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
       String profileUrl = await storageService.uploadFile(
@@ -294,7 +321,13 @@ class HomeController extends GetxController {
       await _imageUpdateRequestService.create(ImageUpdateRequest(
           user: user.id,
           newProfileImage: profileUrl,
-          preProfileImage: user.profileImage));
+          preProfileImage: user.profileImage,
+          coinUsed: true));
+
+      //백
+      await _userService.increaseCoin(user.id, -1, type: CoinReceiptType.imageUpdateRequest);
+      //프론트
+      AuthService.to.user.update((user) => user!.coin = user.coin -1);
 
       //fcm push //todo 나중에 .env 도입해주던가
       FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', FcmPushType.imageUpdateRequest);

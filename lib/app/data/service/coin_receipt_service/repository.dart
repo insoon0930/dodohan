@@ -13,10 +13,8 @@ class CoinReceiptRepository extends ApiService {
 
   Future<void> create(CoinReceipt coinReceipt) async {
     try {
-      print('coinReceipt: $coinReceipt');
       final doc = firestore.collection('coinReceipts').doc();
       coinReceipt.id = doc.id;
-      print('coinReceipt:2 ${coinReceipt.toJson()}');
       await doc.set(coinReceipt.toJson());
       return;
     } catch (e) {

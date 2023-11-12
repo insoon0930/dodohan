@@ -2,7 +2,7 @@ enum StorageBucket { profile, studentId }
 enum IdStatus { waiting, confirmed, rejected }
 enum MatchStatus { unChecked, checked, confirmed, rejected }
 enum CardStatus { unChecked, checked, confirmed1st, rejected1st, confirmed2nd, rejected2nd }
-enum CoinReceiptType { chargeCoin, dailyReject, weeklyReject, consoleReward, dailyCard, weeklyMatch, dailyReward }
+enum CoinReceiptType { chargeCoin, dailyReject, weeklyReject, consoleReward, dailyCard, weeklyMatch, dailyReward, imageUpdateRequest, imageUpdateReject }
 enum Region { seoul, busan, daegu, incheon, gwangju, daejeon, ulsan, sejong, gyeonggi, gangwon, chungbuk, chungnam, jeonbuk, jeonnam, gyeongbuk, gyeongnam, jeju }
 
 enum FcmPushType {
@@ -12,6 +12,12 @@ enum FcmPushType {
   dailyDone2nd(title: '오늘의 카드', body: "상대방이 최종 결정을 내렸어요!"),
   identity(title: '관리자 알림', body: "본인인증 심사 요청이 들어왔습니다"),
   imageUpdateRequest(title: '관리자 알림', body: "이미지 변경 요청이 들어왔습니다"),
+
+  imageUpdateConfirm(title: '프로필 변경 승인', body: "프로필 이미지 변경이 완료되었습니다"),
+  imageUpdateReject(title: '프로필 변경 실패', body: "프로필 사진 정책에 맞지 않아 반려되었습니다"),
+
+  identityConfirm(title: '본인 인증 승인', body: "본인 인증이 완료되었습니다"),
+  identityReject(title: '본인 인증 실패', body: "학생증 및 프로필 사진을 다시 확인해주세요"),
 
   coinPurchased3(title: '관리자 알림', body: "3코인 구매가 이루어졌습니다. +3,900₩"),
   coinPurchased6(title: '관리자 알림', body: "6코인 구매가 이루어졌습니다. +5,900₩"),

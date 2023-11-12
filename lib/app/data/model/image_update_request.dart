@@ -14,6 +14,7 @@ class ImageUpdateRequest {
   IdStatus status;
   @DateTimeConverter()
   DateTime? createdAt;
+  bool coinUsed;
 
   ImageUpdateRequest(
       {this.id = '',
@@ -21,7 +22,8 @@ class ImageUpdateRequest {
         this.newProfileImage = '',
         this.preProfileImage = '',
         this.status = IdStatus.waiting,
-        this.createdAt}) {
+        this.createdAt,
+        this.coinUsed = false}) {
     createdAt ??= DateTime.now();
   }
 

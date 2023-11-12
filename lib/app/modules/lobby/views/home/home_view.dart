@@ -79,7 +79,7 @@ class HomeView extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                  onTap: () => controller.updateProfileImage(),
+                  onTap: () => controller.tapProfileImage(),
                   child: CircleAvatar(backgroundImage: NetworkImage(controller.user.profileImage))),
               const SettingIconButton(),
             ],

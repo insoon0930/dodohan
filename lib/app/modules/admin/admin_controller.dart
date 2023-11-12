@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/services/auth_service.dart';
+import '../../../core/services/push_service.dart';
 import '../../../routes/app_routes.dart';
 import '../../data/dummy.dart';
+import '../../data/enums.dart';
 import '../../data/model/identity.dart';
 import '../../data/model/me_info.dart';
 import '../../data/model/user.dart';
@@ -38,6 +40,7 @@ class AdminController extends GetxController {
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await identityService.confirmed(identity);
     waitingIds.removeWhere((item) => item.id == identity.id);
+    FcmService.to.sendFcmPush(identity.user, FcmPushType.identityConfirm);
     Get.back();
   }
 
@@ -45,6 +48,7 @@ class AdminController extends GetxController {
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await identityService.rejected(identity);
     waitingIds.removeWhere((item) => item.id == identity.id);
+    FcmService.to.sendFcmPush(identity.user, FcmPushType.identityReject);
     Get.back();
   }
 

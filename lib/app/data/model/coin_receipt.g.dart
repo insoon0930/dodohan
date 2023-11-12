@@ -32,6 +32,8 @@ const _$CoinReceiptTypeEnumMap = {
   CoinReceiptType.dailyCard: 'dailyCard',
   CoinReceiptType.weeklyMatch: 'weeklyMatch',
   CoinReceiptType.dailyReward: 'dailyReward',
+  CoinReceiptType.imageUpdateRequest: 'imageUpdateRequest',
+  CoinReceiptType.imageUpdateReject: 'imageUpdateReject',
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

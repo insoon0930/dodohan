@@ -24,7 +24,15 @@ class LobbyPage extends GetView<LobbyController> {
                 DailyView()
               ]),
         ),
-        bottomNavigationBar: const MyBottomNavigationBar(),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => controller.selectedTabIndex.value == 0
+              ? controller.showHowToUseWeekly()
+              : controller.showHowToUseDaily(),
+          mini: true,
+          elevation: 3,
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(46.0))),
+          child: const Icon(Icons.question_mark, color: Colors.white)),
+      bottomNavigationBar: const MyBottomNavigationBar(),
     );
   }
 }

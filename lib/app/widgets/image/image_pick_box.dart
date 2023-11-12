@@ -16,11 +16,13 @@ class ImagePickBox extends StatelessWidget {
   final XFile? file;
   final Function addedCallback;
   final Function deletedCallback;
+  final bool onlySquare;
 
   const ImagePickBox(
       {required this.file,
       required this.addedCallback,
       required this.deletedCallback,
+      this.onlySquare = false,
       Key? key})
       : super(key: key);
 
@@ -80,7 +82,7 @@ class ImagePickBox extends StatelessWidget {
         text: '사진',
         onTap: () async {
           Get.back();
-          XFile? result = await Utility.getImage(source: ImageSource.gallery);
+          XFile? result = await Utility.getImage(source: ImageSource.gallery, onlySquare: onlySquare);
           if (result != null) {
             addedCallback(result);
             // added(result);
