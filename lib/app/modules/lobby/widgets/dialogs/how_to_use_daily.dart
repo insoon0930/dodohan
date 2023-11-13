@@ -14,7 +14,7 @@ class HowToUseDailyDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         padding:
-        const EdgeInsets.only(top: 39, bottom: 30, left: 30, right: 30),
+        const EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(33)),
             color: Colors.white),
@@ -34,7 +34,7 @@ class HowToUseDailyDialog extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               "* '매칭 참여'와 '거절 의사 표현'만 해도 '보상'이 주어져요!",
-              style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 11),
+              style: ThemeFonts.medium.getTextStyle(color: ThemeColors.blueLight, size: 12),
             ),
           ],
         ),

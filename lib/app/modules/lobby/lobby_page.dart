@@ -1,3 +1,4 @@
+import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
@@ -21,13 +22,16 @@ class LobbyPage extends GetView<LobbyController> {
               index: controller.selectedTabIndex.value,
               children: const [
                 HomeView(),
-                DailyView()
+                DailyView(),
+                SelfIntroductionView(),
               ]),
         ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => controller.selectedTabIndex.value == 0
               ? controller.showHowToUseWeekly()
-              : controller.showHowToUseDaily(),
+              : controller.selectedTabIndex.value == 1
+                  ? controller.showHowToUseDaily()
+                  : controller.showHowToUseSelfIntroductionDialog(),
           mini: true,
           elevation: 3,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(46.0))),

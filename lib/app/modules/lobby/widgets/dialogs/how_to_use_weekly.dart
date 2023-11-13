@@ -14,7 +14,7 @@ class HowToUseWeeklyDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         padding:
-        const EdgeInsets.only(top: 39, bottom: 30, left: 30, right: 30),
+        const EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(33)),
             color: Colors.white),

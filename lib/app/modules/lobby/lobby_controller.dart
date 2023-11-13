@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_controller.dart';
 import 'package:dodohan/app/modules/lobby/widgets/dialogs/how_to_use_daily.dart';
+import 'package:dodohan/app/modules/lobby/widgets/dialogs/how_to_use_self_introduction.dart';
 import 'package:dodohan/app/modules/lobby/widgets/dialogs/how_to_use_weekly.dart';
 import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import 'package:flutter/foundation.dart';
@@ -39,9 +41,13 @@ class LobbyController extends GetxController {
       Get.dialog(const StoreRoutingDialog());
       return;
     }
-
-    Get.put(DailyController());
-    selectedTabIndex(index);
+    selectedTabIndex.value = index;
+    if(selectedTabIndex.value == 1 && !Get.isRegistered<DailyController>()) {
+      Get.put(DailyController());
+    }
+    if(selectedTabIndex.value == 2 && !Get.isRegistered<SelfIntroductionController>()) {
+      Get.put(SelfIntroductionController());
+    }
   }
 
   void showHowToUseWeekly() {
@@ -50,6 +56,10 @@ class LobbyController extends GetxController {
 
   void showHowToUseDaily() {
     Get.dialog(const HowToUseDailyDialog());
+  }
+
+  void showHowToUseSelfIntroductionDialog() {
+    Get.dialog(const HowToUseSelfIntroductionDialog());
   }
 }
 
