@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../../../core/services/auth_service.dart';
-import '../../../../../data/model/self_introduction.dart';
-import '../../../../../data/model/user.dart';
-import '../../../../../data/model/you_info.dart';
-import '../../../../../data/service/you_info_service/service.dart';
+import '../../../../../../../core/services/auth_service.dart';
+import '../../../../../../data/model/self_introduction.dart';
+import '../../../../../../data/model/user.dart';
+import '../../../../../../data/model/you_info.dart';
+import '../../../../../../data/service/you_info_service/service.dart';
 
 class CreateSelfIntroductionPageController extends GetxController {
   final Rxn<XFile> image = Rxn<XFile>();

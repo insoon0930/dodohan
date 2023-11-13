@@ -3,12 +3,12 @@ import 'package:dodohan/app/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../../../core/theme/buttons.dart';
-import '../../../../../../core/theme/colors.dart';
-import '../../../../../../core/theme/fonts.dart';
-import '../../../../../widgets/appbars/default_appbar.dart';
-import '../../../../../widgets/image/image_pick_box.dart';
-import 'create_self_introduction_controller.dart';
+import '../../../../../../../core/theme/buttons.dart';
+import '../../../../../../../core/theme/colors.dart';
+import '../../../../../../../core/theme/fonts.dart';
+import '../../../../../../widgets/appbars/default_appbar.dart';
+import '../../../../../../widgets/image/image_pick_box.dart';
+import 'preview_self_introduction_controller.dart';
 
 class CreateSelfIntroductionPage extends GetView<CreateSelfIntroductionPageController> {
   const CreateSelfIntroductionPage({super.key});
