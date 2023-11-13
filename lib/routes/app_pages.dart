@@ -34,6 +34,8 @@ import '../app/modules/lobby/views/home/me_info/me_info_binding.dart';
 import '../app/modules/lobby/views/home/me_info/me_info_page.dart';
 import '../app/modules/lobby/views/home/you_info/you_info_binding.dart';
 import '../app/modules/lobby/views/home/you_info/you_info_page.dart';
+import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_binding.dart';
+import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_page.dart';
 import '../app/modules/setting/inquire/page.dart';
 import '../app/modules/setting/questions/page.dart';
 import '../app/modules/setting/setting_page.dart';
@@ -117,6 +119,10 @@ class AppPages {
               page: () => const CurrentCardItemPage(),
               binding: CurrentCardItemBinding())
         ]),
+    GetPage(
+        name: Routes.createSelfIntroduction,
+        page: () => const CreateSelfIntroductionPage(),
+        binding: CreateSelfIntroductionPageBinding()),
     GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
     GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
     GetPage(name: Routes.setting, page: () => const SettingPage(), children: [

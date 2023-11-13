@@ -50,16 +50,18 @@ class LobbyController extends GetxController {
     }
   }
 
-  void showHowToUseWeekly() {
-    Get.dialog(const HowToUseWeeklyDialog());
-  }
-
-  void showHowToUseDaily() {
-    Get.dialog(const HowToUseDailyDialog());
-  }
-
-  void showHowToUseSelfIntroductionDialog() {
-    Get.dialog(const HowToUseSelfIntroductionDialog());
+  void fabTapped() {
+    switch (selectedTabIndex.value) {
+      case 0:
+        Get.dialog(const HowToUseWeeklyDialog());
+        break;
+      case 1:
+        Get.dialog(const HowToUseDailyDialog());
+        break;
+      case 2:
+        Get.dialog(const HowToUseSelfIntroductionDialog());
+        break;
+    }
   }
 }
 

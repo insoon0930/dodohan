@@ -38,7 +38,7 @@ class HowToUseWeeklyDialog extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               "* 그 외 자세한 사항은 '설정'에 '자주하는 질문' 참조",
-              style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 11),
+              style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 12),
             ),
           ],
         ),

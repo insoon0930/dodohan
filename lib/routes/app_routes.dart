@@ -20,6 +20,8 @@ abstract class Routes {
   static const currentCard = Paths.currentCard;
   static const currentCardItem = Paths.currentCard + Paths.item;
 
+  static const createSelfIntroduction = Paths.createSelfIntroduction;
+
   static const termsOfUse = '/terms-of-use';
   static const privacy = '/privacy';
 
@@ -45,6 +47,8 @@ abstract class Paths {
 
   static const currentCard = '/current-card';
   static const item = '/item';
+
+  static const createSelfIntroduction = '/create-self-introduction';
 
   static const setting = '/setting';
   static const businessInfo = '/business-info';

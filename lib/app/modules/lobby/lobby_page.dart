@@ -1,10 +1,11 @@
 import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_view.dart';
+import 'package:dodohan/app/modules/lobby/widgets/expandable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
-import 'package:dodohan/app/modules/lobby/views/daily/widgets/updating_view.dart';
 import 'package:dodohan/app/modules/lobby/views/home/home_view.dart';
-import 'package:dodohan/core/services/auth_service.dart';
+import '../../../core/theme/fonts.dart';
+import '../../../routes/app_routes.dart';
 import '../../widgets/appbars/home_appbar.dart';
 import '../../widgets/my_bottom_navigation_bar.dart';
 import 'lobby_controller.dart';
@@ -15,28 +16,40 @@ class LobbyPage extends GetView<LobbyController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(
+      () => Scaffold(
         appBar: LobbyAppBar(),
-        body: Obx(
-          () => LazyLoadIndexedStack(
-              index: controller.selectedTabIndex.value,
-              children: const [
-                HomeView(),
-                DailyView(),
-                SelfIntroductionView(),
-              ]),
-        ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () => controller.selectedTabIndex.value == 0
-              ? controller.showHowToUseWeekly()
-              : controller.selectedTabIndex.value == 1
-                  ? controller.showHowToUseDaily()
-                  : controller.showHowToUseSelfIntroductionDialog(),
-          mini: true,
-          elevation: 3,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(46.0))),
-          child: const Icon(Icons.question_mark, color: Colors.white)),
-      bottomNavigationBar: const MyBottomNavigationBar(),
+        body: LazyLoadIndexedStack(index: controller.selectedTabIndex.value, children: const [
+          HomeView(),
+          DailyView(),
+          SelfIntroductionView(),
+        ]),
+        floatingActionButton: (controller.selectedTabIndex.value == 0 || controller.selectedTabIndex.value == 1)
+            ? FloatingActionButton(
+                onPressed: () => controller.fabTapped(),
+                mini: true,
+                elevation: 3,
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(46.0))),
+                child: const Icon(Icons.question_mark, color: Colors.white))
+            : ExpandableFab(
+                distance: 112,
+                children: [
+                  ActionButton(
+                    onPressed: () => Get.toNamed(Routes.createSelfIntroduction),
+                    icon: const Icon(Icons.create),
+                  ),
+                  ActionButton(
+                    onPressed: () {},
+                    icon: Text('MY', style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                  ),
+                  ActionButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.question_mark),
+                  ),
+                ],
+              ),
+        bottomNavigationBar: const MyBottomNavigationBar(),
+      ),
     );
   }
 }
