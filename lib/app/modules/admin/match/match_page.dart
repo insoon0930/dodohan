@@ -9,7 +9,6 @@ import 'match_controller.dart';
 
 class MatchPage extends GetView<MatchController> {
   const MatchPage({super.key});
-  //todo user
 
   @override
   Widget build(BuildContext context) {

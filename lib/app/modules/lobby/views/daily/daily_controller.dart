@@ -30,7 +30,6 @@ class DailyController extends BaseController {
 
     todayCards.value = await _dailyCardService.findToday(user.id);
     loading.value = false;
-    //todo 오늘 날짜 내 카드들 들고오기
     super.onInit();
   }
 

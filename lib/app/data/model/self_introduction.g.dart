@@ -18,7 +18,8 @@ SelfIntroduction _$SelfIntroductionFromJson(Map<String, dynamic> json) =>
       phoneNum: json['phoneNum'] as String? ?? '',
       sameUnivOnly: json['sameUnivOnly'] as bool? ?? false,
       applications: (json['applications'] as List<dynamic>?)
-              ?.map(SelfApplication.fromJson)
+              ?.map((e) => const SelfApplicationConverter()
+                  .fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
@@ -40,7 +41,9 @@ Map<String, dynamic> _$SelfIntroductionToJson(SelfIntroduction instance) =>
       'profileImage': instance.profileImage,
       'phoneNum': instance.phoneNum,
       'sameUnivOnly': instance.sameUnivOnly,
-      'applications': instance.applications,
+      'applications': instance.applications
+          .map(const SelfApplicationConverter().toJson)
+          .toList(),
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
       'deletedAt': _$JsonConverterToJson<Timestamp, DateTime>(

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dodohan/app/data/enums.dart';
 import 'package:dodohan/core/utils/time_utility.dart';
@@ -9,24 +8,36 @@ import '../../model/self_introduction.dart';
 class SelfIntroductionRepository extends ApiService {
   SelfIntroductionRepository._privateConstructor();
 
-  static final SelfIntroductionRepository _instance =
-      SelfIntroductionRepository._privateConstructor();
+  static final SelfIntroductionRepository _instance = SelfIntroductionRepository._privateConstructor();
 
   factory SelfIntroductionRepository() {
     return _instance;
   }
 
+  Future<SelfIntroduction> create(SelfIntroduction selfIntroduction) async {
+    try {
+      final doc = firestore.collection('selfIntroductions').doc();
+      selfIntroduction.id = doc.id;
+      await doc.set(selfIntroduction.toJson());
+      return selfIntroduction;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
+
+
+
+
+
   Future<List<SelfIntroduction>> findToday(String user) async {
     try {
       final DocumentReference todayCardsRef =
           firestore.collection('selfIntroductions').doc(TimeUtility.todayWithSlash());
-      final QuerySnapshot myCardsSnapShot = await todayCardsRef
-          .collection('cards')
-          .where('meInfo.user', isEqualTo: user)
-          .get();
-      return myCardsSnapShot.docs
-          .map((e) => SelfIntroduction.fromJson(e.data()))
-          .toList();
+      final QuerySnapshot myCardsSnapShot =
+          await todayCardsRef.collection('cards').where('meInfo.user', isEqualTo: user).get();
+      return myCardsSnapShot.docs.map((e) => SelfIntroduction.fromJson(e.data())).toList();
     } catch (e) {
       return [];
     }
@@ -56,8 +67,9 @@ class SelfIntroductionRepository extends ApiService {
 
   Future<SelfIntroduction> updateMeStatus(SelfIntroduction selfIntroduction, CardStatus status) async {
     try {
-      final DocumentReference todayCardsRef =
-          firestore.collection('selfIntroductions').doc(TimeUtility.todayWithSlash(subtractDay: selfIntroduction.differenceInDays));
+      final DocumentReference todayCardsRef = firestore
+          .collection('selfIntroductions')
+          .doc(TimeUtility.todayWithSlash(subtractDay: selfIntroduction.differenceInDays));
       final DocumentReference selfIntroductionDocRef = todayCardsRef.collection('cards').doc(selfIntroduction.id);
       await selfIntroductionDocRef.update({'meStatus': status.name});
       final updatedSelfIntroduction = await selfIntroductionDocRef.get();
@@ -69,8 +81,9 @@ class SelfIntroductionRepository extends ApiService {
 
   Future<SelfIntroduction> updateYouStatus(SelfIntroduction selfIntroduction, CardStatus status) async {
     try {
-      final DocumentReference todayCardsRef =
-          firestore.collection('selfIntroductions').doc(TimeUtility.todayWithSlash(subtractDay: selfIntroduction.differenceInDays));
+      final DocumentReference todayCardsRef = firestore
+          .collection('selfIntroductions')
+          .doc(TimeUtility.todayWithSlash(subtractDay: selfIntroduction.differenceInDays));
       final DocumentReference selfIntroductionDocRef = todayCardsRef.collection('cards').doc(selfIntroduction.id);
       await selfIntroductionDocRef.update({'youStatus': status.name});
       final updatedSelfIntroduction = await selfIntroductionDocRef.get();
@@ -82,10 +95,10 @@ class SelfIntroductionRepository extends ApiService {
 
   Future<void> updateBlock(SelfIntroduction selfIntroduction) async {
     try {
-      final DocumentReference todayCardsRef =
-        firestore.collection('selfIntroductions').doc(TimeUtility.todayWithSlash(subtractDay: selfIntroduction.differenceInDays));
-      final DocumentReference selfIntroductionDocRef =
-        todayCardsRef.collection('cards').doc(selfIntroduction.id);
+      final DocumentReference todayCardsRef = firestore
+          .collection('selfIntroductions')
+          .doc(TimeUtility.todayWithSlash(subtractDay: selfIntroduction.differenceInDays));
+      final DocumentReference selfIntroductionDocRef = todayCardsRef.collection('cards').doc(selfIntroduction.id);
       // if (selfIntroduction.iAmMe) {
       //   await selfIntroductionDocRef.update({'meBlockedYou': true});
       // } else {
@@ -106,9 +119,7 @@ class SelfIntroductionRepository extends ApiService {
           .where('meStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
           .where('meBlockedYou', isEqualTo: false)
           .get();
-      return myCardsSnapShot.docs
-          .map((e) => SelfIntroduction.fromJson(e.data()))
-          .toList();
+      return myCardsSnapShot.docs.map((e) => SelfIntroduction.fromJson(e.data())).toList();
     } catch (e) {
       return [];
     }
@@ -123,9 +134,7 @@ class SelfIntroductionRepository extends ApiService {
           .where('meStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
           .where('meBlockedYou', isEqualTo: false)
           .get();
-      return myCardsSnapShot.docs
-          .map((e) => SelfIntroduction.fromJson(e.data()))
-          .toList();
+      return myCardsSnapShot.docs.map((e) => SelfIntroduction.fromJson(e.data())).toList();
     } catch (e) {
       return [];
     }

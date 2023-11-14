@@ -25,7 +25,7 @@ async function jsOpenTabFunction(url) {
 
 async function jsPromiseFunction(amount, orderId, orderName) {
     console.log("start jsOpenTabFunction");
-    //todo 오케 여기 부분부터 이제 토스로 바꿔주면 되겠다
+    //오케 여기 부분부터 이제 토스로 바꿔주면 되겠다
     var clientKey = 'test_ck_AQ92ymxN349YG91NZoAVajRKXvdk'
     var tossPayments = TossPayments(clientKey)
 

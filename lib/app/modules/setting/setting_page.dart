@@ -7,7 +7,7 @@ import '../../../routes/app_routes.dart';
 import '../../data/model/user.dart';
 import '../../widgets/appbars/default_appbar.dart';
 import '../../widgets/dialogs/action_dialog.dart';
-import '../../widgets/my_divider.dart';
+import '../../widgets/dividers/my_divider.dart';
 import 'widgets/setting_item.dart';
 
 class SettingPage extends StatelessWidget {

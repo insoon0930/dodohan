@@ -82,7 +82,7 @@ class LoginController extends BaseController {
       await auth.verifyPhoneNumber(
         phoneNumber: '+82${phone.value!.replaceAll('-', '').substring(1)}',
         verificationCompleted: (PhoneAuthCredential credential) async {
-          //todo 안드에서 한번에 인증되는 경우 처리해야될 듯
+          //안드에서 한번에 인증되는 경우 처리해야될 듯? 아닌가?
           print('verificationCompleted: $credential');
           // // ANDROID ONLY!
           //

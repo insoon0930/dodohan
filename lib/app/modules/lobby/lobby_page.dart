@@ -35,7 +35,7 @@ class LobbyPage extends GetView<LobbyController> {
                 distance: 112,
                 children: [
                   ActionButton(
-                    onPressed: () => Get.toNamed(Routes.createSelfIntroduction),
+                    onPressed: () => controller.goToCreateSelfIntroduction(),
                     icon: const Icon(Icons.create),
                   ),
                   ActionButton(

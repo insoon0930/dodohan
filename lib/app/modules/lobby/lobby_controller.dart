@@ -17,11 +17,16 @@ import '../../../core/services/auth_service.dart';
 import '../../../core/theme/buttons.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
+import '../../../routes/app_routes.dart';
 import '../../data/info_data.dart';
+import '../../data/model/me_info.dart';
 import '../../data/model/user.dart';
+import '../../data/service/me_info_service/service.dart';
+import '../../widgets/dialogs/error_dialog.dart';
 import '../../widgets/dialogs/store_routing_dialog.dart';
 
 class LobbyController extends GetxController {
+  final MeInfoService _meInfoService = MeInfoService();
 
   final RxInt selectedTabIndex = 0.obs;
 
@@ -33,6 +38,7 @@ class LobbyController extends GetxController {
       Get.put(SplashController());
       await 1.delay();
     }
+    selectedTabIndex.value = Get.arguments ?? 0;
     super.onInit();
   }
 
@@ -42,10 +48,10 @@ class LobbyController extends GetxController {
       return;
     }
     selectedTabIndex.value = index;
-    if(selectedTabIndex.value == 1 && !Get.isRegistered<DailyController>()) {
+    if (selectedTabIndex.value == 1 && !Get.isRegistered<DailyController>()) {
       Get.put(DailyController());
     }
-    if(selectedTabIndex.value == 2 && !Get.isRegistered<SelfIntroductionController>()) {
+    if (selectedTabIndex.value == 2 && !Get.isRegistered<SelfIntroductionController>()) {
       Get.put(SelfIntroductionController());
     }
   }
@@ -63,5 +69,14 @@ class LobbyController extends GetxController {
         break;
     }
   }
-}
 
+  Future<void> goToCreateSelfIntroduction() async {
+    final MeInfo meInfo = await _meInfoService.findOne(user.id);
+    //todo 개발시,
+    // if (!meInfo.isCompleted) {
+    //   Get.dialog(const ErrorDialog(text: "홈에서 '나' 프로필 작성을 완료해주세요"));
+    //   return;
+    // }
+    Get.toNamed(Routes.createSelfIntroduction, arguments: {'meInfo': meInfo});
+  }
+}

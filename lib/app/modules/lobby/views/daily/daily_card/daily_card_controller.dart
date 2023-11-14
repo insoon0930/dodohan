@@ -29,7 +29,7 @@ class DailyCardController extends BaseController {
   }
 
   Future<void> showChooseDialog() async {
-    //todo 이후에는 추가 선택 과금하는 식으로
+    //이후에는 추가 선택 과금하는 식으로
     Get.dialog(ActionDialog(
         title: '오늘의 카드', text: '선택하시겠습니까?', confirmCallback: () => choose()));
   }

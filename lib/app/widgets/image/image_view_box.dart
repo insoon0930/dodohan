@@ -27,7 +27,7 @@ class ImageViewBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //todo 필터에 clip 처리 어케할지 봐바 web, mobile 차이 때문에 웹에서 일단 뺌
+    //필터에 clip 처리 어케할지 봐바 web, mobile 차이 때문에 웹에서 일단 뺌
     return kIsWeb
         ? ImageFiltered(
             imageFilter: ImageFilter.blur(

@@ -17,9 +17,6 @@ class ImageUpdateRequestService extends ApiService  {
   //@Post
   Future<ImageUpdateRequest> create(ImageUpdateRequest imageUpdateRequest) async {
     ImageUpdateRequest res = await _imageUpdateRequestRepository.create(imageUpdateRequest);
-    //todo 코인 차감 해줄껀데 코인영수증 처리도해야지, 반려하면 반환해주자
-
-    //영수증 하나 생성
     return res;
   }
 

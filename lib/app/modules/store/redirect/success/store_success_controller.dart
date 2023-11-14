@@ -34,7 +34,6 @@ class StoreSuccessController extends BaseController {
     showLoading();
     final url = Uri.parse('https://api.tosspayments.com/v1/payments/confirm');
 
-    //todo 시크릿키 변경
     final headers = {
       'Authorization': 'Basic dGVzdF9za19qRXhQZUpXWVZRbFI5N2c1N2J2MzQ5UjVndk5MOg==',
       'Content-Type': 'application/json',

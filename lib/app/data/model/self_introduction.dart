@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../core/services/auth_service.dart';
 import '../converter/date_time_converter.dart';
 import '../converter/me_info_converter.dart';
+import '../converter/self_application_info_converter.dart';
 import '../enums.dart';
 import 'me_info.dart';
 
@@ -18,7 +19,8 @@ class SelfIntroduction {
   MeInfo? meInfo;
   String profileImage, phoneNum;
   bool sameUnivOnly;
-  List<SelfApplication> applications; //todo converter 달아야할듯?
+  @SelfApplicationConverter()
+  List<SelfApplication> applications;
   @DateTimeConverter()
   DateTime? createdAt, deletedAt, adminDeletedAt;
 
@@ -42,4 +44,5 @@ class SelfIntroduction {
   Map<String, dynamic> toJson() => _$SelfIntroductionToJson(this);
 
   int get differenceInDays => DateTime.now().difference(createdAt!).inDays;
+  String get leftDay => 'D-${7 - differenceInDays}';
 }

@@ -115,8 +115,7 @@ class HomeController extends GetxController {
     //validation 2. 신청서 작성 완료
     MeInfo meInfo = await _meInfoService.findOne(user.id);
     YouInfo youInfo = await _youInfoService.findOne(user.id);
-    if (meInfo.toJson().containsValue(null) ||
-        youInfo.toJson().containsValue(null)) {
+    if (!meInfo.isCompleted || !youInfo.isCompleted) {
       Get.back();
       Get.dialog(const ErrorDialog(text: "'나' 와 '이상형' 작성을 완료해주세요"));
       return;
@@ -324,9 +323,8 @@ class HomeController extends GetxController {
           preProfileImage: user.profileImage,
           coinUsed: true));
 
-      //백
+      //코인 차감
       await _userService.increaseCoin(user.id, -1, type: CoinReceiptType.imageUpdateRequest);
-      //프론트
       AuthService.to.user.update((user) => user!.coin = user.coin -1);
 
       //fcm push //todo 나중에 .env 도입해주던가

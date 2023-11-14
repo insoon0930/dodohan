@@ -27,4 +27,6 @@ class YouInfo {
       _$YouInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$YouInfoToJson(this);
+
+  bool get isCompleted => !toJson().containsValue(null);
 }

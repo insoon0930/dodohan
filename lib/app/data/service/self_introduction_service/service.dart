@@ -20,6 +20,18 @@ class SelfIntroductionService extends ApiService  {
     return _instance;
   }
 
+  //@Post
+  Future<SelfIntroduction> create(SelfIntroduction selfIntroduction) async {
+    return await _selfIntroductionRepository.create(selfIntroduction);
+  }
+
+
+
+
+
+
+
+
   //@Get
   Future<List<SelfIntroduction>> findToday(String user) async {
     return await _selfIntroductionRepository.findToday(user);

@@ -76,7 +76,7 @@ class AdminController extends GetxController {
     Get.snackbar('필드 업데이트', '완료');
   }
 
-  //todo 404 해결 아마 공개 권한? 문제일듯
+  //404 해결 아마 공개 권한? 문제일듯
   void openFullImage(String url) {
     Get.dialog(Dialog(child: CachedNetworkImage(imageUrl: url)));
   }
