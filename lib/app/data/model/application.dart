@@ -4,6 +4,7 @@ import 'package:dodohan/app/data/model/you_info.dart';
 import '../converter/date_time_converter.dart';
 import '../converter/me_info_converter.dart';
 import '../converter/you_info_converter.dart';
+import '../info_data.dart';
 import 'me_info.dart';
 
 part 'application.g.dart';

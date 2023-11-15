@@ -1,4 +1,5 @@
 import 'package:dodohan/app/modules/lobby/views/self_introduction/create_self_introduction/preview_self_introduction/preview_self_introduction_page.dart';
+import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_item/preview_my_profile/preview_my_profile_page.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/modules/setting/business_info/page.dart';
 import '../app/modules/admin/admin_binding.dart';
@@ -37,6 +38,7 @@ import '../app/modules/lobby/views/home/you_info/you_info_binding.dart';
 import '../app/modules/lobby/views/home/you_info/you_info_page.dart';
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_binding.dart';
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_page.dart';
+import '../app/modules/lobby/views/self_introduction/self_introduction_item/preview_my_profile/preview_my_profile_binding.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/self_introduction_item_binding.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/self_introduction_item_page.dart';
 import '../app/modules/setting/inquire/page.dart';
@@ -134,7 +136,13 @@ class AppPages {
     GetPage(
         name: Routes.selfIntroductionItem,
         page: () => const SelfIntroductionItemPage(),
-        binding: SelfIntroductionItemBinding()),
+        binding: SelfIntroductionItemBinding(),
+        children: [
+          GetPage(
+              name: Paths.previewMyProfile,
+              page: () => const PreviewMyProfilePage(),
+              binding: PreviewMyProfileBinding(),)
+        ]),
     GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
     GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
     GetPage(name: Routes.setting, page: () => const SettingPage(), children: [

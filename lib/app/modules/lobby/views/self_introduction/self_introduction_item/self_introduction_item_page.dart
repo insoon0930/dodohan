@@ -64,8 +64,16 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                           buttonText: '유료 신청')),
                       child: const Text('유료 신청')),
                 ),
+                const SizedBox(width: 8),
+                SizedBox(
+                  width: 75,
+                  child: ElevatedButton(
+                      style: BtStyle.standard(color: Colors.black),
+                      onPressed: () => Get.toNamed(Routes.previewMyProfile),
+                      child: const Icon(Icons.account_box)),
+                ),
               ],
-            )
+            ).paddingOnly(bottom: 8)
           ],
         ).paddingSymmetric(horizontal: 16),
       ),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dodohan/app/data/provider/api_service.dart';
 import 'package:get/get.dart';
@@ -17,9 +18,13 @@ class SelfIntroductionController extends BaseController {
   // final SelfIntroductionService _dailyCardService = SelfIntroductionService();
   // final RxList<SelfIntroduction> todayCards = <SelfIntroduction>[].obs;
   User get user => AuthService.to.user.value;
+
+  List<String> choices = ['전체', ...regionFilter.values.toSet()]; //Set 으,로ㅓㅓ?
+  RxString selectedValue = '전체'.obs;
+
   @override
   Future<void> onInit() async {
-
+    print('SelfIntroductionController onInit');
     super.onInit();
   }
 

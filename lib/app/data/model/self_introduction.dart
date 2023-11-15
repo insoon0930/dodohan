@@ -18,6 +18,7 @@ class SelfIntroduction {
   @MeInfoConverter()
   MeInfo? meInfo;
   String profileImage, phoneNum;
+  String region; //regionFilter value
   bool sameUnivOnly;
   @SelfApplicationConverter()
   List<SelfApplication> applications;
@@ -31,6 +32,7 @@ class SelfIntroduction {
       this.meInfo,
       this.profileImage = '',
       this.phoneNum = '',
+      this.region = '',
       this.sameUnivOnly = false,
       this.applications = const [],
       this.createdAt,

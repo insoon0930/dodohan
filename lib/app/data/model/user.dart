@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../converter/date_time_converter.dart';
 import '../enums.dart';
+import '../info_data.dart';
 
 part 'user.g.dart';
 
@@ -44,4 +45,5 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
+  String get region => InfoData.univInfo[univ]!.region.name;
 }

@@ -48,6 +48,7 @@ class CreateSelfIntroductionController extends BaseController {
     showLoading();
     String mainImage = await storageService.uploadFile(file: image.value!, bucket: StorageBucket.selfIntroduction, userId: user.id);
     selfIntroduction.value.image = mainImage;
+    selfIntroduction.value.region = regionFilter[user.region]!;
     await _selfIntroductionService.create(selfIntroduction.value);
     //코인 차감
     await _userService.increaseCoin(user.id, costCoin, type: CoinReceiptType.createSelfIntro);

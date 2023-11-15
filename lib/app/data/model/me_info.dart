@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../info_data.dart';
+
 part 'me_info.g.dart';
 
 @JsonSerializable()
@@ -26,4 +28,5 @@ class MeInfo {
   Map<String, dynamic> toJson() => _$MeInfoToJson(this);
 
   bool get isCompleted => !toJson().containsValue(null);
+  String get region => InfoData.univInfo[univ]!.region.name;
 }

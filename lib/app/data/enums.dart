@@ -6,6 +6,26 @@ enum SelfApplicationStatus { closed, openedByApplicant, openedByOwner, confirmed
 enum CoinReceiptType { chargeCoin, dailyReject, weeklyReject, consoleReward, dailyCard, weeklyMatch, dailyReward, imageUpdateRequest, imageUpdateReject, createSelfIntro }
 enum Region { seoul, busan, daegu, incheon, gwangju, daejeon, ulsan, sejong, gyeonggi, gangwon, chungbuk, chungnam, jeonbuk, jeonnam, gyeongbuk, gyeongnam, jeju }
 
+const Map<String, String> regionFilter = {
+  'seoul': '서울·경기·인천',
+  'busan': '경남권',
+  'daegu': '경북권',
+  'incheon': '서울·경기·인천',
+  'gwangju': '전라도',
+  'daejeon': '충청도',
+  'ulsan': '경남권',
+  'sejong': '충청도',
+  'gyeonggi': '서울·경기·인천',
+  'gangwon': '강원도',
+  'chungbuk': '충청도',
+  'chungnam': '충청도',
+  'jeonbuk': '전라도',
+  'jeonnam': '전라도',
+  'gyeongbuk': '경북권',
+  'gyeongnam': '경남권',
+  'jeju': '제주도',
+};
+
 enum FcmPushType {
   checkWeekly(title: '', body: "금주의 매칭 결과가 발표되었습니다!"),
   weeklyDone(title: '', body: "상대방이 최종 결정을 내렸어요!"),

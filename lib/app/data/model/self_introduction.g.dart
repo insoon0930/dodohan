@@ -16,6 +16,7 @@ SelfIntroduction _$SelfIntroductionFromJson(Map<String, dynamic> json) =>
           json['meInfo'], const MeInfoConverter().fromJson),
       profileImage: json['profileImage'] as String? ?? '',
       phoneNum: json['phoneNum'] as String? ?? '',
+      region: json['region'] as String? ?? '',
       sameUnivOnly: json['sameUnivOnly'] as bool? ?? false,
       applications: (json['applications'] as List<dynamic>?)
               ?.map((e) => const SelfApplicationConverter()
@@ -40,6 +41,7 @@ Map<String, dynamic> _$SelfIntroductionToJson(SelfIntroduction instance) =>
           instance.meInfo, const MeInfoConverter().toJson),
       'profileImage': instance.profileImage,
       'phoneNum': instance.phoneNum,
+      'region': instance.region,
       'sameUnivOnly': instance.sameUnivOnly,
       'applications': instance.applications
           .map(const SelfApplicationConverter().toJson)
