@@ -72,11 +72,10 @@ class LobbyController extends GetxController {
 
   Future<void> goToCreateSelfIntroduction() async {
     final MeInfo meInfo = await _meInfoService.findOne(user.id);
-    //todo 개발시,
-    // if (!meInfo.isCompleted) {
-    //   Get.dialog(const ErrorDialog(text: "홈에서 '나' 프로필 작성을 완료해주세요"));
-    //   return;
-    // }
+    if (!meInfo.isCompleted) {
+      Get.dialog(const ErrorDialog(text: "홈에서 '나' 프로필 작성을 완료해주세요"));
+      return;
+    }
     Get.toNamed(Routes.createSelfIntroduction, arguments: {'meInfo': meInfo});
   }
 }

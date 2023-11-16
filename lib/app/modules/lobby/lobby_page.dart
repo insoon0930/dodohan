@@ -39,7 +39,7 @@ class LobbyPage extends GetView<LobbyController> {
                     icon: const Icon(Icons.create),
                   ),
                   ActionButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(Routes.mySelfIntroduction),
                     icon: Text('MY', style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
                   ),
                   ActionButton(

@@ -1,21 +1,18 @@
-import 'dart:async';
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dodohan/app/data/provider/api_service.dart';
 import 'package:get/get.dart';
-import 'package:dodohan/app/modules/splash/splash_controller.dart';
-import '../../../../../core/base_controller.dart';
-import '../../../../../core/services/auth_service.dart';
-import '../../../../../routes/app_routes.dart';
-import '../../../../data/enums.dart';
-import '../../../../data/model/daily_card.dart';
-import '../../../../data/model/self_introduction.dart';
-import '../../../../data/model/user.dart';
-import '../../../../data/service/daily_card_service/service.dart';
-import '../../../../data/service/self_introduction_service/service.dart';
 
-class SelfIntroductionController extends BaseController {
+import '../../../../../../core/base_controller.dart';
+import '../../../../../../core/services/auth_service.dart';
+import '../../../../../../routes/app_routes.dart';
+import '../../../../../data/enums.dart';
+import '../../../../../data/model/daily_card.dart';
+import '../../../../../data/model/user.dart';
+import '../../../../../data/provider/api_service.dart';
+import '../../../../../data/service/daily_card_service/service.dart';
+import '../../../../../data/service/self_introduction_service/service.dart';
+
+class MySelfIntroductionController extends BaseController {
   final ApiService apiService = Get.find();
   User get user => AuthService.to.user.value;
 

@@ -5,6 +5,7 @@ import '../../../../../../core/theme/colors.dart';
 import '../../../../../../core/theme/fonts.dart';
 import '../../../../../data/model/daily_card.dart';
 import '../../../../../widgets/appbars/default_appbar.dart';
+import '../../../../../widgets/dividers/divider_with_text.dart';
 import 'current_card_controller.dart';
 
 class CurrentCardPage extends GetView<CurrentCardController> {
@@ -23,7 +24,7 @@ class CurrentCardPage extends GetView<CurrentCardController> {
                   children: [
                     Column(
                       children: [
-                        _divider('보낸 신청').paddingOnly(top: 4, bottom: 8),
+                        const DividerWithText('보낸 신청').paddingOnly(top: 4, bottom: 8),
                         if (controller.sentCards.isEmpty)
                           Text(
                             '보낸 신청이 없습니다',
@@ -34,7 +35,7 @@ class CurrentCardPage extends GetView<CurrentCardController> {
                     ),
                     Column(
                       children: [
-                        _divider('받은 신청').paddingOnly(top: 12, bottom: 8),
+                        const DividerWithText('받은 신청').paddingOnly(top: 12, bottom: 8),
                         if (controller.receivedCards.isEmpty)
                           Text(
                             '받은 신청이 없습니다',
@@ -76,13 +77,5 @@ class CurrentCardPage extends GetView<CurrentCardController> {
           crossAxisSpacing: 0,
           childAspectRatio: 0.8,
         ),
-      );
-
-  Widget _divider(String text) => Row(
-        children: [
-          const Expanded(child: Divider()),
-          Text(text, style: ThemeFonts.semiBold.getTextStyle()).paddingSymmetric(horizontal: 8),
-          const Expanded(child: Divider()),
-        ],
       );
 }

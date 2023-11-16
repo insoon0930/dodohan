@@ -38,6 +38,8 @@ import '../app/modules/lobby/views/home/you_info/you_info_binding.dart';
 import '../app/modules/lobby/views/home/you_info/you_info_page.dart';
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_binding.dart';
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_page.dart';
+import '../app/modules/lobby/views/self_introduction/my_self_introduction/my_self_introduction_binding.dart';
+import '../app/modules/lobby/views/self_introduction/my_self_introduction/my_self_introduction_page.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/preview_my_profile/preview_my_profile_binding.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/self_introduction_item_binding.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/self_introduction_item_page.dart';
@@ -143,6 +145,10 @@ class AppPages {
               page: () => const PreviewMyProfilePage(),
               binding: PreviewMyProfileBinding(),)
         ]),
+    GetPage(
+        name: Routes.mySelfIntroduction,
+        page: () => const MySelfIntroductionPage(),
+        binding: MySelfIntroductionBinding()),
     GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
     GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
     GetPage(name: Routes.setting, page: () => const SettingPage(), children: [

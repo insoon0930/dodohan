@@ -32,12 +32,6 @@ class SelfIntroductionItemController extends BaseController {
   }
 
   void applyForFree() async {
-    if (selfIntroduction) {
-      hideLoading();
-      Get.back();
-      Get.dialog(const ErrorDialog(text: "'나' 의 프로필 작성을 완료해주세요"));
-      return;
-    }
     showLoading();
     final MeInfo meInfo = await _meInfoService.findOne(user.id);
     if (!meInfo.isCompleted) {
