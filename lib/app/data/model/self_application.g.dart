@@ -9,10 +9,11 @@ part of 'self_application.dart';
 SelfApplication _$SelfApplicationFromJson(Map<String, dynamic> json) =>
     SelfApplication(
       id: json['id'] as String? ?? '',
-      meInfo: _$JsonConverterFromJson<Map<String, dynamic>, MeInfo>(
-          json['meInfo'], const MeInfoConverter().fromJson),
-      profileImage: json['profileImage'] as String? ?? '',
-      phoneNum: json['phoneNum'] as String? ?? '',
+      selfIntroductionId: json['selfIntroductionId'] as String,
+      meInfo: const MeInfoConverter()
+          .fromJson(json['meInfo'] as Map<String, dynamic>),
+      profileImage: json['profileImage'] as String,
+      phoneNum: json['phoneNum'] as String,
       status:
           $enumDecodeNullable(_$SelfApplicationStatusEnumMap, json['status']) ??
               SelfApplicationStatus.closed,
@@ -23,20 +24,14 @@ SelfApplication _$SelfApplicationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SelfApplicationToJson(SelfApplication instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'meInfo': _$JsonConverterToJson<Map<String, dynamic>, MeInfo>(
-          instance.meInfo, const MeInfoConverter().toJson),
+      'selfIntroductionId': instance.selfIntroductionId,
+      'meInfo': const MeInfoConverter().toJson(instance.meInfo),
       'profileImage': instance.profileImage,
       'phoneNum': instance.phoneNum,
       'status': _$SelfApplicationStatusEnumMap[instance.status]!,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
     };
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);
 
 const _$SelfApplicationStatusEnumMap = {
   SelfApplicationStatus.closed: 'closed',
@@ -45,6 +40,12 @@ const _$SelfApplicationStatusEnumMap = {
   SelfApplicationStatus.confirmed: 'confirmed',
   SelfApplicationStatus.rejected: 'rejected',
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
 
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,

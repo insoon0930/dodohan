@@ -37,7 +37,7 @@ class CreateSelfIntroductionController extends BaseController {
 
   Future<void> createSelfIntroduction() async {
     Get.back();
-    final int costCoin = user.isMan! ? -2 : -1;
+    final int costCoin = user.isMan! ? 2 : 1;
     if (user.coin < costCoin) {
       Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
         Get.back();
@@ -51,8 +51,8 @@ class CreateSelfIntroductionController extends BaseController {
     selfIntroduction.value.region = regionFilter[user.region]!;
     await _selfIntroductionService.create(selfIntroduction.value);
     //코인 차감
-    await _userService.increaseCoin(user.id, costCoin, type: CoinReceiptType.createSelfIntro);
-    AuthService.to.user.update((user) => user!.coin = user.coin + costCoin);
+    await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.createSelfIntro);
+    AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
     hideLoading();
     Get.offNamedUntil(Routes.lobby, (route) => false, arguments: 2);
   }

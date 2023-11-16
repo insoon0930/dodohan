@@ -1,6 +1,4 @@
-
 import 'package:choice/choice.dart';
-import 'package:dodohan/app/data/provider/api_service.dart';
 import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_controller.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +15,6 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
 
   @override
   Widget build(BuildContext context) {
-    final ApiService apiService = Get.find();
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -25,62 +22,54 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
           flexibleSpace: _filter(),
         ),
         Obx(
-          () {
-            final docs = controller.selectedValue.value == '전체'
-                ? apiService.firestore.collection('selfIntroductions').orderBy('createdAt', descending: true)
-                : apiService.firestore
-                    .collection('selfIntroductions')
-                    .where('region', isEqualTo: controller.selectedValue.value)
-                    .orderBy('createdAt', descending: true);
-            return FirestoreQueryBuilder<SelfIntroduction>(
-              query: docs.withConverter(
-                fromFirestore: (snapshot, _) => SelfIntroduction.fromJson(snapshot.data()!),
-                toFirestore: (selfIntroduction, _) => selfIntroduction.toJson(),
-              ),
-              pageSize: 14,
-              builder: (context, snapshot, _) {
-                if (snapshot.isFetching) {
-                  return SliverToBoxAdapter(
-                    child: const Center(child: CircularProgressIndicator()).paddingOnly(top: Get.height / 3),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return SliverToBoxAdapter(
-                    child: Text(
-                      'error ${snapshot.error}',
-                      style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
-                      textAlign: TextAlign.center,
-                    ).paddingOnly(top: Get.height / 3),
-                  );
-                }
-                if (snapshot.docs.isEmpty) {
-                  return SliverToBoxAdapter(
-                    child: Text(
-                      '셀프 소개가 없습니다',
-                      style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
-                      textAlign: TextAlign.center,
-                    ).paddingOnly(top: Get.height / 3),
-                  );
-                }
-                return SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
-                    childAspectRatio: 0.8,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      // Your grid item creation logic
-                      final selfIntroduction = snapshot.docs[index].data();
-                      return _item(selfIntroduction);
-                    },
-                    childCount: snapshot.docs.length,
-                  ),
+          () => FirestoreQueryBuilder<SelfIntroduction>(
+            query: controller.docs.value!.withConverter(
+              fromFirestore: (snapshot, _) => SelfIntroduction.fromJson(snapshot.data()!),
+              toFirestore: (selfIntroduction, _) => selfIntroduction.toJson(),
+            ),
+            pageSize: 14,
+            builder: (context, snapshot, _) {
+              if (snapshot.isFetching) {
+                return SliverToBoxAdapter(
+                  child: const Center(child: CircularProgressIndicator()).paddingOnly(top: Get.height / 3),
                 );
-              },
-            );
-          },
+              }
+              if (snapshot.hasError) {
+                return SliverToBoxAdapter(
+                  child: Text(
+                    'error ${snapshot.error}',
+                    style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                    textAlign: TextAlign.center,
+                  ).paddingOnly(top: Get.height / 3),
+                );
+              }
+              if (snapshot.docs.isEmpty) {
+                return SliverToBoxAdapter(
+                  child: Text(
+                    '셀프 소개가 없습니다',
+                    style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                    textAlign: TextAlign.center,
+                  ).paddingOnly(top: Get.height / 3),
+                );
+              }
+              return SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
+                  childAspectRatio: 0.8,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    // Your grid item creation logic
+                    final selfIntroduction = snapshot.docs[index].data();
+                    return _item(selfIntroduction);
+                  },
+                  childCount: snapshot.docs.length,
+                ),
+              );
+            },
+          ),
         ),
       ],
     ).paddingSymmetric(horizontal: 8);
@@ -152,14 +141,14 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
         elevation: 0.5,
         child: PromptedChoice<String>.single(
           title: '지역',
-          value: controller.selectedValue.value,
+          value: '전체',
           itemCount: controller.choices.length,
           itemBuilder: (state, i) {
             return RadioListTile(
               value: controller.choices[i],
               groupValue: state.single,
               onChanged: (value) {
-                controller.selectedValue.value = value as String;
+                controller.onFilterChanged(value as String);
                 state.select(controller.choices[i]);
               },
               title: ChoiceText(

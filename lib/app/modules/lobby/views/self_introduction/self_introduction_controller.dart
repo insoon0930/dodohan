@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dodohan/app/data/provider/api_service.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/modules/splash/splash_controller.dart';
@@ -15,27 +16,35 @@ import '../../../../data/service/daily_card_service/service.dart';
 import '../../../../data/service/self_introduction_service/service.dart';
 
 class SelfIntroductionController extends BaseController {
-  // final SelfIntroductionService _dailyCardService = SelfIntroductionService();
-  // final RxList<SelfIntroduction> todayCards = <SelfIntroduction>[].obs;
+  final ApiService apiService = Get.find();
   User get user => AuthService.to.user.value;
 
   List<String> choices = ['전체', ...regionFilter.values.toSet()]; //Set 으,로ㅓㅓ?
-  RxString selectedValue = '전체'.obs;
+  Rxn<Query> docs = Rxn<Query>();
 
   @override
   Future<void> onInit() async {
     print('SelfIntroductionController onInit');
+    docs.value = apiService.firestore
+        .collection('selfIntroductions')
+        .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
+        .orderBy('createdAt', descending: true);
     super.onInit();
   }
 
-  // void tapCard(int index, DailyCard dailyCard) async {
-  //   if(todayCards[index].meStatus == CardStatus.unChecked) {
-  //     _dailyCardService.updateMeStatus(dailyCard, CardStatus.checked);
-  //     todayCards[index].meStatus = CardStatus.checked;
-  //     todayCards.refresh();
-  //   } else {
-  //     Get.toNamed(Routes.dailyCard, arguments: {'index': index, 'dailyCard': dailyCard});
-  //   }
-  // }
+  void onFilterChanged(String value) async {
+    if(value == '전체') {
+      docs.value = apiService.firestore
+          .collection('selfIntroductions')
+          .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
+          .orderBy('createdAt', descending: true);
+    } else {
+      docs.value = apiService.firestore
+          .collection('selfIntroductions')
+          .where('region', isEqualTo: value)
+          .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
+          .orderBy('createdAt', descending: true);
+    }
+  }
 }
 

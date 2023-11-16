@@ -9,7 +9,8 @@ class ReportDialog extends StatelessWidget {
   final Future<void> Function() reportCallback;
   final Future<void> Function() blockCallback;
   final String? blockText;
-  const ReportDialog({Key? key, required this.reportCallback, required this.blockCallback, this.blockText}) : super(key: key);
+  final bool hasBlock;
+  const ReportDialog({Key? key, required this.reportCallback, required this.blockCallback, this.blockText, this.hasBlock = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,10 @@ class ReportDialog extends StatelessWidget {
             Get.snackbar('신고 완료', '24시간 이내에 확인후 조치하겠습니다');
           },
           first: true,
+          last: !hasBlock,
           style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-      SelectDialogItem(
+      if(hasBlock)
+        SelectDialogItem(
           text: blockText ?? '차단하기(즉시 거절됨)',
           onTap: () async {
             await blockCallback();

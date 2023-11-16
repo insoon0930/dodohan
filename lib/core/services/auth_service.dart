@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dodohan/core/services/push_service.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
@@ -33,6 +35,7 @@ class AuthService extends ApiService {
     prefs.setString('uid', uid);
     user.uid = uid;
     user.coin = 10;
+    user.isAndroid = Platform.isAndroid;
     User res = await _userService.create(user);
     return await updateUser(res);
   }

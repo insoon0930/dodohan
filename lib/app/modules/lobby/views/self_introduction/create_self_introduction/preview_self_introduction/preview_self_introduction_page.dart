@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dodohan/app/widgets/image/image_view_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../../../../core/services/auth_service.dart';
 import '../../../../../../../core/theme/buttons.dart';
 import '../../../../../../../core/theme/colors.dart';
 import '../../../../../../../core/theme/fonts.dart';
@@ -44,7 +45,7 @@ class PreviewSelfIntroductionPage extends GetView<CreateSelfIntroductionControll
               style: BtStyle.standard(color: ThemeColors.main),
               onPressed: () => Get.dialog(ActionDialog(
                   title: '셀프 소개 등록하기',
-                  text: '하트 2개가 소모됩니다',
+                  text: '하트 ${AuthService.to.user.value.isMan! ? 2 : 1}개가 소모됩니다',
                   confirmCallback: () => controller.createSelfIntroduction(),
                   buttonText: '등록하기')),
               child: const Text('등록하기'))

@@ -8,21 +8,22 @@ import 'me_info.dart';
 
 part 'self_application.g.dart';
 
-//이거 컬렉션 있긴해야겠다 //나중에 따로 내꺼만 조회한다던가 해야하니께
 @JsonSerializable()
 class SelfApplication {
   String id;
+  String selfIntroductionId;
   @MeInfoConverter()
-  MeInfo? meInfo;
+  MeInfo meInfo;
   String profileImage, phoneNum;
   SelfApplicationStatus status;
   @DateTimeConverter()
   DateTime? createdAt;
 
   SelfApplication({this.id = '',
-      this.meInfo,
-      this.profileImage = '',
-      this.phoneNum = '',
+      required this.selfIntroductionId,
+      required this.meInfo,
+      required this.profileImage,
+      required this.phoneNum,
       this.status = SelfApplicationStatus.closed,
       this.createdAt}) {
     createdAt ??= DateTime.now();
