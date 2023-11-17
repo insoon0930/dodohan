@@ -28,7 +28,7 @@ class SelfIntroductionController extends BaseController {
     docs.value = apiService.firestore
         .collection('selfIntroductions')
         .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
-        .where('isMan', isEqualTo: user.isMan! ? false : true)
+        .where('meInfo.isMan', isEqualTo: user.isMan! ? false : true)
         .orderBy('createdAt', descending: true);
     super.onInit();
   }
@@ -38,14 +38,14 @@ class SelfIntroductionController extends BaseController {
       docs.value = apiService.firestore
           .collection('selfIntroductions')
           .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
-          .where('isMan', isEqualTo: user.isMan! ? false : true)
+          .where('meInfo.isMan', isEqualTo: user.isMan! ? false : true)
           .orderBy('createdAt', descending: true);
     } else {
       docs.value = apiService.firestore
           .collection('selfIntroductions')
           .where('region', isEqualTo: value)
           .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
-          .where('isMan', isEqualTo: user.isMan! ? false : true)
+          .where('meInfo.isMan', isEqualTo: user.isMan! ? false : true)
           .orderBy('createdAt', descending: true);
     }
   }

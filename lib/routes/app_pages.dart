@@ -40,6 +40,7 @@ import '../app/modules/lobby/views/self_introduction/create_self_introduction/cr
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_page.dart';
 import '../app/modules/lobby/views/self_introduction/my_self_introduction/my_self_introduction_binding.dart';
 import '../app/modules/lobby/views/self_introduction/my_self_introduction/my_self_introduction_page.dart';
+import '../app/modules/lobby/views/self_introduction/self_introduction_item/check_opposite_profile/check_opposite_profile_page.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/preview_my_profile/preview_my_profile_binding.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/self_introduction_item_binding.dart';
 import '../app/modules/lobby/views/self_introduction/self_introduction_item/self_introduction_item_page.dart';
@@ -148,7 +149,12 @@ class AppPages {
     GetPage(
         name: Routes.mySelfIntroduction,
         page: () => const MySelfIntroductionPage(),
-        binding: MySelfIntroductionBinding()),
+        binding: MySelfIntroductionBinding(),
+        children: [
+          GetPage(
+            name: Paths.checkOppositeProfile,
+            page: () => const CheckOppositeProfilePage())
+        ]),
     GetPage(name: Routes.termsOfUse, page: () => const TermsOfUsePage()),
     GetPage(name: Routes.privacy, page: () => const PrivacyPage()),
     GetPage(name: Routes.setting, page: () => const SettingPage(), children: [

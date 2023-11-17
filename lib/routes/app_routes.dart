@@ -25,6 +25,7 @@ abstract class Routes {
   static const selfIntroductionItem = Paths.selfIntroductionItem;
   static const previewMyProfile = Paths.selfIntroductionItem + Paths.previewMyProfile;
   static const mySelfIntroduction = Paths.mySelfIntroduction;
+  static const checkOppositeProfile = Paths.mySelfIntroduction + Paths.checkOppositeProfile;
 
   static const termsOfUse = '/terms-of-use';
   static const privacy = '/privacy';
@@ -57,6 +58,7 @@ abstract class Paths {
   static const selfIntroductionItem = '/self-introduction-item';
   static const previewMyProfile = '/preview-my-profile';
   static const mySelfIntroduction = '/my-self-introduction';
+  static const checkOppositeProfile = '/check-opposite-profile';
 
   static const setting = '/setting';
   static const businessInfo = '/business-info';

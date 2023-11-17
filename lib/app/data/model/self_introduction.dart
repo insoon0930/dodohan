@@ -23,6 +23,7 @@ class SelfIntroduction {
   bool sameUnivOnly;
   @SelfApplicationConverter()
   List<SelfApplication> applications;
+  List<String> applicants;
   @DateTimeConverter()
   DateTime? createdAt, deletedAt, adminDeletedAt;
 
@@ -36,6 +37,7 @@ class SelfIntroduction {
       this.region = '',
       this.sameUnivOnly = false,
       this.applications = const [],
+      this.applicants = const [],
       this.createdAt,
       this.deletedAt,
       this.adminDeletedAt}) {
@@ -51,6 +53,8 @@ class SelfIntroduction {
 
   User get user => AuthService.to.user.value;
   bool get isMine => meInfo!.user == user.id;
-  bool get applied => applications.any((e) => e.meInfo.user == user.id);
+  bool get applied => applicants.contains(user.id);
+  bool get confirmed1st => applications.any((e) => e.meInfo.user == user.id && e.status == SelfApplicationStatus.confirmed1st);
+  bool get confirmed2nd => applications.any((e) => e.meInfo.user == user.id && e.status == SelfApplicationStatus.confirmed2nd);
   bool get hasUnivIssue => sameUnivOnly && (user.univ == meInfo!.univ);
 }

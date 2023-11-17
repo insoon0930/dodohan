@@ -29,7 +29,10 @@ class SelfIntroductionRepository extends ApiService {
   Future<void> addSelfApplication(String selfIntroId, SelfApplication selfApplication) async {
     try {
       final doc = firestore.collection('selfIntroductions').doc(selfIntroId);
-      await doc.update({'applications': FieldValue.arrayUnion([selfApplication.toJson()])});
+      await doc.update({
+        'applications': FieldValue.arrayUnion([selfApplication.toJson()]),
+        'applicants': FieldValue.arrayUnion([selfApplication.meInfo.user]),
+      });
       return;
     } catch (e) {
       rethrow;

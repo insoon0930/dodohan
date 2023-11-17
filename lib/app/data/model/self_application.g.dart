@@ -37,8 +37,8 @@ const _$SelfApplicationStatusEnumMap = {
   SelfApplicationStatus.closed: 'closed',
   SelfApplicationStatus.openedByApplicant: 'openedByApplicant',
   SelfApplicationStatus.openedByOwner: 'openedByOwner',
-  SelfApplicationStatus.confirmed: 'confirmed',
-  SelfApplicationStatus.rejected: 'rejected',
+  SelfApplicationStatus.confirmed1st: 'confirmed1st',
+  SelfApplicationStatus.confirmed2nd: 'confirmed2nd',
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

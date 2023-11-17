@@ -16,35 +16,24 @@ class MySelfIntroductionController extends BaseController {
   final ApiService apiService = Get.find();
   User get user => AuthService.to.user.value;
 
-  List<String> choices = ['전체', ...regionFilter.values.toSet()]; //Set 으,로ㅓㅓ?
-  Rxn<Query> docs = Rxn<Query>();
+  List<String> choices = ['전체', ...regionFilter.values.toSet()];
+  Rxn<Query> sentDocs = Rxn<Query>();
+  Rxn<Query> madeDocs = Rxn<Query>();
 
   @override
   Future<void> onInit() async {
     print('SelfIntroductionController onInit');
-    docs.value = apiService.firestore
+    sentDocs.value = apiService.firestore
         .collection('selfIntroductions')
         .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
-        .where('isMan', isEqualTo: user.isMan! ? false : true)
+        .where('applicants', arrayContains: user.id)
+        .orderBy('createdAt', descending: true);
+    madeDocs.value = apiService.firestore
+        .collection('selfIntroductions')
+        .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
+        .where('meInfo.user', isEqualTo: user.id)
         .orderBy('createdAt', descending: true);
     super.onInit();
-  }
-
-  void onFilterChanged(String value) async {
-    if(value == '전체') {
-      docs.value = apiService.firestore
-          .collection('selfIntroductions')
-          .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
-          .where('isMan', isEqualTo: user.isMan! ? false : true)
-          .orderBy('createdAt', descending: true);
-    } else {
-      docs.value = apiService.firestore
-          .collection('selfIntroductions')
-          .where('region', isEqualTo: value)
-          .where('createdAt', isGreaterThanOrEqualTo: DateTime.now().subtract(const Duration(days: 7)))
-          .where('isMan', isEqualTo: user.isMan! ? false : true)
-          .orderBy('createdAt', descending: true);
-    }
   }
 }
 

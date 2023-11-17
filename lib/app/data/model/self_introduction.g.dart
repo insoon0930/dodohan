@@ -23,6 +23,10 @@ SelfIntroduction _$SelfIntroductionFromJson(Map<String, dynamic> json) =>
                   .fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      applicants: (json['applicants'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const DateTimeConverter().fromJson),
       deletedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
@@ -46,6 +50,7 @@ Map<String, dynamic> _$SelfIntroductionToJson(SelfIntroduction instance) =>
       'applications': instance.applications
           .map(const SelfApplicationConverter().toJson)
           .toList(),
+      'applicants': instance.applicants,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
       'deletedAt': _$JsonConverterToJson<Timestamp, DateTime>(
