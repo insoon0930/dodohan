@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dodohan/app/data/model/self_application.dart';
 import 'package:dodohan/app/data/model/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../../../core/services/auth_service.dart';
 import '../converter/date_time_converter.dart';
 import '../converter/me_info_converter.dart';
-import '../converter/self_application_info_converter.dart';
-import '../enums.dart';
 import 'me_info.dart';
 
 part 'self_introduction.g.dart';
@@ -21,8 +18,6 @@ class SelfIntroduction {
   String profileImage, phoneNum;
   String region; //regionFilter value
   bool sameUnivOnly;
-  @SelfApplicationConverter()
-  List<SelfApplication> applications;
   List<String> applicants;
   @DateTimeConverter()
   DateTime? createdAt, deletedAt, adminDeletedAt;
@@ -36,7 +31,6 @@ class SelfIntroduction {
       this.phoneNum = '',
       this.region = '',
       this.sameUnivOnly = false,
-      this.applications = const [],
       this.applicants = const [],
       this.createdAt,
       this.deletedAt,
@@ -54,7 +48,5 @@ class SelfIntroduction {
   User get user => AuthService.to.user.value;
   bool get isMine => meInfo!.user == user.id;
   bool get applied => applicants.contains(user.id);
-  bool get confirmed1st => applications.any((e) => e.meInfo.user == user.id && e.status == SelfApplicationStatus.confirmed1st);
-  bool get confirmed2nd => applications.any((e) => e.meInfo.user == user.id && e.status == SelfApplicationStatus.confirmed2nd);
   bool get hasUnivIssue => sameUnivOnly && (user.univ == meInfo!.univ);
 }

@@ -55,6 +55,7 @@ class CreateSelfIntroductionController extends BaseController {
     AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
     hideLoading();
     Get.offNamedUntil(Routes.lobby, (route) => false, arguments: 2);
+    Get.snackbar('업로드 완료', "우측 하단 버튼의 'MY' 에서 확인 하실 수 있습니다");
   }
 }
 

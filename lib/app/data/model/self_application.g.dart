@@ -17,6 +17,7 @@ SelfApplication _$SelfApplicationFromJson(Map<String, dynamic> json) =>
       status:
           $enumDecodeNullable(_$SelfApplicationStatusEnumMap, json['status']) ??
               SelfApplicationStatus.closed,
+      isPremium: json['isPremium'] as bool? ?? false,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const DateTimeConverter().fromJson),
     );
@@ -29,6 +30,7 @@ Map<String, dynamic> _$SelfApplicationToJson(SelfApplication instance) =>
       'profileImage': instance.profileImage,
       'phoneNum': instance.phoneNum,
       'status': _$SelfApplicationStatusEnumMap[instance.status]!,
+      'isPremium': instance.isPremium,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),
     };

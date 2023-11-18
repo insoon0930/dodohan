@@ -16,6 +16,7 @@ class SelfApplication {
   MeInfo meInfo;
   String profileImage, phoneNum;
   SelfApplicationStatus status;
+  bool isPremium;
   @DateTimeConverter()
   DateTime? createdAt;
 
@@ -25,6 +26,7 @@ class SelfApplication {
       required this.profileImage,
       required this.phoneNum,
       this.status = SelfApplicationStatus.closed,
+      this.isPremium = false,
       this.createdAt}) {
     createdAt ??= DateTime.now();
   }
@@ -34,4 +36,5 @@ class SelfApplication {
   Map<String, dynamic> toJson() => _$SelfApplicationToJson(this);
 
   int get differenceInDays => DateTime.now().difference(createdAt!).inDays;
+  bool get canSeeProfile => status == SelfApplicationStatus.confirmed1st || status == SelfApplicationStatus.confirmed2nd;
 }

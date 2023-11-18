@@ -32,7 +32,6 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
                               SelfIntroduction.fromJson(snapshot.data()!),
                           toFirestore: (selfIntroduction, _) => selfIntroduction.toJson(),
                         ),
-                        pageSize: 14,
                         builder: (context, snapshot, _) {
                           if (snapshot.isFetching) {
                             return const Center(child: CircularProgressIndicator());
@@ -87,7 +86,6 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
                               SelfIntroduction.fromJson(snapshot.data()!),
                           toFirestore: (selfIntroduction, _) => selfIntroduction.toJson(),
                         ),
-                        pageSize: 14,
                         builder: (context, snapshot, _) {
                           if (snapshot.isFetching) {
                             return const Center(child: CircularProgressIndicator());

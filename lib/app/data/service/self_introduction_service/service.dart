@@ -47,7 +47,8 @@ class SelfIntroductionService extends ApiService  {
         profileImage: user.profileImage,
         phoneNum: user.phoneNum,
         meInfo: meInfo,
-        status: SelfApplicationStatus.openedByApplicant));
+        status: SelfApplicationStatus.openedByApplicant,
+        isPremium: true));
     await _selfIntroductionRepository.addSelfApplication(selfIntroductionId, selfApplication);
     return selfApplication;
   }

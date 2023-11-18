@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dodohan/app/data/model/self_application.dart';
 import 'package:get/get.dart';
@@ -19,15 +18,25 @@ import '../../../../../widgets/dialogs/error_dialog.dart';
 
 class SelfIntroductionItemController extends BaseController {
   final SelfIntroductionService _selfIntroductionService = SelfIntroductionService();
+  final SelfApplicationService _selfApplicationService = SelfApplicationService();
   final MeInfoService _meInfoService = MeInfoService();
   final UserService _userService = UserService();
-  User get user => AuthService.to.user.value;
 
   final Rx<SelfIntroduction> selfIntroduction = SelfIntroduction().obs;
+  late Rxn<SelfApplication> selfApplication = Rxn<SelfApplication>();
+  final RxList<SelfApplication> applications = <SelfApplication>[].obs;
+
+  User get user => AuthService.to.user.value;
 
   @override
   Future<void> onInit() async {
     selfIntroduction.value = Get.arguments['selfIntroduction'];
+    selfApplication.value = await _selfApplicationService.findOne(selfIntroduction.value.id, user.id);
+    loading.value = false;
+
+    if (selfIntroduction.value.isMine) {
+      applications.value = await _selfApplicationService.findMany(selfIntroduction.value.id);
+    }
     super.onInit();
   }
 
@@ -40,9 +49,9 @@ class SelfIntroductionItemController extends BaseController {
       Get.dialog(const ErrorDialog(text: "'나' 의 프로필 작성을 완료해주세요"));
       return;
     }
-    final SelfApplication selfApplication = await _selfIntroductionService.applyForFree(user, meInfo, selfIntroduction.value.id);
-    selfIntroduction.update((item) => item!.applications.add(selfApplication));
-
+    final SelfApplication updatedSelfApplication = await _selfIntroductionService.applyForFree(user, meInfo, selfIntroduction.value.id);
+    selfApplication.value =  updatedSelfApplication;
+    selfIntroduction.update((item) => item!.applicants.add(user.id));
     hideLoading();
     FcmService.to.sendFcmPush(selfIntroduction.value.meInfo!.user!, FcmPushType.selfIntroductionApply);
     Get.back();
@@ -70,14 +79,56 @@ class SelfIntroductionItemController extends BaseController {
       return;
     }
 
-    final SelfApplication selfApplication = await _selfIntroductionService.applyWithCharge(user, meInfo, selfIntroduction.value.id);
-    selfIntroduction.update((item) => item!.applications.add(selfApplication));
+    final SelfApplication updatedSelfApplication = await _selfIntroductionService.applyWithCharge(user, meInfo, selfIntroduction.value.id);
+    selfApplication.value =  updatedSelfApplication;
+    selfIntroduction.update((item) => item!.applicants.add(user.id));
     await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroApply);
     AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
     hideLoading();
     FcmService.to.sendFcmPush(selfIntroduction.value.meInfo!.user!, FcmPushType.selfIntroductionApply);
     Get.back();
     Get.snackbar('신청 완료', '상대방의 선택을 기다려주세요');
+  }
+
+  Future<void> confirm2nd() async {
+    const int costCoin = 4;
+    if (user.coin < costCoin) {
+      Get.back();
+      Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
+        Get.back();
+        Get.toNamed(Routes.store);
+      }));
+      return;
+    }
+    showLoading();
+    _selfApplicationService.updateStatus(selfIntroduction.value.id, SelfApplicationStatus.confirmed2nd);
+    FcmService.to.sendFcmPush(selfIntroduction.value.meInfo!.user!, FcmPushType.selfIntroductionConfirmed2nd);
+
+    //코인 차감
+    await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroConfirm2nd);
+    AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
+    hideLoading();
+    Get.back();
+  }
+
+  Future<void> openClosedCard(int index, SelfApplication application) async {
+    const int costCoin = 1;
+    Get.back();
+    if (user.coin < costCoin) {
+      Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
+        Get.back();
+        Get.toNamed(Routes.store);
+      }));
+      return;
+    }
+    showLoading();
+    _selfApplicationService.updateStatus(application.id, SelfApplicationStatus.openedByOwner);
+    applications[index].status = SelfApplicationStatus.openedByOwner;
+    applications.refresh();
+    //코인 차감
+    await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroOpenApplicantCard);
+    AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
+    hideLoading();
   }
 }
 

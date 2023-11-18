@@ -1,25 +1,27 @@
-import 'package:dodohan/app/widgets/card_container.dart';
-import 'package:dodohan/app/widgets/my_text_field.dart';
+import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_item/widgets/applicant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../../../core/theme/buttons.dart';
 import '../../../../../../core/theme/colors.dart';
 import '../../../../../../core/theme/fonts.dart';
 import '../../../../../../routes/app_routes.dart';
+import '../../../../../data/enums.dart';
+import '../../../../../data/model/self_application.dart';
 import '../../../../../data/model/self_introduction.dart';
 import '../../../../../widgets/appbars/default_appbar.dart';
 import '../../../../../widgets/dialogs/action_dialog.dart';
 import '../../../../../widgets/dialogs/report_dialog.dart';
+import '../../../../../widgets/dividers/divider_with_text.dart';
 import '../../../../../widgets/dividers/my_divider_2.dart';
-import '../../../../../widgets/image/image_pick_box.dart';
 import '../../../../../widgets/image/image_view_box.dart';
 import 'self_introduction_item_controller.dart';
 
 class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
   const SelfIntroductionItemPage({super.key});
-  SelfIntroduction get selfIntroduction => controller.selfIntroduction.value;  
+  SelfIntroduction get selfIntroduction => controller.selfIntroduction.value;
+  SelfApplication? get selfApplication => controller.selfApplication.value;
+  List<SelfApplication> get applications => controller.applications.value;
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +61,73 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                       Text(selfIntroduction.text, style: ThemeFonts.semiBold.getTextStyle(size: 20)).paddingOnly(top: 8, bottom: 16),
                       const MyDivider2(),
                       Text(selfIntroduction.text, style: ThemeFonts.medium.getTextStyle(size: 15)).paddingSymmetric(vertical: 16),
+                      if (selfIntroduction.isMine)
+                        Column(
+                          children: [
+                            const DividerWithText('받은 신청').paddingOnly(top: 4, bottom: 8),
+                            GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: applications.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                  onTap: () => applications[index].status == SelfApplicationStatus.closed
+                                      ? Get.dialog(ActionDialog(title: '상대방 확인 하기',
+                                      text: '하트가 1개 소모됩니다',
+                                      confirmCallback: () => controller.openClosedCard(index, applications[index])))
+                                      : Get.toNamed(Routes.checkOppositeProfile),
+                                  child: ApplicantCard(selfApplication: applications[index])),
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 4,
+                                crossAxisSpacing: 4,
+                                childAspectRatio: 1,
+                              ),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),
               ),
               const MyDivider2().paddingOnly(bottom: 8),
-              if(selfIntroduction.isMine && selfIntroduction.hasUnivIssue)
+              if (selfIntroduction.isMine || selfIntroduction.hasUnivIssue || controller.loading.value)
                 Container()
-              else if(selfIntroduction.confirmed1st || selfIntroduction.confirmed2nd)
+              else if (selfApplication == null)
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                          style: BtStyle.standard(color: ThemeColors.main),
+                          onPressed: () => Get.dialog(ActionDialog(
+                              title: '신청하기',
+                              text: '내 프로필을 보내며\n상대방이 유료로 수락 할 경우\n상대방 프로필이 공개됩니다',
+                              confirmCallback: () => controller.applyForFree(),
+                              buttonText: '무료 신청')),
+                          child: const Text('무료 신청')),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ElevatedButton(
+                          style: BtStyle.standard(color: ThemeColors.orangeLight),
+                          onPressed: () => Get.dialog(ActionDialog(
+                              title: '신청하기',
+                              text: '내 프로필을 보내며\n상대방이 무료로 수락 할 경우\n상대방 프로필이 공개됩니다\n\n하트 3개가 소모됩니다',
+                              confirmCallback: () => controller.applyWithCharge(),
+                              buttonText: '유료 신청')),
+                          child: const Text('유료 신청')),
+                    ),
+                    const SizedBox(width: 8),
+                    SizedBox(
+                      width: 75,
+                      child: ElevatedButton(
+                          style: BtStyle.standard(color: Colors.black),
+                          onPressed: () => Get.toNamed(Routes.previewMyProfile),
+                          child: const Icon(Icons.account_box)),
+                    ),
+                  ],
+                ).paddingOnly(bottom: 8)
+              else if (selfApplication!.canSeeProfile)
                 ElevatedButton(
                     onPressed: () => Get.toNamed(Routes.checkOppositeProfile),
                     style: BtStyle.standard(color: ThemeColors.blueLight),
@@ -75,41 +136,7 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                 ElevatedButton(
                     onPressed: null,
                     style: BtStyle.standard(color: ThemeColors.grayLightest),
-                    child: const Text('신청 완료'))
-              else
-                Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        style: BtStyle.standard(color: ThemeColors.main),
-                        onPressed: () => Get.dialog(ActionDialog(
-                            title: '신청하기',
-                            text: '내 프로필을 보내며\n상대방이 유료로 수락 할 경우\n상대방 프로필이 공개됩니다',
-                            confirmCallback: () => controller.applyForFree(),
-                            buttonText: '무료 신청')),
-                        child: const Text('무료 신청')),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: ElevatedButton(
-                        style: BtStyle.standard(color: ThemeColors.orangeLight),
-                        onPressed: () => Get.dialog(ActionDialog(
-                            title: '신청하기',
-                            text: '내 프로필을 보내며\n상대방이 무료로 수락 할 경우\n상대방 프로필이 공개됩니다\n\n하트 3개가 소모됩니다',
-                            confirmCallback: () => controller.applyWithCharge(),
-                            buttonText: '유료 신청')),
-                        child: const Text('유료 신청')),
-                  ),
-                  const SizedBox(width: 8),
-                  SizedBox(
-                    width: 75,
-                    child: ElevatedButton(
-                        style: BtStyle.standard(color: Colors.black),
-                        onPressed: () => Get.toNamed(Routes.previewMyProfile),
-                        child: const Icon(Icons.account_box)),
-                  ),
-                ],
-              ).paddingOnly(bottom: 8),
+                    child: const Text('신청 완료')),
             ],
           ).paddingSymmetric(horizontal: 16),
         ),
