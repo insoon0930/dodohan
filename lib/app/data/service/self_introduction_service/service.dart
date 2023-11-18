@@ -52,4 +52,10 @@ class SelfIntroductionService extends ApiService  {
     await _selfIntroductionRepository.addSelfApplication(selfIntroductionId, selfApplication);
     return selfApplication;
   }
+
+  //@Patch
+  Future<void> delete(String selfIntroductionId) async {
+    await _selfIntroductionRepository.delete(selfIntroductionId);
+    return;
+  }
 }

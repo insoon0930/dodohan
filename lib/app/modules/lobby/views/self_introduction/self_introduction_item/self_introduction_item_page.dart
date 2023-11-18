@@ -1,4 +1,5 @@
 import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_item/widgets/applicant_card.dart';
+import 'package:dodohan/app/widgets/disabled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,8 @@ import '../../../../../data/model/self_introduction.dart';
 import '../../../../../widgets/appbars/default_appbar.dart';
 import '../../../../../widgets/dialogs/action_dialog.dart';
 import '../../../../../widgets/dialogs/report_dialog.dart';
+import '../../../../../widgets/dialogs/select/select_dialog.dart';
+import '../../../../../widgets/dialogs/select/select_dialog_item.dart';
 import '../../../../../widgets/dividers/divider_with_text.dart';
 import '../../../../../widgets/dividers/my_divider_2.dart';
 import '../../../../../widgets/image/image_view_box.dart';
@@ -42,11 +45,20 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                           top: 12,
                           right: 4,
                           child: GestureDetector(
-                              onTap: () => Get.dialog(ReportDialog(
-                                hasBlock: false,
-                                reportCallback: () async {},
-                                blockCallback: () async {},
-                              )),
+                              onTap: () => selfIntroduction.isMine
+                                  ? Get.dialog(SelectDialog(itemHeight: 60, items: [
+                                SelectDialogItem(
+                                    text: '삭제하기',
+                                    onTap: () => controller.delete(selfIntroduction.id),
+                                    first: true,
+                                    last: true,
+                                    style: ThemeFonts.semiBold.getTextStyle(size: 15)),
+                              ]))
+                                  : Get.dialog(ReportDialog(
+                                      hasBlock: false,
+                                      reportCallback: () async {},
+                                      blockCallback: () async {},
+                                    )),
                               child: Container(
                                 width: 40,
                                 height: 20,
@@ -73,9 +85,9 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                               itemBuilder: (context, index) => GestureDetector(
                                   onTap: () => applications[index].status == SelfApplicationStatus.closed
                                       ? Get.dialog(ActionDialog(title: '상대방 확인 하기',
-                                      text: '하트가 1개 소모됩니다',
+                                      text: '프로필 확인은 상대가 알 수 없습니다\n\n하트가 1개 소모됩니다',
                                       confirmCallback: () => controller.openClosedCard(index, applications[index])))
-                                      : Get.toNamed(Routes.checkOppositeProfile),
+                                      : controller.goToCheckOppositeProfile(applications[index]),
                                   child: ApplicantCard(selfApplication: applications[index])),
                               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -84,6 +96,7 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                                 childAspectRatio: 1,
                               ),
                             ),
+                            const SizedBox(height: 8)
                           ],
                         ),
                     ],
@@ -133,10 +146,7 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                     style: BtStyle.standard(color: ThemeColors.blueLight),
                     child: const Text('상대방 프로필 확인'))
               else if(selfIntroduction.applied)
-                ElevatedButton(
-                    onPressed: null,
-                    style: BtStyle.standard(color: ThemeColors.grayLightest),
-                    child: const Text('신청 완료')),
+                const DisabledButton(text: '신청 완료'),
             ],
           ).paddingSymmetric(horizontal: 16),
         ),

@@ -138,8 +138,7 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
   }
 
   Widget _item(SelfIntroduction selfIntroduction) => GestureDetector(
-        onTap: () => Get.toNamed(Routes.selfIntroductionItem,
-            arguments: {'selfIntroduction': selfIntroduction}),
+        onTap: () => controller.onTapCard(selfIntroduction),
         child: Card(
           margin: const EdgeInsets.all(4.0),
           shape: const RoundedRectangleBorder(

@@ -21,6 +21,8 @@ MeInfo _$MeInfoFromJson(Map<String, dynamic> json) {
     isSmoker: json['isSmoker'] as bool?,
     height: json['height'] as int?,
     age: json['age'] as int?,
+    mbti: json['mbti'] as String?,
+    introduction: json['introduction'] as String?,
   );
 }
 
@@ -34,4 +36,6 @@ Map<String, dynamic> _$MeInfoToJson(MeInfo instance) => <String, dynamic>{
       'isSmoker': instance.isSmoker,
       'height': instance.height,
       'age': instance.age,
+      'mbti': instance.mbti,
+      'introduction': instance.introduction,
     };

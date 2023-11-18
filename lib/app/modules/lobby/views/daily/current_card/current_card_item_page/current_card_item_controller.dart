@@ -42,11 +42,6 @@ class CurrentCardItemController extends BaseController {
     super.onInit();
   }
 
-  Future<void> copyPhoneNum(String phoneNum) async {
-    await Clipboard.setData(ClipboardData(text: phoneNum));
-    Get.snackbar('전화번호', '클립보드에 저장 완료');
-  }
-
   Future<void> confirm({required int coin, required CardStatus cardStatus}) async {
     showLoading();
     if(Get.isSnackbarOpen) {

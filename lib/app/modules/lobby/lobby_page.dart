@@ -1,4 +1,5 @@
 import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_view.dart';
+import 'package:dodohan/app/modules/lobby/widgets/dialogs/how_to_use_self_introduction.dart';
 import 'package:dodohan/app/modules/lobby/widgets/expandable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,7 @@ class LobbyPage extends GetView<LobbyController> {
                     icon: Text('MY', style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
                   ),
                   ActionButton(
-                    onPressed: () {},
+                    onPressed: () => Get.dialog(const HowToUseSelfIntroductionDialog()),
                     icon: const Icon(Icons.question_mark),
                   ),
                 ],

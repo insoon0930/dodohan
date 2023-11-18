@@ -1,3 +1,4 @@
+import 'package:dodohan/app/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/theme/buttons.dart';
@@ -79,6 +80,20 @@ class MeInfoPage extends GetView<MeInfoController> {
                       list: InfoData.meSmoke,
                       changedCallback: (selected) => controller.meInfo.value
                           .isSmoker = selected.value == 'true' ? true : false),
+                  const Divider(height: 1),
+                  SingleSelector(
+                      title: 'MBTI',
+                      placeholder: controller.meInfo.value.mbti == null ? '(선택)' : '${controller.meInfo.value.mbti}',
+                      list: InfoData.mbti,
+                      changedCallback: (selected) => controller.meInfo.value.mbti = selected.value),
+                  const Divider(height: 1),
+                  const SizedBox(height: 8),
+                  MyTextField(
+                      textController: TextEditingController(text: controller.meInfo.value.introduction),
+                      width: Get.width,
+                      hint: '자신에 대한 소개를 작성해주세요 (선택)',
+                      minLine: 4,
+                      onChanged: (text) => controller.meInfo.value.introduction = text),
                 ],
               ),
             ),

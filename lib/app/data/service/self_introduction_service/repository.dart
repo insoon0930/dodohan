@@ -37,4 +37,14 @@ class SelfIntroductionRepository extends ApiService {
       rethrow;
     }
   }
+
+  Future<void> delete(String selfIntroId) async {
+    try {
+      final doc = firestore.collection('selfIntroductions').doc(selfIntroId);
+      await doc.update({'deletedAt': DateTime.now()});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

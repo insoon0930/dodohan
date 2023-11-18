@@ -80,7 +80,7 @@ class SelfIntroductionItemController extends BaseController {
     }
 
     final SelfApplication updatedSelfApplication = await _selfIntroductionService.applyWithCharge(user, meInfo, selfIntroduction.value.id);
-    selfApplication.value =  updatedSelfApplication;
+    selfApplication.value = updatedSelfApplication;
     selfIntroduction.update((item) => item!.applicants.add(user.id));
     await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroApply);
     AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
@@ -91,9 +91,9 @@ class SelfIntroductionItemController extends BaseController {
   }
 
   Future<void> confirm2nd() async {
-    const int costCoin = 4;
+    Get.back();
+    const int costCoin = 3;
     if (user.coin < costCoin) {
-      Get.back();
       Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
         Get.back();
         Get.toNamed(Routes.store);
@@ -101,14 +101,48 @@ class SelfIntroductionItemController extends BaseController {
       return;
     }
     showLoading();
-    _selfApplicationService.updateStatus(selfIntroduction.value.id, SelfApplicationStatus.confirmed2nd);
+    _selfApplicationService.updateStatus(selfApplication.value!.id, SelfApplicationStatus.confirmed2nd);
+    selfApplication.update((val) => val!.status = SelfApplicationStatus.confirmed2nd);
     FcmService.to.sendFcmPush(selfIntroduction.value.meInfo!.user!, FcmPushType.selfIntroductionConfirmed2nd);
 
     //코인 차감
     await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroConfirm2nd);
     AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
     hideLoading();
+    Get.snackbar('매칭 성공', '상대방의 전화번호를 확인하세요!');
+  }
+
+  Future<void> confirm1stForFree() async {
     Get.back();
+    showLoading();
+    _selfApplicationService.updateStatus(selfApplication.value!.id, SelfApplicationStatus.confirmed1st);
+    selfApplication.update((val) => val!.status = SelfApplicationStatus.confirmed1st);
+    FcmService.to.sendFcmPush(selfApplication.value!.meInfo.user!, FcmPushType.selfIntroductionConfirmed1st);
+    hideLoading();
+    Get.snackbar('수락 완료', '상대방의 선택을 기다려주세요');
+  }
+
+  Future<void> confirm1stWithCharge() async {
+    Get.back();
+    const int costCoin = 3;
+    if (user.coin < costCoin) {
+      Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
+        Get.back();
+        Get.toNamed(Routes.store);
+      }));
+      return;
+    }
+
+    showLoading();
+    _selfApplicationService.updateStatus(selfApplication.value!.id, SelfApplicationStatus.confirmed1st);
+    selfApplication.update((val) => val!.status = SelfApplicationStatus.confirmed1st);
+    FcmService.to.sendFcmPush(selfApplication.value!.meInfo.user!, FcmPushType.selfIntroductionConfirmed1st);
+
+    //코인 차감
+    await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroConfirm1st);
+    AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
+    hideLoading();
+    Get.snackbar('수락 완료', '상대방의 선택을 기다려주세요');
   }
 
   Future<void> openClosedCard(int index, SelfApplication application) async {
@@ -129,6 +163,20 @@ class SelfIntroductionItemController extends BaseController {
     await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.selfIntroOpenApplicantCard);
     AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
     hideLoading();
+  }
+
+  void goToCheckOppositeProfile(SelfApplication targetApplication) {
+    selfApplication.value = targetApplication;
+    Get.toNamed(Routes.checkOppositeProfile);
+  }
+
+  Future<void> delete(selfIntroductionId) async {
+    showLoading();
+    await _selfIntroductionService.delete(selfIntroductionId);
+    hideLoading();
+    Get.back();
+    Get.back();
+    Get.snackbar('삭제 완료', '나의 셀프 소개가 삭제 완료되었습니다');
   }
 }
 

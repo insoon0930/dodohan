@@ -41,6 +41,7 @@ enum FcmPushType {
   identityReject(title: '본인 인증 실패', body: "학생증 및 프로필 사진을 다시 확인해주세요"),
 
   selfIntroductionApply(title: '셀프 소개', body: "누군가 프로필을 보내왔어요!"),
+  selfIntroductionConfirmed1st(title: '셀프 소개', body: "상대방이 내 신청을 수락했어요!"),
   selfIntroductionConfirmed2nd(title: '셀프 소개', body: "상대방이 최종 수락을 했어요!"),
 
   coinPurchased3(title: '관리자 알림', body: "3코인 구매가 이루어졌습니다. +3,900₩"),

@@ -11,6 +11,7 @@ class MeInfo {
   String? user, univ, major, bodyShape;
   bool? isMan, isSmoker;
   int? height, age;
+  String? mbti, introduction;
 
   MeInfo({this.id,
       this.user,
@@ -20,13 +21,15 @@ class MeInfo {
       this.isMan,
       this.isSmoker,
       this.height,
-      this.age});
+      this.age,
+      this.mbti,
+      this.introduction});
 
   factory MeInfo.fromJson(Map<String, dynamic> json) =>
       _$MeInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MeInfoToJson(this);
 
-  bool get isCompleted => !toJson().containsValue(null);
+  bool get isCompleted => major != null && height != null && age != null && bodyShape != null && isSmoker != null;
   String get region => InfoData.univInfo[univ]!.region.name;
 }

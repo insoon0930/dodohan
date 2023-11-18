@@ -19,7 +19,7 @@ class SingleSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmartSelect<String?>.single(
       title: title,
-      placeholder: (placeholder == null || placeholder == 'null') ? '선택' : placeholder!,
+      placeholder: (placeholder == null || placeholder == 'null') ? '필수' : placeholder!,
       choiceDirection: Axis.vertical,
       choiceGrouped: title == '학과' ? true : false,
       groupCounter: false,

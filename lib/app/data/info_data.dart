@@ -490,4 +490,25 @@ class InfoData {
     S2Choice<String>(value: 'false', title: '상관없음'),
   ];
 
+  static List<S2Choice<String>> mbti = [
+    S2Choice<String>(value: 'ISTJ', title: 'ISTJ'),
+    S2Choice<String>(value: 'ISTP', title: 'ISTP'),
+    S2Choice<String>(value: 'ISFJ', title: 'ISFJ'),
+    S2Choice<String>(value: 'ISFP', title: 'ISFP'),
+
+    S2Choice<String>(value: 'INTJ', title: 'INTJ'),
+    S2Choice<String>(value: 'INTP', title: 'INTP'),
+    S2Choice<String>(value: 'INFJ', title: 'INFJ'),
+    S2Choice<String>(value: 'INFP', title: 'INFP'),
+
+    S2Choice<String>(value: 'ESTJ', title: 'ESTJ'),
+    S2Choice<String>(value: 'ESTP', title: 'ESTP'),
+    S2Choice<String>(value: 'ESFJ', title: 'ESFJ'),
+    S2Choice<String>(value: 'ESEP', title: 'ESEP'),
+
+    S2Choice<String>(value: 'ENTJ', title: 'ENTJ'),
+    S2Choice<String>(value: 'ENTP', title: 'ENTP'),
+    S2Choice<String>(value: 'ENFJ', title: 'ENFJ'),
+    S2Choice<String>(value: 'ENFP', title: 'ENFP'),
+  ];
 }

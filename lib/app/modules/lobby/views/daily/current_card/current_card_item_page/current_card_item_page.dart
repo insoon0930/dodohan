@@ -1,4 +1,5 @@
 import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
+import 'package:dodohan/app/widgets/disabled_button.dart';
 import 'package:dodohan/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import '../../../../../../../core/utils/utility.dart';
 import '../../../../../../data/enums.dart';
 import '../../../../../../widgets/appbars/default_appbar.dart';
 import '../../../../../../widgets/dialogs/report_dialog.dart';
+import '../../../../../../widgets/selectable_phone_num.dart';
 import 'current_card_item_controller.dart';
 
 class CurrentCardItemPage extends GetView<CurrentCardItemController> {
@@ -58,23 +60,22 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               ]),
               //거절함
               if (controller.myStatus == CardStatus.rejected1st || controller.myStatus == CardStatus.rejected2nd)
-                _disabledBt('거절한 카드입니다')
+                const DisabledButton(text: '거절한 카드입니다')
               //1차 선택
               else if (controller.myStatus == CardStatus.checked || controller.myStatus == CardStatus.unChecked)
                 _firstChoice()
               //거절됨
               else if (controller.yourStatus == CardStatus.rejected1st)
-                  _disabledBt('매칭 실패')
+                  const DisabledButton(text: '매칭 실패')
               //2차 선택
               else if (controller.myStatus == CardStatus.confirmed1st && (controller.youMadeAFirstChoice || controller.youMadeASecondChoice))
                 _secondChoice()
               //거절됨
               else if (controller.yourStatus == CardStatus.rejected2nd)
-                _disabledBt('매칭 실패')
+                const DisabledButton(text: '매칭 실패')
               //매칭 성공
               else if (controller.myStatus == CardStatus.confirmed2nd && controller.yourStatus == CardStatus.confirmed2nd)
-                GestureDetector(onTap: () => controller.copyPhoneNum(Utility.formatPhoneNum(controller.dailyCard.value.yourPhoneNum)),
-                  child: Text(Utility.formatPhoneNum(controller.dailyCard.value.yourPhoneNum), style: ThemeFonts.semiBold.getTextStyle(size: 25, color: ThemeColors.main, decoration: TextDecoration.underline)).paddingOnly(top: 16)),
+                SelectablePhoneNum(phoneNum: controller.dailyCard.value.yourPhoneNum).paddingOnly(top: 16),
               if (controller.dailyCard.value.meStatus != CardStatus.checked)
                 const SizedBox(height: 16),
               _infoForm('학교', controller.youInfo.univ!),
@@ -87,9 +88,9 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               const Divider(),
               _infoForm('흡연', controller.youInfo.isSmoker!?'흡연':'비흡연'),
               const Divider(),
-              _infoForm('MBTI', ''),
+              _infoForm('MBTI', controller.youInfo.mbti ?? ''),
               const Divider(),
-              _infoForm('소개', ''),
+              _infoForm('간단소개', controller.youInfo.introduction ?? ''),
               const Divider(),
             ],
           ).paddingAll(16),
@@ -173,9 +174,4 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
       ),
     ],
   ).paddingSymmetric(vertical: 16);
-
-  Widget _disabledBt(String text) => ElevatedButton(
-      onPressed: null,
-      style: BtStyle.standard(color: ThemeColors.grayLightest),
-      child: Text(text)).paddingOnly(top: 16);
 }
