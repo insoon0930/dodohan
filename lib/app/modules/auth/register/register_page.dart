@@ -20,58 +20,54 @@ class RegisterPage extends GetView<RegisterController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16.0),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 16.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                          onTap: () => Get.offAllNamed(Routes.loginBy),
-                          child: Container(
-                            color: Colors.transparent,
-                            child: const Icon(Icons.arrow_back_ios_new_rounded,
-                                size: 19),
-                          )),
-                      const SizedBox(height: 16),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('정보를 입력해주세요',
-                              style: ThemeFonts.bold.getTextStyle(size: 24))),
-                    ],
-                  ),
-                  Text('학교'.tr,
-                          style: ThemeFonts.semiBold.getTextStyle(size: 17))
-                      .paddingOnly(top: 32, bottom: 16),
-                  _searchBar(),
-                  // Obx(() => _univ(context)),
-                  Text('성별'.tr,
-                          style: ThemeFonts.semiBold.getTextStyle(size: 17))
-                      .paddingOnly(top: 32, bottom: 16),
-                  Obx(() => _genderCheck()),
-                  _imageRow(),
+                  GestureDetector(
+                      onTap: () => Get.offAllNamed(Routes.loginBy),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: const Icon(Icons.arrow_back_ios_new_rounded,
+                            size: 19),
+                      )),
                   const SizedBox(height: 16),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('정보를 입력해주세요',
+                          style: ThemeFonts.bold.getTextStyle(size: 24))),
                 ],
               ),
-            ),
-            _termsAgree().paddingOnly(bottom: 8),
-            const Spacer(),
-            Obx(() => ElevatedButton(
-                  style: BtStyle.onOff(controller.ready),
-                  onPressed:
-                      controller.ready ? () => controller.register() : null,
-                  child: Center(
-                    child: Text('완료',
-                        style: ThemeFonts.medium
-                            .getTextStyle(color: Colors.white)),
-                  ),
-                )),
-            const SizedBox(height: 16),
-          ],
+              Text('학교'.tr,
+                      style: ThemeFonts.semiBold.getTextStyle(size: 17))
+                  .paddingOnly(top: 32, bottom: 16),
+              _searchBar(),
+              // Obx(() => _univ(context)),
+              Text('성별'.tr,
+                      style: ThemeFonts.semiBold.getTextStyle(size: 17))
+                  .paddingOnly(top: 32, bottom: 16),
+              Obx(() => _genderCheck()),
+              _imageRow(),
+              const SizedBox(height: 16),
+              _termsAgree(),
+              const SizedBox(height: 16),
+              Obx(() => ElevatedButton(
+                style: BtStyle.onOff(controller.ready),
+                onPressed:
+                controller.ready ? () => controller.register() : null,
+                child: Center(
+                  child: Text('완료',
+                      style: ThemeFonts.medium
+                          .getTextStyle(color: Colors.white)),
+                ),
+              )),
+              const SizedBox(height: 16),
+            ],
+          ),
         ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
       ),
     );

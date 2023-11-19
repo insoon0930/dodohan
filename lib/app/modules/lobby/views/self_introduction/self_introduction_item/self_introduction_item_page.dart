@@ -70,7 +70,7 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                       Text('${selfIntroduction.meInfo?.univ ?? '학교명(오류)'}${selfIntroduction.sameUnivOnly ? ' (동일 캠퍼스만 신청 가능)' : ''}',
                           style: ThemeFonts.regular.getTextStyle(size: 15, color: ThemeColors.mainLight))
                           .paddingOnly(top: 16),
-                      Text(selfIntroduction.text, style: ThemeFonts.semiBold.getTextStyle(size: 20)).paddingOnly(top: 8, bottom: 16),
+                      Text(selfIntroduction.title, style: ThemeFonts.semiBold.getTextStyle(size: 20)).paddingOnly(top: 8, bottom: 16),
                       const MyDivider2(),
                       Text(selfIntroduction.text, style: ThemeFonts.medium.getTextStyle(size: 15)).paddingSymmetric(vertical: 16),
                       if (selfIntroduction.isMine)
