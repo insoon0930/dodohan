@@ -56,15 +56,16 @@ class FinalDecisionDialog extends StatelessWidget {
                   Text('🎉 1차 매칭 성공! 🎉', style: ThemeFonts.semiBold.getTextStyle(size: 16)),
                   const SizedBox(height: 25),
                   //https://storage.googleapis.com/dodohan-6c8fd.appspot.com/profile/Rectangle%209.png
-                  ImageViewBox(url: profileImage, width: 160, height: 160),
+                  ImageViewBox(url: profileImage, width: Get.width * 0.5, height: Get.width * 0.5),
                   const SizedBox(height: 16),
-                  Text('최종 선택을 해주세요\n(수락시 6 하트가 소모됩니다)', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
+                  Text('최종 선택을 해주세요\n(수락시 ${user.isMan! ? 6 : 3} 하트가 소모됩니다)', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
                   Row(
                     children: [
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () async {
-                              if (user.coin < 6) {
+                              final int costCoin = user.isMan! ? 6 : 3;
+                              if (user.coin < costCoin) {
                                 Get.back();
                                 Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
                                   Get.back();
@@ -77,8 +78,8 @@ class FinalDecisionDialog extends StatelessWidget {
                               FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
                               matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.confirmed);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
-                              await _userService.increaseCoin(user.id, -6, type: CoinReceiptType.weeklyMatch);
-                              AuthService.to.user.update((user) => user!.coin = user.coin - 6);
+                              await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.weeklyMatch);
+                              AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
 
                               Get.back();
                               Get.back();

@@ -48,5 +48,5 @@ class SelfIntroduction {
   User get user => AuthService.to.user.value;
   bool get isMine => meInfo!.user == user.id;
   bool get applied => applicants.contains(user.id);
-  bool get hasUnivIssue => sameUnivOnly && (user.univ == meInfo!.univ);
+  bool get hasUnivIssue => sameUnivOnly && (user.univ != meInfo!.univ);
 }
