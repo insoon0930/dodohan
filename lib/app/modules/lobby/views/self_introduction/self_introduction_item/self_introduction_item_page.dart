@@ -22,8 +22,11 @@ import 'self_introduction_item_controller.dart';
 
 class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
   const SelfIntroductionItemPage({super.key});
+
   SelfIntroduction get selfIntroduction => controller.selfIntroduction.value;
+
   SelfApplication? get selfApplication => controller.selfApplication.value;
+
   List<SelfApplication> get applications => controller.applications.value;
 
   @override
@@ -40,20 +43,26 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(children: [
-                        ImageViewBox(url: selfIntroduction.image, width: Get.width, height: Get.width),
+                        ImageViewBox(
+                            url: selfIntroduction.image,
+                            width: Get.width,
+                            height: Get.width),
                         Positioned(
                           top: 12,
                           right: 4,
                           child: GestureDetector(
                               onTap: () => selfIntroduction.isMine
-                                  ? Get.dialog(SelectDialog(itemHeight: 60, items: [
-                                SelectDialogItem(
-                                    text: '삭제하기',
-                                    onTap: () => controller.delete(selfIntroduction.id),
-                                    first: true,
-                                    last: true,
-                                    style: ThemeFonts.semiBold.getTextStyle(size: 15)),
-                              ]))
+                                  ? Get.dialog(
+                                      SelectDialog(itemHeight: 60, items: [
+                                      SelectDialogItem(
+                                          text: '삭제하기',
+                                          onTap: () => controller
+                                              .delete(selfIntroduction.id),
+                                          first: true,
+                                          last: true,
+                                          style: ThemeFonts.semiBold
+                                              .getTextStyle(size: 15)),
+                                    ]))
                                   : Get.dialog(ReportDialog(
                                       hasBlock: false,
                                       reportCallback: () async {},
@@ -63,33 +72,49 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                                 width: 40,
                                 height: 20,
                                 color: Colors.transparent,
-                                child: SvgPicture.asset('assets/dots.svg', color: Colors.white70).paddingOnly(left: 20),
+                                child: SvgPicture.asset('assets/dots.svg',
+                                        color: Colors.white70)
+                                    .paddingOnly(left: 20),
                               )).paddingOnly(right: 16),
                         )
                       ]),
                       Text('${selfIntroduction.meInfo?.univ ?? '학교명(오류)'}${selfIntroduction.sameUnivOnly ? ' (동일 캠퍼스만 신청 가능)' : ''}',
-                          style: ThemeFonts.regular.getTextStyle(size: 15, color: ThemeColors.mainLight))
+                              style: ThemeFonts.regular.getTextStyle(
+                                  size: 15, color: ThemeColors.mainLight))
                           .paddingOnly(top: 16),
-                      Text(selfIntroduction.title, style: ThemeFonts.semiBold.getTextStyle(size: 20)).paddingOnly(top: 8, bottom: 16),
+                      Text(selfIntroduction.title,
+                              style: ThemeFonts.semiBold.getTextStyle(size: 20))
+                          .paddingOnly(top: 8, bottom: 16),
                       const MyDivider2(),
-                      Text(selfIntroduction.text, style: ThemeFonts.medium.getTextStyle(size: 15)).paddingSymmetric(vertical: 16),
+                      Text(selfIntroduction.text,
+                              style: ThemeFonts.medium.getTextStyle(size: 15))
+                          .paddingSymmetric(vertical: 16),
                       if (selfIntroduction.isMine)
                         Column(
                           children: [
-                            const DividerWithText('받은 신청').paddingOnly(top: 4, bottom: 8),
+                            const DividerWithText('받은 신청')
+                                .paddingOnly(top: 4, bottom: 8),
                             GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               itemCount: applications.length,
                               itemBuilder: (context, index) => GestureDetector(
-                                  onTap: () => applications[index].status == SelfApplicationStatus.closed
-                                      ? Get.dialog(ActionDialog(title: '상대방 확인 하기',
-                                      text: '프로필 확인은 상대가 알 수 없습니다\n\n하트가 1개 소모됩니다',
-                                      confirmCallback: () => controller.openClosedCard(index, applications[index])))
-                                      : controller.goToCheckOppositeProfile(applications[index]),
-                                  child: ApplicantCard(selfApplication: applications[index])),
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  onTap: () => applications[index].status ==
+                                          SelfApplicationStatus.closed
+                                      ? Get.dialog(ActionDialog(
+                                          title: '상대방 확인 하기',
+                                          text:
+                                              '프로필 확인은 상대가 알 수 없습니다\n\n하트가 1개 소모됩니다',
+                                          confirmCallback: () =>
+                                              controller.openClosedCard(
+                                                  index, applications[index])))
+                                      : controller.goToCheckOppositeProfile(
+                                          applications[index]),
+                                  child: ApplicantCard(
+                                      selfApplication: applications[index])),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 4,
                                 crossAxisSpacing: 4,
@@ -104,7 +129,9 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                 ),
               ),
               const MyDivider2().paddingOnly(bottom: 8),
-              if (selfIntroduction.isMine || selfIntroduction.hasUnivIssue || controller.loading.value)
+              if (selfIntroduction.isMine ||
+                  selfIntroduction.hasUnivIssue ||
+                  controller.loading.value)
                 Container()
               else if (selfApplication == null)
                 Row(
@@ -114,7 +141,8 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                           style: BtStyle.standard(color: ThemeColors.main),
                           onPressed: () => Get.dialog(ActionDialog(
                               title: '신청하기',
-                              text: '내 프로필을 보내며\n상대방이 유료로 수락 할 경우\n상대방 프로필이 공개됩니다',
+                              text:
+                                  '내 프로필을 보내며\n상대방이 유료로 수락 할 경우\n상대방 프로필이 공개됩니다',
                               confirmCallback: () => controller.applyForFree(),
                               buttonText: '무료 신청')),
                           child: const Text('무료 신청')),
@@ -122,11 +150,14 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: ElevatedButton(
-                          style: BtStyle.standard(color: ThemeColors.orangeLight),
+                          style:
+                              BtStyle.standard(color: ThemeColors.orangeLight),
                           onPressed: () => Get.dialog(ActionDialog(
                               title: '신청하기',
-                              text: '내 프로필을 보내며\n상대방이 무료로 수락 할 경우\n상대방 프로필이 공개됩니다\n\n하트 3개가 소모됩니다',
-                              confirmCallback: () => controller.applyWithCharge(),
+                              text:
+                                  '내 프로필을 보내며\n상대방이 무료로 수락 할 경우\n상대방 프로필이 공개됩니다\n\n하트 3개가 소모됩니다',
+                              confirmCallback: () =>
+                                  controller.applyWithCharge(),
                               buttonText: '유료 신청')),
                           child: const Text('유료 신청')),
                     ),
@@ -145,7 +176,7 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
                     onPressed: () => Get.toNamed(Routes.checkOppositeProfile),
                     style: BtStyle.standard(color: ThemeColors.blueLight),
                     child: const Text('상대방 프로필 확인'))
-              else if(selfIntroduction.applied)
+              else if (selfIntroduction.applied)
                 const DisabledButton(text: '신청 완료'),
             ],
           ).paddingSymmetric(horizontal: 16),

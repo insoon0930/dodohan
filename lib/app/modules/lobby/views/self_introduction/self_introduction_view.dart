@@ -4,6 +4,7 @@ import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../routes/app_routes.dart';
@@ -77,6 +78,7 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
 
   Widget _item(SelfIntroduction selfIntroduction) => GestureDetector(
         onTap: () => Get.toNamed(Routes.selfIntroductionItem, arguments: {'selfIntroduction': selfIntroduction}),
+        onLongPress: AuthService.to.isAdmin ? () => controller.showDeleteDialog(selfIntroduction) : null,
         child: Card(
           margin: const EdgeInsets.all(4.0),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
@@ -110,9 +112,10 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
                     const Spacer(),
                     Text(
                       selfIntroduction.title,
-                      style: ThemeFonts.semiBold.getTextStyle(),
-                      maxLines: 2,
+                      style: ThemeFonts.semiBold.getTextStyle(height: 1.2),
                       overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      maxLines: 2,
                     ),
                     const Spacer(),
                   ],
@@ -136,32 +139,48 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
     );
   }
 
-  Widget _filter() => Card(
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
-        elevation: 0.5,
-        child: PromptedChoice<String>.single(
-          title: '지역',
-          value: '전체',
-          itemCount: controller.choices.length,
-          itemBuilder: (state, i) {
-            return RadioListTile(
-              value: controller.choices[i],
-              groupValue: state.single,
-              onChanged: (value) {
-                controller.onFilterChanged(value as String);
-                state.select(controller.choices[i]);
-              },
-              title: ChoiceText(
-                controller.choices[i],
-                highlight: state.search?.value,
+  Widget _filter() => Row(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Card(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4.0))),
+              elevation: 0.5,
+              child: PromptedChoice<String>.single(
+                title: '지역',
+                value: '전체',
+                itemCount: controller.choices.length,
+                itemBuilder: (state, i) {
+                  return RadioListTile(
+                    value: controller.choices[i],
+                    groupValue: state.single,
+                    onChanged: (value) {
+                      controller.onFilterChanged(value as String);
+                      state.select(controller.choices[i]);
+                    },
+                    title: ChoiceText(
+                      controller.choices[i],
+                      highlight: state.search?.value,
+                    ),
+                  );
+                },
+                promptDelegate: ChoicePrompt.delegatePopupDialog(
+                  maxHeightFactor: .5,
+                  constraints: const BoxConstraints(maxWidth: 300),
+                ),
+                anchorBuilder: ChoiceAnchor.create(inline: true, dense: true),
               ),
-            );
-          },
-          promptDelegate: ChoicePrompt.delegatePopupDialog(
-            maxHeightFactor: .5,
-            constraints: const BoxConstraints(maxWidth: 300),
+            ),
           ),
-          anchorBuilder: ChoiceAnchor.create(inline: true, dense: true),
-        ),
+          if (AuthService.to.isAdmin)
+            Expanded(
+                flex: 1,
+                child: Obx(
+                  () => Switch(
+                      value: controller.isManAdminSwitch.value ?? true,
+                      onChanged: (val) => controller.switchIsMan(val)),
+                )),
+        ],
       );
 }

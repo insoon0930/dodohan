@@ -13,7 +13,7 @@ enum ThemeFonts {
 
 extension TextSizeExt on ThemeFonts {
   // 변형이 필요하면 copyWith 메소드 사용
-  TextStyle getTextStyle({Color? color = Colors.black, double? size = 14, decoration}) {
+  TextStyle getTextStyle({Color? color = Colors.black, double? size = 14, decoration, double? height}) {
     const fontFamily = 'Pretendard';
 
     switch (this) {
@@ -26,7 +26,7 @@ extension TextSizeExt on ThemeFonts {
       case ThemeFonts.medium:
         return TextStyle(fontSize: size, fontWeight: FontWeight.w500, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
       case ThemeFonts.semiBold:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w600, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, decoration: decoration);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w600, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, decoration: decoration, height: height);
       case ThemeFonts.bold:
         return TextStyle(fontSize: size, fontWeight: FontWeight.w700, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
       case ThemeFonts.extraBold:

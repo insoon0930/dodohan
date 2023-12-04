@@ -126,8 +126,8 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           style: BtStyle.standard(color: ThemeColors.main),
           onPressed: () => Get.dialog(ActionDialog(
                   title: '1차 수락',
-                  text: '하트 2개가 소모됩니다',
-                  confirmCallback: () => controller.confirm(coin: 2, cardStatus: CardStatus.confirmed1st),
+                  text: '하트 ${controller.user.isMan! ? 2 : 1}개가 소모됩니다',
+                  confirmCallback: () => controller.confirm(coin: controller.user.isMan! ? 2 : 1, cardStatus: CardStatus.confirmed1st),
                   buttonText: '수락하기')),
               child: const Text('수락'),
         ),
@@ -154,9 +154,11 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           style: BtStyle.standard(color: ThemeColors.main),
           onPressed: () => Get.dialog(ActionDialog(
               title: '최종 수락',
-              text: '하트 6개가 소모됩니다',
-              confirmCallback: () => controller.confirm(coin: 6, cardStatus: CardStatus.confirmed2nd),
-              buttonText: '수락하기')),
+              text: '하트 ${controller.user.isMan! ? 6 : 3}개가 소모됩니다',
+              confirmCallback: () => controller.confirm(
+                      coin: controller.user.isMan! ? 6 : 3,
+                      cardStatus: CardStatus.confirmed2nd),
+                  buttonText: '수락하기')),
           child: const Text('수락'),
         ),
       ),
