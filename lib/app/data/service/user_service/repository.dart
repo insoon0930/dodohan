@@ -93,8 +93,10 @@ class UserRepository extends ApiService {
           .where('isMan', isEqualTo: true)
           .where('deletedAt', isNull: !isDeleted)
           .get();
-
       final manNum = querySnapshotMan.size;
+      if(manNum == 0) {
+        return {'manNum': 0, 'womanNum': 0};
+      }
 
       // 여자 수 가져오기
       QuerySnapshot querySnapshotWoman = await firestore
@@ -102,7 +104,6 @@ class UserRepository extends ApiService {
           .where('isMan', isEqualTo: false)
           .where('deletedAt', isNull: !isDeleted)
           .get();
-
       final womanNum = querySnapshotWoman.size;
       return {'manNum': manNum + 95, 'womanNum': womanNum + 65};
     } catch (e) {
