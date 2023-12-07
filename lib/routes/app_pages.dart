@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:dodohan/app/modules/setting/business_info/page.dart';
 import '../app/modules/admin/admin_binding.dart';
 import '../app/modules/admin/admin_page.dart';
+import '../app/modules/admin/analytics/analytics_binding.dart';
+import '../app/modules/admin/analytics/analytics_page.dart';
 import '../app/modules/admin/application/application_binding.dart';
 import '../app/modules/admin/application/application_page.dart';
 import '../app/modules/admin/match/match_binding.dart';
@@ -104,6 +106,10 @@ class AppPages {
               name: Paths.application,
               page: () => const ApplicationPage(),
               binding: ApplicationBinding()),
+          GetPage(
+              name: Paths.analytics,
+              page: () => const AnalyticsPage(),
+              binding: AnalyticsBinding()),
         ]),
     GetPage(
         name: Routes.meInfo,

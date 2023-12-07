@@ -4,10 +4,12 @@ import '../../../data/provider/api_service.dart';
 import '../../enums.dart';
 import '../../model/identity.dart';
 import '../../model/user.dart';
-class UserRepository extends ApiService {
 
+class UserRepository extends ApiService {
   UserRepository._privateConstructor();
+
   static final UserRepository _instance = UserRepository._privateConstructor();
+
   factory UserRepository() {
     return _instance;
   }
@@ -34,11 +36,8 @@ class UserRepository extends ApiService {
 
   Future<User?> findOneByUid(String uid) async {
     try {
-      QuerySnapshot querySnapshot = await firestore
-          .collection('users')
-          .where('uid', isEqualTo: uid)
-          .where('deletedAt', isNull: true)
-          .get();
+      QuerySnapshot querySnapshot =
+          await firestore.collection('users').where('uid', isEqualTo: uid).where('deletedAt', isNull: true).get();
       return User.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
     } catch (e) {
       print('error: $e');
@@ -67,14 +66,9 @@ class UserRepository extends ApiService {
 
   Future<List<User>> findWomen() async {
     try {
-      QuerySnapshot querySnapshot = await firestore
-          .collection('users')
-          .where('isMan', isEqualTo: false)
-          .get();
+      QuerySnapshot querySnapshot = await firestore.collection('users').where('isMan', isEqualTo: false).get();
 
-      List<User> users = querySnapshot.docs
-          .map((e) => User.fromJson(e.data() as Map<String, dynamic>))
-          .toList();
+      List<User> users = querySnapshot.docs.map((e) => User.fromJson(e.data() as Map<String, dynamic>)).toList();
 
       // createdAt 필드 기준으로 오름차순 정렬
       users.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
@@ -88,27 +82,92 @@ class UserRepository extends ApiService {
   Future<Map<String, int>> findUserNum(bool isDeleted) async {
     try {
       // 남자 수 가져오기
-      QuerySnapshot querySnapshotMan = await firestore
+      int manNum = 0;
+      await firestore
           .collection('users')
           .where('isMan', isEqualTo: true)
           .where('deletedAt', isNull: !isDeleted)
-          .get();
-      final manNum = querySnapshotMan.size;
-      if(manNum == 0) {
-        return {'manNum': 0, 'womanNum': 0};
-      }
+          .count()
+          .get()
+          .then((res) => manNum = res.count);
 
       // 여자 수 가져오기
-      QuerySnapshot querySnapshotWoman = await firestore
+      int womanNum = 0;
+      await firestore
           .collection('users')
           .where('isMan', isEqualTo: false)
           .where('deletedAt', isNull: !isDeleted)
-          .get();
-      final womanNum = querySnapshotWoman.size;
-      return {'manNum': manNum + 95, 'womanNum': womanNum + 65};
+          .count()
+          .get()
+          .then((res) => womanNum = res.count);
+      return {'manNum': manNum, 'womanNum': womanNum};
     } catch (e) {
       print('findUserNum error: $e');
       return {'manNum': 0, 'womanNum': 0};
+    }
+  }
+
+  Future<Map<String, int>> findUserNumIncludeDeleted() async {
+    try {
+      // 남자 수 가져오기
+      int? manNum;
+      await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: true)
+          .count()
+          .get()
+          .then((res) => manNum = res.count);
+
+      // 여자 수 가져오기
+      int? womanNum;
+      await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: false)
+          .count()
+          .get()
+          .then((res) => womanNum = res.count);
+      return {'manNum': (manNum ?? 155) + -155, 'womanNum': (womanNum ?? 105) + -105};
+    } catch (e) {
+      print('findUserNum error: $e');
+      return {'manNum': 0, 'womanNum': 0};
+    }
+  }
+
+  Future<int> findManNumWithCoin(
+      {required bool isDeleted, required int greaterThanAndEqual, required int lessThanAndEqual}) async {
+    try {
+      int manNum = 0;
+      await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: true)
+          .where('deletedAt', isNull: !isDeleted)
+          .where('coin', isGreaterThanOrEqualTo: greaterThanAndEqual, isLessThanOrEqualTo: lessThanAndEqual)
+          .count()
+          .get()
+          .then((res) => manNum = res.count);
+      return manNum;
+    } catch (e) {
+      print('findManNumWithCoin error: $e');
+      return 0;
+    }
+  }
+
+  Future<int> findWoManNumWithCoin(
+      {required bool isDeleted, required int greaterThanAndEqual, required int lessThanAndEqual}) async {
+    try {
+      int womanNum = 0;
+      await firestore
+          .collection('users')
+          .where('isMan', isEqualTo: true)
+          .where('deletedAt', isNull: !isDeleted)
+          .where('coin', isGreaterThanOrEqualTo: greaterThanAndEqual, isLessThanOrEqualTo: lessThanAndEqual)
+          .count()
+          .get()
+          .then((res) => womanNum = res.count);
+      return womanNum;
+    } catch (e) {
+      print('findWoManNumWithCoin error: $e');
+      return 0;
     }
   }
 

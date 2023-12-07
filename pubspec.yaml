@@ -82,7 +82,7 @@ dependencies:
   carousel_slider: ^4.2.1
   firebase_ui_firestore: ^1.5.14
   choice: ^2.3.0
-  fl_chart: ^0.65.0
+  fl_chart: ^0.63.0
 
 
 dev_dependencies:

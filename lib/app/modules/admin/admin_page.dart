@@ -71,7 +71,7 @@ class AdminPage extends GetView<AdminController> {
               Flexible(
                 child: ElevatedButton(
                     style: BtStyle.standard(color: ThemeColors.mainLight),
-                    onPressed: () => Get.toNamed(Routes.application),
+                    onPressed: () => Get.toNamed(Routes.analytics),
                     child: Text('통계', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
               ),
               const SizedBox(width: 8),

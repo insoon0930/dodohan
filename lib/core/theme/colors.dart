@@ -14,4 +14,6 @@ class ThemeColors {
   static const Color blueLight = Color(0xff3585fd);
   static const Color yellowLight = Color(0xfffdd235);
   static const Color orangeLight = Color(0xfffdb435);
+  static const Color greenLight = Color(0xff35fd49);
+  static const Color pinkLight = Color(0xffd835fd);
 }

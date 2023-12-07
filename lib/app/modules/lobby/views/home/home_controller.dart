@@ -67,7 +67,7 @@ class HomeController extends GetxController {
       await 1.delay();
     }
     //users
-    final res = await _userService.findUserNum();
+    final res = await _userService.findUserNumIncludeDeleted();
     manNum.value = res['manNum']!;
     womanNum.value = res['womanNum']!;
 

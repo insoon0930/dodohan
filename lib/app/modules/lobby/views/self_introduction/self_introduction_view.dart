@@ -28,7 +28,7 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
               fromFirestore: (snapshot, _) => SelfIntroduction.fromJson(snapshot.data()!),
               toFirestore: (selfIntroduction, _) => selfIntroduction.toJson(),
             ),
-            pageSize: 14,
+            pageSize: 4,
             builder: (context, snapshot, _) {
               if (snapshot.isFetching) {
                 return SliverToBoxAdapter(
@@ -62,6 +62,11 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
+                    if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+                      // Tell FirestoreQueryBuilder to try to obtain more items.
+                      // It is safe to call this function from within the build method.
+                      snapshot.fetchMore();
+                    }
                     // Your grid item creation logic
                     final selfIntroduction = snapshot.docs[index].data();
                     return _item(selfIntroduction);

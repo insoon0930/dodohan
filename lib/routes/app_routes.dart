@@ -12,6 +12,7 @@ abstract class Routes {
   static const womanUser = Paths.admin + Paths.womanUser;
   static const match = Paths.admin + Paths.match;
   static const application = Paths.admin + Paths.application;
+  static const analytics = Paths.admin + Paths.analytics;
 
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';
@@ -49,6 +50,7 @@ abstract class Paths {
   static const womanUser = '/woman-user';
   static const match = '/match';
   static const application = '/application';
+  static const analytics = '/analytics';
 
   static const currentCard = '/current-card';
   static const item = '/item';
