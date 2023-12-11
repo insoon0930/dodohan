@@ -28,7 +28,7 @@ class AdminController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    if(user.phoneNum != '+821066192550') {
+    if(!AuthService.to.isAdmin) {
       Get.offAllNamed(Routes.loginBy);
       return;
     }

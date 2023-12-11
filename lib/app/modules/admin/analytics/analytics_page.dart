@@ -12,24 +12,54 @@ class AnalyticsPage extends GetView<AnalyticsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('이번주 신청'),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ElevatedButton(onPressed: () => controller.onTapCoinDistribution(), child: const Text('코인 분포')),
-          ElevatedButton(onPressed: () {}, child: const Text('결제')),
-          ElevatedButton(onPressed: () {}, child: const Text('캠퍼스')),
-          // Obx(
-          //   () => AspectRatio(
-          //     aspectRatio: 1,
-          //     child: PieChart(
-          //       PieChartData(
-          //         centerSpaceRadius: 60,
-          //         sections: showingSections(),
-          //       ),
-          //     ),
-          //   ),
-          // )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Column(
+              children: [
+                Obx(
+                  ()=> Column(
+                    children: [
+                      ElevatedButton(
+                          onPressed: () => controller.onTapManCoinDistribution(), child: const Text('코인 분포(남)')),
+                      if(controller.manCoinDistributions.isNotEmpty)
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: PieChart(
+                            PieChartData(
+                              centerSpaceRadius: 60,
+                              sections: controller.manCoinDistributions,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Obx(
+                  () => Column(
+                    children: [
+                      ElevatedButton(
+                          onPressed: () => controller.onTapWomanCoinDistribution(), child: const Text('코인 분포(여)')),
+                      if(controller.womanCoinDistributions.isNotEmpty)
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: PieChart(
+                            PieChartData(
+                              centerSpaceRadius: 60,
+                              sections: controller.womanCoinDistributions,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            // ElevatedButton(onPressed: () {}, child: const Text('결제')),
+            // ElevatedButton(onPressed: () {}, child: const Text('캠퍼스')),
+          ],
+        ),
       ),
     );
   }

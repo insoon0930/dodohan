@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dodohan/app/data/model/coin_receipt.dart';
 import 'package:dodohan/app/data/service/user_service/repository.dart';
 import '../../enums.dart';
@@ -53,26 +55,30 @@ class UserService {
   }
 
   //@Get
-  Future<Map<String, List<int>>> findUserCoinDistribution({bool isDeleted = false}) async {
     //todo 남여 구문, 하나의 아이템에 담겨있어야 하는 정보. 1. 구간 사이의 인원
+  Future<List<int>> findManCoinDistribution({bool isDeleted = false}) async {
     //이전에 isMan, coin, isDeleted 로 구분해서 다 저장하자
     //그리고 해당 아이템들을 set 으로 만들어 종류 구분
     //해당 set 의 아이템들에 대해 갯수 세어달라하며 리스트 대입
     //다 한다음에 더 간단하게 만들어 달라고해보자
 
     //이렇게 할랬다가 비용좀 나올거 같아서 보다 간단하게 count로 범위별 처리해서 그래프만 표현하기
-    final int range0to5 = await _userRepository.findManNumWithCoin(isDeleted: false, greaterThanAndEqual: 0, lessThanAndEqual: 5);
-    final int range0to5Deleted = await _userRepository.findManNumWithCoin(isDeleted: true, greaterThanAndEqual: 0, lessThanAndEqual: 5);
-    final int range6to10 = await _userRepository.findManNumWithCoin(isDeleted: false, greaterThanAndEqual: 6, lessThanAndEqual: 10);
-    final int range6to10Deleted = await _userRepository.findManNumWithCoin(isDeleted: true, greaterThanAndEqual: 6, lessThanAndEqual: 10);
-    final int range11to20 = await _userRepository.findManNumWithCoin(isDeleted: false, greaterThanAndEqual: 11, lessThanAndEqual: 20);
-    final int range11to20Deleted = await _userRepository.findManNumWithCoin(isDeleted: true, greaterThanAndEqual: 11, lessThanAndEqual: 20);
-    final int range20to100 = await _userRepository.findManNumWithCoin(isDeleted: false, greaterThanAndEqual: 21, lessThanAndEqual: 100);
-    final int range20to100Deleted = await _userRepository.findManNumWithCoin(isDeleted: true, greaterThanAndEqual: 21, lessThanAndEqual: 100);
-    return {
-      'notDeleted': [range0to5, range6to10, range11to20, range20to100],
-      'deleted': [range0to5Deleted, range6to10Deleted, range11to20Deleted, range20to100Deleted],
-    };
+    final int manRange0to5 = await _userRepository.findNumWithCoin(isMan: true, greaterThanAndEqual: 0, lessThanAndEqual: 5);
+    final int manRange6to9 = await _userRepository.findNumWithCoin(isMan: true, greaterThanAndEqual: 6, lessThanAndEqual: 9);
+    final int manRange10 = await _userRepository.findNumWithCoin(isMan: true, greaterThanAndEqual: 10, lessThanAndEqual: 10);
+    final int manRange11to20 = await _userRepository.findNumWithCoin(isMan: true, greaterThanAndEqual: 11, lessThanAndEqual: 20);
+    final int manRange21to100 = await _userRepository.findNumWithCoin(isMan: true, greaterThanAndEqual: 21, lessThanAndEqual: 100);
+    return [manRange0to5, manRange6to9, manRange10, manRange11to20, manRange21to100];
+  }
+
+  //@Get
+  Future<List<int>> findWomanCoinDistribution({bool isDeleted = false}) async {
+    final int womanRange0to5 = await _userRepository.findNumWithCoin(isMan: false, greaterThanAndEqual: 0, lessThanAndEqual: 5);
+    final int womanRange6to9 = await _userRepository.findNumWithCoin(isMan: false, greaterThanAndEqual: 6, lessThanAndEqual: 9);
+    final int womanRange10 = await _userRepository.findNumWithCoin(isMan: false, greaterThanAndEqual: 10, lessThanAndEqual: 10);
+    final int womanRange11to20 = await _userRepository.findNumWithCoin(isMan: false, greaterThanAndEqual: 11, lessThanAndEqual: 20);
+    final int womanRange21to100 = await _userRepository.findNumWithCoin(isMan: false, greaterThanAndEqual: 21, lessThanAndEqual: 100);
+    return [womanRange0to5, womanRange6to9, womanRange10, womanRange11to20, womanRange21to100];
   }
 
   //@Patch

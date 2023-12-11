@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../data/provider/api_service.dart';
@@ -126,21 +128,22 @@ class UserRepository extends ApiService {
           .count()
           .get()
           .then((res) => womanNum = res.count);
-      return {'manNum': (manNum ?? 155) + -155, 'womanNum': (womanNum ?? 105) + -105};
+      return {'manNum': (manNum ?? 145) + -145, 'womanNum': (womanNum ?? 97) + -97};
     } catch (e) {
       print('findUserNum error: $e');
       return {'manNum': 0, 'womanNum': 0};
     }
   }
-
-  Future<int> findManNumWithCoin(
-      {required bool isDeleted, required int greaterThanAndEqual, required int lessThanAndEqual}) async {
+  //man: [75, 622, 419, 204]
+  //woman: [33, 436, 123, 65]
+  Future<int> findNumWithCoin(
+      {required bool isMan, required int greaterThanAndEqual, required int lessThanAndEqual}) async {
     try {
       int manNum = 0;
       await firestore
           .collection('users')
-          .where('isMan', isEqualTo: true)
-          .where('deletedAt', isNull: !isDeleted)
+          .where('isMan', isEqualTo: isMan)
+          .where('deletedAt', isNull: true)
           .where('coin', isGreaterThanOrEqualTo: greaterThanAndEqual, isLessThanOrEqualTo: lessThanAndEqual)
           .count()
           .get()

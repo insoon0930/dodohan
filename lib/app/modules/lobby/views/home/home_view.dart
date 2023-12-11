@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
               Center(
                 child: Column(
                   children: [
-                    if (controller.user.phoneNum == '+821066192550')
+                    if (AuthService.to.isAdmin)
                       Column(
                         children: [
                           _applicantNum(),
@@ -44,7 +44,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ],
                       ),
-                    if (controller.user.phoneNum != '+821066192550')
+                    if (!AuthService.to.isAdmin)
                       _userNumData(),
                     const SizedBox(height: 16),
                     Obx(
