@@ -67,7 +67,7 @@ class PreviewMyProfilePage extends GetView<PreviewMyProfileController> {
         ),
         Container(
           width: Get.width * 0.65,
-          height: 35,
+          // height: 35,
           alignment: Alignment.centerLeft,
           child: Text(value, style: ThemeFonts.medium.getTextStyle()).paddingOnly(left: 8),
         ),

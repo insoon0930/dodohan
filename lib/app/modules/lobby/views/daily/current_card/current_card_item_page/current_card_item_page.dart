@@ -60,19 +60,19 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               ]),
               //거절함
               if (controller.myStatus == CardStatus.rejected1st || controller.myStatus == CardStatus.rejected2nd)
-                const DisabledButton(text: '거절한 카드입니다')
+                const DisabledButton(text: '거절한 카드입니다').paddingOnly(top: 16)
               //1차 선택
               else if (controller.myStatus == CardStatus.checked || controller.myStatus == CardStatus.unChecked)
                 _firstChoice()
               //거절됨
               else if (controller.yourStatus == CardStatus.rejected1st)
-                  const DisabledButton(text: '매칭 실패')
+                  const DisabledButton(text: '매칭 실패').paddingOnly(top: 16)
               //2차 선택
               else if (controller.myStatus == CardStatus.confirmed1st && (controller.youMadeAFirstChoice || controller.youMadeASecondChoice))
                 _secondChoice()
               //거절됨
               else if (controller.yourStatus == CardStatus.rejected2nd)
-                const DisabledButton(text: '매칭 실패')
+                const DisabledButton(text: '매칭 실패').paddingOnly(top: 16)
               //매칭 성공
               else if (controller.myStatus == CardStatus.confirmed2nd && controller.yourStatus == CardStatus.confirmed2nd)
                 SelectablePhoneNum(phoneNum: controller.dailyCard.value.yourPhoneNum).paddingOnly(top: 16),
@@ -111,7 +111,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
         ),
         Container(
           width: Get.width * 0.65,
-          height: 35,
+          // height: 35,
           alignment: Alignment.centerLeft,
           child: Text(value, style: ThemeFonts.medium.getTextStyle()).paddingOnly(left: 8),
         ),
@@ -138,7 +138,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           style: BtStyle.standard(color: ThemeColors.mainLight),
           onPressed: () => Get.dialog(ActionDialog(
               title: '거절',
-              text: '하트 1개를 지급받습니다',
+              text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
               confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected1st),
                   buttonText: '거절하기')),
           child: const Text('거절'),
@@ -168,7 +168,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
           style: BtStyle.standard(color: ThemeColors.mainLight),
           onPressed: () => Get.dialog(ActionDialog(
               title: '거절',
-              text: '하트 1개를 지급받습니다',
+              text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
               confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected2nd),
                   buttonText: '거절하기')),
           child: const Text('거절'),

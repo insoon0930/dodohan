@@ -44,16 +44,6 @@ class DailyView extends GetView<DailyController> {
             ),
           ),
         ),
-        // Center(
-        //   child: DefaultTextStyle(
-        //     style: ThemeFonts.medium.getTextStyle(size: 18),
-        //     child: AnimatedTextKit(
-        //       animatedTexts: [WavyAnimatedText('준비중입니다')],
-        //       isRepeatingAnimation: true,
-        //       repeatForever: true,
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

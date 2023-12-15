@@ -504,7 +504,7 @@ class InfoData {
     S2Choice<String>(value: 'ESTJ', title: 'ESTJ'),
     S2Choice<String>(value: 'ESTP', title: 'ESTP'),
     S2Choice<String>(value: 'ESFJ', title: 'ESFJ'),
-    S2Choice<String>(value: 'ESEP', title: 'ESEP'),
+    S2Choice<String>(value: 'ESFP', title: 'ESFP'),
 
     S2Choice<String>(value: 'ENTJ', title: 'ENTJ'),
     S2Choice<String>(value: 'ENTP', title: 'ENTP'),

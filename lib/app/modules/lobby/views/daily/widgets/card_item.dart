@@ -18,17 +18,17 @@ class CardItem extends GetView<DailyController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: dailyCard.meBlockedYou
-          ? () => Get.dialog(const ErrorDialog(text: '차단한 카드입니다'))
-          : () => controller.tapCard(index, dailyCard),
-      child: Card(
-        margin: const EdgeInsets.all(4.0),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(9.0))),
-        elevation: 3,
-        child: Obx(
-          () => Stack(
+    return Obx(
+      () => GestureDetector(
+        onTap: dailyCard.meBlockedYou
+            ? () => Get.dialog(const ErrorDialog(text: '차단한 카드입니다'))
+            : () => controller.tapCard(index, dailyCard),
+        child: Card(
+          margin: const EdgeInsets.all(4.0),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(9.0))),
+          elevation: 3,
+          child: Stack(
             children: [
               Container(
                 width: (Get.width - 64) / 2,
@@ -45,15 +45,24 @@ class CardItem extends GetView<DailyController> {
                     const Spacer(),
                     Row(
                       children: [
-                        Expanded(child: Text('${dailyCard.youInfo!.height}cm', textAlign: TextAlign.center)),
-                        Expanded(child: Text('${dailyCard.youInfo!.age}살', textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text('${dailyCard.youInfo!.height}cm',
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text('${dailyCard.youInfo!.age}살',
+                                textAlign: TextAlign.center)),
                       ],
                     ).paddingSymmetric(horizontal: 4),
                     const SizedBox(height: 12),
                     Row(
                       children: [
-                        Expanded(child: Text(dailyCard.youInfo!.bodyShape!, textAlign: TextAlign.center)),
-                        Expanded(child: Text(dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연', textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text(dailyCard.youInfo!.bodyShape!,
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text(
+                                dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연',
+                                textAlign: TextAlign.center)),
                       ],
                     ).paddingSymmetric(horizontal: 4),
                     const Spacer(),
@@ -62,8 +71,7 @@ class CardItem extends GetView<DailyController> {
               ),
               if (controller.todayCards[index].meStatus == CardStatus.unChecked)
                 _cardCover(),
-              if (dailyCard.meBlockedYou)
-                _blockedCover(),
+              if (dailyCard.meBlockedYou) _blockedCover(),
             ],
           ),
         ),
@@ -75,16 +83,21 @@ class CardItem extends GetView<DailyController> {
       child: Card(
           color: ThemeColors.main,
           margin: const EdgeInsets.all(4.0),
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(9.0))),
           elevation: 0,
-          child:
-              SvgPicture.asset('assets/love.svg', color: ThemeColors.mainLightest).paddingAll((Get.width - 64) / 7)));
+          child: SvgPicture.asset('assets/love.svg',
+                  color: ThemeColors.mainLightest)
+              .paddingAll((Get.width - 64) / 7)));
 
   Widget _blockedCover() => Positioned.fill(
-          child: Card(
-              color: ThemeColors.main,
-              margin: const EdgeInsets.all(4.0),
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
-              elevation: 0,
-              child: FittedBox(child: const Icon(Icons.block, color: ThemeColors.mainLightest).paddingAll(13))));
+      child: Card(
+          color: ThemeColors.main,
+          margin: const EdgeInsets.all(4.0),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(9.0))),
+          elevation: 0,
+          child: FittedBox(
+              child: const Icon(Icons.block, color: ThemeColors.mainLightest)
+                  .paddingAll(13))));
 }

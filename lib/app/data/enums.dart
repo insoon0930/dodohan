@@ -32,7 +32,7 @@ enum FcmPushType {
   dailyDone1st(title: '오늘의 카드', body: "누군가 나를 선택했어요!"),
   dailyDone2nd(title: '오늘의 카드', body: "상대방이 최종 결정을 내렸어요!"),
   identity(title: '관리자 알림', body: "본인인증 심사 요청이 들어왔습니다"),
-  imageUpdateRequest(title: '관리자 알림', body: "이미지 변경 요청이 들어왔습니다"),
+  // imageUpdateRequest(title: '관리자 알림', body: "이미지 변경 요청이 들어왔습니다"),
 
   imageUpdateConfirm(title: '프로필 변경 승인', body: "프로필 이미지 변경이 완료되었습니다"),
   imageUpdateReject(title: '프로필 변경 실패', body: "프로필 사진 정책에 맞지 않아 반려되었습니다"),

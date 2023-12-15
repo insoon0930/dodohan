@@ -327,8 +327,8 @@ class HomeController extends GetxController {
       await _userService.increaseCoin(user.id, -1, type: CoinReceiptType.imageUpdateRequest);
       AuthService.to.user.update((user) => user!.coin = user.coin -1);
 
-      //fcm push //todo 나중에 .env 도입해주던가
-      FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', FcmPushType.imageUpdateRequest);
+      // //fcm push //todo 나중에 .env 도입해주던가 //중단
+      // FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', FcmPushType.imageUpdateRequest);
 
       Get.back();
       Get.snackbar('신청 완료', '심사 통과시 반영됩니다');
