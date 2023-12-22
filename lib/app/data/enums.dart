@@ -84,10 +84,11 @@ enum FcmPushType {
   selfIntroductionConfirmed2nd(title: '셀프 소개', body: "상대방이 최종 수락을 했어요!"),
   selfIntroductionDeletedByAdmin(title: '셀프 소개', body: "관리자에 의해 소개가 삭제되었습니다"),
 
-  coinPurchased3(title: '관리자 알림', body: "3코인 구매가 이루어졌습니다. +3,900₩"),
+  // coinPurchased3(title: '관리자 알림', body: "3코인 구매가 이루어졌습니다. +3,900₩"),
   coinPurchased6(title: '관리자 알림', body: "6코인 구매가 이루어졌습니다. +5,900₩"),
   coinPurchased12(title: '관리자 알림', body: "12코인 구매가 이루어졌습니다.+10,900₩"),
-  coinPurchased24(title: '관리자 알림', body: "24코인 구매가 이루어졌습니다. +18,900₩");
+  coinPurchased24(title: '관리자 알림', body: "24코인 구매가 이루어졌습니다. +18,900₩"),
+  coinPurchased40(title: '관리자 알림', body: "40코인 구매가 이루어졌습니다. +28,900₩");
 
   final String title;
   final String body;

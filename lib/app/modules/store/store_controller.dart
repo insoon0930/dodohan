@@ -23,7 +23,7 @@ class StoreService extends BaseController {
   void onInit() async {
     List<ProductDetails> unsortedProductDetails = await getProductDetails();
     productDetails.value = unsortedProductDetails..sort((a, b) => a.rawPrice.compareTo(b.rawPrice));
-    print('productDetails.value: ${productDetails.value}');
+    print('productDetails.value: $productDetails');
 
     final Stream purchaseUpdated = InAppPurchase.instance.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
@@ -61,11 +61,11 @@ class StoreService extends BaseController {
             AuthService.to.user.update((user) => user!.coin = user.coin + coin);
             hideLoading();
 
-            FcmPushType fcmPushType = FcmPushType.coinPurchased3;
+            FcmPushType fcmPushType = FcmPushType.coinPurchased6;
             switch (coin) {
-              case 3:
-                fcmPushType = FcmPushType.coinPurchased3;
-                break;
+              // case 3:
+              //   fcmPushType = FcmPushType.coinPurchased3;
+              //   break;
               case 6:
                 fcmPushType = FcmPushType.coinPurchased6;
                 break;
@@ -74,6 +74,9 @@ class StoreService extends BaseController {
                 break;
               case 24:
                 fcmPushType = FcmPushType.coinPurchased24;
+                break;
+              case 40:
+                fcmPushType = FcmPushType.coinPurchased40;
                 break;
             }
             FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', fcmPushType);
@@ -105,9 +108,7 @@ class StoreService extends BaseController {
 
   //In-App Purchase 상품 조회R
   Future<List<ProductDetails>> getProductDetails() async {
-    //코인 1000개 + 550개
-    // 총 1550코인이 지급됩니다.
-    const Set<String> productIds = <String>{'3_coins', '6_coins', '12_coins', '24_coins'};
+    const Set<String> productIds = <String>{'6_coins', '12_coins', '24_coins', '40_coins'};
     final ProductDetailsResponse response = await InAppPurchase.instance.queryProductDetails(productIds);
     if (response.notFoundIDs.isNotEmpty) {
       // 상품ID를 찾지 못한 예외처리

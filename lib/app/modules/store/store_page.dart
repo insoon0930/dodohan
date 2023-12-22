@@ -19,16 +19,15 @@ class StorePage extends GetView<StoreService> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar('스토어'),
-      // appBar: DefaultAppBar('스토어', actions: [const Text('이용 내역').paddingOnly(right:16)]),
       body: Stack(
         children: [
           Container(color: ThemeColors.mainLightest),
           Column(
             children: [
-              _purchaseItem(coin: 3, price: 3900, promotion: 0, index: 0),
-              _purchaseItem(coin: 5, price: 5900, promotion: 1, index: 1),
+              _purchaseItem(coin: 5, price: 5900, promotion: 0, index: 0),
+              _purchaseItem(coin: 10, price: 10900, promotion: 2, index: 1),
               Stack(children: [
-                _purchaseItem(coin: 10, price: 10900, promotion: 2, index: 2),
+                _purchaseItem(coin: 20, price: 18900, promotion: 4, index: 2),
                 Positioned(
                     right: 18,
                     top: 18,
@@ -38,7 +37,7 @@ class StorePage extends GetView<StoreService> {
                     ]))
               ]),
               Stack(children: [
-                _purchaseItem(coin: 20, price: 18900, promotion: 4, index: 3),
+                _purchaseItem(coin: 30, price: 28900, promotion: 10, index: 3),
                 Positioned(
                     right: 18,
                     top: 18,
