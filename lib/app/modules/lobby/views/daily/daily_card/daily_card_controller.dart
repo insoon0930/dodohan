@@ -1,3 +1,4 @@
+import 'package:dodohan/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/modules/lobby/views/daily/daily_controller.dart';
 import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
@@ -34,6 +35,15 @@ class DailyCardController extends BaseController {
         title: '오늘의 카드', text: '선택하시겠습니까?', confirmCallback: () => choose()));
   }
 
+  Future<void> showChooseMoreDialog() async {
+    //이후에는 추가 선택 과금하는 식으로
+    final int costCoin = user.isMan! ? 2 : 1;
+    Get.dialog(ActionDialog(
+        title: '오늘의 카드',
+        text: '추가로 한장 더 선택하시겠습니까?\n하트 $costCoin개가 소모됩니다',
+        confirmCallback: () => chooseMore(costCoin)));
+  }
+
   Future<void> choose() async {
     showLoading();
     _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
@@ -48,6 +58,30 @@ class DailyCardController extends BaseController {
     await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReward);
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
     Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
+  }
+
+  Future<void> chooseMore(int costCoin) async {
+    if (user.coin < costCoin) {
+      Get.back();
+      Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
+        Get.back();
+        Get.toNamed(Routes.store);
+      }));
+      return;
+    }
+
+    showLoading();
+    _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
+    hideLoading();
+    Get.back();
+    dailyCard.value.meStatus = CardStatus.confirmed1st;
+    dailyController.todayCards[cardIndex].meStatus = CardStatus.confirmed1st;
+    dailyController.todayCards.refresh();
+
+    //유저 하트 갯수 감소 (백, 프론트)
+    await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.dailyChooseMore);
+    AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
+    Get.snackbar('선택 완료', '오늘의 카드 추가 선택을 완료했습니다');
   }
 
   Future<void> block() async {

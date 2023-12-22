@@ -128,7 +128,7 @@ class UserRepository extends ApiService {
           .count()
           .get()
           .then((res) => womanNum = res.count);
-      return {'manNum': (manNum ?? 145) + -145, 'womanNum': (womanNum ?? 97) + -97};
+      return {'manNum': (manNum ?? 130) + -130, 'womanNum': (womanNum ?? 88) + -88};
     } catch (e) {
       print('findUserNum error: $e');
       return {'manNum': 0, 'womanNum': 0};

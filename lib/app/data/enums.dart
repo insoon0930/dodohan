@@ -3,8 +3,44 @@ enum IdStatus { waiting, confirmed, rejected }
 enum MatchStatus { unChecked, checked, confirmed, rejected }
 enum CardStatus { unChecked, checked, confirmed1st, rejected1st, confirmed2nd, rejected2nd }
 enum SelfApplicationStatus { closed, openedByApplicant, openedByOwner, confirmed1st, confirmed2nd }
-enum CoinReceiptType { chargeCoin, dailyReject, weeklyReject, consoleReward, dailyCard, weeklyMatch, dailyReward, imageUpdateRequest, imageUpdateReject, createSelfIntro, selfIntroApply, selfIntroConfirm1st, selfIntroConfirm2nd, selfIntroOpenApplicantCard }
-enum Region { seoul, busan, daegu, incheon, gwangju, daejeon, ulsan, sejong, gyeonggi, gangwon, chungbuk, chungnam, jeonbuk, jeonnam, gyeongbuk, gyeongnam, jeju }
+enum CoinReceiptType {
+  chargeCoin,
+  dailyReject,
+  weeklyReject,
+  consoleReward,
+  dailyCard,
+  dailyCardRefund,
+  dailyChooseMore,
+  weeklyMatch,
+  dailyReward,
+  imageUpdateRequest,
+  imageUpdateReject,
+  createSelfIntro,
+  selfIntroApply,
+  selfIntroConfirm1st,
+  selfIntroConfirm2nd,
+  selfIntroOpenApplicantCard
+}
+
+enum Region {
+  seoul,
+  busan,
+  daegu,
+  incheon,
+  gwangju,
+  daejeon,
+  ulsan,
+  sejong,
+  gyeonggi,
+  gangwon,
+  chungbuk,
+  chungnam,
+  jeonbuk,
+  jeonnam,
+  gyeongbuk,
+  gyeongnam,
+  jeju
+}
 
 const Map<String, String> regionFilter = {
   'seoul': '서울·경기·인천',
@@ -29,8 +65,11 @@ const Map<String, String> regionFilter = {
 enum FcmPushType {
   checkWeekly(title: '', body: "금주의 매칭 결과가 발표되었습니다!"),
   weeklyDone(title: '', body: "상대방이 최종 결정을 내렸어요!"),
-  dailyDone1st(title: '오늘의 카드', body: "누군가 나를 선택했어요!"),
+  dailyConfirmed1st(title: '오늘의 카드', body: "누군가 나를 선택했어요!"),
+  dailyReject1st(title: '오늘의 카드', body: "1차 신청이 거절되었습니다"),
   dailyDone2nd(title: '오늘의 카드', body: "상대방이 최종 결정을 내렸어요!"),
+  dailyCardMatched(title: '오늘의 카드', body: "매칭이 성사되었어요!"),
+  dailyCardMatchFailed(title: '오늘의 카드', body: "최종 매칭에 실패했습니다. 하트 2개를 돌려 받았습니다"),
   identity(title: '관리자 알림', body: "본인인증 심사 요청이 들어왔습니다"),
   // imageUpdateRequest(title: '관리자 알림', body: "이미지 변경 요청이 들어왔습니다"),
 

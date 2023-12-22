@@ -98,7 +98,11 @@ class FinalDecisionDialog extends StatelessWidget {
                         child: ElevatedButton(
                             onPressed: () async {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                              FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
+                              //todo 여기 삼항연산자들 게터로 정리좀 하자 ㅎㅎ..
+                              //상대방이 거절 안한 경우만 푸시 보냄
+                              if (user.isMan! ? match.womanStatus != MatchStatus.rejected : match.manStatus != MatchStatus.rejected) {
+                                FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
+                              }
                               await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
                               final int rewardCoin = user.isMan! ? 1 : 2;

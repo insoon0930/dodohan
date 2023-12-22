@@ -55,13 +55,17 @@ class DailyCardPage extends GetView<DailyCardController> {
                   child: Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
                 ),
               ]),
-              //todo 추가 선택 가능하게 되면 아래껄로
-              //if(controller.dailyCard.value.meStatus == MatchStatus.checked)
               if (controller.dailyController.isFirstChoice)
                 ElevatedButton(
                   style: BtStyle.standard(),
                   onPressed: () => controller.showChooseDialog(),
                   child: const Text('선택하기'),
+                ).paddingSymmetric(vertical: 16)
+              else if(controller.dailyCard.value.meStatus == CardStatus.checked)
+                ElevatedButton(
+                  style: BtStyle.standard(),
+                  onPressed: () => controller.showChooseMoreDialog(),
+                  child: const Text('추가 선택하기'),
                 ).paddingSymmetric(vertical: 16),
               if(controller.dailyCard.value.meStatus != CardStatus.checked)
                 const SizedBox(height: 16),

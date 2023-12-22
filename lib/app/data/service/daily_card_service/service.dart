@@ -54,20 +54,4 @@ class DailyCardService extends ApiService  {
     }
     return;
   }
-
-  // //@Patch
-  // Future<void> confirmed(DailyCard dailyCard) async {
-  //   await _dailyCardRepository.updateStatus(dailyCard.id, IdStatus.confirmed);
-  //   await _userRepository.idConfirmed(dailyCard);
-  //   await _meInfoRepository.create(MeInfo(user: dailyCard.user, isMan: dailyCard.isMan));
-  //   await _youInfoRepository.create(YouInfo(user: dailyCard.user));
-  //   return;
-  // }
-  //
-  // //@Patch
-  // Future<void> rejected(DailyCard dailyCard) async {
-  //   await _dailyCardRepository.updateStatus(dailyCard.id, IdStatus.rejected);
-  //   await _userRepository.idRejected(dailyCard);
-  //   return;
-  // }
 }

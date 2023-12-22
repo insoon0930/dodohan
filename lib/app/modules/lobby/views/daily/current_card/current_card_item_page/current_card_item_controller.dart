@@ -81,21 +81,31 @@ class CurrentCardItemController extends BaseController {
     hideLoading();
     Get.back();
 
-    if (dailyCard.value.yourStatus == CardStatus.confirmed2nd) {
+    if (yourStatus == CardStatus.confirmed2nd) {
       Get.snackbar('매칭 성공', '상대방의 전화번호를 확인하세요!');
-    } else if (dailyCard.value.yourStatus == CardStatus.rejected2nd) {
-      Get.snackbar('매칭 실패', '상대방이 거절한 상태입니다');
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyCardMatched);
+      return;
+    } else if (yourStatus == CardStatus.rejected2nd) {
+      const refundCoin = 2;
+      Get.snackbar('매칭 실패', '상대방이 거절한 상태입니다. 하트 $refundCoin개를 돌려 받습니다');
+      //특별 스낵바, 푸시 없음, 내 하트 보상받기
+      await _userService.increaseCoin(user.id, refundCoin, type: CoinReceiptType.dailyCardRefund);
+      AuthService.to.user.update((user) => user!.coin = user.coin + refundCoin);
+      return;
     }
     Get.snackbar('수락 완료', '상대방의 선택을 기다려주세요');
 
-    //fcm push
-    FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!,
-        cardStatus == CardStatus.confirmed1st ? FcmPushType.dailyDone1st : FcmPushType.dailyDone2nd);
+    //fcm push - 결정 안난 케이스
+    if (cardStatus == CardStatus.confirmed1st) {
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyConfirmed1st);
+    } else if(cardStatus == CardStatus.confirmed2nd) {
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyDone2nd);
+    }
   }
 
   Future<void> reject({required CardStatus cardStatus}) async {
     showLoading();
-    if(Get.isSnackbarOpen) {
+    if (Get.isSnackbarOpen) {
       await Get.closeCurrentSnackbar();
     }
     //1. 데일리매치 상태 업데이트 (백, 프론트)
@@ -115,18 +125,32 @@ class CurrentCardItemController extends BaseController {
       currentCardController.sentCards.refresh();
     }
     //2. 유저 하트 갯수 증가 (백, 프론트)
-    final int rewardCoin = user.isMan! ? 1 : 2;
+    const rewardCoin = 2;
     //백
     await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReject);
     //프론트
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
+
+    if (yourStatus == CardStatus.confirmed2nd) {
+      //특별 푸시, 상대방 하트 보상해주기
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyCardMatchFailed);
+      const refundCoin = 2;
+      await _userService.increaseCoin(dailyCard.value.yourInfo!.user!, refundCoin, type: CoinReceiptType.dailyCardRefund);
+      return;
+    } else if (yourStatus == CardStatus.rejected2nd) {
+      return;
+    }
+
+    //fcm push - 결정 안난 케이스
+    if (cardStatus == CardStatus.rejected1st) {
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyReject1st);
+    } else if(cardStatus == CardStatus.rejected2nd) {
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyDone2nd);
+    }
+
     hideLoading();
     Get.back();
     Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
-
-    //fcm push
-    FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!,
-        cardStatus == CardStatus.rejected1st ? FcmPushType.dailyDone1st : FcmPushType.dailyDone2nd);
   }
 
   Future<void> block() async {

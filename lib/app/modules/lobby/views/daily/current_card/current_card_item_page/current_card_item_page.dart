@@ -21,8 +21,9 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar('오늘의 카드', actions: [GestureDetector(
-          onTap: () => Get.dialog(ReportDialog(
+      appBar: DefaultAppBar('오늘의 카드', actions: [
+        GestureDetector(
+            onTap: () => Get.dialog(ReportDialog(
                   reportCallback: () async {
                     return;
                   },
@@ -30,11 +31,11 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
                   blockCallback: () async => await controller.block(),
                 )),
             child: Container(
-            width: 40,
-            height: 20,
-            color: Colors.transparent,
-            child: SvgPicture.asset('assets/dots.svg', color: ThemeColors.grayDark).paddingOnly(left: 20),
-          )).paddingOnly(right: 16),
+              width: 40,
+              height: 20,
+              color: Colors.transparent,
+              child: SvgPicture.asset('assets/dots.svg', color: ThemeColors.grayDark).paddingOnly(left: 20),
+            )).paddingOnly(right: 16),
       ]),
       body: SingleChildScrollView(
         child: Obx(
@@ -48,15 +49,16 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
                     blurValue: 24,
                     width: Get.width - 32,
                     height: Get.width - 32),
-                if(!controller.dailyCard.value.isNotBlurred)
+                if (!controller.dailyCard.value.isNotBlurred)
                   Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 1.5),
-                    borderRadius: BorderRadius.circular(10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 1.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child:
+                        Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
                   ),
-                  child: Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
-                ),
               ]),
               //거절함
               if (controller.myStatus == CardStatus.rejected1st || controller.myStatus == CardStatus.rejected2nd)
@@ -66,7 +68,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
                 _firstChoice()
               //거절됨
               else if (controller.yourStatus == CardStatus.rejected1st)
-                  const DisabledButton(text: '매칭 실패').paddingOnly(top: 16)
+                const DisabledButton(text: '매칭 실패').paddingOnly(top: 16)
               //2차 선택
               else if (controller.myStatus == CardStatus.confirmed1st && (controller.youMadeAFirstChoice || controller.youMadeASecondChoice))
                 _secondChoice()
@@ -76,8 +78,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               //매칭 성공
               else if (controller.myStatus == CardStatus.confirmed2nd && controller.yourStatus == CardStatus.confirmed2nd)
                 SelectablePhoneNum(phoneNum: controller.dailyCard.value.yourPhoneNum).paddingOnly(top: 16),
-              if (controller.dailyCard.value.meStatus != CardStatus.checked)
-                const SizedBox(height: 16),
+              if (controller.dailyCard.value.meStatus != CardStatus.checked) const SizedBox(height: 16),
               _infoForm('학교', controller.youInfo.univ!),
               const Divider(),
               _infoForm('키', '${controller.youInfo.height}cm'),
@@ -86,7 +87,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               const Divider(),
               _infoForm('체형', controller.youInfo.bodyShape!),
               const Divider(),
-              _infoForm('흡연', controller.youInfo.isSmoker!?'흡연':'비흡연'),
+              _infoForm('흡연', controller.youInfo.isSmoker! ? '흡연' : '비흡연'),
               const Divider(),
               _infoForm('MBTI', controller.youInfo.mbti ?? ''),
               const Divider(),
@@ -120,60 +121,60 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
   }
 
   Widget _firstChoice() => Row(
-    children: [
-      Flexible(
-        child: ElevatedButton(
-          style: BtStyle.standard(color: ThemeColors.main),
-          onPressed: () => Get.dialog(ActionDialog(
+        children: [
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.standard(color: ThemeColors.main),
+              onPressed: () => Get.dialog(ActionDialog(
                   title: '1차 수락',
                   text: '하트 ${controller.user.isMan! ? 2 : 1}개가 소모됩니다',
-                  confirmCallback: () => controller.confirm(coin: controller.user.isMan! ? 2 : 1, cardStatus: CardStatus.confirmed1st),
+                  confirmCallback: () =>
+                      controller.confirm(coin: controller.user.isMan! ? 2 : 1, cardStatus: CardStatus.confirmed1st),
                   buttonText: '수락하기')),
               child: const Text('수락'),
-        ),
-      ),
-      const SizedBox(width: 16),
-      Flexible(
-        child: ElevatedButton(
-          style: BtStyle.standard(color: ThemeColors.mainLight),
-          onPressed: () => Get.dialog(ActionDialog(
-              title: '거절',
-              text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
-              confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected1st),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.standard(color: ThemeColors.mainLight),
+              onPressed: () => Get.dialog(ActionDialog(
+                  title: '거절',
+                  text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
+                  confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected1st),
                   buttonText: '거절하기')),
-          child: const Text('거절'),
-        ),
-      ),
-    ],
-  ).paddingSymmetric(vertical: 16);
+              child: const Text('거절'),
+            ),
+          ),
+        ],
+      ).paddingSymmetric(vertical: 16);
 
   Widget _secondChoice() => Row(
-    children: [
-      Flexible(
-        child: ElevatedButton(
-          style: BtStyle.standard(color: ThemeColors.main),
-          onPressed: () => Get.dialog(ActionDialog(
-              title: '최종 수락',
-              text: '하트 ${controller.user.isMan! ? 6 : 3}개가 소모됩니다',
-              confirmCallback: () => controller.confirm(
-                      coin: controller.user.isMan! ? 6 : 3,
-                      cardStatus: CardStatus.confirmed2nd),
+        children: [
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.standard(color: ThemeColors.main),
+              onPressed: () => Get.dialog(ActionDialog(
+                  title: '최종 수락',
+                  text: '하트 ${controller.user.isMan! ? 6 : 3}개가 소모됩니다',
+                  confirmCallback: () =>
+                      controller.confirm(coin: controller.user.isMan! ? 6 : 3, cardStatus: CardStatus.confirmed2nd),
                   buttonText: '수락하기')),
-          child: const Text('수락'),
-        ),
-      ),
-      const SizedBox(width: 16),
-      Flexible(
-        child: ElevatedButton(
-          style: BtStyle.standard(color: ThemeColors.mainLight),
-          onPressed: () => Get.dialog(ActionDialog(
-              title: '거절',
-              text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
-              confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected2nd),
+              child: const Text('수락'),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Flexible(
+            child: ElevatedButton(
+              style: BtStyle.standard(color: ThemeColors.mainLight),
+              onPressed: () => Get.dialog(ActionDialog(
+                  title: '거절',
+                  text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
+                  confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected2nd),
                   buttonText: '거절하기')),
-          child: const Text('거절'),
-        ),
-      ),
-    ],
-  ).paddingSymmetric(vertical: 16);
+              child: const Text('거절'),
+            ),
+          ),
+        ],
+      ).paddingSymmetric(vertical: 16);
 }

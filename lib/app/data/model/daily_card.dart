@@ -55,5 +55,4 @@ class DailyCard {
   int get differenceInDays => DateTime.now().difference(createdAt!).inDays;
   String get leftDay => 'D-${3 - differenceInDays}';
   String get oppositeProfileImage => iAmMe ? youProfileImage : meProfileImage;
-  //ProfileImage
 }
