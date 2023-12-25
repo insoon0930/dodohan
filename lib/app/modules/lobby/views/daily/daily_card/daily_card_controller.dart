@@ -1,3 +1,4 @@
+import 'package:dodohan/core/services/push_service.dart';
 import 'package:dodohan/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/app/modules/lobby/views/daily/daily_controller.dart';
@@ -40,7 +41,7 @@ class DailyCardController extends BaseController {
     final int costCoin = user.isMan! ? 2 : 1;
     Get.dialog(ActionDialog(
         title: '오늘의 카드',
-        text: '추가로 한장 더 선택하시겠습니까?\n하트 $costCoin개가 소모됩니다',
+        text: '한장 더 선택하시겠습니까?\n하트 $costCoin개가 소모됩니다',
         confirmCallback: () => chooseMore(costCoin)));
   }
 
@@ -58,6 +59,7 @@ class DailyCardController extends BaseController {
     await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReward);
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
     Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
+    FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyConfirmed1st);
   }
 
   Future<void> chooseMore(int costCoin) async {
@@ -82,6 +84,7 @@ class DailyCardController extends BaseController {
     await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.dailyChooseMore);
     AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
     Get.snackbar('선택 완료', '오늘의 카드 추가 선택을 완료했습니다');
+    FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyConfirmed1st);
   }
 
   Future<void> block() async {

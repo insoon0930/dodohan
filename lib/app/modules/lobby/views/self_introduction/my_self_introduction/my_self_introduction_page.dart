@@ -41,7 +41,7 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
                               child: Text(
                                 'error ${snapshot.error}',
                                 style: ThemeFonts.regular
-                                    .getTextStyle(color: ThemeColors.greyText, size: 14),
+                                    .getTextStyle(color: ThemeColors.grayText, size: 14),
                                 textAlign: TextAlign.center,
                               ),
                             );
@@ -51,7 +51,7 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
                               child: Text(
                                 '셀프 소개가 없습니다',
                                 style: ThemeFonts.regular
-                                    .getTextStyle(color: ThemeColors.greyText, size: 14),
+                                    .getTextStyle(color: ThemeColors.grayText, size: 14),
                                 textAlign: TextAlign.center,
                               ),
                             );
@@ -95,7 +95,7 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
                               child: Text(
                                 'error ${snapshot.error}',
                                 style: ThemeFonts.regular
-                                    .getTextStyle(color: ThemeColors.greyText, size: 14),
+                                    .getTextStyle(color: ThemeColors.grayText, size: 14),
                                 textAlign: TextAlign.center,
                               ),
                             );
@@ -105,7 +105,7 @@ class MySelfIntroductionPage extends GetView<MySelfIntroductionController> {
                               child: Text(
                                 '셀프 소개가 없습니다',
                                 style: ThemeFonts.regular
-                                    .getTextStyle(color: ThemeColors.greyText, size: 14),
+                                    .getTextStyle(color: ThemeColors.grayText, size: 14),
                                 textAlign: TextAlign.center,
                               ),
                             );

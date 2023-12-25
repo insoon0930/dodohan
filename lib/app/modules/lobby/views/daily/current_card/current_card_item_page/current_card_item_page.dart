@@ -157,6 +157,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               onPressed: () => Get.dialog(ActionDialog(
                   title: '최종 수락',
                   text: '하트 ${controller.user.isMan! ? 6 : 3}개가 소모됩니다',
+                  subText: '* 수락한 경우에만 상대방의\n최종 선택을 확인할 수 있습니다',
                   confirmCallback: () =>
                       controller.confirm(coin: controller.user.isMan! ? 6 : 3, cardStatus: CardStatus.confirmed2nd),
                   buttonText: '수락하기')),

@@ -86,8 +86,8 @@ class CurrentCardItemController extends BaseController {
       FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyCardMatched);
       return;
     } else if (yourStatus == CardStatus.rejected2nd) {
-      const refundCoin = 2;
-      Get.snackbar('매칭 실패', '상대방이 거절한 상태입니다. 하트 $refundCoin개를 돌려 받습니다');
+      const refundCoin = 1;
+      Get.snackbar('매칭 실패', '상대방은 거절을 선택했습니다. 하트 $refundCoin개를 돌려 받습니다');
       //특별 스낵바, 푸시 없음, 내 하트 보상받기
       await _userService.increaseCoin(user.id, refundCoin, type: CoinReceiptType.dailyCardRefund);
       AuthService.to.user.update((user) => user!.coin = user.coin + refundCoin);
@@ -97,7 +97,7 @@ class CurrentCardItemController extends BaseController {
 
     //fcm push - 결정 안난 케이스
     if (cardStatus == CardStatus.confirmed1st) {
-      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyConfirmed1st);
+      FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyConfirmed1stInReaction);
     } else if(cardStatus == CardStatus.confirmed2nd) {
       FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyDone2nd);
     }
@@ -125,16 +125,20 @@ class CurrentCardItemController extends BaseController {
       currentCardController.sentCards.refresh();
     }
     //2. 유저 하트 갯수 증가 (백, 프론트)
-    const rewardCoin = 2;
+    final int rewardCoin = user.isMan! ? 1 : 2;
     //백
     await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReject);
     //프론트
     AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
 
+    hideLoading();
+    Get.back();
+    Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
+
     if (yourStatus == CardStatus.confirmed2nd) {
       //특별 푸시, 상대방 하트 보상해주기
       FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyCardMatchFailed);
-      const refundCoin = 2;
+      const refundCoin = 1;
       await _userService.increaseCoin(dailyCard.value.yourInfo!.user!, refundCoin, type: CoinReceiptType.dailyCardRefund);
       return;
     } else if (yourStatus == CardStatus.rejected2nd) {
@@ -147,10 +151,6 @@ class CurrentCardItemController extends BaseController {
     } else if(cardStatus == CardStatus.rejected2nd) {
       FcmService.to.sendFcmPush(dailyCard.value.yourInfo!.user!, FcmPushType.dailyDone2nd);
     }
-
-    hideLoading();
-    Get.back();
-    Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
   }
 
   Future<void> block() async {

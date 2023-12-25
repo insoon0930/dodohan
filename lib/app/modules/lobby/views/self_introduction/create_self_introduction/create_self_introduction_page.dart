@@ -54,7 +54,7 @@ class CreateSelfIntroductionPage extends GetView<CreateSelfIntroductionControlle
                   onPressed: () => Get.toNamed(Routes.previewSelfIntroduction),
                   child: Text('등록하기 (미리보기)',
                       style: ThemeFonts.medium
-                          .getTextStyle(color: Colors.white))),
+                          .getTextStyle(color: Colors.white))).paddingOnly(top: 16),
             )
           ],
         ).paddingAll(16),

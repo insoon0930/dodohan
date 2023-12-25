@@ -34,7 +34,7 @@ class HowToUseSelfIntroductionDialog extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               "* '개인정보 노출', '부적절한 사진 업로드', '기타 이용 정책에 제한 되는 내용'은 관리자에 의해 삭제될 수 있습니다",
-              style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 12),
+              style: ThemeFonts.medium.getTextStyle(color: ThemeColors.grayText, size: 12),
             ),
           ],
         ),

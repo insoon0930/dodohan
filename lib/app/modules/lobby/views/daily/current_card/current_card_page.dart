@@ -28,7 +28,7 @@ class CurrentCardPage extends GetView<CurrentCardController> {
                         if (controller.sentCards.isEmpty)
                           Text(
                             '보낸 신청이 없습니다',
-                            style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                            style: ThemeFonts.regular.getTextStyle(color: ThemeColors.grayText, size: 14),
                           ).paddingOnly(top: 58, bottom: 50),
                         _gridView(controller.sentCards),
                       ],
@@ -39,7 +39,7 @@ class CurrentCardPage extends GetView<CurrentCardController> {
                         if (controller.receivedCards.isEmpty)
                           Text(
                             '받은 신청이 없습니다',
-                            style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                            style: ThemeFonts.regular.getTextStyle(color: ThemeColors.grayText, size: 14),
                           ).paddingOnly(top: 58, bottom: 50),
                         _gridView(controller.receivedCards),
                       ],

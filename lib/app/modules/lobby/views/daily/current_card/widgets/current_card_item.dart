@@ -40,9 +40,10 @@ class CurrentCardItem extends StatelessWidget {
                     // if (dailyCard.meStatus != CardStatus.unChecked || dailyCard.meStatus != CardStatus.checked)
                     Positioned(bottom: 4, right: 4, child: _leftDayTag()),
                   ],
-                ),
+                ).paddingOnly(bottom: 4),
+
                 const Spacer(),
-                Text('${dailyCard.yourInfo!.univ}', style: ThemeFonts.medium.getTextStyle()),
+                Text('${dailyCard.yourInfo!.univ}', style: ThemeFonts.medium.getTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
                 const Spacer(),
               ],
             ),

@@ -28,6 +28,7 @@ const _$CoinReceiptTypeEnumMap = {
   CoinReceiptType.chargeCoin: 'chargeCoin',
   CoinReceiptType.dailyReject: 'dailyReject',
   CoinReceiptType.weeklyReject: 'weeklyReject',
+  CoinReceiptType.weeklyRefund: 'weeklyRefund',
   CoinReceiptType.consoleReward: 'consoleReward',
   CoinReceiptType.dailyCard: 'dailyCard',
   CoinReceiptType.dailyCardRefund: 'dailyCardRefund',

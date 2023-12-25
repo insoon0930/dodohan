@@ -24,7 +24,7 @@ class StorePage extends GetView<StoreService> {
           Container(color: ThemeColors.mainLightest),
           Column(
             children: [
-              _purchaseItem(coin: 5, price: 5900, promotion: 0, index: 0),
+              _purchaseItem(coin: 6, price: 5900, promotion: 0, index: 0),
               _purchaseItem(coin: 10, price: 10900, promotion: 2, index: 1),
               Stack(children: [
                 _purchaseItem(coin: 20, price: 18900, promotion: 4, index: 2),

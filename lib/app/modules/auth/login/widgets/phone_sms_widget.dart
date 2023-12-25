@@ -45,7 +45,7 @@ class PhoneSMSWidget extends StatelessWidget {
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: '010-1234-5678',
                       hintStyle: ThemeFonts.medium
-                          .getTextStyle(color: ThemeColors.greyText),
+                          .getTextStyle(color: ThemeColors.grayText),
                     ),
                   ),
                 ),

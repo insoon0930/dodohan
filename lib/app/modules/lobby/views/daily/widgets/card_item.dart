@@ -1,4 +1,5 @@
 import 'package:dodohan/app/widgets/dialogs/error_dialog.dart';
+import 'package:dodohan/core/theme/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -41,15 +42,17 @@ class CardItem extends GetView<DailyController> {
                         url: dailyCard.youProfileImage,
                         width: (Get.width - 64) / 2 - 8,
                         height: (Get.width - 64) / 2 - 8,
-                        isBlurred: true),
+                        isBlurred: true).paddingOnly(bottom: 4),
                     const Spacer(),
                     Row(
                       children: [
                         Expanded(
                             child: Text('${dailyCard.youInfo!.height}cm',
+                                style: ThemeFonts.regular.getTextStyle(),
                                 textAlign: TextAlign.center)),
                         Expanded(
                             child: Text('${dailyCard.youInfo!.age}살',
+                                style: ThemeFonts.regular.getTextStyle(),
                                 textAlign: TextAlign.center)),
                       ],
                     ).paddingSymmetric(horizontal: 4),
@@ -58,10 +61,12 @@ class CardItem extends GetView<DailyController> {
                       children: [
                         Expanded(
                             child: Text(dailyCard.youInfo!.bodyShape!,
+                                style: ThemeFonts.regular.getTextStyle(),
                                 textAlign: TextAlign.center)),
                         Expanded(
                             child: Text(
                                 dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연',
+                                style: ThemeFonts.regular.getTextStyle(),
                                 textAlign: TextAlign.center)),
                       ],
                     ).paddingSymmetric(horizontal: 4),

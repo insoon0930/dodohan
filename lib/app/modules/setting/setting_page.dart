@@ -58,7 +58,7 @@ class SettingPage extends StatelessWidget {
           left: ThemePaddings.mainPadding, bottom: 8, top: 20),
       child: Text(
         text,
-        style: const TextStyle(color: ThemeColors.greyText),
+        style: const TextStyle(color: ThemeColors.grayText),
       ),
     );
   }

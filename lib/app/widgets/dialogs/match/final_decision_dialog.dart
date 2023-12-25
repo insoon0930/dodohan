@@ -24,7 +24,7 @@ import '../select/select_dialog_item.dart';
 class FinalDecisionDialog extends StatelessWidget {
   final UserService _userService = UserService();
   final MatchService matchService;
-  final Match match;
+  Match match;
   final String phoneNum, profileImage;
   final Function function;
 
@@ -59,6 +59,11 @@ class FinalDecisionDialog extends StatelessWidget {
                   ImageViewBox(url: profileImage, width: Get.width * 0.5, height: Get.width * 0.5),
                   const SizedBox(height: 16),
                   Text('최종 선택을 해주세요\n(수락시 ${user.isMan! ? 6 : 3} 하트가 소모됩니다)', style: ThemeFonts.regular.getTextStyle(), textAlign: TextAlign.center),
+                  Text('* 수락한 경우에만 상대방의\n최종 선택을 확인할 수 있습니다',
+                      style: ThemeFonts.regular
+                          .getTextStyle(size: 14, color: ThemeColors.grayText),
+                      textAlign: TextAlign.center)
+                      .paddingOnly(top: 14),
                   Row(
                     children: [
                       Expanded(
@@ -75,17 +80,28 @@ class FinalDecisionDialog extends StatelessWidget {
                               }
 
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                              FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
+                              match = (await matchService.findOne(user.id, user.isMan!))!;
                               matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.confirmed);
                               //3. 유저 하트 갯수 차감 (백, 프론트)
                               await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.weeklyMatch);
                               AuthService.to.user.update((user) => user!.coin = user.coin - costCoin);
 
+                              //푸시 및 보상
+                              if(match.youStatus == MatchStatus.confirmed) {
+                                FcmService.to.sendFcmPush(match.you, FcmPushType.weeklyMatched);
+                              } else if(match.youStatus == MatchStatus.rejected) {
+                                const refundCoin = 1;
+                                Get.snackbar('매칭 실패', '상대방은 거절을 선택했습니다. 하트 $refundCoin개를 돌려 받습니다');
+                                await _userService.increaseCoin(user.id, refundCoin, type: CoinReceiptType.dailyCardRefund);
+                                AuthService.to.user.update((user) => user!.coin = user.coin + refundCoin);
+                              } else {
+                                FcmService.to.sendFcmPush(match.you, FcmPushType.weeklyChoiceMade);
+                              }
+
                               Get.back();
                               Get.back();
                               //상대가 수락했을 때만,
                               function();
-                              // Get.dialog(MatchSuccessDialog(match: match, phoneNum: phoneNum, profileImage: profileImage));
                             },
                             style: BtStyle.confirm,
                             child: Text('수락',
@@ -98,16 +114,22 @@ class FinalDecisionDialog extends StatelessWidget {
                         child: ElevatedButton(
                             onPressed: () async {
                               Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                              //todo 여기 삼항연산자들 게터로 정리좀 하자 ㅎㅎ..
-                              //상대방이 거절 안한 경우만 푸시 보냄
-                              if (user.isMan! ? match.womanStatus != MatchStatus.rejected : match.manStatus != MatchStatus.rejected) {
-                                FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
-                              }
+                              match = (await matchService.findOne(user.id, user.isMan!))!;
                               await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
-                              //3. 유저 하트 갯수 차감 (백, 프론트)
+                              //3. 유저 하트 갯수 증가 (백, 프론트)
                               final int rewardCoin = user.isMan! ? 1 : 2;
                               await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.weeklyReject);
                               AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
+
+                              //푸시 및 보상
+                              if(match.youStatus == MatchStatus.confirmed) {
+                                const refundCoin = 1;
+                                await _userService.increaseCoin(match.you, refundCoin, type: CoinReceiptType.weeklyRefund);
+                                FcmService.to.sendFcmPush(match.you, FcmPushType.weeklyMatchFailed);
+                              } else if(match.youStatus == MatchStatus.unChecked || match.youStatus == MatchStatus.checked) {
+                                FcmService.to.sendFcmPush(match.you, FcmPushType.weeklyChoiceMade);
+                              }
+
                               Get.back();
                               Get.back();
                               Get.snackbar('하트 지급', '참여 보상으로 하트가 $rewardCoin개 지급되었습니다');
@@ -131,7 +153,7 @@ class FinalDecisionDialog extends StatelessWidget {
                         return;
                       },
                       blockCallback: () async {
-                        FcmService.to.sendFcmPush(user.isMan! ? match.woman : match.man, FcmPushType.weeklyDone);
+                        FcmService.to.sendFcmPush(match.you, FcmPushType.weeklyChoiceMade);
                         await matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.rejected);
                         Get.back();
                       },

@@ -34,7 +34,7 @@ class ApplicationDialog extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             "* 1차 매칭 성사 시, '프로필 사진' 이 전달됩니다",
-            style: ThemeFonts.medium.getTextStyle(color: ThemeColors.greyText, size: 11),
+            style: ThemeFonts.medium.getTextStyle(color: ThemeColors.grayText, size: 11),
           ),
           ElevatedButton(
             style: BtStyle.standard(),

@@ -39,7 +39,7 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
                 return SliverToBoxAdapter(
                   child: Text(
                     'error ${snapshot.error}',
-                    style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                    style: ThemeFonts.regular.getTextStyle(color: ThemeColors.grayText, size: 14),
                     textAlign: TextAlign.center,
                   ).paddingOnly(top: Get.height / 3),
                 );
@@ -48,7 +48,7 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
                 return SliverToBoxAdapter(
                   child: Text(
                     '셀프 소개가 없습니다',
-                    style: ThemeFonts.regular.getTextStyle(color: ThemeColors.greyText, size: 14),
+                    style: ThemeFonts.regular.getTextStyle(color: ThemeColors.grayText, size: 14),
                     textAlign: TextAlign.center,
                   ).paddingOnly(top: Get.height / 3),
                 );
