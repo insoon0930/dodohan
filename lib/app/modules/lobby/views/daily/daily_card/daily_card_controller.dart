@@ -19,30 +19,43 @@ class DailyCardController extends BaseController {
 
   final Rx<DailyCard> dailyCard = DailyCard().obs;
   late final int cardIndex;
+
   MeInfo get youInfo => dailyCard.value.youInfo!;
+
   User get user => AuthService.to.user.value;
+
+  //내가 들고 들어온 인덱스를 통해서 isFirst를 체크하자
+  late final bool isFirstChoice;
 
   @override
   Future<void> onInit() async {
     print('DailyCardController OnInit started');
     dailyCard.value = Get.arguments['dailyCard'];
     cardIndex = Get.arguments['index'];
+
+    final List<DailyCard> listA = dailyController.todayCards.sublist(0, 2);
+    final List<DailyCard> listB = dailyController.todayCards.sublist(2, 4);
+    final List<DailyCard> listC = dailyController.todayCards.sublist(4, 6);
+    if (cardIndex == 0 || cardIndex == 1) {
+      isFirstChoice = listA.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
+    } else if (cardIndex == 2 || cardIndex == 3) {
+      isFirstChoice = listB.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
+    } else if (cardIndex == 4 || cardIndex == 5) {
+      isFirstChoice = listC.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
+    }
     super.onInit();
   }
 
   Future<void> showChooseDialog() async {
     //이후에는 추가 선택 과금하는 식으로
-    Get.dialog(ActionDialog(
-        title: '오늘의 카드', text: '선택하시겠습니까?', confirmCallback: () => choose()));
+    Get.dialog(ActionDialog(title: '오늘의 카드', text: '선택하시겠습니까?', confirmCallback: () => choose()));
   }
 
   Future<void> showChooseMoreDialog() async {
     //이후에는 추가 선택 과금하는 식으로
     final int costCoin = user.isMan! ? 2 : 1;
     Get.dialog(ActionDialog(
-        title: '오늘의 카드',
-        text: '한장 더 선택하시겠습니까?\n하트 $costCoin개가 소모됩니다',
-        confirmCallback: () => chooseMore(costCoin)));
+        title: '오늘의 카드', text: '한장 더 선택하시겠습니까?\n하트 $costCoin개가 소모됩니다', confirmCallback: () => chooseMore(costCoin)));
   }
 
   Future<void> choose() async {
@@ -65,10 +78,13 @@ class DailyCardController extends BaseController {
   Future<void> chooseMore(int costCoin) async {
     if (user.coin < costCoin) {
       Get.back();
-      Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
-        Get.back();
-        Get.toNamed(Routes.store);
-      }));
+      Get.dialog(ActionDialog(
+          title: '하트 부족',
+          text: '스토어로 이동하기',
+          confirmCallback: () {
+            Get.back();
+            Get.toNamed(Routes.store);
+          }));
       return;
     }
 
@@ -98,4 +114,3 @@ class DailyCardController extends BaseController {
     Get.back(); // 카드에서 나가기
   }
 }
-

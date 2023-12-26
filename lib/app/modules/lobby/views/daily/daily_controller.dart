@@ -16,9 +16,9 @@ class DailyController extends BaseController {
   final RxList<DailyCard> todayCards = <DailyCard>[].obs;
 
   User get user => AuthService.to.user.value;
-  bool get isFirstChoice => todayCards.every((card) =>
-      (card.meStatus == CardStatus.checked) ||
-      (card.meStatus == CardStatus.unChecked));
+  // bool get isFirstChoice => todayCards.every((card) =>
+  //     (card.meStatus == CardStatus.checked) ||
+  //     (card.meStatus == CardStatus.unChecked));
 
   @override
   Future<void> onInit() async {
