@@ -24,6 +24,7 @@ class DailyCardRepository extends ApiService {
       final QuerySnapshot myCardsSnapShot = await todayCardsRef
           .collection('cards')
           .where('meInfo.user', isEqualTo: user)
+          .orderBy('id', descending: true)
           .get();
       return myCardsSnapShot.docs
           .map((e) => DailyCard.fromJson(e.data()))
