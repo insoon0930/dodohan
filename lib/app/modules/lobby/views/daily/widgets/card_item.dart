@@ -25,34 +25,35 @@ class CardItem extends GetView<DailyController> {
             ? () => Get.dialog(const ErrorDialog(text: '차단한 카드입니다'))
             : () => controller.tapCard(index, dailyCard),
         child: Card(
-          margin: const EdgeInsets.all(4.0),
+          color: Colors.white,
+          margin: const EdgeInsets.all(0.0),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
-          elevation: 3,
+          elevation: 0,
           child: Stack(
             children: [
-              Container(
+              SizedBox(
                 width: (Get.width - 64) / 2,
                 height: (Get.width - 64) / 2 * 1.4,
-                padding: const EdgeInsets.all(4.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ImageViewBox(
                         url: dailyCard.youProfileImage,
-                        width: (Get.width - 64) / 2 - 8,
-                        height: (Get.width - 64) / 2 - 8,
-                        isBlurred: true).paddingOnly(bottom: 4),
+                        width: (Get.width - 64) / 2,
+                        height: (Get.width - 64) / 2,
+                        isBlurred: true,
+                        border: const BorderRadius.vertical(top: Radius.circular(9))),
                     const Spacer(),
                     Row(
                       children: [
                         Expanded(
                             child: Text('${dailyCard.youInfo!.height}cm',
-                                style: ThemeFonts.regular.getTextStyle(),
+                                style: ThemeFonts.medium.getTextStyle(),
                                 textAlign: TextAlign.center)),
                         Expanded(
                             child: Text('${dailyCard.youInfo!.age}살',
-                                style: ThemeFonts.regular.getTextStyle(),
+                                style: ThemeFonts.medium.getTextStyle(),
                                 textAlign: TextAlign.center)),
                       ],
                     ).paddingSymmetric(horizontal: 4),
@@ -61,12 +62,12 @@ class CardItem extends GetView<DailyController> {
                       children: [
                         Expanded(
                             child: Text(dailyCard.youInfo!.bodyShape!,
-                                style: ThemeFonts.regular.getTextStyle(),
+                                style: ThemeFonts.medium.getTextStyle(),
                                 textAlign: TextAlign.center)),
                         Expanded(
                             child: Text(
                                 dailyCard.youInfo!.isSmoker! ? '흡연' : '비흡연',
-                                style: ThemeFonts.regular.getTextStyle(),
+                                style: ThemeFonts.medium.getTextStyle(),
                                 textAlign: TextAlign.center)),
                       ],
                     ).paddingSymmetric(horizontal: 4),
@@ -87,7 +88,7 @@ class CardItem extends GetView<DailyController> {
   Widget _cardCover() => Positioned.fill(
       child: Card(
           color: ThemeColors.main,
-          margin: const EdgeInsets.all(4.0),
+          margin: const EdgeInsets.all(0),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
           elevation: 0,
@@ -98,7 +99,7 @@ class CardItem extends GetView<DailyController> {
   Widget _blockedCover() => Positioned.fill(
       child: Card(
           color: ThemeColors.main,
-          margin: const EdgeInsets.all(4.0),
+          margin: const EdgeInsets.all(0),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
           elevation: 0,

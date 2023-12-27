@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,17 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // if (kDebugMode) {
+  //   try {
+  //     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+  //     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e);
+  //   }
+  // }
+
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   analytics.logAppOpen();
   if (!kIsWeb) {
@@ -33,6 +46,11 @@ void main() async {
     statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
   ));
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 

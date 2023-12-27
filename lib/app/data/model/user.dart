@@ -46,4 +46,5 @@ class User {
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
   String get region => InfoData.univInfo[univ]!.region.name;
+  bool get hasFourDailyCards => isMan!;
 }

@@ -31,7 +31,7 @@ class LobbyPage extends GetView<LobbyController> {
                 mini: true,
                 elevation: 3,
                 shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(46.0))),
-                child: const Icon(Icons.question_mark, color: Colors.white))
+                child: const Icon(Icons.question_mark, color: Colors.white)).paddingOnly(bottom: controller.selectedTabIndex.value == 1 && controller.user.hasFourDailyCards ? 60 : 0)
             : ExpandableFab(
                 distance: 112,
                 children: [

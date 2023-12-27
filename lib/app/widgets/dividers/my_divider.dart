@@ -7,6 +7,6 @@ class MyDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Divider(height: 1, indent: ThemePaddings.mainPadding, endIndent: ThemePaddings.mainPadding);
+    return const Divider(height: 5, indent: ThemePaddings.mainPadding, endIndent: ThemePaddings.mainPadding);
   }
 }

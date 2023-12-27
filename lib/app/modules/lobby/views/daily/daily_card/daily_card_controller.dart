@@ -33,15 +33,16 @@ class DailyCardController extends BaseController {
     dailyCard.value = Get.arguments['dailyCard'];
     cardIndex = Get.arguments['index'];
 
+    //todo 이거 좀 더 깔끔하게 짤 수 있을듯 (추후에 리스트 3개 되는거 고려해서 확장성 있게)
     final List<DailyCard> listA = dailyController.todayCards.sublist(0, 2);
-    final List<DailyCard> listB = dailyController.todayCards.sublist(2, 4);
-    final List<DailyCard> listC = dailyController.todayCards.sublist(4, 6);
+    List<DailyCard> listB = [];
+    if (dailyController.todayCards.length > 2) {
+      listB = dailyController.todayCards.sublist(2, 4);
+    }
     if (cardIndex == 0 || cardIndex == 1) {
       isFirstChoice = listA.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
     } else if (cardIndex == 2 || cardIndex == 3) {
       isFirstChoice = listB.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
-    } else if (cardIndex == 4 || cardIndex == 5) {
-      isFirstChoice = listC.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
     }
     super.onInit();
   }
