@@ -100,8 +100,7 @@ class CardItem extends GetView<DailyController> {
       child: Card(
           color: ThemeColors.main,
           margin: const EdgeInsets.all(0),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(9.0))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
           elevation: 3,
           child: FittedBox(
               child: const Icon(Icons.block, color: ThemeColors.mainLightest)

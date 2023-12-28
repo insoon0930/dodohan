@@ -1,6 +1,9 @@
 import 'package:awesome_select/awesome_select.dart';
+import 'package:dodohan/app/data/majors/cho_sun.dart';
 import 'package:dodohan/app/data/majors/chung_ang.dart';
 import 'package:dodohan/app/data/majors/default_major.dart';
+import 'package:dodohan/app/data/majors/snu.dart';
+import 'package:dodohan/app/data/majors/won_kwang.dart';
 import 'package:dodohan/app/data/model/univ_info.dart';
 
 import 'enums.dart';
@@ -39,8 +42,8 @@ class InfoData {
     '상명대(서울)': UnivInfo(appTitleTail: '상명', major: defaultMajor, region: Region.seoul),
     '서강대': UnivInfo(appTitleTail: '서강', major: defaultMajor, region: Region.seoul),
     '서경대': UnivInfo(appTitleTail: '서강', major: defaultMajor, region: Region.seoul),
-    '서울대학교(관악)': UnivInfo(appTitleTail: '샤대', major: defaultMajor, region: Region.seoul),
-    '서울대학교(연건)': UnivInfo(appTitleTail: '샤대', major: defaultMajor, region: Region.seoul),
+    '서울대(관악)': UnivInfo(appTitleTail: '샤대', major: majorSNU, region: Region.seoul),
+    '서울대(연건)': UnivInfo(appTitleTail: '샤대', major: majorSNU, region: Region.seoul),
     '서울과학기술대': UnivInfo(appTitleTail: '과기대', major: defaultMajor, region: Region.seoul),
     '성공회대': UnivInfo(appTitleTail: '성공회', major: defaultMajor, region: Region.seoul),
     '성균관대(인문사회)': UnivInfo(appTitleTail: '성균', major: defaultMajor, region: Region.seoul),
@@ -110,7 +113,7 @@ class InfoData {
     '송원대': UnivInfo(appTitleTail: '송원', major: defaultMajor, region: Region.gwangju),
     '전남대(용봉)': UnivInfo(appTitleTail: '전대', major: defaultMajor, region: Region.gwangju),
     '전남대(학동)': UnivInfo(appTitleTail: '전대', major: defaultMajor, region: Region.gwangju),
-    '조선대': UnivInfo(appTitleTail: '조선', major: defaultMajor, region: Region.gwangju),
+    '조선대': UnivInfo(appTitleTail: '조선', major: majorChoSun, region: Region.gwangju),
     '호남대': UnivInfo(appTitleTail: '호남', major: defaultMajor, region: Region.gwangju),
     'GIST': UnivInfo(appTitleTail: '지스트', major: defaultMajor, region: Region.gwangju),
 
@@ -184,7 +187,7 @@ class InfoData {
     '강원대(삼척)': UnivInfo(appTitleTail: '강원', major: defaultMajor, region: Region.gangwon),
     '강원대(도계)': UnivInfo(appTitleTail: '강원', major: defaultMajor, region: Region.gangwon),
     '상지대': UnivInfo(appTitleTail: '상지', major: defaultMajor, region: Region.gangwon),
-    '서울대학교(평창)': UnivInfo(appTitleTail: '샤대', major: defaultMajor, region: Region.gangwon),
+    '서울대(평창)': UnivInfo(appTitleTail: '샤대', major: majorSNU, region: Region.gangwon),
     '한라대': UnivInfo(appTitleTail: '한라', major: defaultMajor, region: Region.gangwon),
     '한림대': UnivInfo(appTitleTail: '한림', major: defaultMajor, region: Region.gangwon),
 
@@ -238,7 +241,7 @@ class InfoData {
     '우석대(완산)': UnivInfo(appTitleTail: '우석', major: defaultMajor, region: Region.jeonbuk),
     '군산대(미룡)': UnivInfo(appTitleTail: '군산', major: defaultMajor, region: Region.jeonbuk),
     '군산대(새만금)': UnivInfo(appTitleTail: '군산', major: defaultMajor, region: Region.jeonbuk),
-    '원광대': UnivInfo(appTitleTail: '원광', major: defaultMajor, region: Region.jeonbuk),
+    '원광대': UnivInfo(appTitleTail: '원광', major: majorWonKwang, region: Region.jeonbuk),
     '전북대(전주)': UnivInfo(appTitleTail: '전대', major: defaultMajor, region: Region.jeonbuk),
     '전북대(익산)': UnivInfo(appTitleTail: '전대', major: defaultMajor, region: Region.jeonbuk),
     '전북대(고창)': UnivInfo(appTitleTail: '전대', major: defaultMajor, region: Region.jeonbuk),
