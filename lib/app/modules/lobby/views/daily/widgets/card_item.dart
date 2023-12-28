@@ -29,7 +29,7 @@ class CardItem extends GetView<DailyController> {
           margin: const EdgeInsets.all(0.0),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
-          elevation: 0,
+          elevation: 3,
           child: Stack(
             children: [
               SizedBox(
@@ -91,7 +91,7 @@ class CardItem extends GetView<DailyController> {
           margin: const EdgeInsets.all(0),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
-          elevation: 0,
+          elevation: 3,
           child: SvgPicture.asset('assets/love.svg',
                   color: ThemeColors.mainLightest)
               .paddingAll((Get.width - 64) / 7)));
@@ -102,7 +102,7 @@ class CardItem extends GetView<DailyController> {
           margin: const EdgeInsets.all(0),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(9.0))),
-          elevation: 0,
+          elevation: 3,
           child: FittedBox(
               child: const Icon(Icons.block, color: ThemeColors.mainLightest)
                   .paddingAll(13))));

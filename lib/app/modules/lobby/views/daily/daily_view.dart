@@ -20,33 +20,37 @@ class DailyView extends GetView<DailyController> {
       alignment: Alignment.bottomCenter,
       children: [
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Obx(
             () => Column(
               children: [
                 if (controller.loading.value) _progressIndicator(),
                 if (!controller.loading.value && controller.todayCards.isEmpty) _noCardText(),
                 if (controller.todayCards.isNotEmpty)
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: controller.todayCards.length ~/ 2,
-                    itemBuilder: (context, index) => _set(index * 2 + 0, index * 2 + 1),
+                  Flexible(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.todayCards.length ~/ 2,
+                      itemBuilder: (context, index) => _set(index * 2 + 0, index * 2 + 1),
+                    ),
                   ),
                 if (!controller.user.hasFourDailyCards)
                   ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.mainLight),
-                      onPressed: () => Get.toNamed(Routes.currentCard),
-                      child: const Text('카드 현황')).paddingOnly(top: 16),
-                const SizedBox(height: 70),
+                          style: BtStyle.standard(color: ThemeColors.mainLight),
+                          onPressed: () => Get.toNamed(Routes.currentCard),
+                          child: const Text('카드 현황'))
+                      .paddingOnly(top: 16),
+                const SizedBox(height: 86),
               ],
             ),
           ),
         ),
         if (controller.user.hasFourDailyCards)
           ElevatedButton(
-              style: BtStyle.standard(color: ThemeColors.mainLight),
-              onPressed: () => Get.toNamed(Routes.currentCard),
-              child: const Text('카드 현황')).paddingAll(16),
+                  style: BtStyle.standard(color: ThemeColors.mainLight),
+                  onPressed: () => Get.toNamed(Routes.currentCard),
+                  child: const Text('카드 현황'))
+              .paddingAll(16),
       ],
     );
   }
@@ -74,27 +78,16 @@ class DailyView extends GetView<DailyController> {
         ),
       );
 
-  Widget _set(int index1, int index2) => Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          Card(
-            margin: const EdgeInsets.all(0),
-            color: ThemeColors.mainLightest2,
-            elevation: 3,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CardItem(index: index1),
-                CardItem(index: index2),
-              ],
-            ).paddingAll(10),
-          ),
-          Container(
-              decoration:
-                  const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(49.0))),
-              width: 40,
-              height: 40,
-              child: Center(child: Text('OR', style: ThemeFonts.semiBold.getTextStyle(size: 14))))
-        ],
+  Widget _set(int index1, int index2) => Card(
+        margin: const EdgeInsets.all(0),
+        color: ThemeColors.mainLightest2,
+        elevation: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CardItem(index: index1),
+            CardItem(index: index2),
+          ],
+        ).paddingAll(10),
       ).paddingOnly(bottom: 8, top: 8);
 }

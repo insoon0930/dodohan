@@ -34,6 +34,12 @@ class DailyCardController extends BaseController {
     cardIndex = Get.arguments['index'];
 
     //todo 이거 좀 더 깔끔하게 짤 수 있을듯 (추후에 리스트 3개 되는거 고려해서 확장성 있게)
+    //  var chunks = [];
+    //   int chunkSize = 2;
+    //   for (var i = 0; i < letters.length; i += chunkSize) {
+    //     chunks.add(letters.sublist(i, i+chunkSize > letters.length ? letters.length : i + chunkSize));
+    //   }
+    //   return chunks;
     final List<DailyCard> listA = dailyController.todayCards.sublist(0, 2);
     List<DailyCard> listB = [];
     if (dailyController.todayCards.length > 2) {
