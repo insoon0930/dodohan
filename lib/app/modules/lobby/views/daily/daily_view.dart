@@ -29,6 +29,7 @@ class DailyView extends GetView<DailyController> {
                 if (controller.todayCards.isNotEmpty)
                   Flexible(
                     child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: controller.todayCards.length ~/ 2,
                       itemBuilder: (context, index) => _set(index * 2 + 0, index * 2 + 1),
