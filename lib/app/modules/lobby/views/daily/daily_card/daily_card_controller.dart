@@ -25,7 +25,7 @@ class DailyCardController extends BaseController {
   User get user => AuthService.to.user.value;
 
   //내가 들고 들어온 인덱스를 통해서 isFirst를 체크하자
-  late final bool isFirstChoice;
+  final RxBool isFirstChoice = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -46,9 +46,9 @@ class DailyCardController extends BaseController {
       listB = dailyController.todayCards.sublist(2, 4);
     }
     if (cardIndex == 0 || cardIndex == 1) {
-      isFirstChoice = listA.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
+      isFirstChoice.value = listA.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
     } else if (cardIndex == 2 || cardIndex == 3) {
-      isFirstChoice = listB.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
+      isFirstChoice.value = listB.every((card) => (card.meStatus == CardStatus.checked) || (card.meStatus == CardStatus.unChecked));
     }
     super.onInit();
   }
@@ -70,9 +70,10 @@ class DailyCardController extends BaseController {
     _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
     hideLoading();
     Get.back();
-    dailyCard.value.meStatus = CardStatus.confirmed1st;
+    dailyCard.update((val) => val!.meStatus = CardStatus.confirmed1st);
     dailyController.todayCards[cardIndex].meStatus = CardStatus.confirmed1st;
     dailyController.todayCards.refresh();
+    isFirstChoice.value = false;
 
     //유저 하트 갯수 증가 (백, 프론트)
     final int rewardCoin = user.isMan! ? 1 : 2;
@@ -99,7 +100,7 @@ class DailyCardController extends BaseController {
     _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
     hideLoading();
     Get.back();
-    dailyCard.value.meStatus = CardStatus.confirmed1st;
+    dailyCard.update((val) => val!.meStatus = CardStatus.confirmed1st);
     dailyController.todayCards[cardIndex].meStatus = CardStatus.confirmed1st;
     dailyController.todayCards.refresh();
 

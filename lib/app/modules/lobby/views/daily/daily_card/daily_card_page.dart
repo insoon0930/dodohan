@@ -55,7 +55,7 @@ class DailyCardPage extends GetView<DailyCardController> {
                   child: Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
                 ),
               ]),
-              if (controller.isFirstChoice)
+              if (controller.isFirstChoice.value)
                 ElevatedButton(
                   style: BtStyle.standard(),
                   onPressed: () => controller.showChooseDialog(),
