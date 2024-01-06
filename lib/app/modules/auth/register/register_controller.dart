@@ -77,7 +77,8 @@ class RegisterController extends GetxController {
 
     // 페이지 라우팅 //본인 인증이 진행중입니다(24시간 이내 처리)
     Get.back();
-    Get.toNamed(Routes.waiting);
+    Get.offAllNamed(Routes.waiting);
+    FcmService.to.init(); // 심사 일림 받아야 해서 추가함 (문제 없겠지?)
   }
 
   Widget _processWidget() => Center(child: Obx(

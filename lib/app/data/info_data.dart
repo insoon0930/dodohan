@@ -460,8 +460,11 @@ class InfoData {
   static List<S2Choice<String>> height = List.generate(
       50, (index) => S2Choice<String>(value: '${140 + index}', title: '${140 + index}'));
 
-  static List<S2Choice<String>> age = List.generate(
-      10, (index) => S2Choice<String>(value: '${20 + index}', title: '${20 + index}'));
+  static List<S2Choice<String>> ageWithYear = List.generate(
+      11,
+      (index) => S2Choice<String>(
+          value: '${20 + index} (${DateTime.now().year - (20 + index) + 1}년생)',
+          title: '${20 + index} (${DateTime.now().year - (20 + index) + 1}년생)'));
 
   static List<S2Choice<String>> manBodyShape = [
     S2Choice<String>(value: '마른', title: '마른'),

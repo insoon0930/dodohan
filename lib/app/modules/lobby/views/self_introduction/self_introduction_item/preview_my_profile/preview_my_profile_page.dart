@@ -1,5 +1,6 @@
 
 import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_item/preview_my_profile/preview_my_profile_controller.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,9 +34,9 @@ class PreviewMyProfilePage extends GetView<PreviewMyProfileController> {
                     const SizedBox(height: 16),
                     _infoForm('학교', user.univ),
                     const Divider(),
-                    _infoForm('키', '${meInfo.height}cm'),
+                    _infoForm('키', '${meInfo.height??''}cm'),
                     const Divider(),
-                    _infoForm('나이', '${meInfo.age}살'),
+                    _infoForm('나이', '${meInfo.age??''}살 (${TimeUtility.birthYear(age: meInfo.age??0)}년생)'),
                     const Divider(),
                     _infoForm('체형', meInfo.bodyShape??''),
                     const Divider(),

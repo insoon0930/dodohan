@@ -1,4 +1,5 @@
 import 'package:dodohan/app/widgets/my_text_field.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/theme/buttons.dart';
@@ -60,10 +61,10 @@ class MeInfoPage extends GetView<MeInfoController> {
                   const Divider(height: 1),
                   SingleSelector(
                       title: '나이',
-                      placeholder: '${controller.meInfo.value.age}',
-                      list: InfoData.age,
+                      placeholder: controller.meInfo.value.age == null ? '필수' : '${controller.meInfo.value.age} (${TimeUtility.birthYear(age: controller.meInfo.value.age??0)}년생)',
+                      list: InfoData.ageWithYear,
                       changedCallback: (selected) => controller.meInfo.value.age =
-                          int.parse('${selected.value ?? 0}')),
+                          int.parse('${selected.value.split(' ')[0] ?? 0}')),
                   const Divider(height: 1),
                   SingleSelector(
                       title: '체형',

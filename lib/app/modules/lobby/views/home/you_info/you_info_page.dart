@@ -1,4 +1,5 @@
 import 'package:awesome_select/awesome_select.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/theme/buttons.dart';
@@ -73,34 +74,38 @@ class YouInfoPage extends GetView<YouInfoController> {
                               value: '${controller.minHeight! + index}',
                               title: '${controller.minHeight! + index}')),
                       changedCallback: (selected) => controller.youInfo.update(
-                          (val) => val!.maxHeight = int.parse('${selected.value}'))),
+                          (val) => val!.maxHeight = int.parse('${selected.value.split(' ')[0] ?? 0}'))),
                   const Divider(height: 1),
                   SingleSelector(
                       title: '나이(이상)',
-                      placeholder: '${controller.youInfo.value.minAge}',
+                      placeholder: controller.maxAge == null
+                          ? '필수'
+                          : '${controller.youInfo.value.minAge} (${TimeUtility.birthYear(age: controller.youInfo.value.minAge ?? 0)}년생)',
                       list: controller.maxAge == null
-                          ? InfoData.age
+                          ? InfoData.ageWithYear
                           : List.generate(
                           controller.maxAge! - 19,
                               (index) => S2Choice<String>(
-                              value: '${20 + index}',
-                              title: '${20 + index}')),
+                              value: '${20 + index} (${TimeUtility.birthYear(age: 20 + index)}년생)',
+                              title: '${20 + index} (${TimeUtility.birthYear(age: 20 + index)}년생)')),
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) =>
-                              val!.minAge = int.parse('${selected.value}'))),
+                              val!.minAge = int.parse('${selected.value.split(' ')[0] ?? 0}'))),
                   const Divider(height: 1),
                   SingleSelector(
                       title: '나이(이하)',
-                      placeholder: '${controller.youInfo.value.maxAge}',
+                      placeholder: controller.minAge == null
+                          ? '필수'
+                          : '${controller.youInfo.value.maxAge} (${TimeUtility.birthYear(age: controller.youInfo.value.maxAge ?? 0)}년생)',
                       list: controller.minAge == null
-                          ? InfoData.age
+                          ? InfoData.ageWithYear
                           : List.generate(
-                          30 - controller.minAge!,
+                          31 - controller.minAge!,
                               (index) => S2Choice<String>(
-                              value: '${controller.minAge! + index}',
-                              title: '${controller.minAge! + index}')),
+                              value: '${controller.minAge! + index} (${TimeUtility.birthYear(age: controller.minAge! + index)}년생)',
+                              title: '${controller.minAge! + index} (${TimeUtility.birthYear(age: controller.minAge! + index)}년생)')),
                       changedCallback: (selected) => controller.youInfo.update(
-                          (val) => val!.maxAge = int.parse('${selected.value}'))),
+                          (val) => val!.maxAge = int.parse('${selected.value.split(' ')[0] ?? 0}'))),
                   const Divider(height: 1),
                   MultiSelector(
                       title: '체형',

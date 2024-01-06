@@ -1,6 +1,7 @@
 import 'package:dodohan/app/data/model/self_application.dart';
 import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import 'package:dodohan/app/widgets/disabled_button.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -73,9 +74,9 @@ class CheckOppositeProfilePage extends GetView<SelfIntroductionItemController> {
                     const SizedBox(height: 16),
                     _infoForm('학교', meInfo.univ!),
                     const Divider(),
-                    _infoForm('키', '${meInfo.height}cm'),
+                    _infoForm('키', '${meInfo.height ?? ''}cm'),
                     const Divider(),
-                    _infoForm('나이', '${meInfo.age}살'),
+                    _infoForm('나이', '${meInfo.age ?? ''}살 (${TimeUtility.birthYear(age: meInfo.age??0)}년생)'),
                     const Divider(),
                     _infoForm('체형', meInfo.bodyShape ?? ''),
                     const Divider(),

@@ -24,7 +24,7 @@ extension TextSizeExt on ThemeFonts {
       case ThemeFonts.regular:
         return TextStyle(fontSize: size, fontWeight: FontWeight.w400, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
       case ThemeFonts.medium:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w500, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w500, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       case ThemeFonts.semiBold:
         return TextStyle(fontSize: size, fontWeight: FontWeight.w600, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, decoration: decoration, height: height);
       case ThemeFonts.bold:

@@ -29,4 +29,6 @@ abstract class TimeUtility {
 
   static String formatDateSimple(DateTime date) => DateFormat('yyyy-MM-dd').format(date);
 
+  static int birthYear({required int age}) => DateTime.now().year - age + 1;
+
 }

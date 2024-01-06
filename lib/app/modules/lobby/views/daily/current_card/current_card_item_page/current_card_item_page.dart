@@ -1,6 +1,7 @@
 import 'package:dodohan/app/widgets/dialogs/action_dialog.dart';
 import 'package:dodohan/app/widgets/disabled_button.dart';
 import 'package:dodohan/core/theme/colors.dart';
+import 'package:dodohan/core/utils/time_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,9 +82,9 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               if (controller.dailyCard.value.meStatus != CardStatus.checked) const SizedBox(height: 16),
               _infoForm('학교', controller.youInfo.univ!),
               const Divider(),
-              _infoForm('키', '${controller.youInfo.height}cm'),
+              _infoForm('키', '${controller.youInfo.height ?? ''}cm'),
               const Divider(),
-              _infoForm('나이', '${controller.youInfo.age}살'),
+              _infoForm('나이', '${controller.youInfo.age ?? ''}살 (${TimeUtility.birthYear(age: controller.youInfo.age??0)}년생)'),
               const Divider(),
               _infoForm('체형', controller.youInfo.bodyShape!),
               const Divider(),

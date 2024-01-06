@@ -207,6 +207,7 @@ class RegisterPage extends GetView<RegisterController> {
 
   Widget _imageRow() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +247,10 @@ class RegisterPage extends GetView<RegisterController> {
               Text("* '학교'와 '본인'이 보여야 합니다".tr,
                   style: ThemeFonts.extraBold
                       .getTextStyle(size: 12, color: ThemeColors.grayDark)).paddingOnly(top: 8, bottom: 2),
-              Text("* 모바일 학생증 권고".tr,
+              Text("* 관리자 심사시 1회만 이용됩니다".tr,
+                  style: ThemeFonts.medium
+                      .getTextStyle(size: 12, color: ThemeColors.grayDark)).paddingOnly(bottom: 2),
+              Text("* 모바일 가능".tr,
                   style: ThemeFonts.medium
                       .getTextStyle(size: 12, color: ThemeColors.grayDark)),
             ],

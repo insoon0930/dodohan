@@ -29,16 +29,16 @@ class WaitingPage extends GetView<WaitingController> {
                 repeatForever: true,
               ),
             ),
-            Text('* 승인까지 최대 1일 정도 소요될 수 있습니다',
-                style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.grayDark)).paddingSymmetric(vertical: 8),
-            SizedBox(
-              width: 90,
-              height: 30,
-              child: ElevatedButton(
-                  onPressed: () => controller.refreshPage(),
-                  style: BtStyle.confirm,
-                  child: Text('확인하기', style: ThemeFonts.medium.getTextStyle(size: 12))),
-            )
+            Text('* 승인까지 최대 1일 정도 소요될 수 있습니다\n* 심사가 완료되면 알림을 보내드려요!',
+                style: ThemeFonts.medium.getTextStyle(height: 1.3, size: 12, color: ThemeColors.grayDark), textAlign: TextAlign.center,).paddingSymmetric(vertical: 8),
+            // SizedBox(
+            //   width: 90,
+            //   height: 30,
+            //   child: ElevatedButton(
+            //       onPressed: () => controller.refreshPage(),
+            //       style: BtStyle.confirm,
+            //       child: Text('확인하기', style: ThemeFonts.medium.getTextStyle(size: 12))),
+            // )
           ],
         ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
       ),
