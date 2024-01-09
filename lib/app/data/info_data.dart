@@ -57,6 +57,19 @@ class InfoData {
     '육군사관학교': UnivInfo(appTitleTail: '육사', major: defaultMajor, region: Region.seoul),
     'KAIST(서울)': UnivInfo(appTitleTail: '카이스트', major: defaultMajor, region: Region.seoul),
     'KAIST(도곡)': UnivInfo(appTitleTail: '카이스트', major: defaultMajor, region: Region.seoul),
+    '덕성여대(쌍문동)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '덕성여대(종로)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '동덕여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '서울여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '성신여대(수정)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '성신여대(운정그린)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '숙명여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '이화여대(대현)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '이화여대(마곡)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '배화여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '서울여자간호대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '숭의여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '한양여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
 
     //부산
     '경성대': UnivInfo(appTitleTail: '경성', major: defaultMajor, region: Region.busan),
@@ -84,6 +97,7 @@ class InfoData {
     '한국해양대학교(서부산융합)': UnivInfo(appTitleTail: '해양', major: defaultMajor, region: Region.busan),
     '한국해양대학교(다운타운)': UnivInfo(appTitleTail: '해양', major: defaultMajor, region: Region.busan),
     '한국해양대학교(해양군사대학)': UnivInfo(appTitleTail: '해양', major: defaultMajor, region: Region.busan),
+    '부산여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
 
     //대구
     '경북대(대구)': UnivInfo(appTitleTail: '경북', major: defaultMajor, region: Region.daegu),
@@ -105,6 +119,7 @@ class InfoData {
     '인하대(항공우주)': UnivInfo(appTitleTail: '인하', major: defaultMajor, region: Region.incheon),
     '인하대(송도)': UnivInfo(appTitleTail: '인하', major: defaultMajor, region: Region.incheon),
     '청운대(인천)': UnivInfo(appTitleTail: '청운', major: defaultMajor, region: Region.incheon),
+    '경인여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
 
     //광주
     '광신대': UnivInfo(appTitleTail: '광신', major: defaultMajor, region: Region.gwangju),
@@ -116,6 +131,7 @@ class InfoData {
     '조선대': UnivInfo(appTitleTail: '조선', major: majorChoSun, region: Region.gwangju),
     '호남대': UnivInfo(appTitleTail: '호남', major: defaultMajor, region: Region.gwangju),
     'GIST': UnivInfo(appTitleTail: '지스트', major: defaultMajor, region: Region.gwangju),
+    '광주여대': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
 
     //대전
     '건양대(메디컬)': UnivInfo(appTitleTail: '건양', major: defaultMajor, region: Region.daejeon),
@@ -175,6 +191,8 @@ class InfoData {
     '한세대': UnivInfo(appTitleTail: '한세', major: defaultMajor, region: Region.gyeonggi),
     '한신대': UnivInfo(appTitleTail: '한신', major: defaultMajor, region: Region.gyeonggi),
     '협성대': UnivInfo(appTitleTail: '협성', major: defaultMajor, region: Region.gyeonggi),
+    '수원여대(수원)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
+    '수원여대(해란)': UnivInfo(appTitleTail: '캠퍼스', major: defaultMajor, region: Region.seoul, isWomanUniv: true),
 
     //강원
     '경동대(글로벌)': UnivInfo(appTitleTail: '경동', major: defaultMajor, region: Region.gangwon),

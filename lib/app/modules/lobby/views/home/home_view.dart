@@ -1,3 +1,5 @@
+import 'package:dodohan/app/widgets/dialogs/error_dialog.dart';
+import 'package:dodohan/app/widgets/dialogs/report_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../core/services/auth_service.dart';
@@ -65,7 +67,9 @@ class HomeView extends GetView<HomeController> {
               const SizedBox(height: 40),
               ElevatedButton(
                 style: BtStyle.standard(),
-                onPressed: () => controller.getMatchResult(),
+                onPressed: !AuthService.to.user.value.isWomanUniv
+                    ? () => controller.getMatchResult()
+                    : () => Get.dialog(const ErrorDialog(text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
                 child: const Text('매칭 결과 확인'),
               ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
               const SizedBox(height: 16),
@@ -103,7 +107,9 @@ class HomeView extends GetView<HomeController> {
               Flexible(
                 child: ElevatedButton(
                   style: BtStyle.standard(color: ThemeColors.mainLight),
-                  onPressed: () => Get.toNamed(Routes.youInfo),
+                  onPressed: !AuthService.to.user.value.isWomanUniv
+                      ? () => Get.toNamed(Routes.youInfo)
+                      : () => Get.dialog(const ErrorDialog(text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
                   child: const Text('이상형'),
                 ),
               ),
@@ -113,7 +119,9 @@ class HomeView extends GetView<HomeController> {
           const SizedBox(height: 16),
           ElevatedButton(
             style: BtStyle.standard(),
-            onPressed: () => controller.getInfos(),
+            onPressed: !AuthService.to.user.value.isWomanUniv
+                ? () => controller.getInfos()
+                : () => Get.dialog(const ErrorDialog(text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
             child: const Text('이번 회차 신청'),
           ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
           const SizedBox(height: 16),
