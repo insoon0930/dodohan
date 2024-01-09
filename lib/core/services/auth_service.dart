@@ -23,10 +23,15 @@ class AuthService extends ApiService {
   Rx<User> user = User().obs;
 
   bool get isAdmin => user.value.phoneNum =='+821066192550';
+  bool get isTester => user.value.phoneNum =='+821012341234';
   // bool get isAdmin => user.value.phoneNum =='+821012341234' || user.value.phoneNum =='+821066192550';
 
   Future<User> updateUser(User newUser) async {
     user.value = newUser;
+    //앱 테스터 제한 걸기
+    if(isTester) {
+      user.update((val) => val!.coin = 0);
+    }
     return user.value;
   }
 
