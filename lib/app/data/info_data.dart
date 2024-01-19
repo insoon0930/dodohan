@@ -40,7 +40,7 @@ class InfoData {
     '명지대(인문)': UnivInfo(appTitleTail: '명지', major: defaultMajor, region: Region.seoul),
     '삼육대': UnivInfo(appTitleTail: '삼육', major: defaultMajor, region: Region.seoul),
     '상명대(서울)': UnivInfo(appTitleTail: '상명', major: defaultMajor, region: Region.seoul),
-    '서강대': UnivInfo(appTitleTail: '서강', major: defaultMajor, region: Region.seoul),
+    '대': UnivInfo(appTitleTail: '서강', major: defaultMajor, region: Region.seoul),
     '서경대': UnivInfo(appTitleTail: '서강', major: defaultMajor, region: Region.seoul),
     '서울대(관악)': UnivInfo(appTitleTail: '샤대', major: majorSNU, region: Region.seoul),
     '서울대(연건)': UnivInfo(appTitleTail: '샤대', major: majorSNU, region: Region.seoul),
