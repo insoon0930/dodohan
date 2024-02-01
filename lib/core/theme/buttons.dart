@@ -45,11 +45,10 @@ class BtStyle {
   // );
 
   static ButtonStyle get loginBy => ElevatedButton.styleFrom(
-    backgroundColor: Colors.white,
+    backgroundColor: ThemeColors.main,
     textStyle: ThemeFonts.medium.getTextStyle(),
     surfaceTintColor: Colors.transparent,
-    elevation: 3,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     minimumSize: Size(Get.width, 54),
   );
 

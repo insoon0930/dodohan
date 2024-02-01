@@ -31,21 +31,21 @@ class ImagePickBox extends StatelessWidget {
     return GestureDetector(
       onTap: () => _getDialog(),
       child: Container(
-        width: 150,
-        height: 150,
+        width: (Get.width - 40) / 2,
+        height: (Get.width - 40) / 2,
         decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.all(color: ThemeColors.grayLightest, width: 1),
             color: file == null ? ThemeColors.cream : Colors.transparent),
         child: file == null
-            ? Center(child: SvgPicture.asset('assets/add.svg'))
+            ? Center(child: SvgPicture.asset('assets/add.svg', width: 20, color: ThemeColors.grayLightest))
             : _image(),
       ),
     );
   }
 
   Widget _image() => ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(9)),
+      borderRadius: const BorderRadius.all(Radius.circular(11)),
       child: kIsWeb
           ? FutureBuilder<Uint8List>(
               future: file!.readAsBytes(),
