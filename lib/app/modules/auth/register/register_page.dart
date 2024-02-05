@@ -57,8 +57,7 @@ class RegisterPage extends GetView<RegisterController> {
               const SizedBox(height: 16),
               Obx(() => ElevatedButton(
                 style: BtStyle.onOff(controller.ready),
-                onPressed:
-                controller.ready ? () => controller.register() : null,
+                onPressed: controller.ready ? () => controller.register() : null,
                 child: Center(
                   child: Text('완료',
                       style: ThemeFonts.medium
@@ -180,26 +179,73 @@ class RegisterPage extends GetView<RegisterController> {
   //   ),
   // );
 
-  Widget _imageRow() => Column(
+  Widget _imageRow() => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text('프로필'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17))
-          .paddingOnly(top: 32, bottom: 16),
-      Obx(
-        () => ImagePickBox(
-            file: controller.profileImage.value,
-            addedCallback: (XFile file) =>
-                controller.profileImage.value = file,
-            deletedCallback: () =>
-                controller.profileImage.value = null,
-            onlySquare: true),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('프로필'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17))
+              .paddingOnly(top: 32, bottom: 16),
+          Obx(
+            () => ImagePickBox(
+                file: controller.profileImage.value,
+                addedCallback: (XFile file) => controller.profileImage.value = file,
+                deletedCallback: () => controller.profileImage.value = null,
+                onlySquare: true),
+          ),
+          Text('- 매칭된 상대에게만 공개돼요'.tr,
+              style: ThemeFonts.medium
+                  .getTextStyle(size: 12, color: ThemeColors.grayDark)).paddingOnly(top: 8, bottom: 4),
+          Text('- 본인확인 가능한 정면 사진 필수'.tr,
+              style: ThemeFonts.medium
+                  .getTextStyle(size: 12, color: ThemeColors.emphasis)),
+        ],
       ),
-      Text('- 매칭된 상대에게만 공개돼요'.tr,
-          style: ThemeFonts.medium
-              .getTextStyle(size: 12, color: ThemeColors.grayDark)).paddingOnly(top: 8, bottom: 4),
-      Text('- 본인확인 가능한 정면 사진 필수'.tr,
-          style: ThemeFonts.medium
-              .getTextStyle(size: 12, color: ThemeColors.emphasis)),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text('학생증'.tr, style: ThemeFonts.semiBold.getTextStyle(size: 17))
+                  .paddingOnly(top: 32, bottom: 16),
+              Text('(카드 또는 모바일)'.tr, style: ThemeFonts.medium.getTextStyle(size: 17, color: ThemeColors.grayDark))
+                  .paddingOnly(top: 32, bottom: 16),
+            ],
+          ),
+          Obx(
+                () => ImagePickBox(
+                file: controller.studentIdImage.value,
+                addedCallback: (XFile file) =>
+                controller.studentIdImage.value = file,
+                deletedCallback: () =>
+                controller.studentIdImage.value = null),
+          ),
+          RichText(
+            text: TextSpan(
+              style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.grayDark), // 기본 스타일
+              children: const [
+                TextSpan(text: "- "), // 기본 텍스트
+                TextSpan(
+                  text: "학교명",
+                  style: TextStyle(color: ThemeColors.blueLight), // '학교명'에 파란색 적용
+                ),
+                TextSpan(text: "과 "),
+                TextSpan(
+                  text: "본인사진",
+                  style: TextStyle(color: ThemeColors.blueLight), // '본인'에 파란색 적용
+                ),
+                TextSpan(text: "이 보여야해요"),
+              ],
+            ),
+          ).paddingOnly(top: 8, bottom: 4),
+
+          Text("- 타인에게 노출되지 않아요".tr,
+              style: ThemeFonts.medium
+                  .getTextStyle(size: 12, color: ThemeColors.grayDark)).paddingOnly(bottom: 4),
+        ],
+      ),
     ],
   );
 

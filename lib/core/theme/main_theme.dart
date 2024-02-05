@@ -16,7 +16,7 @@ class MainTheme {
     // ),
     // primaryColor: ThemeColors.specialColor,
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff6750a4)),
+    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff6750a4), background: ThemeColors.orangeLight),
   );
 
   static final ThemeData dark = ThemeData.dark().copyWith(

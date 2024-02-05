@@ -6,6 +6,7 @@ class ThemeColors {
   static const Color mainLightest = Color(0xffD2BEF4);
   static const Color mainLightest2 = Color(0xffF0E9FB);
 
+  static const Color background = Color(0xffF2F2F3);
   static const Color grayDark = Color(0xff89898a);
   static const Color grayText = Color(0xffB1B4B7);
   static const Color grayLightest = Color(0xffD9D7DB);
