@@ -14,8 +14,8 @@ class WaitingPage extends GetView<WaitingController> {
 
   @override
   Widget build(BuildContext context) {
-    print('WaitingPage build!?');
     return Scaffold(
+      backgroundColor: ThemeColors.white,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

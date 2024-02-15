@@ -1,3 +1,4 @@
+import 'package:dodohan/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -17,10 +18,11 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: controller.isFirstPage ? ThemeColors.background : ThemeColors.white,
       automaticallyImplyLeading: false,
-      title: Text(
+      title: controller.isFirstPage ? Text(
           '두근두근${InfoData.univInfo[controller.user.univ]?.appTitleTail ?? '캠퍼스'}',
-          style: ThemeFonts.bold.getTextStyle(size: 22)),
+          style: ThemeFonts.bold.getTextStyle(size: 22)) : null,
       elevation: 0,
       actions: [
         GestureDetector(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../core/theme/colors.dart';
@@ -13,9 +14,8 @@ class SettingIconButton extends StatelessWidget {
       isSelected: true,
       constraints: const BoxConstraints(), // 패딩 설정
       padding: EdgeInsets.zero, // 패딩 설정
-      icon: const Icon(Icons.settings_outlined),
+      icon: SvgPicture.asset('assets/setting.svg'),
       color: ThemeColors.grayDark,
-      selectedIcon: const Icon(Icons.settings),
       onPressed: () => Get.toNamed(Routes.setting),
     );
   }

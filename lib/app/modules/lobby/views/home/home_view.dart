@@ -1,6 +1,8 @@
+import 'package:dodohan/app/modules/lobby/widgets/dialogs/how_to_use_weekly.dart';
 import 'package:dodohan/app/widgets/dialogs/error_dialog.dart';
 import 'package:dodohan/app/widgets/dialogs/report_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../../core/services/auth_service.dart';
 import '../../../../../core/theme/buttons.dart';
@@ -19,6 +21,9 @@ class HomeView extends GetView<HomeController> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          _box1(),
+          const SizedBox(height: 12),
+          _box2(),
           _upperBox(),
           const Divider(thickness: 10, color: ThemeColors.grayLightest)
               .paddingSymmetric(vertical: 16),
@@ -182,4 +187,97 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       );
+
+  Widget _box1() => Container(
+    decoration: BoxDecoration(
+      color: ThemeColors.white,
+      borderRadius: BorderRadius.circular(18),
+    ),
+    padding: const EdgeInsets.all(20),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                GestureDetector(
+                    onTap: () => controller.tapProfileImage(),
+                    child: CircleAvatar(
+                        minRadius: 31,
+                        backgroundImage: NetworkImage(
+                            controller.user.profileImage))),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('한양대(서울)',
+                        style: ThemeFonts.bold.getTextStyle(size: 16)),
+                    const SizedBox(height: 5),
+                    GestureDetector(
+                      onTap: () => Get.toNamed(Routes.meInfo),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: ThemeColors.chip,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text('프로필 편집',
+                              style: ThemeFonts.medium.getTextStyle(size: 12)).paddingSymmetric(vertical: 6, horizontal: 10)),
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SettingIconButton(),
+          ],
+        )
+      ],
+    ),
+  ).paddingSymmetric(horizontal: 16);
+
+  Widget _box2() => Container(
+    decoration: BoxDecoration(
+      color: ThemeColors.white,
+      borderRadius: BorderRadius.circular(18),
+    ),
+    padding: const EdgeInsets.all(20),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('교내 소개팅', style: ThemeFonts.bold.getTextStyle(size: 16, color: ThemeColors.grayTextDarker)),
+            GestureDetector(
+                onTap: () => Get.dialog(const HowToUseWeeklyDialog()),
+                child: Container(color: Colors.transparent, child: SvgPicture.asset('assets/info.svg').paddingOnly(right: 3, top: 3, bottom: 5, left: 5)))
+              ],
+        ),
+        Text(
+          "이번 회차 마감까지",
+          style: ThemeFonts.bold.getTextStyle(size: 16),
+        ),
+        const SizedBox(height: 16),
+        Obx(
+              () => Text(
+            controller.leftDay.value,
+            style: ThemeFonts.bold.getTextStyle(
+                size: 30, color: ThemeColors.mainLight),
+          ),
+        ),
+        const SizedBox(height: 40),
+        ElevatedButton(
+          style: BtStyle.standard(),
+          onPressed: !AuthService.to.user.value.isWomanUniv
+              ? () => controller.getMatchResult()
+              : () => Get.dialog(const ErrorDialog(text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
+          child: const Text('매칭 결과 확인'),
+        ).paddingSymmetric(horizontal: ThemePaddings.mainPadding),
+        const SizedBox(height: 16),
+        Text(
+          "* '금요일' 하루간 확인할 수 있습니다",
+          style: ThemeFonts.medium.getTextStyle(size: 11),
+        ),
+      ],
+    ),
+  ).paddingSymmetric(horizontal: 16);
 }

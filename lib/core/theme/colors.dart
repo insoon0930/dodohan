@@ -8,10 +8,12 @@ class ThemeColors {
 
   static const Color background = Color(0xffF2F2F3);
   static const Color grayDark = Color(0xff89898a);
-  static const Color grayText = Color(0xffB1B4B7);
+  static const Color grayText = Color(0xff736E77);
+  static const Color grayTextDarker = Color(0xff736E77);
   static const Color grayLightest = Color(0xffD9D7DB);
   static const Color cream =  Color(0xffFAFAFA);
   static const Color white =  Color(0xffffffff);
+  static const Color chip =  Color(0xffEDECEE);
 
   static const Color redLight = Color(0xfffd354f);
   static const Color emphasis = Color(0xffE35A65);

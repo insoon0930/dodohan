@@ -31,6 +31,7 @@ class LobbyController extends GetxController {
   final RxInt selectedTabIndex = 0.obs;
 
   User get user => AuthService.to.user.value;
+  bool get isFirstPage => selectedTabIndex.value == 0;
 
   @override
   Future<void> onInit() async {

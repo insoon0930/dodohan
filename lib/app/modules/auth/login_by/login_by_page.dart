@@ -32,6 +32,7 @@ class _LoginByPageState extends State<LoginByPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColors.white,
       body: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [

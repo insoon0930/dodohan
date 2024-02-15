@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class MainTheme {
   static final ThemeData light = ThemeData.light().copyWith(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: ThemeColors.background,
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,

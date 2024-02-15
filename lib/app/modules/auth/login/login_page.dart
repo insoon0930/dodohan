@@ -1,3 +1,4 @@
+import 'package:dodohan/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dodohan/core/theme/fonts.dart';
@@ -11,27 +12,26 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => Get.focusScope?.unfocus(),
-          child: Scaffold(
-            body: Column(
-              children: [
-                const SizedBox(height: 16.0),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('휴대폰 본인 인증', style: ThemeFonts.bold.getTextStyle(size: 24)))
-                    .paddingOnly(left: ThemePaddings.mainPadding),
-                const SizedBox(height: 14.0),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('회원여부 확인 및 가입을 진행합니다.', style: ThemeFonts.medium.getTextStyle(size: 24)))
-                    .paddingOnly(left: ThemePaddings.mainPadding),
-                const SizedBox(height: 30.0),
-                Expanded(child: PhoneSMSWidget(controller)),
-                const SizedBox(height: ThemePaddings.mainPadding),
-              ],
-            ),
+          child: Column(
+            children: [
+              const SizedBox(height: 16.0),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('휴대폰 본인 인증', style: ThemeFonts.bold.getTextStyle(size: 24)))
+                  .paddingOnly(left: ThemePaddings.mainPadding),
+              const SizedBox(height: 14.0),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('회원여부 확인 및 가입을 진행합니다.', style: ThemeFonts.medium.getTextStyle(size: 24)))
+                  .paddingOnly(left: ThemePaddings.mainPadding),
+              const SizedBox(height: 30.0),
+              Expanded(child: PhoneSMSWidget(controller)),
+              const SizedBox(height: ThemePaddings.mainPadding),
+            ],
           ),
         ),
       ),
