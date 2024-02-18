@@ -10,13 +10,9 @@ class SettingIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      isSelected: true,
-      constraints: const BoxConstraints(), // 패딩 설정
-      padding: EdgeInsets.zero, // 패딩 설정
-      icon: SvgPicture.asset('assets/setting.svg'),
-      color: ThemeColors.grayDark,
-      onPressed: () => Get.toNamed(Routes.setting),
+    return GestureDetector(
+      child: SvgPicture.asset('assets/setting.svg'),
+      onTap: () => Get.toNamed(Routes.setting),
     );
   }
 }

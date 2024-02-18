@@ -12,7 +12,6 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => Get.focusScope?.unfocus(),

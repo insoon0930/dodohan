@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dodohan/app/modules/lobby/views/home/you_info/you_info_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,7 @@ import '../../../../widgets/dialogs/match/decision_waiting_dialog.dart';
 import '../../../../widgets/dialogs/select/select_dialog.dart';
 import '../../../../widgets/dialogs/select/select_dialog_item.dart';
 import '../../../../widgets/dialogs/store_routing_dialog.dart';
+import 'me_info/me_info_controller.dart';
 
 class HomeController extends GetxController {
   final StorageService storageService = Get.find();
@@ -50,12 +52,13 @@ class HomeController extends GetxController {
 
   RxString leftDay = '0일 0시 0분 0초'.obs;
   Timer? timer;
+  final RxBool isApplicationCompleted = false.obs;
 
-  final RxInt manNum = 0.obs;
-  final RxInt womanNum = 0.obs;
-  RxInt get userNum => (manNum.value + womanNum.value).obs;
-  RxDouble get genderRatio => (manNum.value / (womanNum.value == 0 ? 1 : womanNum.value)).obs;
-  //'${(manNum.value / womanNum.value).toStringAsFixed(2)} : 1'
+  // final RxInt manNum = 0.obs;
+  // final RxInt womanNum = 0.obs;
+  // RxInt get userNum => (manNum.value + womanNum.value).obs;
+  // RxDouble get genderRatio => (manNum.value / (womanNum.value == 0 ? 1 : womanNum.value)).obs;
+  bool get isFriday => DateTime.now().weekday == 5;
 
   User get user => AuthService.to.user.value;
 
@@ -66,10 +69,16 @@ class HomeController extends GetxController {
       Get.put(SplashController());
       await 1.delay();
     }
+
+    Application? application = await _applicationService.findThisWeekOne(user.id);
+    if(application != null) {
+      isApplicationCompleted.value = true;
+    }
+
     //users
-    final res = await _userService.findUserNumIncludeDeleted();
-    manNum.value = res['manNum']!;
-    womanNum.value = res['womanNum']!;
+    // final res = await _userService.findUserNumIncludeDeleted();
+    // manNum.value = res['manNum']!;
+    // womanNum.value = res['womanNum']!;
 
     //timer
     final DateTime todaySimple = TimeUtility.todaySimple();
@@ -138,6 +147,7 @@ class HomeController extends GetxController {
   Future<void> _apply(MeInfo meInfo, YouInfo youInfo) async {
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await _applicationService.create(meInfo, youInfo);
+    isApplicationCompleted.value = true;
     Get.back();
     Get.back();
     Get.snackbar('신청 완료', '결과는 금요일에 공개됩니다!');
@@ -166,7 +176,7 @@ class HomeController extends GetxController {
       Application? application = await _applicationService.findThisWeekOne(user.id);
       Get.back();
       if (application == null) {
-        Get.dialog(const ErrorDialog(text: "이번 회차에\n신청하지 않은 계정입니다"));
+        Get.dialog(const ErrorDialog(text: "이번 회차에\n신청하지 않았어요!"));
         return;
       }
       if (application.isRewarded) {

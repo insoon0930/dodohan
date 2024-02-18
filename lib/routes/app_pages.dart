@@ -34,9 +34,7 @@ import '../app/modules/lobby/views/daily/current_card/current_card_item_page/cur
 import '../app/modules/lobby/views/daily/current_card/current_card_page.dart';
 import '../app/modules/lobby/views/daily/daily_card/daily_card_binding.dart';
 import '../app/modules/lobby/views/daily/daily_card/daily_card_page.dart';
-import '../app/modules/lobby/views/home/me_info/me_info_binding.dart';
 import '../app/modules/lobby/views/home/me_info/me_info_page.dart';
-import '../app/modules/lobby/views/home/you_info/you_info_binding.dart';
 import '../app/modules/lobby/views/home/you_info/you_info_page.dart';
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_binding.dart';
 import '../app/modules/lobby/views/self_introduction/create_self_introduction/create_self_introduction_page.dart';
@@ -113,12 +111,10 @@ class AppPages {
         ]),
     GetPage(
         name: Routes.meInfo,
-        page: () => const MeInfoPage(),
-        binding: MeInfoBinding()),
+        page: () => const MeInfoPage()),
     GetPage(
         name: Routes.youInfo,
-        page: () => const YouInfoPage(),
-        binding: YouInfoBinding()),
+        page: () => const YouInfoPage()),
     GetPage(
         name: Routes.dailyCard,
         page: () => const DailyCardPage(),

@@ -141,7 +141,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               style: BtStyle.standard(color: ThemeColors.mainLight),
               onPressed: () => Get.dialog(ActionDialog(
                   title: '거절',
-                  text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
+                  text: '하트 ${controller.user.isMan! ? 1 : 1}개를 지급받습니다',
                   confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected1st),
                   buttonText: '거절하기')),
               child: const Text('거절'),
@@ -171,7 +171,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
               style: BtStyle.standard(color: ThemeColors.mainLight),
               onPressed: () => Get.dialog(ActionDialog(
                   title: '거절',
-                  text: '하트 ${controller.user.isMan! ? 1 : 2}개를 지급받습니다',
+                  text: '하트 ${controller.user.isMan! ? 1 : 1}개를 지급받습니다',
                   confirmCallback: () => controller.reject(cardStatus: CardStatus.rejected2nd),
                   buttonText: '거절하기')),
               child: const Text('거절'),

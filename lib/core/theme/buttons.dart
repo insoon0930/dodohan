@@ -12,7 +12,7 @@ class BtStyle {
         backgroundColor: color,
         foregroundColor: Colors.white,
         textStyle: ThemeFonts.medium.getTextStyle(size: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         minimumSize: Size(Get.width, height ?? 54));
 
   static ButtonStyle get confirm => TextButton.styleFrom(
@@ -69,6 +69,6 @@ class BtStyle {
         }),
         textStyle: MaterialStateProperty.all(ThemeFonts.medium.getTextStyle(size: 16)),
         shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
       );
 }

@@ -18,7 +18,6 @@ class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColors.white,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(

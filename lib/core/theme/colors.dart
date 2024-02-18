@@ -6,11 +6,18 @@ class ThemeColors {
   static const Color mainLightest = Color(0xffD2BEF4);
   static const Color mainLightest2 = Color(0xffF0E9FB);
 
+  static const Color sub = Color(0xFFE38262);
+  static const Color subLightest = Color(0xFFFBEEE9);
+
   static const Color background = Color(0xffF2F2F3);
+  static const Color bottomNavigationBar = Color(0xffBFBDC2);
   static const Color grayDark = Color(0xff89898a);
+  static const Color grayLightest = Color(0xffD9D7DB);
+  static const Color grayTextLight = Color(0xffA6A2A9);
   static const Color grayText = Color(0xff736E77);
   static const Color grayTextDarker = Color(0xff736E77);
-  static const Color grayLightest = Color(0xffD9D7DB);
+  static const Color blackTextLight = Color(0xff262428);
+
   static const Color cream =  Color(0xffFAFAFA);
   static const Color white =  Color(0xffffffff);
   static const Color chip =  Color(0xffEDECEE);

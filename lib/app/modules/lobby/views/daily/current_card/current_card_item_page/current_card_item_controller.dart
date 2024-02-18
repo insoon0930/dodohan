@@ -125,7 +125,7 @@ class CurrentCardItemController extends BaseController {
       currentCardController.sentCards.refresh();
     }
     //2. 유저 하트 갯수 증가 (백, 프론트)
-    final int rewardCoin = user.isMan! ? 1 : 2;
+    final int rewardCoin = user.isMan! ? 1 : 1;
     //백
     await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.dailyReject);
     //프론트

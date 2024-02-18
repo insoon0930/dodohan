@@ -23,6 +23,7 @@ class YouInfoController extends GetxController {
 
   Future<void> updateYouInfo() async {
     await _youInfoService.updateOne(youInfo.value.id!, youInfo.value);
+    youInfo.refresh();
     Get.back();
     return;
   }

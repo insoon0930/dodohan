@@ -13,14 +13,13 @@ class MeInfoController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    print('onInit user.id: ${user.id}');
     meInfo.value = await _meInfoService.findOne(user.id);
-    print('onInit meInfo.value: ${meInfo.value}');
     super.onInit();
   }
 
   Future<void> updateMeInfo() async {
     await _meInfoService.updateOne(meInfo.value.id!, meInfo.value);
+    meInfo.refresh();
     Get.back();
     return;
   }
