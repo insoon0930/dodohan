@@ -12,6 +12,7 @@ class SplashController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     String? uid = prefs.getString('uid');
 
+    await 0.3.delay();
     if (uid != null) {
       await AuthService.to.loginByUid(uid);
     } else {

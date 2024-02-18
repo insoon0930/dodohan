@@ -29,7 +29,6 @@ class LoginPage extends GetView<LoginController> {
                   .paddingOnly(left: ThemePaddings.mainPadding),
               const SizedBox(height: 30.0),
               Expanded(child: PhoneSMSWidget(controller)),
-              const SizedBox(height: ThemePaddings.mainPadding),
             ],
           ),
         ),
