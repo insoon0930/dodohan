@@ -18,7 +18,7 @@ class CurrentCardPage extends GetView<CurrentCardController> {
       body: Obx(
         () => Stack(
           children: [
-            if (!controller.loading.value)
+            if (!controller.isLoading.value)
               SingleChildScrollView(
                 child: Column(
                   children: [
@@ -47,7 +47,7 @@ class CurrentCardPage extends GetView<CurrentCardController> {
                   ],
                 ).paddingAll(16),
               ),
-            if (controller.loading.value)
+            if (controller.isLoading.value)
               const Center(
                 child: SizedBox(
                   width: 24,

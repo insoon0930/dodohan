@@ -24,6 +24,7 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
           '두근두근${InfoData.univInfo[controller.user.univ]?.appTitleTail ?? '캠퍼스'}',
           style: ThemeFonts.bold.getTextStyle(size: 22)) : null,
       elevation: 0,
+      scrolledUnderElevation: 0,
       actions: [
         GestureDetector(
             onTap: () => Get.toNamed(Routes.store),

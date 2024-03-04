@@ -32,7 +32,7 @@ class SelfIntroductionItemController extends BaseController {
   Future<void> onInit() async {
     selfIntroduction.value = Get.arguments['selfIntroduction'];
     selfApplication.value = await _selfApplicationService.findOne(selfIntroduction.value.id, user.id);
-    loading.value = false;
+    isLoading.value = false;
 
     if (selfIntroduction.value.isMine) {
       applications.value = await _selfApplicationService.findMany(selfIntroduction.value.id);

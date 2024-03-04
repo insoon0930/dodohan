@@ -18,19 +18,19 @@ extension TextSizeExt on ThemeFonts {
 
     switch (this) {
       case ThemeFonts.extraLight:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w200, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w200, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       case ThemeFonts.light:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w300, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w300, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       case ThemeFonts.regular:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w400, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w400, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       case ThemeFonts.medium:
         return TextStyle(fontSize: size, fontWeight: FontWeight.w500, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       case ThemeFonts.semiBold:
         return TextStyle(fontSize: size, fontWeight: FontWeight.w600, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, decoration: decoration, height: height);
       case ThemeFonts.bold:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w700, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w700, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       case ThemeFonts.extraBold:
-        return TextStyle(fontSize: size, fontWeight: FontWeight.w800, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color);
+        return TextStyle(fontSize: size, fontWeight: FontWeight.w800, fontFamily: fontFamily, fontStyle: FontStyle.normal, color: color, height: height);
       default:
         throw UnsupportedError('구현되지 않은 Font Theme 입니다.');
     }

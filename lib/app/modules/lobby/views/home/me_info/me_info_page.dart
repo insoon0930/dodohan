@@ -26,11 +26,7 @@ class MeInfoPage extends GetView<MeInfoController> {
             ElevatedButton(
               style: BtStyle.standard(),
               onPressed: () => controller.updateMeInfo(),
-              child: Center(
-                child: Text('저장',
-                    style:
-                    ThemeFonts.medium.getTextStyle(color: Colors.white)),
-              ),
+              child: const Text('저장'),
             ).paddingSymmetric(horizontal: 16)
           ],
         ),
@@ -51,21 +47,21 @@ class MeInfoPage extends GetView<MeInfoController> {
                       list: InfoData.univInfo[controller.user.univ]?.major??[],
                       changedCallback: (selected) =>
                           controller.meInfo.value.major = selected.value),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '키',
                       placeholder: '${controller.meInfo.value.height}',
                       list: InfoData.height,
                       changedCallback: (selected) => controller
                           .meInfo.value.height = int.parse('${selected.value}')),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '나이',
                       placeholder: controller.meInfo.value.age == null ? '필수' : '${controller.meInfo.value.age} (${TimeUtility.birthYear(age: controller.meInfo.value.age??0)}년생)',
                       list: InfoData.ageWithYear,
                       changedCallback: (selected) => controller.meInfo.value.age =
                           int.parse('${selected.value.split(' ')[0] ?? 0}')),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '체형',
                       placeholder: controller.meInfo.value.bodyShape,
@@ -74,21 +70,20 @@ class MeInfoPage extends GetView<MeInfoController> {
                           : InfoData.womanBodyShape,
                       changedCallback: (selected) =>
                       controller.meInfo.value.bodyShape = selected.value),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '흡연',
                       placeholder: '${controller.meInfo.value.isSmoker}',
                       list: InfoData.meSmoke,
                       changedCallback: (selected) => controller.meInfo.value
                           .isSmoker = selected.value == 'true' ? true : false),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: 'MBTI',
                       placeholder: controller.meInfo.value.mbti == null ? '(선택)' : '${controller.meInfo.value.mbti}',
                       list: InfoData.mbti,
                       changedCallback: (selected) => controller.meInfo.value.mbti = selected.value),
-                  const Divider(height: 1),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
                   MyTextField(
                       textController: TextEditingController(text: controller.meInfo.value.introduction),
                       width: Get.width,

@@ -32,7 +32,7 @@ class SettingPage extends StatelessWidget {
           SettingItem('이용약관', onTap: () => Get.toNamed(Routes.termsOfUse)),
           const MyDivider(),
           SettingItem('개인정보처리방침', onTap: () => Get.toNamed(Routes.privacy)),
-          const Divider(thickness: 10, color: ThemeColors.grayLightest,),
+          const Divider(thickness: 10, color: ThemeColors.background),
           settingTextWithPadding('계정'),
           if (!AuthService.to.isAdmin)
             SettingItem('회원탈퇴',
@@ -46,7 +46,7 @@ class SettingPage extends StatelessWidget {
             SettingItem('관리자 페이지', onTap: () => Get.toNamed(Routes.admin)),
           const MyDivider(),
           SettingItem('로그아웃', onTap: () => AuthService.to.logOut()),
-          Expanded(child: Container(width: Get.width, color: ThemeColors.grayLightest))
+          Expanded(child: Container(width: Get.width, color: ThemeColors.background))
         ],
       ),
     );

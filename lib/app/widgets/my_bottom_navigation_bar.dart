@@ -21,7 +21,7 @@ class MyBottomNavigationBar extends GetView<LobbyController> {
         child: BottomNavigationBar(
           currentIndex: controller.selectedTabIndex.value,
           onTap: controller.changeIndex,
-          elevation: 0,
+          elevation: 5,
           // selectedItemColor: ThemeColors.main,
           // unselectedItemColor: ThemeColors.bottomNavigationBar,
           selectedLabelStyle: ThemeFonts.regular.getTextStyle(size: 11, color: ThemeColors.main),
@@ -33,7 +33,6 @@ class MyBottomNavigationBar extends GetView<LobbyController> {
             BottomNavigationBarItem(icon: SvgPicture.asset('assets/bottom_navigation_2.svg', color: controller.selectedTabIndex.value == 1 ? ThemeColors.main : ThemeColors.bottomNavigationBar).paddingOnly(bottom: 6), label: '오늘의 카드'),
             BottomNavigationBarItem(icon: SvgPicture.asset('assets/bottom_navigation_3.svg', color: controller.selectedTabIndex.value == 2 ? ThemeColors.main : ThemeColors.bottomNavigationBar).paddingOnly(bottom: 6), label: '셀프 소개'),
           ],
-
         ),
       ),
     ));

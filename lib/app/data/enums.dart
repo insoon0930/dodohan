@@ -64,16 +64,16 @@ const Map<String, String> regionFilter = {
 };
 
 enum FcmPushType {
-  checkWeekly(title: '', body: "금주의 매칭 결과가 발표되었습니다!"),
+  checkWeekly(title: '', body: "금주의 매칭 결과가 발표되었어요!"),
   weeklyChoiceMade(title: '', body: "상대방이 최종 결정을 내렸어요!"),
   weeklyMatched(title: '', body: "최종 매칭에 성공했어요!"),
-  weeklyMatchFailed(title: '', body: "최종 매칭에 실패했습니다. 하트 1개를 돌려 받았습니다"),
+  weeklyMatchFailed(title: '', body: "최종 매칭에 실패해 하트 1개를 돌려 받았어요"),
   dailyConfirmed1st(title: '오늘의 카드', body: "누군가 나를 선택했어요!"),
   dailyConfirmed1stInReaction(title: '오늘의 카드', body: "1차 매칭에 성공했어요!"),
-  dailyReject1st(title: '오늘의 카드', body: "1차 신청이 거절되었습니다"),
+  dailyReject1st(title: '오늘의 카드', body: "1차 신청이 거절됐어요"),
   dailyDone2nd(title: '오늘의 카드', body: "상대방이 최종 결정을 내렸어요!"),
   dailyCardMatched(title: '오늘의 카드', body: "최종 매칭에 성공했어요!"),
-  dailyCardMatchFailed(title: '오늘의 카드', body: "최종 매칭에 실패했습니다. 하트 1개를 돌려 받았습니다"),
+  dailyCardMatchFailed(title: '오늘의 카드', body: "최종 매칭에 실패해 하트 1개를 돌려 받았어요"),
   identity(title: '관리자 알림', body: "본인인증 심사 요청이 들어왔습니다"),
   // imageUpdateRequest(title: '관리자 알림', body: "이미지 변경 요청이 들어왔습니다"),
 

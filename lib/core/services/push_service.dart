@@ -138,6 +138,11 @@ class FcmService extends GetxService {
   }
 
   void sendFcmPush(String receiverId, FcmPushType type) {
+    //더미 계정 - 누나: 'WdIHlWaTUAitbexvmW5E', 민아: 'pZA3D9Ajp7o711YKU2nk'
+    if(receiverId == 'WdIHlWaTUAitbexvmW5E' || receiverId == 'pZA3D9Ajp7o711YKU2nk') {
+      return;
+    }
+
     var url = Uri.parse('https://fcmpush-m2rvoqphsq-uc.a.run.app');
     Map<String, dynamic> data = {
       'receiverId': receiverId,

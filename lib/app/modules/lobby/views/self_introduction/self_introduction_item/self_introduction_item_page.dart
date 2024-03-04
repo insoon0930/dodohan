@@ -131,7 +131,7 @@ class SelfIntroductionItemPage extends GetView<SelfIntroductionItemController> {
               const MyDivider2().paddingOnly(bottom: 8),
               if (selfIntroduction.isMine ||
                   selfIntroduction.hasUnivIssue ||
-                  controller.loading.value)
+                  controller.isLoading.value)
                 Container()
               else if (selfApplication == null)
                 Row(

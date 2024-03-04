@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dodohan/app/modules/lobby/views/home/you_info/you_info_controller.dart';
+import 'package:dodohan/core/base_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,13 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:dodohan/app/data/model/image_update_request.dart';
 import 'package:dodohan/app/modules/splash/splash_controller.dart';
 import 'package:dodohan/app/widgets/dialogs/application_dialog.dart';
-import 'package:dodohan/app/widgets/dialogs/match/final_decision_dialog.dart';
-import 'package:dodohan/app/widgets/dialogs/match/match_success_dialog.dart';
 import 'package:dodohan/core/utils/time_utility.dart';
-import 'package:in_app_review/in_app_review.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/services/auth_service.dart';
-import '../../../../../core/services/push_service.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/utils/utility.dart';
 import '../../../../../routes/app_routes.dart';
@@ -35,13 +29,11 @@ import '../../../../data/service/user_service/service.dart';
 import '../../../../data/service/you_info_service/service.dart';
 import '../../../../widgets/dialogs/action_dialog.dart';
 import '../../../../widgets/dialogs/error_dialog.dart';
-import '../../../../widgets/dialogs/match/decision_waiting_dialog.dart';
 import '../../../../widgets/dialogs/select/select_dialog.dart';
 import '../../../../widgets/dialogs/select/select_dialog_item.dart';
 import '../../../../widgets/dialogs/store_routing_dialog.dart';
-import 'me_info/me_info_controller.dart';
 
-class HomeController extends GetxController {
+class HomeController extends BaseController {
   final StorageService storageService = Get.find();
   final ApplicationService _applicationService = ApplicationService();
   final MeInfoService _meInfoService = MeInfoService();
@@ -74,7 +66,7 @@ class HomeController extends GetxController {
     if(application != null) {
       isApplicationCompleted.value = true;
     }
-
+    isLoading.value = false;
     //users
     // final res = await _userService.findUserNumIncludeDeleted();
     // manNum.value = res['manNum']!;
@@ -145,10 +137,10 @@ class HomeController extends GetxController {
   }
 
   Future<void> _apply(MeInfo meInfo, YouInfo youInfo) async {
-    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+    showLoading();
     await _applicationService.create(meInfo, youInfo);
     isApplicationCompleted.value = true;
-    Get.back();
+    hideLoading();
     Get.back();
     Get.snackbar('신청 완료', '결과는 금요일에 공개됩니다!');
   }
@@ -159,11 +151,11 @@ class HomeController extends GetxController {
       return;
     }
 
-    Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+    showLoading();
     // validation 1. 확인 가능 시간
     final int currentWeekday = DateTime.now().weekday;
     if(currentWeekday != 5) { //금요일
-      Get.back();
+      hideLoading();
       Get.dialog(const ErrorDialog(text: '금요일 외에는 확인이 불가능합니다'));
       return;
     }
@@ -172,9 +164,8 @@ class HomeController extends GetxController {
     //woman: WdIHlWaTUAitbexvmW5E
     Match? match = await _matchService.findOne(user.id, user.isMan!);
     if (match == null) {
-      //여기서 분기. 어플리케이션 찾아봄(없음 - 이번 회차에 신청하지 않았습니다, 있음 - 분기.)
       Application? application = await _applicationService.findThisWeekOne(user.id);
-      Get.back();
+      hideLoading();
       if (application == null) {
         Get.dialog(const ErrorDialog(text: "이번 회차에\n신청하지 않았어요!"));
         return;
@@ -190,6 +181,7 @@ class HomeController extends GetxController {
       }
       return;
     }
+
     String phoneNum;
     String profileImage;
     if(user.isMan!) {
@@ -203,58 +195,28 @@ class HomeController extends GetxController {
     }
 
     //아랫것들 다 겟터로 적어두면좋겠다
-    //내 상태 보고(1) (2차 선택 안했으면 해당 다이얼로그로)
-    //처음 보는거면 상태 업데이트 umChecked > checked
     if((user.isMan! && match.manStatus == MatchStatus.unChecked) || (!user.isMan! && match.womanStatus == MatchStatus.unChecked)) {
       await _matchService.updateMatchStatus(match.id!, user.isMan!, MatchStatus.checked);
     }
 
-    //2차 선택 다이얼로그로
-    if ((user.isMan! && match.manStatus == MatchStatus.unChecked) ||
-        (user.isMan! && match.manStatus == MatchStatus.checked) ||
-        (!user.isMan! && match.womanStatus == MatchStatus.unChecked) ||
-        (!user.isMan! && match.womanStatus == MatchStatus.checked)) {
-      Get.back();
-      Get.dialog(FinalDecisionDialog(_matchService,
-          match: match,
-          profileImage: profileImage,
-          phoneNum: phoneNum,
-          function: () => getMatchResult()));
-      return;
-    }
-
-    //내 상태 보고(2) (내가 2차 거절했으면 거절했습니다 다이얼로그)
-    if((user.isMan! && match.manStatus == MatchStatus.rejected) || (!user.isMan! && match.womanStatus == MatchStatus.rejected)) {
-      Get.back();
+    if(match.meStatus == MatchStatus.rejected) {
+      hideLoading();
       Get.dialog(const ErrorDialog(text: '거절한 매칭입니다'));
       return;
     }
 
-    //여기서부터는 상대 상태 기준
-    //상대가 확인 안했음
-    if((user.isMan! && match.womanStatus == MatchStatus.unChecked) || (!user.isMan! && match.manStatus == MatchStatus.unChecked)) {
-      Get.back();
-      Get.dialog(DecisionWaitingDialog(profileImage: profileImage, status: MatchStatus.unChecked));
-      return;
-    }
-
-    //상대가 확인했는데 선택 안했음
-    if((user.isMan! && match.womanStatus == MatchStatus.checked) || (!user.isMan! && match.manStatus == MatchStatus.checked)) {
-      Get.back();
-      Get.dialog(DecisionWaitingDialog(profileImage: profileImage, status: MatchStatus.checked));
-      return;
-    }
-
-    //상대가 거절했음
-    if((user.isMan! && match.womanStatus == MatchStatus.rejected) || (!user.isMan! && match.manStatus == MatchStatus.rejected)) {
-      Get.back();
+    if(match.hasMadeDecision && (match.youStatus == MatchStatus.rejected)) {
+      hideLoading();
       Get.dialog(ActionDialog(title: '최종 매칭 실패', text: '상대방이 거절한 매치입니다', confirmCallback: () => Get.back()));
       return;
     }
 
-    //최종 매칭
-    Get.back();
-    Get.dialog(MatchSuccessDialog(match: match, phoneNum: phoneNum, profileImage: profileImage));
+    hideLoading();
+    Get.toNamed(Routes.weeklyMatchSucceed, arguments: {
+      'match': match,
+      'profileImage': profileImage,
+      'phoneNum': phoneNum
+    });
   }
 
   Stream<int> getApplicantsNumStream() {

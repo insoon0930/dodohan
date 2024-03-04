@@ -22,7 +22,7 @@ class SelectablePhoneNum extends StatelessWidget {
         child: Text(Utility.formatPhoneNum(phoneNum),
                 style: ThemeFonts.semiBold.getTextStyle(
                     size: 25,
-                    color: ThemeColors.main,
+                    color: ThemeColors.sub,
                     decoration: TextDecoration.underline)));
   }
 }

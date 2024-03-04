@@ -123,7 +123,7 @@ class DailyCardRepository extends ApiService {
           .collection('cards')
           .where('youInfo.user', isEqualTo: user)
           .where('meStatus', whereNotIn: [CardStatus.unChecked.name, CardStatus.checked.name])
-          .where('meBlockedYou', isEqualTo: false)
+          .where('youBlockedMe', isEqualTo: false)
           .get();
       return myCardsSnapShot.docs
           .map((e) => DailyCard.fromJson(e.data()))

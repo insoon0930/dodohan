@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class BaseController extends GetxController {
 
-  final RxBool loading = true.obs;
+  final RxBool isLoading = true.obs;
 
   //todo 기존에 써둔것들 바꿔주기 (급한거 아님)
   void showLoading({bool isDismissible = false}) {

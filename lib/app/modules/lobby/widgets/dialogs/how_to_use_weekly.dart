@@ -65,7 +65,6 @@ class _HowToUseWeeklyDialogState extends State<HowToUseWeeklyDialog> {
                       const SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SvgPicture.asset('assets/number_2.svg').paddingOnly(top: 1),
                           const SizedBox(width: 6),

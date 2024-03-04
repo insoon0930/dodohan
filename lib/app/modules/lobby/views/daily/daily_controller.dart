@@ -22,14 +22,13 @@ class DailyController extends BaseController {
 
   @override
   Future<void> onInit() async {
-    print('DailyController onInit');
     if (user.id == '') {
       Get.put(SplashController());
       await 1.delay();
     }
 
     todayCards.value = await _dailyCardService.findToday(user.id);
-    loading.value = false;
+    isLoading.value = false;
     super.onInit();
   }
 

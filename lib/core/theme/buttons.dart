@@ -12,6 +12,7 @@ class BtStyle {
         backgroundColor: color,
         foregroundColor: Colors.white,
         textStyle: ThemeFonts.medium.getTextStyle(size: 16),
+        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         minimumSize: Size(Get.width, height ?? 54));
 
@@ -49,6 +50,15 @@ class BtStyle {
     textStyle: ThemeFonts.medium.getTextStyle(),
     surfaceTintColor: Colors.transparent,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    minimumSize: Size(Get.width, 54),
+  );
+
+  static ButtonStyle get outlined => ElevatedButton.styleFrom(
+    backgroundColor: Colors.white,
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: const BorderSide(width: 1, color: ThemeColors.main)),
     minimumSize: Size(Get.width, 54),
   );
 

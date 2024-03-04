@@ -32,4 +32,7 @@ class Match {
 
   String get you => AuthService.to.user.value.isMan! ? woman : man;
   MatchStatus get youStatus => AuthService.to.user.value.isMan! ? womanStatus : manStatus;
+  MatchStatus get meStatus => AuthService.to.user.value.isMan! ? manStatus : womanStatus;
+  bool get isFinalMatchSucceeded => manStatus == MatchStatus.confirmed && womanStatus == MatchStatus.confirmed;
+  bool get hasMadeDecision => meStatus == MatchStatus.confirmed || meStatus == MatchStatus.rejected;
 }

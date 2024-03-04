@@ -1,10 +1,11 @@
+import 'package:dodohan/core/base_controller.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/services/auth_service.dart';
 import '../../../../../data/model/user.dart';
 import '../../../../../data/model/you_info.dart';
 import '../../../../../data/service/you_info_service/service.dart';
 
-class YouInfoController extends GetxController {
+class YouInfoController extends BaseController {
   final YouInfoService _youInfoService = YouInfoService();
 
   Rx<YouInfo> youInfo = YouInfo().obs;
@@ -18,6 +19,7 @@ class YouInfoController extends GetxController {
   @override
   Future<void> onInit() async {
     youInfo.value = await _youInfoService.findOne(user.id);
+    isLoading.value = false;
     super.onInit();
   }
 

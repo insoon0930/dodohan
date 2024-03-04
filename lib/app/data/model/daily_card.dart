@@ -55,4 +55,5 @@ class DailyCard {
   int get differenceInDays => DateTime.now().difference(createdAt!).inDays;
   String get leftDay => 'D-${3 - differenceInDays}';
   String get oppositeProfileImage => iAmMe ? youProfileImage : meProfileImage;
+  bool get hasPicked => meStatus == CardStatus.confirmed1st || meStatus == CardStatus.confirmed2nd || meStatus == CardStatus.rejected2nd;
 }

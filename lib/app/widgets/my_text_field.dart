@@ -29,10 +29,12 @@ class MyTextField extends StatelessWidget {
           hintText: hint,
           counter: null,
           contentPadding: const EdgeInsets.all(8),
-          enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ThemeColors.grayDark, width: 0.5)),
-          border: const OutlineInputBorder(
-              borderSide: BorderSide(color: ThemeColors.main, width: 0.5)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: ThemeColors.main, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: ThemeColors.chip, width: 1)),
         ),
       ),
     );

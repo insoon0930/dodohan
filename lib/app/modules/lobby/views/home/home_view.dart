@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:dodohan/app/data/enums.dart';
 import 'package:dodohan/app/modules/lobby/views/home/me_info/me_info_controller.dart';
 import 'package:dodohan/app/modules/lobby/views/home/you_info/you_info_controller.dart';
 import 'package:dodohan/app/modules/lobby/widgets/dialogs/how_to_use_weekly.dart';
@@ -12,6 +15,7 @@ import '../../../../../core/theme/colors.dart';
 import '../../../../../core/theme/fonts.dart';
 import '../../../../../core/theme/paddings.dart';
 import '../../../../../routes/app_routes.dart';
+import '../../../../data/info_data.dart';
 import '../../../../widgets/setting_icon_button.dart';
 import 'home_controller.dart';
 
@@ -220,8 +224,16 @@ class HomeView extends GetView<HomeController> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('한양대(서울)',
-                            style: ThemeFonts.bold.getTextStyle(size: 16)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text('${controller.user.univ} ',
+                                style: ThemeFonts.bold.getTextStyle(size: 16, color: ThemeColors.blackTextLight)),
+                            // Text(regionFilter[controller.user.region]!,
+                            //     style: ThemeFonts.bold.getTextStyle(size: 12, color: ThemeColors.grayTextDarker))
+                          ],
+                        ),
                         const SizedBox(height: 5),
                         GestureDetector(
                           onTap: () => Get.toNamed(Routes.meInfo),
@@ -281,7 +293,8 @@ class HomeView extends GetView<HomeController> {
                             .paddingOnly(right: 3, top: 3, bottom: 6, left: 6)))
               ],
             ),
-            Expanded(
+            if(!controller.isFriday)
+              Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -298,11 +311,31 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ],
               ),
-            ),
+            )
+            else
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "매칭 결과를 확인해보세요!",
+                      style: ThemeFonts.bold.getTextStyle(size: 22, color: ThemeColors.blackTextLight),
+                      textAlign: TextAlign.center,
+                    ).paddingOnly(bottom: 8),
+                    Text(
+                      "매주 토요일 새로운 회차가 오픈됩니다",
+                      style: ThemeFonts.medium.getTextStyle(size: 14, color: ThemeColors.grayTextLight),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
             Obx(
               () => Column(
                 children: [
-                  GestureDetector(
+                  Opacity(
+                    opacity: meInfoController.isLoading.value ? 0 : 1,
+                    child: GestureDetector(
                     onTap: () => Get.toNamed(Routes.meInfo),
                     child: Container(
                       decoration: ShapeDecoration(
@@ -332,65 +365,72 @@ class HomeView extends GetView<HomeController> {
                         ],
                       ),
                     ),
-                  ).paddingOnly(bottom: 12),
-                  GestureDetector(
-                    onTap: () => Get.toNamed(Routes.youInfo),
-                    child: Container(
-                      decoration: ShapeDecoration(
-                        color: youInfoController.youInfo.value.isCompleted ? ThemeColors.white : ThemeColors.subLightest,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1, color: youInfoController.youInfo.value.isCompleted ? ThemeColors.chip :ThemeColors.sub),
-                          borderRadius: BorderRadius.circular(12),
+                ).paddingOnly(bottom: 12),
+                  ),
+                  Opacity(
+                    opacity: youInfoController.isLoading.value ? 0 : 1,
+                    child: GestureDetector(
+                      onTap: () => Get.toNamed(Routes.youInfo),
+                      child: Container(
+                        decoration: ShapeDecoration(
+                          color: youInfoController.youInfo.value.isCompleted ? ThemeColors.white : ThemeColors.subLightest,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1, color: youInfoController.youInfo.value.isCompleted ? ThemeColors.chip :ThemeColors.sub),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 26, horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('이상형 설정',
+                                    style: ThemeFonts.bold.getTextStyle(size: 16)),
+                                const SizedBox(height: 4),
+                                Text(youInfoController.youInfo.value.isCompleted ? '설정 완료' :'소개받고 싶은 이상형을 설정해주세요',
+                                    style: ThemeFonts.medium.getTextStyle(size: 13, color: youInfoController.youInfo.value.isCompleted ? ThemeColors.main :ThemeColors.sub)),
+                              ],
+                            ),
+                            SvgPicture.asset('assets/arrow_right.svg')
+                          ],
                         ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 26, horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('이상형 설정',
-                                  style: ThemeFonts.bold.getTextStyle(size: 16)),
-                              const SizedBox(height: 4),
-                              Text(youInfoController.youInfo.value.isCompleted ? '설정 완료' :'소개받고 싶은 이상형을 설정해주세요',
-                                  style: ThemeFonts.medium.getTextStyle(size: 13, color: youInfoController.youInfo.value.isCompleted ? ThemeColors.main :ThemeColors.sub)),
-                            ],
-                          ),
-                          SvgPicture.asset('assets/arrow_right.svg')
-                        ],
-                      ),
-                    ),
-                  ).paddingOnly(bottom: 26),
+                    ).paddingOnly(bottom: 26),
+                  ),
                 ],
               ),
             ),
             Obx(
-              () => Column(
-                children: [
-                  if(controller.isFriday)
-                    ElevatedButton(
-                      style: BtStyle.standard(color: ThemeColors.sub),
-                      onPressed: !AuthService.to.user.value.isWomanUniv
-                          ? () => controller.getMatchResult()
-                          : () => Get.dialog(const ErrorDialog(
-                              text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
-                      child: const Text('매칭 결과 확인하기'),
-                    ).paddingOnly(bottom: 10)
-                  else
-                    ElevatedButton(
-                      style: BtStyle.standard(),
-                      onPressed: !AuthService.to.user.value.isWomanUniv
-                          ? controller.isApplicationCompleted.value ? null : () => controller.getInfos()
-                          : () => Get.dialog(
-                          const ErrorDialog(text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
-                      child: Text(controller.isApplicationCompleted.value ? '신청 완료' : '교내 소개팅 신청하기'),
-                    ).paddingOnly(bottom: 10),
-                  Text('매주 목요일 오후 11시 55분 마감',
-                      style: ThemeFonts.medium.getTextStyle(
-                          size: 12, color: ThemeColors.grayTextLight))
-                ],
+              () => Opacity(
+                opacity: controller.isLoading.value ? 0 : 1,
+                child: Column(
+                  children: [
+                    if(controller.isFriday)
+                      ElevatedButton(
+                        style: BtStyle.standard(color: ThemeColors.sub),
+                        onPressed: !AuthService.to.user.value.isWomanUniv
+                            ? () => controller.getMatchResult()
+                            : () => Get.dialog(const ErrorDialog(
+                                text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
+                        child: const Text('매칭 결과 확인하기'),
+                      ).paddingOnly(bottom: 10)
+                    else
+                      ElevatedButton(
+                        style: BtStyle.standard(),
+                        onPressed: !AuthService.to.user.value.isWomanUniv
+                            ? controller.isApplicationCompleted.value ? null : () => controller.getInfos()
+                            : () => Get.dialog(
+                            const ErrorDialog(text: "여대에서는 '교내 소개팅' 기능이\n제한되어있습니다!")),
+                        child: Text(controller.isApplicationCompleted.value ? '신청 완료' : '교내 소개팅 신청하기'),
+                      ).paddingOnly(bottom: 10),
+                    Text('매주 목요일 23시 55분 마감',
+                        style: ThemeFonts.medium.getTextStyle(
+                            size: 12, color: ThemeColors.grayTextLight))
+                  ],
+                ),
               ),
             ),
           ],

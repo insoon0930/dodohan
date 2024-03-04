@@ -49,7 +49,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                       changedCallback: (selected) =>
                           controller.youInfo.value.exceptSameMajor =
                               selected.value == 'true' ? true : false),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '키(이상)',
                       placeholder: '${controller.youInfo.value.minHeight}',
@@ -62,7 +62,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                               title: '${140 + index}')),
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) => val!.minHeight = int.parse('${selected.value}'))),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '키(이하)',
                       placeholder: '${controller.youInfo.value.maxHeight}',
@@ -75,7 +75,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                               title: '${controller.minHeight! + index}')),
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) => val!.maxHeight = int.parse('${selected.value.split(' ')[0] ?? 0}'))),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '나이(이상)',
                       placeholder: controller.maxAge == null
@@ -91,7 +91,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) =>
                               val!.minAge = int.parse('${selected.value.split(' ')[0] ?? 0}'))),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '나이(이하)',
                       placeholder: controller.minAge == null
@@ -106,7 +106,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                               title: '${controller.minAge! + index} (${TimeUtility.birthYear(age: controller.minAge! + index)}년생)')),
                       changedCallback: (selected) => controller.youInfo.update(
                           (val) => val!.maxAge = int.parse('${selected.value.split(' ')[0] ?? 0}'))),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   MultiSelector(
                       title: '체형',
                       selected: controller.youInfo.value.bodyShape,
@@ -115,7 +115,7 @@ class YouInfoPage extends GetView<YouInfoController> {
                           : InfoData.manBodyShape,
                       changedCallback: (S2MultiSelected<String?> selected) => controller
                           .youInfo.value.bodyShape = selected.title),
-                  const Divider(height: 1),
+                  const SizedBox(height: 12),
                   SingleSelector(
                       title: '흡연',
                       placeholder: controller.youInfo.value.isSmoker,

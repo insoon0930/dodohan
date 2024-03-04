@@ -16,6 +16,7 @@ abstract class Routes {
 
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';
+  static const weeklyMatchSucceed = '/weekly-match-succeed';
   static const dailyCard = '/daily-card';
 
   static const currentCard = Paths.currentCard;

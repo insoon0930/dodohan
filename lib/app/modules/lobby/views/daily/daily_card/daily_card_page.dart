@@ -24,6 +24,7 @@ class DailyCardPage extends GetView<DailyCardController> {
                     reportCallback: () async {
                       return;
                     },
+                    hasBlock: controller.dailyCard.value.hasPicked ? false : true,
                     blockText: '차단하기(카드 삭제)',
                     blockCallback: () => controller.block(),
                   )),
