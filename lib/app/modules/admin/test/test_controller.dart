@@ -59,4 +59,10 @@ class TestController extends GetxController {
     await userService.updateDefaultCoin();
     Get.snackbar('필드 업데이트', '완료');
   }
+
+  Future<void> receiptTest() async {
+    //todo 리스트업:
+    await userService.updateDefaultCoin();
+    Get.snackbar('필드 업데이트', '완료');
+  }
 }

@@ -36,7 +36,7 @@ class DailyCardService extends ApiService  {
   Future<void> updateMeStatus(DailyCard dailyCard, CardStatus status) async {
     final DailyCard updatedDailyCard = await _dailyCardRepository.updateMeStatus(dailyCard, status);
     if (updatedDailyCard.meStatus == CardStatus.confirmed1st && updatedDailyCard.youStatus == CardStatus.confirmed1st) {
-      _dailyOpenedCardRepository.create(DailyOpenedCard(me: dailyCard.meInfo!.user!, you: dailyCard.youInfo!.user!));
+      await _dailyOpenedCardRepository.create(DailyOpenedCard(me: dailyCard.meInfo!.user!, you: dailyCard.youInfo!.user!));
     }
     return;
   }

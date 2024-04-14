@@ -46,15 +46,15 @@ class StoreService extends BaseController {
 
   //In-App Purchase 구매 확인: 구매가 성공적으로 완료되면, InAppPurchaseConnection 인스턴스를 사용하여 구매 확인을 수행하고, PurchaseDetails 객체를 가져올 수 있습니다.
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
-    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+    for (PurchaseDetails purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         showLoading(); //추가됨
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
           Get.dialog(ErrorDialog(text: '구매 실패'.tr));
-        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-            purchaseDetails.status == PurchaseStatus.restored) {
+        } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
           bool isValid = await _verifyPurchase(purchaseDetails);
+          print('?????? $isValid');
           if (isValid) {
             final int coin = int.parse(purchaseDetails.productID.split('_')[0]);
             await _userService.increaseCoin(AuthService.to.user.value.id, coin, type: CoinReceiptType.chargeCoin);
@@ -63,9 +63,9 @@ class StoreService extends BaseController {
 
             FcmPushType fcmPushType = FcmPushType.coinPurchased6;
             switch (coin) {
-              // case 3:
-              //   fcmPushType = FcmPushType.coinPurchased3;
-              //   break;
+            // case 3:
+            //   fcmPushType = FcmPushType.coinPurchased3;
+            //   break;
               case 6:
                 fcmPushType = FcmPushType.coinPurchased6;
                 break;
@@ -92,7 +92,7 @@ class StoreService extends BaseController {
           await InAppPurchase.instance.completePurchase(purchaseDetails);
         }
       }
-    });
+    }
   }
 
 
@@ -129,6 +129,15 @@ class StoreService extends BaseController {
       'Content-type': 'application/json',
       'Accept': 'application/json',
     };
+
+    // /// 코드 문제점: 서버에서 인증을 제대로 못함(응답에만 오류 없으면 수락하고있음)
+    // /// 임시로 아래와 같이 처리해둠
+    // /// 정상적으로 처리하려면 서버에서 purchaseState가 PENDING = 2 혹은 UNSPECIFIED_STATE = 0 이 아닌 PURCHASED = 1 일 때만 지급해야함
+    // /// 다시 보자 ㅇㅇ
+    // if(AuthService.to.user.value.id == '') {
+    //   return false;
+    // }
+
     if(Platform.isAndroid) {
       var url = Uri.parse('https://googlereceiptverify-m2rvoqphsq-uc.a.run.app');
       Map<String, dynamic> data = {
@@ -140,6 +149,7 @@ class StoreService extends BaseController {
       };
       String encodedData = jsonEncode(data);
       response = await http.post(url, body: encodedData, headers: headers);
+      print('responseresponseresponseresponse ${response.statusCode}');
     } else {
       var url = Uri.parse('https://applereceiptverify-m2rvoqphsq-uc.a.run.app');
       Map<String, dynamic> data = {

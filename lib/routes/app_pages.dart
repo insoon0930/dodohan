@@ -1,3 +1,5 @@
+import 'package:dodohan/app/modules/lobby/views/home/my_profile/my_profile_binding.dart';
+import 'package:dodohan/app/modules/lobby/views/home/my_profile/my_profile_page.dart';
 import 'package:dodohan/app/modules/lobby/views/home/weekly_match_succeed/weekly_match_succeed_page.dart';
 import 'package:dodohan/app/modules/lobby/views/self_introduction/create_self_introduction/preview_self_introduction/preview_self_introduction_page.dart';
 import 'package:dodohan/app/modules/lobby/views/self_introduction/self_introduction_item/preview_my_profile/preview_my_profile_page.dart';
@@ -111,6 +113,10 @@ class AppPages {
               page: () => const AnalyticsPage(),
               binding: AnalyticsBinding()),
         ]),
+    GetPage(
+        name: Routes.myProfile,
+        page: () => const MyProfilePage(),
+        binding: MyProfileBinding()),
     GetPage(
         name: Routes.meInfo,
         page: () => const MeInfoPage()),

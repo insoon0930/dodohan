@@ -78,6 +78,21 @@ class TestPage extends GetView<TestController> {
               const SizedBox(width: 16),
             ],
           ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              const SizedBox(width: 16),
+              Flexible(
+                child: ElevatedButton(
+                  style: BtStyle.standard(height: 100),
+                  onPressed: () => controller.receiptTest(),
+                  child: Text('영수증 테스트',
+                      style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+                ),
+              ),
+              const SizedBox(width: 16),
+            ],
+          )
         ],
       ),
     );

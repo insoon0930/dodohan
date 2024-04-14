@@ -87,7 +87,7 @@ class SelfIntroductionView extends GetView<SelfIntroductionController> {
         child: Card(
           margin: const EdgeInsets.all(4.0),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
-          elevation: 3,
+          elevation: 1,
           child: Stack(
             children: [
               Container(

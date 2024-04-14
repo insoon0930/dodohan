@@ -58,7 +58,7 @@ class CurrentCardItemPage extends GetView<CurrentCardItemController> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child:
-                        Text('1차 매칭에 성공시 공개됩니다', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
+                        Text('1차 매칭에 성공시 공개돼요', style: ThemeFonts.medium.getTextStyle(color: Colors.white, size: 14)),
                   ),
               ]),
               //거절함

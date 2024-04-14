@@ -20,6 +20,8 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: controller.isFirstPage ? ThemeColors.background : ThemeColors.white,
       automaticallyImplyLeading: false,
+      //!!
+      // title: Text('두근두근경성', style: ThemeFonts.bold.getTextStyle(size: 22)),
       title: controller.isFirstPage ? Text(
           '두근두근${InfoData.univInfo[controller.user.univ]?.appTitleTail ?? '캠퍼스'}',
           style: ThemeFonts.bold.getTextStyle(size: 22)) : null,
@@ -34,6 +36,8 @@ class LobbyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   SvgPicture.asset('assets/love.svg'),
                   const SizedBox(width: 6),
+                  //!!
+                  // Text('10', style: ThemeFonts.semiBold.getTextStyle(size: 20))
                   Obx(() => Text('${controller.user.coin}', style: ThemeFonts.semiBold.getTextStyle(size: 20)))
                 ],
               ).paddingOnly(right: 16),

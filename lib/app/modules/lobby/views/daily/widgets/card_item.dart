@@ -35,7 +35,7 @@ class CardItem extends GetView<DailyController> {
             children: [
               SizedBox(
                 width: (Get.width - 72) / 2,
-                height: (Get.width - 72) / 2 * 1.45,
+                // height: (Get.width - 72) / 2 * 1.45,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -48,13 +48,14 @@ class CardItem extends GetView<DailyController> {
                                 width: (Get.width - 72) / 2 - 40,
                                 height: (Get.width - 72) / 2 - 40,
                                 isBlurred: true)
-                            .paddingOnly(top: 20, bottom: 16),
+                            .paddingOnly(top: 20),
                         if(dailyCard.hasPicked)
-                          Text('PICKED', style: ThemeFonts.bold.getTextStyle(size: ((Get.width - 72) / 2 - 40) / 5, color: ThemeColors.white)).paddingOnly(top: 4)
+                          Text('PICKED', style: ThemeFonts.bold.getTextStyle(size: ((Get.width - 72) / 2 - 40) / 5, color: ThemeColors.white)).paddingOnly(top: 20)
                       ],
                     ),
-                    Expanded(child: Text('${dailyCard.youInfo!.univ}', style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main))),
-                    const Spacer(),
+                    Text('${dailyCard.youInfo!.univ}',
+                        style: ThemeFonts.medium.getTextStyle(size: 12, color: ThemeColors.main)).paddingOnly(top: 16, bottom: 12),
+                    // const Spacer(),
                     Row(
                       children: [
                         Expanded(
@@ -62,7 +63,7 @@ class CardItem extends GetView<DailyController> {
                                 style: ThemeFonts.medium.getTextStyle(size: 12),
                                 textAlign: TextAlign.center)),
                         Expanded(
-                            child: Text('${dailyCard.youInfo!.age}살',
+                            child: Text('${dailyCard.youInfo!.age}세',
                                 style: ThemeFonts.medium.getTextStyle(size: 12),
                                 textAlign: TextAlign.center)),
                       ],
@@ -82,7 +83,7 @@ class CardItem extends GetView<DailyController> {
                       ],
                     ).paddingSymmetric(horizontal: 4),
                     const SizedBox(height: 16)
-                    // const Spacer(),
+                    // // const Spacer(),
                   ],
                 ),
               ),

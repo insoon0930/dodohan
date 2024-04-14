@@ -56,6 +56,7 @@ class BtStyle {
   static ButtonStyle get outlined => ElevatedButton.styleFrom(
     backgroundColor: Colors.white,
     elevation: 0,
+    surfaceTintColor: Colors.transparent,
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
         side: const BorderSide(width: 1, color: ThemeColors.main)),

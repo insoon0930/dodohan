@@ -34,7 +34,7 @@ class DailyController extends BaseController {
 
   void tapCard(int index, DailyCard dailyCard) async {
     if(todayCards[index].meStatus == CardStatus.unChecked) {
-      _dailyCardService.updateMeStatus(dailyCard, CardStatus.checked);
+      await _dailyCardService.updateMeStatus(dailyCard, CardStatus.checked);
       todayCards[index].meStatus = CardStatus.checked;
       todayCards.refresh();
     } else {

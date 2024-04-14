@@ -67,7 +67,7 @@ class DailyCardController extends BaseController {
 
   Future<void> choose() async {
     showLoading();
-    _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
+    await _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
     hideLoading();
     Get.back();
     dailyCard.update((val) => val!.meStatus = CardStatus.confirmed1st);
@@ -97,7 +97,7 @@ class DailyCardController extends BaseController {
     }
 
     showLoading();
-    _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
+    await _dailyCardService.updateMeStatus(dailyCard.value, CardStatus.confirmed1st);
     hideLoading();
     Get.back();
     dailyCard.update((val) => val!.meStatus = CardStatus.confirmed1st);

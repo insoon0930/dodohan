@@ -228,21 +228,24 @@ class HomeView extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
+                            //!!
+                            // Text('경성대',
+                            //     style: ThemeFonts.bold.getTextStyle(size: 16, color: ThemeColors.blackTextLight)),
                             Text('${controller.user.univ} ',
                                 style: ThemeFonts.bold.getTextStyle(size: 16, color: ThemeColors.blackTextLight)),
-                            // Text(regionFilter[controller.user.region]!,
-                            //     style: ThemeFonts.bold.getTextStyle(size: 12, color: ThemeColors.grayTextDarker))
+                            Text(regionFilter[controller.user.region]!,
+                                style: ThemeFonts.bold.getTextStyle(size: 12, color: ThemeColors.grayTextDarker))
                           ],
                         ),
                         const SizedBox(height: 5),
                         GestureDetector(
-                          onTap: () => Get.toNamed(Routes.meInfo),
+                          onTap: () => Get.toNamed(Routes.myProfile),
                           child: Container(
                               decoration: BoxDecoration(
                                 color: ThemeColors.chip,
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Text('프로필 편집',
+                              child: Text('내 프로필 보기',
                                       style: ThemeFonts.medium
                                           .getTextStyle(size: 12))
                                   .paddingSymmetric(

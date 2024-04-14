@@ -14,6 +14,7 @@ abstract class Routes {
   static const application = Paths.admin + Paths.application;
   static const analytics = Paths.admin + Paths.analytics;
 
+  static const myProfile = '/my-profile';
   static const meInfo = '/me-info';
   static const youInfo = '/you-info';
   static const weeklyMatchSucceed = '/weekly-match-succeed';

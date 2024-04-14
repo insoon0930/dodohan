@@ -30,7 +30,7 @@ class _HowToUseDailyDialogState extends State<HowToUseDailyDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('오늘의 카드 이용 방법', style: ThemeFonts.bold.getTextStyle(size: 20)),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
             CarouselSlider(
               items: [
                 Column(

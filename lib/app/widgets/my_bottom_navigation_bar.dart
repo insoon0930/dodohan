@@ -12,7 +12,7 @@ class MyBottomNavigationBar extends GetView<LobbyController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => SizedBox(
-      height: GetPlatform.isAndroid ? 65 : 83,
+      height: GetPlatform.isAndroid ? 65 : 90,
       child: Theme(
         data: Theme.of(context).copyWith(
           splashColor: Colors.transparent,
