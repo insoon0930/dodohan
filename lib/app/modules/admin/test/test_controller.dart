@@ -17,6 +17,7 @@ class TestController extends GetxController {
   final UserService userService = UserService();
   final ApplicationService applicationService = ApplicationService();
   final YouInfoService youInfoService = YouInfoService();
+  // final ReceiptService youInfoService = YouInfoService();
 
   final RxList<Identity> waitingIds = <Identity>[].obs;
   User get user => AuthService.to.user.value;
@@ -62,7 +63,25 @@ class TestController extends GetxController {
 
   Future<void> receiptTest() async {
     //todo 리스트업:
-    await userService.updateDefaultCoin();
+    // await re
+    // QuerySnapshot querySnapshot = await _firestore.collection('receipts').get();
+    // Map<String, List<DocumentSnapshot>> tokenGroups = {};
+    //
+    // for (var doc in querySnapshot.docs) {
+    //   String token = doc['purchaseToken'] as String;
+    //   if (tokenGroups[token] == null) {
+    //     tokenGroups[token] = [];
+    //   }
+    //   tokenGroups[token]!.add(doc);
+    // }
+    //
+    // // Filter out tokens that appear more than once
+    // var duplicates = tokenGroups.entries.where((entry) => entry.value.length > 1).expand((entry) => entry.value).toList();
+    // setState(() {
+    //   duplicateReceipts = duplicates;
+    //   isLoading = false;
+    // });
+    // await userService.updateDefaultCoin();
     Get.snackbar('필드 업데이트', '완료');
   }
 }
