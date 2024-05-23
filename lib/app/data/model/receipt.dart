@@ -11,6 +11,7 @@ class Receipt {
   String? buyer;
   int? amount;
   bool? isAndroid;
+  String? purchaseToken;
   Map? receipt;
   @DateTimeConverter()
   DateTime? createdAt;
@@ -19,6 +20,7 @@ class Receipt {
       this.buyer,
       this.amount,
       this.isAndroid,
+      this.purchaseToken,
       this.receipt}) {
     createdAt ??= DateTime.now();
   }

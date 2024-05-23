@@ -112,4 +112,14 @@ class UserService {
   Future<void> updateFcmToken(String userId, String? deviceToken) async {
     return await _userRepository.updateFcmToken(userId, deviceToken);
   }
+
+  //@Patch
+  Future<void> removeFcmToken(String userId) async {
+    return await _userRepository.updateFcmToken(userId, null);
+  }
+
+  //@Patch
+  Future<void> updateUidToWithdraw(String userId, String uid) async {
+    return await _userRepository.updateUidToWithdraw(userId, uid);
+  }
 }

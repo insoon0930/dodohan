@@ -79,20 +79,19 @@ class TestPage extends GetView<TestController> {
           //   ],
           // ),
           // const SizedBox(height: 16),
-          Row(
-            children: [
-              const SizedBox(width: 16),
-              Flexible(
-                child: ElevatedButton(
-                  style: BtStyle.standard(height: 100),
-                  onPressed: () => controller.receiptTest(),
-                  child: Text('영수증 테스트',
-                      style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
-                ),
-              ),
-              const SizedBox(width: 16),
-            ],
-          )
+          ElevatedButton(
+            style: BtStyle.standard(height: 100),
+            onPressed: () => controller.receiptTest(),
+            child: Text('영수증 테스트',
+                style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+          ).paddingSymmetric(horizontal: 16),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: BtStyle.standard(height: 100),
+            onPressed: () => controller.dailyRewardErrorCheck(),
+            child: Text('데일리 보상 중복 확인',
+                style: ThemeFonts.medium.getTextStyle(color: Colors.white)),
+          ).paddingSymmetric(horizontal: 16),
         ],
       ),
     );

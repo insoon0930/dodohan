@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dodohan/app/widgets/dialogs/update_profile_image_dialog.dart';
 import 'package:dodohan/core/base_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -173,7 +174,7 @@ class HomeController extends BaseController {
       if (application.isRewarded) {
         Get.dialog(const ErrorDialog(text: "매칭된 상대가 없습니다 🥲\n다음주를 기약해주세요!"));
       } else {
-        const int rewardCoin = 2;
+        const int rewardCoin = 1;
         await _userService.increaseCoin(user.id, rewardCoin, type: CoinReceiptType.consoleReward);
         await _applicationService.updateIsRewarded(application.id);
         AuthService.to.user.update((user) => user!.coin = user.coin + rewardCoin);
@@ -251,12 +252,12 @@ class HomeController extends BaseController {
       return Get.dialog(const ErrorDialog(text: '심사중인 프로필이 있습니다'));
     }
 
-    Get.dialog(ActionDialog(
-      title: '프로필 변경 신청',
-      text: '본인 확인이 어려운 사진은 반려될 수 있습니다 (마스크, 모자, 옆모습, 어두운, 많이 가려진, 여러명의 얼굴이 나온, ai 프로필 등...) \n\n * 하트 1개가 소모됩니다',
+    const int costCoin = 2;
+    Get.dialog(UpdateProfileImageDialog(
+      costCoin: costCoin,
       confirmCallback: () {
         Get.back();
-        if (user.coin < 1) {
+        if (user.coin < costCoin) {
           Get.dialog(ActionDialog(title: '하트 부족', text: '스토어로 이동하기', confirmCallback: () {
             Get.back();
             Get.toNamed(Routes.store);
@@ -266,12 +267,12 @@ class HomeController extends BaseController {
         Get.dialog(SelectDialog(itemHeight: 60, items: [
           SelectDialogItem(
               text: '카메라',
-              onTap: () => _createRequest(ImageSource.camera),
+              onTap: () => _createRequest(ImageSource.camera, costCoin),
               first: true,
               style: ThemeFonts.semiBold.getTextStyle(size: 15)),
           SelectDialogItem(
               text: '사진',
-              onTap: () => _createRequest(ImageSource.gallery),
+              onTap: () => _createRequest(ImageSource.gallery, costCoin),
               last: true,
               style: ThemeFonts.semiBold.getTextStyle(size: 15)),
         ]));
@@ -280,7 +281,7 @@ class HomeController extends BaseController {
     return ;
   }
 
-  Future<void> _createRequest(ImageSource imageSource) async {
+  Future<void> _createRequest(ImageSource imageSource, int costCoin) async {
     Get.back();
     XFile? result = await Utility.getImage(source: imageSource, onlySquare: true);
     if (result != null) {
@@ -296,8 +297,8 @@ class HomeController extends BaseController {
           coinUsed: true));
 
       //코인 차감
-      await _userService.increaseCoin(user.id, -1, type: CoinReceiptType.imageUpdateRequest);
-      AuthService.to.user.update((user) => user!.coin = user.coin -1);
+      await _userService.increaseCoin(user.id, -costCoin, type: CoinReceiptType.imageUpdateRequest);
+      AuthService.to.user.update((user) => user!.coin = user.coin -costCoin);
 
       // //fcm push //todo 나중에 .env 도입해주던가 //중단
       // FcmService.to.sendFcmPush('6BqgdRdFUoZOPclxIzbD', FcmPushType.imageUpdateRequest);

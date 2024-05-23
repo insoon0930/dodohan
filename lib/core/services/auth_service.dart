@@ -91,6 +91,8 @@ class AuthService extends ApiService {
 
   Future<void> withdraw() async {
     await _userService.updateDeletedAt(user.value.id);
+    await _userService.removeFcmToken(user.value.id);
+    await _userService.updateUidToWithdraw(user.value.id, user.value.uid);
     await logOut();
     return;
   }

@@ -41,7 +41,7 @@ class ProfileImageRequestController extends GetxController {
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
     await imageUpdateRequestService.rejected(item);
     if (item.coinUsed) {
-      await userService.increaseCoin(item.user, 1, type: CoinReceiptType.imageUpdateReject);
+      await userService.increaseCoin(item.user, 2, type: CoinReceiptType.imageUpdateReject);
     }
     waitingRequests.removeWhere((e) => e.id == item.id);
     FcmService.to.sendFcmPush(item.user, FcmPushType.imageUpdateReject);

@@ -11,6 +11,7 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) => Receipt(
       buyer: json['buyer'] as String?,
       amount: json['amount'] as int?,
       isAndroid: json['isAndroid'] as bool?,
+      purchaseToken: json['purchaseToken'] as String?,
       receipt: json['receipt'] as Map<String, dynamic>?,
     )..createdAt = _$JsonConverterFromJson<Timestamp, DateTime>(
         json['createdAt'], const DateTimeConverter().fromJson);
@@ -20,6 +21,7 @@ Map<String, dynamic> _$ReceiptToJson(Receipt instance) => <String, dynamic>{
       'buyer': instance.buyer,
       'amount': instance.amount,
       'isAndroid': instance.isAndroid,
+      'purchaseToken': instance.purchaseToken,
       'receipt': instance.receipt,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),

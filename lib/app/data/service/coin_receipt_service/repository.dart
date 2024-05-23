@@ -33,4 +33,17 @@ class CoinReceiptRepository extends ApiService {
       return [];
     }
   }
+
+  Future<List<CoinReceipt>> findAllDailyRewards() async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('coinReceipts')
+          .where('type', isEqualTo: 'dailyReward')
+          .get();
+      return querySnapshot.docs.map((e) => CoinReceipt.fromJson(e.data() as Map<String, dynamic>)).toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
 }

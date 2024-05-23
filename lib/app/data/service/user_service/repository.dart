@@ -296,4 +296,14 @@ class UserRepository extends ApiService {
       rethrow;
     }
   }
+
+  Future<void> updateUidToWithdraw(String userId, String uid) async {
+    try {
+      final DocumentReference ref = firestore.collection('users').doc(userId);
+      ref.update({'uid': '$uid-deleted'});
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
