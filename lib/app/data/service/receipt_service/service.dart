@@ -15,4 +15,9 @@ class ReceiptService extends ApiService  {
   Future<List<Receipt>> findAll() async {
     return await _receiptRepository.findAll();
   }
+
+  //@Get
+  Future<List<Receipt>> findByBuyerId(String userId) async {
+    return await _receiptRepository.findByBuyerId(userId);
+  }
 }

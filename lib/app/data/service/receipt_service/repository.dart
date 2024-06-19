@@ -21,4 +21,19 @@ class ReceiptRepository extends ApiService {
       return [];
     }
   }
+
+  Future<List<Receipt>> findByBuyerId(String userId) async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('receipts')
+          .where('buyer', isEqualTo: userId)
+          .orderBy('createdAt', descending: true)
+          .limit(3)
+          .get();
+      return querySnapshot.docs.map((e) => Receipt.fromJson(e.data() as Map<String, dynamic>)).toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
 }

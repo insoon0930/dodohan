@@ -15,7 +15,7 @@ class StoreHistoryController extends BaseController {
 
   @override
   Future<void> onInit() async {
-    coinReceipts.value = await _coinReceiptService.find(user.id);
+    coinReceipts.value = await _coinReceiptService.findByUserId(user.id);
     super.onInit();
   }
   //

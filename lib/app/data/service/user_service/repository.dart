@@ -47,7 +47,7 @@ class UserRepository extends ApiService {
     }
   }
 
-  Future<User?> findOneByPhoneNum(String phoneNum) async {
+  Future<User?> findDeletedOneByPhoneNum(String phoneNum) async {
     try {
       QuerySnapshot querySnapshot = await firestore
           .collection('users')
@@ -55,7 +55,7 @@ class UserRepository extends ApiService {
           .where('deletedAt', isNull: false)
           .orderBy('deletedAt', descending: true)
           .get();
-      print('querySnapshot.docs: ${querySnapshot.docs}');
+      print('querySnapshot.docs?? ${querySnapshot.docs}');
       if (querySnapshot.docs.isEmpty) {
         return null;
       }
@@ -65,6 +65,25 @@ class UserRepository extends ApiService {
       rethrow;
     }
   }
+
+  Future<User?> findOneByPhoneNum(String phoneNum) async {
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('users')
+          .where('phoneNum', isEqualTo: phoneNum)
+          .where('deletedAt', isNull: true)
+          .orderBy('createdAt', descending: true)
+          .get();
+      if (querySnapshot.docs.isEmpty) {
+        return null;
+      }
+      return User.fromJson(querySnapshot.docs.last.data() as Map<String, dynamic>);
+    } catch (e) {
+      print('error: $e');
+      rethrow;
+    }
+  }
+
 
   Future<List<User>> findWomen() async {
     try {

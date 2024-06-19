@@ -20,7 +20,8 @@ enum CoinReceiptType {
   selfIntroApply,
   selfIntroConfirm1st,
   selfIntroConfirm2nd,
-  selfIntroOpenApplicantCard
+  selfIntroOpenApplicantCard,
+  admin
 }
 
 enum Region {

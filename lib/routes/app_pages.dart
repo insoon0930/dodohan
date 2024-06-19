@@ -1,3 +1,5 @@
+import 'package:dodohan/app/modules/admin/receipt/receipt_binding.dart';
+import 'package:dodohan/app/modules/admin/receipt/receipt_page.dart';
 import 'package:dodohan/app/modules/lobby/views/home/my_profile/my_profile_binding.dart';
 import 'package:dodohan/app/modules/lobby/views/home/my_profile/my_profile_page.dart';
 import 'package:dodohan/app/modules/lobby/views/home/weekly_match_succeed/weekly_match_succeed_page.dart';
@@ -112,6 +114,10 @@ class AppPages {
               name: Paths.analytics,
               page: () => const AnalyticsPage(),
               binding: AnalyticsBinding()),
+          GetPage(
+              name: Paths.receipt,
+              page: () => const ReceiptPage(),
+              binding: ReceiptBinding()),
         ]),
     GetPage(
         name: Routes.myProfile,

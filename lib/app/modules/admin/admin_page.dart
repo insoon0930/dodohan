@@ -77,6 +77,19 @@ class AdminPage extends GetView<AdminController> {
               const SizedBox(width: 8),
             ],
           ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const SizedBox(width: 8),
+              Flexible(
+                child: ElevatedButton(
+                    style: BtStyle.standard(color: ThemeColors.mainLight),
+                    onPressed: () => Get.toNamed(Routes.receipt),
+                    child: Text('영수증 관리', style: ThemeFonts.medium.getTextStyle(color: Colors.white))),
+              ),
+              const SizedBox(width: 8),
+            ],
+          ),
           const SizedBox(height: 16),
           Text('심사', style: ThemeFonts.medium.getTextStyle(size: 17)),
           const SizedBox(height: 8),

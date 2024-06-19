@@ -42,6 +42,7 @@ const _$CoinReceiptTypeEnumMap = {
   CoinReceiptType.selfIntroConfirm1st: 'selfIntroConfirm1st',
   CoinReceiptType.selfIntroConfirm2nd: 'selfIntroConfirm2nd',
   CoinReceiptType.selfIntroOpenApplicantCard: 'selfIntroOpenApplicantCard',
+  CoinReceiptType.admin: 'admin',
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

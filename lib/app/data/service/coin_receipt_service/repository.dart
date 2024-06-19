@@ -22,11 +22,13 @@ class CoinReceiptRepository extends ApiService {
     }
   }
 
-  Future<List<CoinReceipt>> find(String user) async {
+  Future<List<CoinReceipt>> findByUserId(String userId) async {
     try {
       QuerySnapshot querySnapshot = await firestore
           .collection('coinReceipts')
-          .where('customer', isEqualTo: user)
+          .where('user', isEqualTo: userId)
+          .orderBy('createdAt', descending: true)
+          .limit(10)
           .get();
       return querySnapshot.docs.map((e) => CoinReceipt.fromJson(e.data() as Map<String, dynamic>)).toList();
     } catch (e) {

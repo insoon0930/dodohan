@@ -52,7 +52,7 @@ class LoginController extends BaseController {
       String resUid = userCredential.user!.uid;
 
       //탈퇴회원 재가입 제한
-      final UserModel.User? deletedUser = await _userService.findOneByPhoneNum(
+      final UserModel.User? deletedUser = await _userService.findDeletedOneByPhoneNum(
           '+82${phone.value!.replaceAll('-', '').substring(1)}');
       if((deletedUser != null) && (DateTime.now().difference(deletedUser.deletedAt!) < const Duration(days: 30))) {
         hideLoading();
@@ -115,7 +115,7 @@ class LoginController extends BaseController {
       String resUid = userCredential.user!.uid;
 
       //탈퇴회원 재가입 제한
-      final UserModel.User? deletedUser = await _userService.findOneByPhoneNum(
+      final UserModel.User? deletedUser = await _userService.findDeletedOneByPhoneNum(
           '+82${phone.value!.replaceAll('-', '').substring(1)}');
       if((deletedUser != null) && (DateTime.now().difference(deletedUser.deletedAt!) < const Duration(days: 30))) {
         Get.back();

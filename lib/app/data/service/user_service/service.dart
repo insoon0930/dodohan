@@ -35,6 +35,11 @@ class UserService {
   }
 
   //@Get
+  Future<User?> findDeletedOneByPhoneNum(String phoneNum) async {
+    return await _userRepository.findDeletedOneByPhoneNum(phoneNum);
+  }
+
+  //@Get
   Future<User?> findOneByPhoneNum(String phoneNum) async {
     return await _userRepository.findOneByPhoneNum(phoneNum);
   }

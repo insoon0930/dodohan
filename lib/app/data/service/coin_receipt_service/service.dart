@@ -17,8 +17,8 @@ class CoinReceiptService extends ApiService  {
   }
 
   //@Get
-  Future<List<CoinReceipt>> find(String user) async {
-    return await _coinReceiptRepository.find(user);
+  Future<List<CoinReceipt>> findByUserId(String userId) async {
+    return await _coinReceiptRepository.findByUserId(userId);
   }
 
   //@Get
